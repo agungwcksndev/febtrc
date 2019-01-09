@@ -18,4 +18,13 @@ class Jurusan_Model extends CI_Model{
     return $query->result();
   }
 
+  public function listing()
+  {
+    $this->db->select('*');
+    $this->db->from('jurusan');
+    $this->db->order_by('id_jurusan', 'DESC');
+    $query  = $this->db->get();
+    return $query->result();
+  }
+
 }

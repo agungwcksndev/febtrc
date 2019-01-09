@@ -12,7 +12,7 @@ class Dashboard extends CI_Controller{
 
   function index()
   {
-        $data = array('isi'     => 'alumni/dashboard'
+        $data = array('isi'     => 'admin/dashboard'
                       );
         $this->load->view("layouts/wrapper", $data, false);
   }
