@@ -27,4 +27,15 @@ class Jurusan_Model extends CI_Model{
     return $query->result();
   }
 
+  public function tambah_jurusan($data)
+  {
+    $this->db->insert('jurusan', $data);
+  }
+
+  public function hapus_jurusan($data)
+  {
+    $this->db->where('id_jurusan',$data['id_jurusan']);
+    $this->db->delete('jurusan', $data);
+  }
+
 }

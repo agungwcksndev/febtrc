@@ -16,10 +16,11 @@
    <!-- Main content -->
    <section class="content">
      <div class="row">
-       <div class="col-xs-8">
+       <div class="col-xs-12">
          <div class="box box-info">
            <div class="box-header">
              <h3 class="box-title">Data Jurusan Fakultas Ekonomi Bisnis Universitas Brawijaya</h3>
+               <button type="button" class="btn btn-success btn-flat" style="float:right;" data-toggle="modal" data-target="#modal-add-jurusan"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Tambah Jurusan</button>
            </div>
            <!-- /.box-header -->
            <div class="box-body">
@@ -38,8 +39,8 @@
                <tr>
                  <td class="text-center"><?php echo $no ?></td>
                  <td><?php echo $jurusan->nama_jurusan ?></td>
-                 <td><a class="btn btn-default"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Edit</a>
-                 <a class="btn btn-danger"><i class="fa fa-eraser"></i>&nbsp;&nbsp;Delete</a></td>
+                 <td class="text-center"><a class="btn btn-default"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Edit</a>
+                 <a href="<?php echo site_url('admin/jurusan/hapus_jurusan/'.$jurusan->id_jurusan) ?>" class="btn btn-danger"><i class="fa fa-eraser"></i>&nbsp;&nbsp;Hapus</a></td>
                </tr>
                <?php $no++ ?>
                <?php endforeach; ?>
@@ -58,30 +59,6 @@
          <!-- /.box -->
        </div>
        <!-- /.col -->
-       <div class="col-md-4">
-          <!-- Horizontal Form -->
-          <!-- general form elements disabled -->
-          <div class="box box-info">
-            <div class="box-header with-border">
-              <h3 class="box-title">Tambah Jurusan</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <form role="form">
-                <!-- text input -->
-                <div class="form-group">
-                  <label>Nama Jurusan</label>
-                  <input type="text" class="form-control" placeholder="Masukan nama jurusan...">
-                </div>
-                <div class="box-footer">
-                  <button type="submit" class="btn btn-info pull-right">Tambah</button>
-                </div>
-              </form>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-     </div>
      <!-- /.row -->
    </section>
    <!-- /.content -->
@@ -291,6 +268,38 @@
 </div>
 <!-- ./wrapper -->
 
+<div class="modal fade" id="modal-add-jurusan" role="dialog">
+  <div class="modal-dialog">
+    <form class="" action="<?php echo site_url('admin/jurusan/tambah_jurusan') ?>" method="post">
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <button type="button" class="close" data-dismiss="modal" name="button"></button>
+          <h4 class="modal-title"></i>Form Tambah Jurusan</h4>
+        </div>
+        <div class="modal-body">
+          <div class="col-md-12">
+            <div class="form-horizontal">
+              <div class="box-body">
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="">Nama Jurusan</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="nama_jurusan" class="form-control" value="" placeholder="Masukan Nama Jurusan..."required>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-default" data-dismiss="modal" name="button">Cancel</button>
+          <button type="submit" class="btn btn-primary" name="button">Tambah Jurusan</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
 <!-- jQuery 3 -->
 <script src="<?php echo base_url(); ?>bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
@@ -312,7 +321,7 @@
    $('#example1').DataTable({
      "columnDefs": [
   { "width": "5%", "targets": 0 },
-  { "width": "25%", "targets": 2 }
+  { "width": "17%", "targets": 2 }
 ]
    })
  })
