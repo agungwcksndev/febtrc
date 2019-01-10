@@ -28,12 +28,12 @@
       <li class="header">MAIN NAVIGATION</li>
       <li><a href="<?php echo site_url('alumni/dashboard'); ?>"><i class="fa fa-th"></i> <span>Dashboard</span></a></li>
       <li>
-        <a href="<?php echo base_url(); ?>pages/calendar.html">
+        <a href="<?php echo site_url('admin/jurusan'); ?>">
           <i class="fa fa-bookmark"></i> <span>Jurusan</span>
         </a>
       </li>
       <li>
-        <a href="<?php echo base_url(); ?>pages/calendar.html">
+        <a href="<?php echo site_url('admin/prodi'); ?>">
           <i class="fa fa-tag"></i> <span>Program Studi</span>
         </a>
       </li>

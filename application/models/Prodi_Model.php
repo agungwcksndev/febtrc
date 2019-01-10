@@ -19,6 +19,16 @@ class Prodi_Model extends CI_Model{
     return $query->result();
   }
 
+  public function listing()
+  {
+    $this->db->select('*');
+    $this->db->from('prodi');
+    $this->db->join('jurusan', 'jurusan.id_jurusan = prodi.id_jurusan');
+    $this->db->order_by('id_prodi', 'DESC');
+    $query  = $this->db->get();
+    return $query->result();
+  }
+
   function fetch_prodi($id_jurusan)
   {
     $this->db->select('*');
@@ -32,6 +42,23 @@ class Prodi_Model extends CI_Model{
       $output .= '<option value="'.$row->id_prodi.'">'.$row->nama_prodi.'</option>';
     }
     return $output;
+  }
+
+  public function tambah_prodi($data)
+  {
+    $this->db->insert('prodi', $data);
+  }
+
+  public function update_prodi($data)
+  {
+      $this->db->where('id_prodi', $data['id_prodi']);
+      $this->db->update('prodi', $data);
+  }
+
+  public function hapus_prodi($data)
+  {
+    $this->db->where('id_prodi',$data['id_prodi']);
+    $this->db->delete('prodi', $data);
   }
 
 }

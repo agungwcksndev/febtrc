@@ -40,7 +40,7 @@ class Jurusan extends CI_Controller{
                 'nama_jurusan'      =>  $i->post('nama_jurusan')
               );
           $this->Jurusan_Model->tambah_jurusan($data);
-          $this->session->set_flashdata('notifikasi', 'Berhasil menambahkan jurusan!');
+          $this->session->set_flashdata('sukses', 'Berhasil menambah jurusan.');
           redirect('admin/jurusan');
       }
     }
@@ -68,7 +68,7 @@ class Jurusan extends CI_Controller{
                   'nama_jurusan'      =>  $i->post('nama_jurusan_up')
                 );
             $this->Jurusan_Model->update_jurusan($data);
-            $this->session->set_flashdata('notifikasi', 'Berhasil menambahkan jurusan!');
+            $this->session->set_flashdata('success', 'Berhasil merubah jurusan.');
             redirect('admin/jurusan');
         }
     }
@@ -77,7 +77,7 @@ class Jurusan extends CI_Controller{
     {
       $data = array('id_jurusan'  =>  $id);
       $this->Jurusan_Model->hapus_jurusan($data);
-      $this->session->set_flashdata('notifikasi', '<center>Berhasil menghapus jurusan');
+      $this->session->set_flashdata('success', '<center>Berhasil menghapus jurusan.');
       redirect('admin/jurusan');
     }
 
