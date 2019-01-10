@@ -32,6 +32,12 @@ class Jurusan_Model extends CI_Model{
     $this->db->insert('jurusan', $data);
   }
 
+  public function update_jurusan($data)
+  {
+      $this->db->where('id_jurusan', $data['id_jurusan']);
+      $this->db->update('jurusan', $data);
+  }
+
   public function hapus_jurusan($data)
   {
     $this->db->where('id_jurusan',$data['id_jurusan']);

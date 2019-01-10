@@ -39,7 +39,10 @@
                <tr>
                  <td class="text-center"><?php echo $no ?></td>
                  <td><?php echo $jurusan->nama_jurusan ?></td>
-                 <td class="text-center"><a class="btn btn-default"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Edit</a>
+                 <td class="text-center"><a style="cursor:pointer;" class="btn btn-default" onclick="get_jurusan(
+                   '<?php echo $jurusan->id_jurusan ?>',
+                   '<?php echo $jurusan->nama_jurusan ?>'
+                   )" data-toggle="modal" data-target="#modal-update-jurusan"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Edit</a>
                  <a href="<?php echo site_url('admin/jurusan/hapus_jurusan/'.$jurusan->id_jurusan) ?>" class="btn btn-danger"><i class="fa fa-eraser"></i>&nbsp;&nbsp;Hapus</a></td>
                </tr>
                <?php $no++ ?>
@@ -283,7 +286,7 @@
                 <div class="form-group">
                   <label class="col-sm-3 control-label" for="">Nama Jurusan</label>
                   <div class="col-sm-9">
-                    <input type="text" name="nama_jurusan" class="form-control" value="" placeholder="Masukan Nama Jurusan..."required>
+                    <input type="text" name="nama_jurusan" id="nama_jurusan" class="form-control" value="" placeholder="Masukan Nama Jurusan..."required>
                   </div>
                 </div>
               </div>
@@ -298,6 +301,39 @@
     </form>
   </div>
 </div>
+
+<div class="modal fade" id="modal-update-jurusan" role="dialog">
+  <div class="modal-dialog">
+    <form class="" action="<?php echo site_url('admin/jurusan/update_jurusan') ?>" method="post">
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <button type="button" class="close" data-dismiss="modal" name="button"></button>
+          <h4 class="modal-title"></i>Form Update Jurusan</h4>
+        </div>
+        <div class="modal-body">
+          <div class="col-md-12">
+            <div class="form-horizontal">
+              <div class="box-body">
+                <input type="hidden" name="id_jurusan_up" id="id_jurusan_up" class="form-control" value="" placeholder="">
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="">Nama Jurusan</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="nama_jurusan_up" id="nama_jurusan_up" class="form-control" value="" placeholder="Masukan Nama Jurusan..."required>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-default" data-dismiss="modal" name="button">Cancel</button>
+          <button type="submit" class="btn btn-primary" name="button">Update Jurusan Jurusan</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
 
 
 <!-- jQuery 3 -->
@@ -321,10 +357,17 @@
    $('#example1').DataTable({
      "columnDefs": [
   { "width": "5%", "targets": 0 },
-  { "width": "17%", "targets": 2 }
+  { "width": "18%", "targets": 2 }
 ]
    })
  })
+
+ function get_jurusan($id_jurusan,$nama_jurusan)
+ {
+   $("#id_jurusan_up").val($id_jurusan);
+   $("#nama_jurusan_up").val($nama_jurusan);
+   console.log(nama_jurusan);
+ }
 </script>
 </body>
 </html>
