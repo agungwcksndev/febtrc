@@ -29,7 +29,7 @@ class Prodi_Model extends CI_Model{
     return $query->result();
   }
 
-  function fetch_prodi($id_jurusan)
+  public function fetch_prodi($id_jurusan)
   {
     $this->db->select('*');
     $this->db->from('prodi');
@@ -42,6 +42,14 @@ class Prodi_Model extends CI_Model{
       $output .= '<option value="'.$row->id_prodi.'">'.$row->nama_prodi.'</option>';
     }
     return $output;
+  }
+
+  public function getDetailProdi($id_prodi){
+    $this->db->select('*');
+    $this->db->from('prodi');
+		$this->db->where('id_prodi',$id_prodi);
+		$query = $this->db->get();
+		return $query->row();
   }
 
   public function tambah_prodi($data)

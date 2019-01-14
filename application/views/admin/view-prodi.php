@@ -41,11 +41,7 @@
                  <td class="text-center"><?php echo $no ?></td>
                  <td><?php echo $prodi->nama_jurusan ?></td>
                  <td><?php echo $prodi->nama_prodi ?></td>
-                 <td><a class="btn btn-default" onclick="get_prodi(
-                   '<?php echo $prodi->id_prodi ?>',
-                   '<?php echo $prodi->nama_jurusan ?>',
-                   '<?php echo $prodi->nama_prodi ?>'
-                   )"  data-toggle="modal" data-target="#modal-update-prodi"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Edit</a>
+                 <td><a class="btn btn-default" onclick="edit_prodi('<?php echo $prodi->id_prodi ?>')"<i class="fa fa-pencil"></i>&nbsp;&nbsp;Edit</a>
                  <a href="<?php echo site_url('admin/prodi/hapus_prodi/'.$prodi->id_prodi) ?>"class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;&nbsp;Delete</a></td>
                </tr>
                <?php $no++ ?>
@@ -359,10 +355,11 @@
                 <div class="form-group">
                   <label class="col-sm-3 control-label" for="">Jurusan</label>
                   <div class="col-sm-9">
-                    <select name="jurusan" id="jurusan">
+                    <input type="hidden" id="id_prodi_up" name="id_prodi_up" value="">
+                    <select name="nama_jurusan_up" id="nama_jurusan_up" class="form-control">
                       <option value="" disabled>Pilih Jurusan</option>
                         <?php foreach ($list_jurusan as $jurusan): ?>
-                          <option value="<?php echo $jurusan->id_jurusan ?>" <?php if($jurusan->nama_jurusan==$jurusan){ echo "selected";} ?>><?php echo $jurusan->nama_jurusan ?></option>
+                          <option value="<?php echo $jurusan->id_jurusan ?>"><?php echo $jurusan->nama_jurusan ?></option>
                         <?php endforeach; ?>
                     </select>
                   </div>
@@ -403,6 +400,7 @@
 <script src="<?php echo base_url(); ?>dist/js/demo.js"></script>
 <!-- page script -->
 <script>
+
  $(function () {
    $('#example1').DataTable({
      "columnDefs": [
@@ -412,11 +410,27 @@
 ]
    })
  })
- function get_prodi($id_prodi,$nama_jurusan,$nama_prodi)
+
+ function edit_prodi(id_prodi)
  {
-   $("#id_prodi_up").val($id_prodi);
-   $("#jurusan_up").val($nama_jurusan);
-   $("#nama_prodi_up").val($nama_prodi);
+     //Ajax Load data from ajax
+     $.ajax({
+         url : "<?php echo site_url('admin/prodi/getDetailProdi')?>/" + id_prodi,
+         type: "GET",
+         dataType: "JSON",
+         success: function(data)
+         {
+             $('[name="id_prodi_up"]').val(data.id_prodi);
+             $('[name="nama_jurusan_up"]').val(data.id_jurusan);
+             $('[name="nama_prodi_up"]').val(data.nama_prodi);
+             $('#modal-update-prodi').modal('show'); // show bootstrap modal when complete loaded
+
+         },
+         error: function (jqXHR, textStatus, errorThrown)
+         {
+             alert('Error get data from ajax');
+         }
+     });
  }
 </script>
 </body>

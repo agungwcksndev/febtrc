@@ -58,6 +58,52 @@ class Prodi extends CI_Controller{
       }
     }
 
+    public function getDetailProdi($id_prodi){
+      $data = $this->Prodi_Model->getDetailProdi($id_prodi);
+      echo json_encode($data);
+    }
+
+    public function update_prodi()
+        {
+            $valid = $this->form_validation;
+
+            $valid->set_rules(
+                'nama_jurusan_up',
+                'nama_jurusan_up',
+                'required',
+                array(
+              'required'  =>  'Anda belum memilih Jurusan.')
+            );
+
+            $valid->set_rules(
+                'nama_prodi_up',
+                'nama_prodi_up',
+                'required',
+                array(
+              'required'  =>  'Anda belum mengisikan Nama Jurusan.')
+            );
+
+            $i  = $this->input;
+            if ($valid->run()===false) {
+              $prodis = $this->Prodi_Model->listing();
+              $list_jurusan = $this->Jurusan_Model->get_jurusan();
+              $data = array('isi'           => 'admin/view-prodi',
+                            'prodis'       => $prodis,
+                            'list_jurusan' => $list_jurusan
+                            );
+              $this->load->view("layouts/wrapper", $data, false);
+            } else {
+                $data = array(
+                  'id_jurusan'       =>  $i->post('nama_jurusan_up'),
+                  'nama_prodi'       =>  $i->post('nama_prodi_up'),
+                  'id_prodi'         =>  $i->post('id_prodi_up')
+                  );
+                $this->Prodi_Model->update_prodi($data);
+                $this->session->set_flashdata('notifikasi', '<center>Data Program Studi berhasil di update');
+                redirect('admin/prodi');
+              }
+            }
+
     public function hapus_prodi($id)
     {
       $data = array('id_prodi'  =>  $id);
