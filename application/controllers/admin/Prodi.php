@@ -18,7 +18,6 @@ class Prodi extends CI_Controller{
                   'prodis'       => $prodis,
                   'list_jurusan' => $list_jurusan
                   );
-    // $data['join2'] = $this->Prodi_Model->duatable();
     $this->load->view("layouts/wrapper", $data, false);
   }
 

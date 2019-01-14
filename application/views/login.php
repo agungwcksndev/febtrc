@@ -131,7 +131,6 @@
                         <option value="<?php echo $jurusan->id_jurusan; ?>"><?php echo $jurusan->nama_jurusan; ?></option>
                       <?php endforeach; ?>
                     </select>
-                    <!-- <input type="text" name="jurusan" class="form-control" value="" placeholder="Masukan Jurusan..."required> -->
                   </div>
                 </div>
                 <div class="form-group">
@@ -140,7 +139,6 @@
                     <select name="prodi" id="prodi" class="form-control">
                       <option selected disabled>Pilih Program Studi</option>
                     </select>
-                    <!-- <input type="text" name="prodi" class="form-control" value="" placeholder="Masukan Program Studi..."required> -->
                   </div>
                 </div>
                 <div class="form-group">

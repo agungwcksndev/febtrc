@@ -3,7 +3,7 @@
    <!-- Content Header (Page header) -->
    <section class="content-header">
      <h1>
-       Master Prodi
+       Master Alumni
        <small>View data</small>
      </h1>
      <ol class="breadcrumb">
@@ -19,8 +19,8 @@
        <div class="col-xs-12">
          <div class="box box-info">
            <div class="box-header">
-             <h3 class="box-title">Data Prodi Fakultas Ekonomi Bisnis Universitas Brawijaya</h3>
-             <button type="button" class="btn btn-success btn-flat" style="float:right;" data-toggle="modal" data-target="#modal-add-prodi"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Tambah Program Studi</button>
+             <h3 class="box-title">Data Alumni Fakultas Ekonomi Bisnis Universitas Brawijaya</h3>
+               <a href="<?php echo site_url('admin/alumni/tambah_alumni') ?>" class="btn btn-success btn-flat"  style="float:right;"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Tambah Data Alumni</a>
            </div>
            <!-- /.box-header -->
            <div class="box-body">
@@ -28,21 +28,29 @@
                <thead>
                <tr>
                  <th class="text-center">No.</th>
-                 <th>Nama Jurusan</th>
-                 <th>Nama Program Studi</th>
+                 <th>Nama</th>
+                 <th>Jenjang</th>
+                 <th>Jurusan</th>
+                 <th>Program Studi</th>
+                 <th>Angkatan</th>
+                 <th>Tahun Lulus</th>
                  <th class="text-center">Aksi</th>
                </tr>
                </thead>
                <tbody>
                  <?php
                  $no = 1;
-                 foreach ($prodis as $prodi): ?>
+                 foreach ($alumnis as $alumni): ?>
                <tr>
                  <td class="text-center"><?php echo $no ?></td>
-                 <td><?php echo $prodi->nama_jurusan ?></td>
-                 <td><?php echo $prodi->nama_prodi ?></td>
-                 <td><a class="btn btn-default" onclick="edit_prodi('<?php echo $prodi->id_prodi ?>')"<i class="fa fa-pencil"></i>&nbsp;&nbsp;Edit</a>
-                 <a href="<?php echo site_url('admin/prodi/hapus_prodi/'.$prodi->id_prodi) ?>"class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;&nbsp;Delete</a></td>
+                 <td><?php echo $alumni->nama ?></td>
+                 <td><?php echo $alumni->jenjang ?></td>
+                 <td><?php echo $alumni->nama_jurusan ?></td>
+                 <td><?php echo $alumni->nama_prodi ?></td>
+                 <td><?php echo $alumni->angkatan ?></td>
+                 <td><?php echo $alumni->tahun_lulus ?></td>
+                 <td class="text-center"><a style="cursor:pointer;" class="btn btn-default" onclick="" data-toggle="" data-target="#"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Detail</a>
+                 <a href="<?php echo site_url('admin/alumni/hapus_alumni/'.$alumni->username) ?>" class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;&nbsp;Hapus</a></td>
                </tr>
                <?php $no++ ?>
                <?php endforeach; ?>
@@ -50,8 +58,12 @@
                <tfoot>
                <tr>
                  <th class="text-center">No.</th>
-                 <th>Nama Jurusan</th>
-                 <th>Nama Program Studi</th>
+                 <th>Nama</th>
+                 <th>Jenjang</th>
+                 <th>Jurusan</th>
+                 <th>Program Studi</th>
+                 <th>Angkatan</th>
+                 <th>Tahun Lulus</th>
                  <th class="text-center">Aksi</th>
                </tr>
                </tfoot>
@@ -62,30 +74,6 @@
          <!-- /.box -->
        </div>
        <!-- /.col -->
-       <!-- <div class="col-md-4"> -->
-          <!-- Horizontal Form -->
-          <!-- general form elements disabled -->
-          <!-- <div class="box box-info">
-            <div class="box-header with-border">
-              <h3 class="box-title">Tambah Prodi</h3>
-            </div>
-
-            <div class="box-body">
-              <form role="form">
-
-                <div class="form-group">
-                  <label>Nama Program Studi</label>
-                  <input type="text" class="form-control" placeholder="Masukan nama prodi...">
-                </div>
-                <div class="box-footer">
-                  <button type="submit" class="btn btn-info pull-right">Tambah</button>
-                </div>
-              </form>
-            </div>
-
-          </div> -->
-          <!-- /.box -->
-     <!-- </div> -->
      <!-- /.row -->
    </section>
    <!-- /.content -->
@@ -295,94 +283,6 @@
 </div>
 <!-- ./wrapper -->
 
-
-<div class="modal fade" id="modal-add-prodi" role="dialog">
-  <div class="modal-dialog">
-    <form class="" action="<?php echo site_url('admin/prodi/tambah_prodi') ?>" method="post">
-      <div class="modal-content">
-        <div class="modal-header bg-primary">
-          <button type="button" class="close" data-dismiss="modal" name="button"></button>
-          <h4 class="modal-title"></i>Form Tambah Program Studi</h4>
-        </div>
-        <div class="modal-body">
-          <div class="col-md-12">
-            <div class="form-horizontal">
-              <div class="box-body">
-                <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Pilih Jurusan</label>
-                  <div class="col-sm-9">
-                    <select name="jurusan" id="jurusan" class="form-control">
-                      <option disabled>Pilih Jurusan</option>
-                      <?php foreach ($list_jurusan as $jurusan): ?>
-                        <option value="<?php echo $jurusan->id_jurusan; ?>"><?php echo $jurusan->nama_jurusan; ?></option>
-                      <?php endforeach; ?>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Nama Program Studi</label>
-                  <div class="col-sm-9">
-                    <input type="text" name="nama_prodi" id="nama_prodi" class="form-control" value="" placeholder="Masukan Nama Program Studi..."required>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-default" data-dismiss="modal" name="button">Cancel</button>
-          <button type="submit" class="btn btn-primary" name="button">Tambah Program Studi</button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
-
-<div class="modal fade" id="modal-update-prodi" role="dialog">
-  <div class="modal-dialog">
-    <form class="" action="<?php echo site_url('admin/prodi/update_prodi') ?>" method="post">
-      <div class="modal-content">
-        <div class="modal-header bg-primary">
-
-          <button type="button" class="close" data-dismiss="modal" name="button"></button>
-          <h4 class="modal-title"></i>Form Update Program Studi</h4>
-        </div>
-        <div class="modal-body">
-          <div class="col-md-12">
-            <div class="form-horizontal">
-              <div class="box-body">
-                <input type="hidden" name="id_prodi_up" id="id_prodi_up" class="form-control" value="" placeholder="">
-                <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Jurusan</label>
-                  <div class="col-sm-9">
-                    <input type="hidden" id="id_prodi_up" name="id_prodi_up" value="">
-                    <select name="nama_jurusan_up" id="nama_jurusan_up" class="form-control">
-                      <option value="" disabled>Pilih Jurusan</option>
-                        <?php foreach ($list_jurusan as $jurusan): ?>
-                          <option value="<?php echo $jurusan->id_jurusan ?>"><?php echo $jurusan->nama_jurusan ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Nama Program Studi</label>
-                  <div class="col-sm-9">
-                    <input type="text" name="nama_prodi_up" id="nama_prodi_up" class="form-control" value="" placeholder="Masukan Nama Program Studi..."required>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-default" data-dismiss="modal" name="button">Cancel</button>
-          <button type="submit" class="btn btn-primary" name="button">Update Program Studi</button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
-
 <!-- jQuery 3 -->
 <script src="<?php echo base_url(); ?>bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
@@ -400,38 +300,22 @@
 <script src="<?php echo base_url(); ?>dist/js/demo.js"></script>
 <!-- page script -->
 <script>
-
  $(function () {
    $('#example1').DataTable({
      "columnDefs": [
-  { "width": "5%", "targets": 0 },
-  { "width": "30%", "targets": 1 },
-  { "width": "17%", "targets": 3 }
-]
+       { "width": "5%", "targets": 0 },
+       { "width": "13%", "targets": 9 }
+    ]
    })
  })
 
- function edit_prodi(id_prodi)
+ function get_alumni($username,$nama)
  {
-     //Ajax Load data from ajax
-     $.ajax({
-         url : "<?php echo site_url('admin/prodi/getDetailProdi')?>/" + id_prodi,
-         type: "GET",
-         dataType: "JSON",
-         success: function(data)
-         {
-             $('[name="id_prodi_up"]').val(data.id_prodi);
-             $('[name="nama_jurusan_up"]').val(data.id_jurusan);
-             $('[name="nama_prodi_up"]').val(data.nama_prodi);
-             $('#modal-update-prodi').modal('show'); // show bootstrap modal when complete loaded
-
-         },
-         error: function (jqXHR, textStatus, errorThrown)
-         {
-             alert('Error get data from ajax');
-         }
-     });
+   $("#username_up").val($username);
+   $("#nama_up").val($nama);
+   console.log(nama);
  }
+
 </script>
 </body>
 </html>
