@@ -31,8 +31,8 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <p href="<?php echo base_url(); ?>index2.html"><b>Tracert Alumni</b></p>
-    <p>Fakultas Ekonomi Bisnis</p>
+    <p style="color:#fff;" href="<?php echo base_url(); ?>index2.html"><b>Tracert Alumni</b></p>
+    <p style="color:#fff;">Fakultas Ekonomi Bisnis</p>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">

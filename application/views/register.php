@@ -27,7 +27,7 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition register-page" style="background:#ffff7e;">
+<body class="hold-transition register-page" style="background:#003961;">
 <div class="register-box">
   <div class="register-logo">
     <a href="<?php echo base_url(); ?>index2.html">Registrasi Alumni <b>FEB UB</b></a>

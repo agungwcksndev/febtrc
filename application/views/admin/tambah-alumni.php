@@ -15,15 +15,16 @@
 
    <!-- Main content -->
    <section class="content">
+     <?php echo validation_errors(); ?>
+     <form class="form-horizontal" method="post" action="<?php echo site_url('admin/alumni/proses_tambah_alumni') ?>">
      <div class="row">
      <div class="col-md-6">
        <div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">Data Diri</h3>
+              <h3 class="box-title">Identitas Diri</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form class="form-horizontal">
               <div class="box-body">
                 <div class="form-group">
                   <label for="nama" class="col-sm-4 control-label">Nama Lengkap<font style="color: red;">*)</font></label>
@@ -34,7 +35,7 @@
                 <div class="form-group">
                   <label for="nim" class="col-sm-4 control-label">NIM</label>
                   <div class="col-sm-8">
-                    <input type="text" name="nim" class="form-control" id="nim" placeholder="MasukN NIM">
+                    <input type="text" name="nim" class="form-control" id="nim" placeholder="Masukan NIM">
                   </div>
                 </div>
                 <div class="form-group">
@@ -44,7 +45,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="jenis_kelamin" class="col-sm-4 control-label">Jenis Kelamin</label>
+                  <label for="jenis_kelamin" class="col-sm-4 control-label">Jenis Kelamin<font style="color: red;">*)</font></label>
                   <div class="col-sm-8">
                     <select class="form-control" name="jenis_kelamin" id="jenis_kelamin">
                       <option value=""selected disabled>Pilih Jenis Kelamin</option>
@@ -54,7 +55,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-4 control-label">Golongan Darah</label>
+                  <label for="golongan_darah" class="col-sm-4 control-label">Golongan Darah</label>
                   <div class="col-sm-8">
                     <select class="form-control" name="golongan_darah" id="golongan_darah">
                       <option value=""selected disabled>Pilih Golongan Darah</option>
@@ -65,7 +66,6 @@
                     </select>
                   </div>
                 </div>
-
                 <div class="form-group">
                   <label for="tempat_lahir" class="col-sm-4 control-label">Tempat Lahir</label>
                   <div class="col-sm-8">
@@ -75,7 +75,7 @@
                 <div class="form-group">
                   <label for="tanggal_lahir" class="col-sm-4 control-label">Tanggal Lahir</label>
                   <div class="col-sm-8">
-                    <input type="date" name="tanggal_lahir" class="form-control" id="tanggal_lahir" placeholder="Masukan Tanggal Lahir">
+                    <input type="text" name="tanggal_lahir" class="form-control" id="tanggal_lahir" placeholder="Masukan Tanggal Lahir">
                   </div>
                 </div>
                 <div class="form-group">
@@ -176,17 +176,15 @@
                     <input type="text" name="instagram" class="form-control" id="instagram" placeholder="Masukan Instagram">
                   </div>
                 </div>
-              </form>
             </div>
           </div>
         </div>
 
-        <div class="col-md-6">
-            <div class="box box-info">
+    <div class="col-md-6">
+        <div class="box box-info">
               <div class="box-header with-border">
                 <h3 class="box-title">Informasi Akun</h3>
               </div>
-                <form class="form-horizontal">
                   <div class="box-body">
                    <div class="form-group">
                      <label for="username" class="col-sm-4 control-label">Username<font style="color: red;">*)</font></label>
@@ -197,24 +195,22 @@
                    <div class="form-group">
                      <label for="password" class="col-sm-4 control-label">Password<font style="color: red;">*)</font></label>
                      <div class="col-sm-8">
-                       <input type="text" name="password" class="form-control" id="password" placeholder="Masukan Password">
+                       <input type="password" name="password" class="form-control" id="password" placeholder="Masukan Password">
                      </div>
                    </div>
                    <div class="form-group">
                      <label for="passconf" class="col-sm-4 control-label">Konfirmasi Password<font style="color: red;">*)</font></label>
                      <div class="col-sm-8">
-                       <input type="text" name="passconf" class="form-control" id="passconf" placeholder="Masukan Ulang Password">
+                       <input type="password" name="passconf" class="form-control" id="passconf" placeholder="Masukan Ulang Password">
                      </div>
                    </div>
                  </div>
-               </form>
               </div>
 
                <div class="box box-info">
                  <div class="box-header with-border">
                    <h3 class="box-title">Informasi Lulusan</h3>
                  </div>
-                   <form class="form-horizontal">
                      <div class="box-body">
                        <div class="form-group">
                          <label for="jenjang" class="col-sm-4 control-label">Jenjang<font style="color: red;">*)</font></label>
@@ -250,11 +246,13 @@
                        <div class="form-group">
                          <label for="angkatan" class="col-sm-4 control-label">Angkatan<font style="color: red;">*)</font></label>
                          <div class="col-sm-8">
-                           <input type="text" name="angkatan" class="form-control" id="angkatan" placeholder="Masukan Angkatan Masuk">
+                           <select class="form-control" id="angkatan" name="angkatan">
+                             <option value="" selected disabled>Pilih Tahun Angkatan</option>
+                           </select>
                          </div>
                        </div>
                        <div class="form-group">
-                         <label for="tahun_lulus" class="col-sm-4 control-label">Tahun Lulus<font style="color: red;">*)</font></label>
+                         <label for="tahun_lulus" class="col-sm-4 control-label">Tahun Lulus</label>
                          <div class="col-sm-8">
                            <select class="form-control" id="tahun_lulus" name="tahun_lulus">
                              <option value="" selected disabled>Pilih Tahun Lulus</option>
@@ -264,7 +262,7 @@
                        <div class="form-group">
                          <label for="tanggal_yudisium" class="col-sm-4 control-label">Tanggal Yudisium</label>
                          <div class="col-sm-8">
-                           <input type="date" name="tanggal_yudisium" class="form-control" id="tanggal_yudisium" placeholder="Masukan Tanggal Yudisium">
+                           <input type="text" name="tanggal_yudisium" class="form-control" id="tanggal_yudisium" placeholder="Masukan Tanggal Yudisium">
                          </div>
                        </div>
                        <div class="form-group">
@@ -281,16 +279,16 @@
                        </div>
                       </div>
                     </div>
-                  </form>
                 </div>
              </div>
           </div>
           <!-- /.box-body -->
-          <div class="box-footer">
-            <button type="submit" class="btn btn-default pull-right" name="button">Cancel</button>
-            <button type="submit" class="btn btn-primary pull-right" name="button">Simpan</button>
+          <div class="box-footer btn-toolbar">
+            <a href="<?php echo site_url('admin/alumni') ?>" class="btn btn-default pull-right">Cancel</a>
+            <button type="submit"  class="btn btn-primary pull-right" name="submit" value="Simpan">Simpan</button>
           </div>
           <!-- /.box-footer -->
+        </form>
       </section>
    <!-- /.content -->
  </div>
@@ -423,7 +421,6 @@
      <!-- /.tab-pane -->
      <!-- Settings tab content -->
      <div class="tab-pane" id="control-sidebar-settings-tab">
-       <form method="post">
          <h3 class="control-sidebar-heading">General Settings</h3>
 
          <div class="form-group">
@@ -487,7 +484,7 @@
            </label>
          </div>
          <!-- /.form-group -->
-       </form>
+
      </div>
      <!-- /.tab-pane -->
    </div>
@@ -582,15 +579,24 @@ $(document).ready(function(){
         })
       }
     })
-    var max = new Date().getFullYear();
-    var min = 1961;
+    var max  = new Date().getFullYear();
+    var min  = 1961;
+    var min2 = 1950;
     select = document.getElementById('tahun_lulus');
+    select2 = document.getElementById('angkatan');
 
     for (var i = min; i<=max; i++){
     var opt = document.createElement('option');
     opt.value = i;
     opt.innerHTML = i;
     select.appendChild(opt);
+    }
+
+    for (var i = min2; i<=max; i++){
+    var opt = document.createElement('option');
+    opt.value = i;
+    opt.innerHTML = i;
+    select2.appendChild(opt);
     }
   })
 })

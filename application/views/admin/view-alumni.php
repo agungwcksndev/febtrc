@@ -11,6 +11,15 @@
        <li><a href="#">Tables</a></li>
        <li class="active">Data tables</li>
      </ol>
+     <?php if ($this->session->flashdata('success')) {
+         echo "<br>";
+         echo "<div class='alert alert-success alert-dismissible'>";
+         echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
+         echo "<h4><i class='icon fa fa-check'></i>Success!</h4>";
+         echo $this->session->flashdata('success');
+         echo "</div>";
+     };
+     ?>
    </section>
 
    <!-- Main content -->
@@ -20,7 +29,7 @@
          <div class="box box-info">
            <div class="box-header">
              <h3 class="box-title">Data Alumni Fakultas Ekonomi Bisnis Universitas Brawijaya</h3>
-               <a href="<?php echo site_url('admin/alumni/tambah_alumni') ?>" class="btn btn-success btn-flat"  style="float:right;"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Tambah Data Alumni</a>
+               <a href="<?php echo site_url('admin/alumni/tambah_alumni') ?>" class="btn btn-primary btn-flat"  style="float:right;"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Tambah Data Alumni</a>
            </div>
            <!-- /.box-header -->
            <div class="box-body">
@@ -29,11 +38,10 @@
                <tr>
                  <th class="text-center">No.</th>
                  <th>Nama</th>
-                 <th>Jenjang</th>
+                 <th class="text-center">Jenjang</th>
                  <th>Jurusan</th>
                  <th>Program Studi</th>
-                 <th>Angkatan</th>
-                 <th>Tahun Lulus</th>
+                 <th class="text-center">Angkatan</th>
                  <th class="text-center">Aksi</th>
                </tr>
                </thead>
@@ -44,13 +52,12 @@
                <tr>
                  <td class="text-center"><?php echo $no ?></td>
                  <td><?php echo $alumni->nama ?></td>
-                 <td><?php echo $alumni->jenjang ?></td>
+                 <td class="text-center"><?php echo $alumni->jenjang ?></td>
                  <td><?php echo $alumni->nama_jurusan ?></td>
                  <td><?php echo $alumni->nama_prodi ?></td>
-                 <td><?php echo $alumni->angkatan ?></td>
-                 <td><?php echo $alumni->tahun_lulus ?></td>
-                 <td class="text-center"><a style="cursor:pointer;" class="btn btn-default" onclick="" data-toggle="" data-target="#"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Detail</a>
-                 <a href="<?php echo site_url('admin/alumni/hapus_alumni/'.$alumni->username) ?>" class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;&nbsp;Hapus</a></td>
+                 <td class="text-center"><?php echo $alumni->angkatan ?></td>
+                 <td class="text-center"><a style="cursor:pointer;" class="btn btn-default" onclick="detail('<?php echo $alumni->username ?>')" data-toggle="" data-target="#"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Detail</a>
+                 <button onclick="del('<?php echo $alumni->username ?>')" class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;&nbsp;Hapus</button></td>
                </tr>
                <?php $no++ ?>
                <?php endforeach; ?>
@@ -59,11 +66,10 @@
                <tr>
                  <th class="text-center">No.</th>
                  <th>Nama</th>
-                 <th>Jenjang</th>
+                 <th class="text-center">Jenjang</th>
                  <th>Jurusan</th>
                  <th>Program Studi</th>
-                 <th>Angkatan</th>
-                 <th>Tahun Lulus</th>
+                 <th  class="text-center">Angkatan</th>
                  <th class="text-center">Aksi</th>
                </tr>
                </tfoot>
@@ -304,7 +310,7 @@
    $('#example1').DataTable({
      "columnDefs": [
        { "width": "5%", "targets": 0 },
-       { "width": "13%", "targets": 9 }
+       { "width": "20%", "targets": 6 }
     ]
    })
  })
@@ -316,6 +322,20 @@
    console.log(nama);
  }
 
+ function del(id) {
+      var url="<?php echo site_url();?>";
+      var r = confirm("Apakah anda yakin menghapus data ini?");
+      if (r == true) {
+          window.location = url+"/admin/alumni/hapus_alumni/"+id;
+      } else {
+          return false;
+      }
+  }
+
+  function detail(id) {
+       var url="<?php echo site_url();?>";
+       window.location = url+"/admin/alumni/detail_alumni/"+id;
+   }
 </script>
 </body>
 </html>

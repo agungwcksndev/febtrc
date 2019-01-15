@@ -33,6 +33,16 @@ class Alumni_Model extends CI_Model{
     $this->db->insert('alumni', $data);
   }
 
+  public function find_alumni($username){
+    $this->db->select('*');
+    $this->db->from('alumni');
+    $this->db->join('jurusan', 'jurusan.id_jurusan = alumni.id_jurusan');
+    $this->db->join('prodi', 'prodi.id_prodi = alumni.id_prodi');
+    $this->db->where('username', $username);
+    $query  = $this->db->get();
+    return $query->row();
+  }
+
   public function update_alumni($data)
   {
       $this->db->where('username', $data['username']);
