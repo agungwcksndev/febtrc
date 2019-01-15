@@ -8,6 +8,9 @@ class Alumni extends CI_Controller{
     parent::__construct();
     $this->load->model('Alumni_Model');
     $this->load->model('Jurusan_Model');
+    $this->load->model('Negara_Model');
+    $this->load->model('Provinsi_Model');
+    $this->load->model('Kota_Model');
   }
 
   function index()
@@ -22,8 +25,8 @@ class Alumni extends CI_Controller{
   function tambah_alumni()
   {
     $alumnis      = $this->Alumni_Model->listing();
-    $negaras      = $this->Alumni_Model->get_negara();
-    $provinsis    = $this->Alumni_Model->get_provinsi();
+    $negaras      = $this->Negara_Model->get_negara();
+    $provinsis    = $this->Provinsi_Model->get_provinsi();
     $list_jurusan = $this->Jurusan_Model->listing();
     $data = array('isi'          => 'admin/tambah-data-alumni',
                   'negaras'      =>  $negaras,
@@ -59,14 +62,14 @@ class Alumni extends CI_Controller{
     public function fetch_provinsi(){
       if($this->input->post('id_negara'))
       {
-      echo $this->Alumni_Model->fetch_provinsi($this->input->post('id_negara'));
+      echo $this->Provinsi_Model->fetch_provinsi($this->input->post('id_negara'));
       }
     }
 
     public function fetch_kota(){
       if($this->input->post('id_provinsi'))
       {
-      echo $this->Alumni_Model->fetch_kota($this->input->post('id_provinsi'));
+      echo $this->Kota_Model->fetch_kota($this->input->post('id_provinsi'));
       }
     }
 

@@ -256,7 +256,9 @@
                        <div class="form-group">
                          <label for="tahun_lulus" class="col-sm-4 control-label">Tahun Lulus<font style="color: red;">*)</font></label>
                          <div class="col-sm-8">
-                           <input type="text" name="tahun_lulus" class="form-control" id="tahun_lulus" placeholder="Masukan Tahun Lulus">
+                           <select class="form-control" id="tahun_lulus" name="tahun_lulus">
+                             <option value="" selected disabled>Pilih Tahun Lulus</option>
+                           </select>
                          </div>
                        </div>
                        <div class="form-group">
@@ -504,6 +506,7 @@
 <!-- DataTables -->
 <script src="<?php echo base_url(); ?>bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url(); ?>bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="<?php echo base_url(); ?>bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- SlimScroll -->
 <script src="<?php echo base_url(); ?>bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
@@ -514,6 +517,16 @@
 <script src="<?php echo base_url(); ?>dist/js/demo.js"></script>
 <!-- page script -->
 <script>
+
+//Date picker
+$('#tanggal_yudisium').datepicker({
+autoclose: true
+})
+
+$('#tanggal_lahir').datepicker({
+autoclose: true
+})
+
 $(document).ready(function(){
   $('#negara').change(function(){
     var e = document.getElementById("negara");
@@ -549,6 +562,7 @@ $(document).ready(function(){
       })
     }
   })
+
   $(document).ready(function(){
 
     $('#jurusan').change(function(){
@@ -568,7 +582,16 @@ $(document).ready(function(){
         })
       }
     })
+    var max = new Date().getFullYear();
+    var min = 1961;
+    select = document.getElementById('tahun_lulus');
 
+    for (var i = min; i<=max; i++){
+    var opt = document.createElement('option');
+    opt.value = i;
+    opt.innerHTML = i;
+    select.appendChild(opt);
+    }
   })
 })
 

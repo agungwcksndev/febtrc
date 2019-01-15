@@ -17,57 +17,6 @@ class Alumni_Model extends CI_Model{
     return $query->result();
   }
 
-  public function get_negara()
-  {
-    $this->db->select('*');
-    $this->db->from('negara');
-    $this->db->order_by('nama_negara');
-    $query  = $this->db->get();
-    return $query->result();
-  }
-
-  public function get_provinsi()
-  {
-    $this->db->select('*');
-    $this->db->from('provinsi');
-    $this->db->order_by('nama_provinsi');
-    $query  = $this->db->get();
-    return $query->result();
-  }
-
-  public function fetch_provinsi($id_negara)
-  {
-    $this->db->select('*');
-    $this->db->from('provinsi');
-    $this->db->where('id_negara', $id_negara);
-    $this->db->order_by('nama_provinsi', 'ASC');
-    $query  = $this->db->get();
-    $output = '<option value="" disabled selected>Pilih Provinsi</option>';
-    foreach($query->result() as $row)
-    {
-      $output .= '<option value="'.$row->id_provinsi.'">'.$row->nama_provinsi.'</option>';
-    }
-    $output .= '<option value="9999">Lain-lain</option>';
-
-    return $output;
-  }
-
-  public function fetch_kota($id_provinsi)
-  {
-    $this->db->select('*');
-    $this->db->from('kota');
-    $this->db->where('id_provinsi', $id_provinsi);
-    $this->db->order_by('nama_kota', 'ASC');
-    $query  = $this->db->get();
-    $output = '<option value="" selected disabled>Pilih Kota</option>';
-    foreach($query->result() as $row)
-    {
-      $output .= '<option value="'.$row->id_kota.'">'.$row->nama_kota.'</option>';
-    }
-    $output .= '<option value="9999">Lain-lain</option>';
-    return $output;
-  }
-
   public function listing()
   {
     $this->db->select('*');
