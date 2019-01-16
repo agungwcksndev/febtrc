@@ -26,7 +26,7 @@
     <!-- sidebar menu: : style can be found in sidebar.less -->
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header">MAIN NAVIGATION</li>
-      <li><a href="<?php echo site_url('alumni/dashboard'); ?>"><i class="fa fa-th"></i> <span>Dashboard</span></a></li>
+      <li><a href="<?php echo site_url('admin/dashboard'); ?>"><i class="fa fa-th"></i> <span>Dashboard</span></a></li>
       <li>
         <a href="<?php echo site_url('admin/jurusan'); ?>">
           <i class="fa fa-bookmark"></i> <span>Jurusan</span>
@@ -46,9 +46,9 @@
           </span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="<?php echo base_url(); ?>pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> Alumni</a></li>
-          <li><a href="<?php echo base_url(); ?>pages/charts/morris.html"><i class="fa fa-circle-o"></i> Operator</a></li>
-          <li><a href="<?php echo base_url(); ?>pages/charts/flot.html"><i class="fa fa-circle-o"></i> Admin</a></li>
+          <li><a href="<?php echo site_url('admin/alumni'); ?>"><i class="fa fa-circle-o"></i> Alumni</a></li>
+          <li><a href="<?php echo site_url(''); ?>"><i class="fa fa-circle-o"></i> Operator</a></li>
+          <li><a href="<?php echo site_url(''); ?>"><i class="fa fa-circle-o"></i> Admin</a></li>
         </ul>
       </li>
       <li>
