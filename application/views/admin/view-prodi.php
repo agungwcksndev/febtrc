@@ -20,7 +20,7 @@
          <div class="box box-info">
            <div class="box-header">
              <h3 class="box-title">Data Prodi Fakultas Ekonomi Bisnis Universitas Brawijaya</h3>
-             <button type="button" class="btn btn-success btn-flat" style="float:right;" data-toggle="modal" data-target="#modal-add-prodi"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Tambah Program Studi</button>
+             <button type="button" class="btn btn-primary btn-flat" style="float:right;" data-toggle="modal" data-target="#modal-add-prodi"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Tambah Program Studi</button>
            </div>
            <!-- /.box-header -->
            <div class="box-body">

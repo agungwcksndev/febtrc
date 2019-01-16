@@ -20,7 +20,7 @@
          <div class="box box-info">
            <div class="box-header">
              <h3 class="box-title">Data Jurusan Fakultas Ekonomi Bisnis Universitas Brawijaya</h3>
-               <button type="button" class="btn btn-success btn-flat" style="float:right;" data-toggle="modal" data-target="#modal-add-jurusan"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Tambah Jurusan</button>
+               <button type="button" class="btn btn-primary btn-flat" style="float:right;" data-toggle="modal" data-target="#modal-add-jurusan"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Tambah Jurusan</button>
            </div>
            <!-- /.box-header -->
            <div class="box-body">
