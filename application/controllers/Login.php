@@ -37,33 +37,54 @@ class Login extends CI_Controller{
                         'list_jurusan' => $list_jurusan,
                         'list_prodi'   => $list_prodi);
           $this->load->view('login', $data, false);
-      } else {
+      }
+      else {
           $i            = $this->input;
           $username     = $i->post('username');
           $password     = md5($i->post('password'));
-          $check_login  = $this->User_Model->login($username, $password);
+          $check_login_admin     = $this->User_Model->login_admin($username, $password);
+          $check_login_operator  = $this->User_Model->login_operator($username, $password);
+          $check_login_alumni    = $this->User_Model->login_alumni($username, $password);
 
-          if (count($check_login) > 0) {
-              if ($check_login->active == 1) {
+          if ($check_login_admin['count_admin'] > 0) {
+              if ($check_login_admin['detail_admin']->active == 1) {
                   $this->session->set_userdata('username', $username);
-                  $this->session->set_userdata('akses_level', $check_login->akses_level);
-                  $this->session->set_userdata('id', $check_login->id);
-                  $this->session->set_userdata('nama', $check_login->nama);
-                  if($this->session->userdata('akses_level') == 'Alumni'){
-                    redirect(site_url('alumni/dashboard'), 'refresh');
-                  }else if($this->session->userdata('akses_level') == 'Admin'){
+                  $this->session->set_userdata('nama', $check_login_admin['detail_admin']->nama);
                     redirect(site_url('admin/dashboard'), 'refresh');
                   }
-              } else {
+                  else{
+                    $this->session->set_flashdata('notifikasi', '<center>Akun belum aktif.<br> Silahkan verifikasi email terlebih dahulu</center>');
+                    redirect(site_url('login'), 'refresh');
+                  }
+              }
+              else if($check_login_operator['count_operator'] > 0) {
+                if($check_login_operator['detail_operator']->active == 1){
+                  $this->session->set_userdata('username', $username);
+                  $this->session->set_userdata('nama', $check_login_operator['detail_operator']->nama);
+                    redirect(site_url('operator/dashboard'), 'refresh');
+                }
+                else{
                   $this->session->set_flashdata('notifikasi', '<center>Akun belum aktif.<br> Silahkan verifikasi email terlebih dahulu</center>');
                   redirect(site_url('login'), 'refresh');
+                }
               }
-          } else {
-              $this->session->set_flashdata('notifikasi', '<center>Username dan password tidak cocok</center>');
-              redirect(site_url('login'), 'refresh');
-          }
-      }
-  }
+              else if($check_login_alumni['count_alumni'] > 0) {
+                if($check_login_alumni['detail_alumni']->active == 1){
+                  $this->session->set_userdata('username', $username);
+                  $this->session->set_userdata('nama', $check_login_alumni['detail_alumni']->nama);
+                    redirect(site_url('alumni/dashboard'), 'refresh');
+                }
+                else{
+                  $this->session->set_flashdata('notifikasi', '<center>Akun belum aktif.<br> Silahkan verifikasi email terlebih dahulu</center>');
+                  redirect(site_url('login'), 'refresh');
+                }
+              }
+              else{
+                $this->session->set_flashdata('notifikasi', '<center>Akun Tidak Terdaftar / Password Salah<br> Pastikan Username & Password sudah benar</center>');
+                redirect(site_url('login'), 'refresh');
+              }
+            }
+}
   function fetch_prodi()
   {
     if($this->input->post('id_jurusan'))

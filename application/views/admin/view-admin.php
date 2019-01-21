@@ -3,7 +3,7 @@
    <!-- Content Header (Page header) -->
    <section class="content-header">
      <h1>
-       Master Jurusan
+       Master Admin
        <small>View data</small>
      </h1>
      <ol class="breadcrumb">
@@ -11,6 +11,15 @@
        <li><a href="#">Tables</a></li>
        <li class="active">Data tables</li>
      </ol>
+     <?php if ($this->session->flashdata('success')) {
+         echo "<br>";
+         echo "<div class='alert alert-success alert-dismissible'>";
+         echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
+         echo "<h4><i class='icon fa fa-check'></i>Success!</h4>";
+         echo $this->session->flashdata('success');
+         echo "</div>";
+     };
+     ?>
    </section>
 
    <!-- Main content -->
@@ -19,8 +28,8 @@
        <div class="col-xs-12">
          <div class="box box-info">
            <div class="box-header">
-             <h3 class="box-title">Data Jurusan Fakultas Ekonomi Bisnis Universitas Brawijaya</h3>
-               <button type="button" class="btn btn-primary btn-flat" style="float:right;" data-toggle="modal" data-target="#modal-add-jurusan"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Tambah Jurusan</button>
+             <h3 class="box-title">Data Administrator Fakultas Ekonomi Bisnis Universitas Brawijaya</h3>
+               <a href="<?php echo site_url('admin/admin/tambah_admin') ?>" class="btn btn-primary btn-flat"  style="float:right;"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Tambah Data Admin</a>
            </div>
            <!-- /.box-header -->
            <div class="box-body">
@@ -28,22 +37,25 @@
                <thead>
                <tr>
                  <th class="text-center">No.</th>
-                 <th>Nama Jurusan</th>
+                 <th>Nama</th>
+                 <th>Username</th>
+                 <th>Email</th>
+                 <th>Nomor HP</th>
                  <th class="text-center">Aksi</th>
                </tr>
                </thead>
                <tbody>
                  <?php
                  $no = 1;
-                 foreach ($jurusans as $jurusan): ?>
+                 foreach ($admins as $admin): ?>
                <tr>
                  <td class="text-center"><?php echo $no ?></td>
-                 <td><?php echo $jurusan->nama_jurusan ?></td>
-                 <td class="text-center"><a style="cursor:pointer;" class="btn btn-default" onclick="get_jurusan(
-                   '<?php echo $jurusan->id_jurusan ?>',
-                   '<?php echo $jurusan->nama_jurusan ?>'
-                   )" data-toggle="modal" data-target="#modal-update-jurusan"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Edit</a>
-                 <a href="<?php echo site_url('admin/jurusan/hapus_jurusan/'.$jurusan->id_jurusan) ?>" class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;&nbsp;Hapus</a></td>
+                 <td><?php echo $admin->nama ?></td>
+                 <td><?php echo $admin->username ?></td>
+                 <td><?php echo $admin->email ?></td>
+                 <td><?php echo $admin->nomor_hp ?></td>
+                 <td class="text-center"><a style="cursor:pointer;" class="btn btn-default" onclick="detail('<?php echo $admin->username ?>')" data-toggle="" data-target="#"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Detail</a>
+                 <button onclick="del('<?php echo $admin->username ?>')" class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;&nbsp;Hapus</button></td>
                </tr>
                <?php $no++ ?>
                <?php endforeach; ?>
@@ -51,7 +63,10 @@
                <tfoot>
                <tr>
                  <th class="text-center">No.</th>
-                 <th>Nama Jurusan</th>
+                 <th>Nama</th>
+                 <th>Username</th>
+                 <th>Email</th>
+                 <th>Nomor HP</th>
                  <th class="text-center">Aksi</th>
                </tr>
                </tfoot>
@@ -271,71 +286,6 @@
 </div>
 <!-- ./wrapper -->
 
-<div class="modal fade" id="modal-add-jurusan" role="dialog">
-  <div class="modal-dialog">
-    <form class="" action="<?php echo site_url('admin/jurusan/tambah_jurusan') ?>" method="post">
-      <div class="modal-content">
-        <div class="modal-header bg-primary">
-          <button type="button" class="close" data-dismiss="modal" name="button"></button>
-          <h4 class="modal-title"></i>Form Tambah Jurusan</h4>
-        </div>
-        <div class="modal-body">
-          <div class="col-md-12">
-            <div class="form-horizontal">
-              <div class="box-body">
-                <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Nama Jurusan</label>
-                  <div class="col-sm-9">
-                    <input type="text" name="nama_jurusan" id="nama_jurusan" class="form-control" value="<?php echo set_value('nama_jurusan') ?>" placeholder="Masukan Nama Jurusan..."required>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-default" data-dismiss="modal" name="button">Cancel</button>
-          <button type="submit" class="btn btn-primary" name="button">Tambah Jurusan</button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
-
-<div class="modal fade" id="modal-update-jurusan" role="dialog">
-  <div class="modal-dialog">
-    <form class="" action="<?php echo site_url('admin/jurusan/update_jurusan') ?>" method="post">
-      <div class="modal-content">
-        <div class="modal-header bg-primary">
-          <button type="button" class="close" data-dismiss="modal" name="button"></button>
-          <h4 class="modal-title"></i>Form Update Jurusan</h4>
-        </div>
-        <div class="modal-body">
-          <div class="col-md-12">
-            <div class="form-horizontal">
-              <div class="box-body">
-                <input type="hidden" name="id_jurusan_up" id="id_jurusan_up" class="form-control" value="" placeholder="">
-                <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Nama Jurusan</label>
-                  <div class="col-sm-9">
-                    <input type="text" name="nama_jurusan_up" id="nama_jurusan_up" class="form-control" value="" placeholder="Masukan Nama Jurusan..."required>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-default" data-dismiss="modal" name="button">Cancel</button>
-          <button type="submit" class="btn btn-primary" name="button">Update Jurusan</button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
-
-
-
 <!-- jQuery 3 -->
 <script src="<?php echo base_url(); ?>bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
@@ -356,18 +306,33 @@
  $(function () {
    $('#example1').DataTable({
      "columnDefs": [
-  { "width": "5%", "targets": 0 },
-  { "width": "18%", "targets": 2 }
-]
+       { "width": "5%", "targets": 0 },
+       { "width": "20%", "targets": 5 }
+    ]
    })
  })
 
- function get_jurusan($id_jurusan,$nama_jurusan)
+ function get_admin($username,$nama)
  {
-   $("#id_jurusan_up").val($id_jurusan);
-   $("#nama_jurusan_up").val($nama_jurusan);
-   console.log(nama_jurusan);
+   $("#username_up").val($username);
+   $("#nama_up").val($nama);
+   console.log(nama);
  }
+
+ function del(id) {
+      var url="<?php echo site_url();?>";
+      var r = confirm("Apakah anda yakin menghapus data ini?");
+      if (r == true) {
+          window.location = url+"/admin/admin/hapus_admin/"+id;
+      } else {
+          return false;
+      }
+  }
+
+  function detail(id) {
+       var url="<?php echo site_url();?>";
+       window.location = url+"/admin/admin/detail_admin/"+id;
+   }
 </script>
 </body>
 </html>

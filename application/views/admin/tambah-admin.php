@@ -3,8 +3,8 @@
    <!-- Content Header (Page header) -->
    <section class="content-header">
      <h1>
-       Master Jurusan
-       <small>View data</small>
+       Master Admin
+       <small>Tambah Data Admin Fakultas Ekonomi dan Bisnis</small>
      </h1>
      <ol class="breadcrumb">
        <li><a href="#"><i class="fa fa-folder-open"></i> Home</a></li>
@@ -15,55 +15,86 @@
 
    <!-- Main content -->
    <section class="content">
+     <?php echo validation_errors(); ?>
+     <form class="form-horizontal" method="post" action="<?php echo site_url('admin/admin/proses_tambah_admin') ?>">
      <div class="row">
-       <div class="col-xs-12">
-         <div class="box box-info">
-           <div class="box-header">
-             <h3 class="box-title">Data Jurusan Fakultas Ekonomi Bisnis Universitas Brawijaya</h3>
-               <button type="button" class="btn btn-primary btn-flat" style="float:right;" data-toggle="modal" data-target="#modal-add-jurusan"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Tambah Jurusan</button>
-           </div>
-           <!-- /.box-header -->
-           <div class="box-body">
-             <table id="example1" class="table table-bordered table-striped">
-               <thead>
-               <tr>
-                 <th class="text-center">No.</th>
-                 <th>Nama Jurusan</th>
-                 <th class="text-center">Aksi</th>
-               </tr>
-               </thead>
-               <tbody>
-                 <?php
-                 $no = 1;
-                 foreach ($jurusans as $jurusan): ?>
-               <tr>
-                 <td class="text-center"><?php echo $no ?></td>
-                 <td><?php echo $jurusan->nama_jurusan ?></td>
-                 <td class="text-center"><a style="cursor:pointer;" class="btn btn-default" onclick="get_jurusan(
-                   '<?php echo $jurusan->id_jurusan ?>',
-                   '<?php echo $jurusan->nama_jurusan ?>'
-                   )" data-toggle="modal" data-target="#modal-update-jurusan"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Edit</a>
-                 <a href="<?php echo site_url('admin/jurusan/hapus_jurusan/'.$jurusan->id_jurusan) ?>" class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;&nbsp;Hapus</a></td>
-               </tr>
-               <?php $no++ ?>
-               <?php endforeach; ?>
-               </tbody>
-               <tfoot>
-               <tr>
-                 <th class="text-center">No.</th>
-                 <th>Nama Jurusan</th>
-                 <th class="text-center">Aksi</th>
-               </tr>
-               </tfoot>
-             </table>
-           </div>
-           <!-- /.box-body -->
-         </div>
-         <!-- /.box -->
-       </div>
-       <!-- /.col -->
-     <!-- /.row -->
-   </section>
+     <div class="col-md-6">
+       <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Identitas Diri</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+              <div class="box-body">
+                <div class="form-group">
+                  <label for="nama" class="col-sm-4 control-label">Nama Lengkap<font style="color: red;">*)</font></label>
+                  <div class="col-sm-8">
+                    <input type="text" name="nama" class="form-control" id="nama" value="<?php echo set_value('nama') ?>" placeholder="Masukan Nama Lengkap">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="jenis_kelamin" class="col-sm-4 control-label">Jenis Kelamin<font style="color: red;">*)</font></label>
+                  <div class="col-sm-8">
+                    <select class="form-control" name="jenis_kelamin" id="jenis_kelamin" value="<?php echo set_value('jenis_kelamin') ?>">
+                      <option value=""selected disabled>Pilih Jenis Kelamin</option>
+                      <option value="Perempuan">Perempuan</option>
+                      <option value="Laki-laki">Laki-laki</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="email" class="col-sm-4 control-label">Email<font style="color: red;">*)</font></label>
+                  <div class="col-sm-8">
+                    <input type="text" name="email" class="form-control" id="email" value="<?php echo set_value('email') ?>" placeholder="Masukan Email">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="nomor_hp" class="col-sm-4 control-label">Nomor HP<font style="color: red;">*)</font></label>
+                  <div class="col-sm-8">
+                    <input type="text" name="nomor_hp" class="form-control" id="nomor_hp" value="<?php echo set_value('nomor_hp') ?>" placeholder="Masukan Nomor HP">
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+
+    <div class="col-md-6">
+        <div class="box box-info">
+              <div class="box-header with-border">
+                <h3 class="box-title">Informasi Akun</h3>
+              </div>
+                  <div class="box-body">
+                   <div class="form-group">
+                     <label for="username" class="col-sm-4 control-label">Username<font style="color: red;">*)</font></label>
+                     <div class="col-sm-8">
+                       <input type="text" name="username" class="form-control" id="username" value="<?php echo set_value('username') ?>" placeholder="Masukan Username">
+                     </div>
+                   </div>
+                   <div class="form-group">
+                     <label for="password" class="col-sm-4 control-label">Password<font style="color: red;">*)</font></label>
+                     <div class="col-sm-8">
+                       <input type="password" name="password" class="form-control" id="password" placeholder="Masukan Password">
+                     </div>
+                   </div>
+                   <div class="form-group">
+                     <label for="passconf" class="col-sm-4 control-label">Konfirmasi Password<font style="color: red;">*)</font></label>
+                     <div class="col-sm-8">
+                       <input type="password" name="passconf" class="form-control" id="passconf" placeholder="Masukan Ulang Password">
+                     </div>
+                   </div>
+                 </div>
+              </div>
+                </div>
+             </div>
+          </div>
+          <!-- /.box-body -->
+          <div class="box-footer btn-toolbar">
+            <a href="<?php echo site_url('admin/admin') ?>" class="btn btn-default pull-right">Cancel</a>
+            <button type="submit"  class="btn btn-primary pull-right" name="submit" value="Simpan">Simpan</button>
+          </div>
+          <!-- /.box-footer -->
+        </form>
+      </section>
    <!-- /.content -->
  </div>
  <!-- /.content-wrapper -->
@@ -195,7 +226,6 @@
      <!-- /.tab-pane -->
      <!-- Settings tab content -->
      <div class="tab-pane" id="control-sidebar-settings-tab">
-       <form method="post">
          <h3 class="control-sidebar-heading">General Settings</h3>
 
          <div class="form-group">
@@ -259,7 +289,7 @@
            </label>
          </div>
          <!-- /.form-group -->
-       </form>
+
      </div>
      <!-- /.tab-pane -->
    </div>
@@ -271,71 +301,6 @@
 </div>
 <!-- ./wrapper -->
 
-<div class="modal fade" id="modal-add-jurusan" role="dialog">
-  <div class="modal-dialog">
-    <form class="" action="<?php echo site_url('admin/jurusan/tambah_jurusan') ?>" method="post">
-      <div class="modal-content">
-        <div class="modal-header bg-primary">
-          <button type="button" class="close" data-dismiss="modal" name="button"></button>
-          <h4 class="modal-title"></i>Form Tambah Jurusan</h4>
-        </div>
-        <div class="modal-body">
-          <div class="col-md-12">
-            <div class="form-horizontal">
-              <div class="box-body">
-                <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Nama Jurusan</label>
-                  <div class="col-sm-9">
-                    <input type="text" name="nama_jurusan" id="nama_jurusan" class="form-control" value="<?php echo set_value('nama_jurusan') ?>" placeholder="Masukan Nama Jurusan..."required>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-default" data-dismiss="modal" name="button">Cancel</button>
-          <button type="submit" class="btn btn-primary" name="button">Tambah Jurusan</button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
-
-<div class="modal fade" id="modal-update-jurusan" role="dialog">
-  <div class="modal-dialog">
-    <form class="" action="<?php echo site_url('admin/jurusan/update_jurusan') ?>" method="post">
-      <div class="modal-content">
-        <div class="modal-header bg-primary">
-          <button type="button" class="close" data-dismiss="modal" name="button"></button>
-          <h4 class="modal-title"></i>Form Update Jurusan</h4>
-        </div>
-        <div class="modal-body">
-          <div class="col-md-12">
-            <div class="form-horizontal">
-              <div class="box-body">
-                <input type="hidden" name="id_jurusan_up" id="id_jurusan_up" class="form-control" value="" placeholder="">
-                <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Nama Jurusan</label>
-                  <div class="col-sm-9">
-                    <input type="text" name="nama_jurusan_up" id="nama_jurusan_up" class="form-control" value="" placeholder="Masukan Nama Jurusan..."required>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-default" data-dismiss="modal" name="button">Cancel</button>
-          <button type="submit" class="btn btn-primary" name="button">Update Jurusan</button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
-
-
-
 <!-- jQuery 3 -->
 <script src="<?php echo base_url(); ?>bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
@@ -343,6 +308,7 @@
 <!-- DataTables -->
 <script src="<?php echo base_url(); ?>bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url(); ?>bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="<?php echo base_url(); ?>bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- SlimScroll -->
 <script src="<?php echo base_url(); ?>bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
@@ -353,21 +319,93 @@
 <script src="<?php echo base_url(); ?>dist/js/demo.js"></script>
 <!-- page script -->
 <script>
- $(function () {
-   $('#example1').DataTable({
-     "columnDefs": [
-  { "width": "5%", "targets": 0 },
-  { "width": "18%", "targets": 2 }
-]
-   })
- })
 
- function get_jurusan($id_jurusan,$nama_jurusan)
- {
-   $("#id_jurusan_up").val($id_jurusan);
-   $("#nama_jurusan_up").val($nama_jurusan);
-   console.log(nama_jurusan);
- }
+//Date picker
+$('#tanggal_yudisium').datepicker({
+autoclose: true
+})
+
+$('#tanggal_lahir').datepicker({
+autoclose: true
+})
+
+$(document).ready(function(){
+  $('#negara').change(function(){
+    var e = document.getElementById("negara");
+    var id_negara = e.options[e.selectedIndex].value;
+    console.log(id_negara)
+    if(id_negara != '')
+    {
+      $.ajax({
+        url:"<?php echo site_url();?>/admin/admin/fetch_provinsi",
+        method: "POST",
+        data:{id_negara:id_negara},
+        success:function(data)
+        {
+          $('#provinsi').html(data);
+        }
+      })
+    }
+  })
+  $('#provinsi').change(function(){
+    var e = document.getElementById("provinsi");
+    var id_provinsi = e.options[e.selectedIndex].value;
+    console.log(id_provinsi)
+    if(id_provinsi != '')
+    {
+      $.ajax({
+        url:"<?php echo site_url();?>/admin/admin/fetch_kota",
+        method: "POST",
+        data:{id_provinsi:id_provinsi},
+        success:function(data)
+        {
+          $('#kota').html(data);
+        }
+      })
+    }
+  })
+
+  $(document).ready(function(){
+
+    $('#jurusan').change(function(){
+      var e = document.getElementById ("jurusan");
+      var id_jurusan = e.options [e.selectedIndex] .value;
+      console.log(id_jurusan)
+      if(id_jurusan != '')
+      {
+        $.ajax({
+          url:"<?php echo site_url();?>/Login/fetch_prodi",
+          method: "POST",
+          data:{id_jurusan:id_jurusan},
+          success:function(data)
+          {
+            $('#prodi').html(data);
+          }
+        })
+      }
+    })
+    var max  = new Date().getFullYear();
+    var min  = 1961;
+    var min2 = 1950;
+    select = document.getElementById('tahun_lulus');
+    select2 = document.getElementById('angkatan');
+
+    for (var i = min; i<=max; i++){
+    var opt = document.createElement('option');
+    opt.value = i;
+    opt.innerHTML = i;
+    select.appendChild(opt);
+    }
+
+    for (var i = min2; i<=max; i++){
+    var opt = document.createElement('option');
+    opt.value = i;
+    opt.innerHTML = i;
+    select2.appendChild(opt);
+    }
+  })
+})
+
 </script>
 </body>
 </html>

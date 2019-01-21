@@ -311,7 +311,7 @@
                 <div class="form-group">
                   <label class="col-sm-3 control-label" for="">Pilih Jurusan</label>
                   <div class="col-sm-9">
-                    <select name="jurusan" id="jurusan" class="form-control">
+                    <select name="jurusan" id="jurusan" class="form-control" value="<?php echo set_value('jurusan') ?>">
                       <option disabled>Pilih Jurusan</option>
                       <?php foreach ($list_jurusan as $jurusan): ?>
                         <option value="<?php echo $jurusan->id_jurusan; ?>"><?php echo $jurusan->nama_jurusan; ?></option>
@@ -322,7 +322,7 @@
                 <div class="form-group">
                   <label class="col-sm-3 control-label" for="">Nama Program Studi</label>
                   <div class="col-sm-9">
-                    <input type="text" name="nama_prodi" id="nama_prodi" class="form-control" value="" placeholder="Masukan Nama Program Studi..."required>
+                    <input type="text" name="nama_prodi" id="nama_prodi" class="form-control" value="<?php echo set_value('nama_prodi') ?>" placeholder="Masukan Nama Program Studi..."required>
                   </div>
                 </div>
               </div>

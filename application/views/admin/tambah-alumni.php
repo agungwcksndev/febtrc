@@ -29,25 +29,25 @@
                 <div class="form-group">
                   <label for="nama" class="col-sm-4 control-label">Nama Lengkap<font style="color: red;">*)</font></label>
                   <div class="col-sm-8">
-                    <input type="text" name="nama" class="form-control" id="nama" placeholder="Masukan Nama Lengkap">
+                    <input type="text" name="nama" class="form-control" id="nama" value="<?php echo set_value('nama') ?>" placeholder="Masukan Nama Lengkap">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="nim" class="col-sm-4 control-label">NIM</label>
                   <div class="col-sm-8">
-                    <input type="text" name="nim" class="form-control" id="nim" placeholder="Masukan NIM">
+                    <input type="text" name="nim" class="form-control" id="nim" value="<?php echo set_value('nim') ?>" placeholder="Masukan NIM">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="email" class="col-sm-4 control-label">Email<font style="color: red;">*)</font></label>
                   <div class="col-sm-8">
-                    <input type="text" name="email" class="form-control" id="email" placeholder="Masukan Email">
+                    <input type="text" name="email" class="form-control" id="email" value="<?php echo set_value('email') ?>" placeholder="Masukan Email">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="jenis_kelamin" class="col-sm-4 control-label">Jenis Kelamin<font style="color: red;">*)</font></label>
                   <div class="col-sm-8">
-                    <select class="form-control" name="jenis_kelamin" id="jenis_kelamin">
+                    <select class="form-control" name="jenis_kelamin" id="jenis_kelamin" value="<?php echo set_value('jenis_kelamin') ?>">
                       <option value=""selected disabled>Pilih Jenis Kelamin</option>
                       <option value="Perempuan">Perempuan</option>
                       <option value="Laki-laki">Laki-laki</option>
@@ -57,7 +57,7 @@
                 <div class="form-group">
                   <label for="golongan_darah" class="col-sm-4 control-label">Golongan Darah</label>
                   <div class="col-sm-8">
-                    <select class="form-control" name="golongan_darah" id="golongan_darah">
+                    <select class="form-control" name="golongan_darah" id="golongan_darah" value="<?php echo set_value('golongan_darah') ?>">
                       <option value=""selected disabled>Pilih Golongan Darah</option>
                       <option value="O">O</option>
                       <option value="A">A</option>
@@ -69,19 +69,19 @@
                 <div class="form-group">
                   <label for="tempat_lahir" class="col-sm-4 control-label">Tempat Lahir</label>
                   <div class="col-sm-8">
-                    <input type="text" name="tempat_lahir" class="form-control" id="tempat_lahir" placeholder="Masukan Tempat Lahir">
+                    <input type="text" name="tempat_lahir" class="form-control" id="tempat_lahir" value="<?php echo set_value('tempat_lahir') ?>" placeholder="Masukan Tempat Lahir">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="tanggal_lahir" class="col-sm-4 control-label">Tanggal Lahir</label>
                   <div class="col-sm-8">
-                    <input type="text" name="tanggal_lahir" class="form-control" id="tanggal_lahir" placeholder="Masukan Tanggal Lahir">
+                    <input type="text" name="tanggal_lahir" class="form-control" id="tanggal_lahir" value="<?php echo set_value('tanggal_lahir') ?>" placeholder="Masukan Tanggal Lahir">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="kewarganegaraan" class="col-sm-4 control-label">Kewarganegaraan</label>
                   <div class="col-sm-8">
-                    <select class="form-control" id="kewarganegaraan" name="kewarganegaraan">
+                    <select class="form-control" id="kewarganegaraan" name="kewarganegaraan" value="<?php echo set_value('kewarganegaraan') ?>">
                       <option value="" selected disabled>Pilih Kewarganegaraan</option>
                       <option value="Warga Indonesia">Warga Indonesia</option>
                       <option value="Warga Keturunan">Warga Keturunan</option>
@@ -92,31 +92,31 @@
                 <div class="form-group">
                   <label for="alamat_asal" class="col-sm-4 control-label">Alamat Asal</label>
                   <div class="col-sm-8">
-                    <input type="text" name="alamat_asal" class="form-control" id="alamat_asal" placeholder="Masukan Alamat Asal">
+                    <input type="text" name="alamat_asal" class="form-control" id="alamat_asal" value="<?php echo set_value('alamat_asal') ?>" placeholder="Masukan Alamat Asal">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="kode_pos_asal" class="col-sm-4 control-label">Kode Pos Asal</label>
                   <div class="col-sm-8">
-                    <input type="text" name="kode_pos_asal" class="form-control" id="kode_pos_asal" placeholder="Masukan Kode Pos Alamat Asal">
+                    <input type="text" name="kode_pos_asal" class="form-control" id="kode_pos_asal" value="<?php echo set_value('kode_pos_asal') ?>" placeholder="Masukan Kode Pos Alamat Asal">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="alamat_sekarang" class="col-sm-4 control-label">Alamat Sekarang</label>
                   <div class="col-sm-8">
-                    <input type="text" name="alamat_sekarang" class="form-control" id="alamat_sekarang" placeholder="Masukan Alamat Tinggal Sekarang">
+                    <input type="text" name="alamat_sekarang" class="form-control" id="alamat_sekarang" value="<?php echo set_value('alamat_sekarang') ?>" placeholder="Masukan Alamat Tinggal Sekarang">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="kode_pos_sekarang" class="col-sm-4 control-label">Kode Pos Sekarang</label>
                   <div class="col-sm-8">
-                    <input type="text" name="kode_pos_sekarang" class="form-control" id="kode_pos_sekarang" placeholder="Masukan Kode Pos Alamat Tinggal Sekarang">
+                    <input type="text" name="kode_pos_sekarang" class="form-control" id="kode_pos_sekarang" value="<?php echo set_value('kode_pos_sekarang') ?>" placeholder="Masukan Kode Pos Alamat Tinggal Sekarang">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-4 control-label">Negara</label>
                   <div class="col-sm-8">
-                    <select name="negara" id="negara" class="form-control">
+                    <select name="negara" id="negara" class="form-control" value="<?php echo set_value('negara') ?>">
                       <option value="" selected disabled>Pilih Negara</option>
                       <?php foreach ($negaras as $negara): ?>
                         <option value="<?php echo $negara->id_negara ?>"><?php echo $negara->nama_negara ?></option>
@@ -127,7 +127,7 @@
                 <div class="form-group">
                   <label for="provinsi" class="col-sm-4 control-label">Provinsi</label>
                   <div class="col-sm-8">
-                    <select name="provinsi" id="provinsi" class="form-control">
+                    <select name="provinsi" id="provinsi" class="form-control" value="<?php echo set_value('provinsi') ?>">
                       <option selected disabled>Pilih Provinsi</option>
                     </select>
                   </div>
@@ -135,7 +135,7 @@
                 <div class="form-group">
                   <label for="kota" class="col-sm-4 control-label">Kota</label>
                   <div class="col-sm-8">
-                    <select class="form-control" id="kota" name="kota">
+                    <select class="form-control" id="kota" name="kota" value="<?php echo set_value('kota') ?>">
                       <option selected disabled>Pilih Kota</option>
                     </select>
                   </div>
@@ -143,37 +143,37 @@
                 <div class="form-group">
                   <label for="nomor_telepon" class="col-sm-4 control-label">Nomor Telepon</label>
                   <div class="col-sm-8">
-                    <input type="text" name="nomor_telepon" class="form-control" id="nomor_telepon" placeholder="Masukan Nomor Telepon">
+                    <input type="text" name="nomor_telepon" class="form-control" id="nomor_telepon" value="<?php echo set_value('nomor_telepon') ?>" placeholder="Masukan Nomor Telepon">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="nomor_hp" class="col-sm-4 control-label">Nomor HP<font style="color: red;">*)</font></label>
                   <div class="col-sm-8">
-                    <input type="text" name="nomor_hp" class="form-control" id="nomor_hp" placeholder="Masukan Nomor HP">
+                    <input type="text" name="nomor_hp" class="form-control" id="nomor_hp" value="<?php echo set_value('nomor_hp') ?>" placeholder="Masukan Nomor HP">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="website" class="col-sm-4 control-label">Website</label>
                   <div class="col-sm-8">
-                    <input type="text" name="website" class="form-control" id="website" placeholder="Masukan Website">
+                    <input type="text" name="website" class="form-control" id="website" value="<?php echo set_value('website') ?>" placeholder="Masukan Website">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="facebook" class="col-sm-4 control-label">Facebook</label>
                   <div class="col-sm-8">
-                    <input type="text" name="facebook" class="form-control" id="facebook" placeholder="Masukan Facebook">
+                    <input type="text" name="facebook" class="form-control" id="facebook" value="<?php echo set_value('facebook') ?>" placeholder="Masukan Facebook">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="twitter" class="col-sm-4 control-label">Twitter</label>
                   <div class="col-sm-8">
-                    <input type="text" name="twitter" class="form-control" id="twitter" placeholder="Masukan Twitter">
+                    <input type="text" name="twitter" class="form-control" id="twitter" value="<?php echo set_value('twitter') ?>" placeholder="Masukan Twitter">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="instagram" class="col-sm-4 control-label">Instagram</label>
                   <div class="col-sm-8">
-                    <input type="text" name="instagram" class="form-control" id="instagram" placeholder="Masukan Instagram">
+                    <input type="text" name="instagram" class="form-control" id="instagram" value="<?php echo set_value('instagram') ?>" placeholder="Masukan Instagram">
                   </div>
                 </div>
             </div>
@@ -189,7 +189,7 @@
                    <div class="form-group">
                      <label for="username" class="col-sm-4 control-label">Username<font style="color: red;">*)</font></label>
                      <div class="col-sm-8">
-                       <input type="text" name="username" class="form-control" id="username" placeholder="Masukan Username">
+                       <input type="text" name="username" class="form-control" id="username" value="<?php echo set_value('username') ?>" placeholder="Masukan Username">
                      </div>
                    </div>
                    <div class="form-group">
@@ -215,7 +215,7 @@
                        <div class="form-group">
                          <label for="jenjang" class="col-sm-4 control-label">Jenjang<font style="color: red;">*)</font></label>
                          <div class="col-sm-8">
-                           <select class="form-control" id="jenjang" name="jenjang">
+                           <select class="form-control" id="jenjang" name="jenjang" value="<?php echo set_value('jenjang') ?>">
                              <option value="" selected disabled>Pilih Jenjang</option>
                              <option value="D3">D3</option>
                              <option value="S1">S1</option>
@@ -227,7 +227,7 @@
                        <div class="form-group">
                          <label for="jurusan" class="col-sm-4 control-label">Jurusan<font style="color: red;">*)</font></label>
                          <div class="col-sm-8">
-                           <select name="jurusan" id="jurusan" class="form-control">
+                           <select name="jurusan" id="jurusan" class="form-control" value="<?php echo set_value('jurusan') ?>">
                              <option selected disabled>Pilih Jurusan</option>
                              <?php foreach ($list_jurusan as $jurusan): ?>
                                <option value="<?php echo $jurusan->id_jurusan; ?>"><?php echo $jurusan->nama_jurusan; ?></option>
@@ -238,7 +238,7 @@
                        <div class="form-group">
                          <label for="prodi" class="col-sm-4 control-label">Program Studi<font style="color: red;">*)</font></label>
                          <div class="col-sm-8">
-                           <select class="form-control" id="prodi" name="prodi">
+                           <select class="form-control" id="prodi" name="prodi" value="<?php echo set_value('prodi') ?>">
                              <option value=""selected disabled>Pilih Program Studi</option>
                            </select>
                          </div>
@@ -246,7 +246,7 @@
                        <div class="form-group">
                          <label for="angkatan" class="col-sm-4 control-label">Angkatan<font style="color: red;">*)</font></label>
                          <div class="col-sm-8">
-                           <select class="form-control" id="angkatan" name="angkatan">
+                           <select class="form-control" id="angkatan" name="angkatan" value="<?php echo set_value('angkatan') ?>">
                              <option value="" selected disabled>Pilih Tahun Angkatan</option>
                            </select>
                          </div>
@@ -254,7 +254,7 @@
                        <div class="form-group">
                          <label for="tahun_lulus" class="col-sm-4 control-label">Tahun Lulus</label>
                          <div class="col-sm-8">
-                           <select class="form-control" id="tahun_lulus" name="tahun_lulus">
+                           <select class="form-control" id="tahun_lulus" name="tahun_lulus" value="<?php echo set_value('tahun_lulus') ?>">
                              <option value="" selected disabled>Pilih Tahun Lulus</option>
                            </select>
                          </div>
@@ -262,19 +262,19 @@
                        <div class="form-group">
                          <label for="tanggal_yudisium" class="col-sm-4 control-label">Tanggal Yudisium</label>
                          <div class="col-sm-8">
-                           <input type="text" name="tanggal_yudisium" class="form-control" id="tanggal_yudisium" placeholder="Masukan Tanggal Yudisium">
+                           <input type="text" name="tanggal_yudisium" class="form-control" id="tanggal_yudisium" value="<?php echo set_value('tanggal_yudisium') ?>" placeholder="Masukan Tanggal Yudisium">
                          </div>
                        </div>
                        <div class="form-group">
                          <label for="judul_skripsi" class="col-sm-4 control-label">Judul Skripsi</label>
                          <div class="col-sm-8">
-                           <input type="text" name="judul_skripsi" class="form-control" id="judul_skripsi" placeholder="Masukan Judul Skripsi">
+                           <input type="text" name="judul_skripsi" class="form-control" id="judul_skripsi" value="<?php echo set_value('judul_skripsi') ?>" placeholder="Masukan Judul Skripsi">
                          </div>
                        </div>
                        <div class="form-group">
                          <label for="ipk" class="col-sm-4 control-label">IPK</label>
                          <div class="col-sm-8">
-                           <input type="text" name="ipk" class="form-control" id="ipk" placeholder="Masukan IPK">
+                           <input type="text" name="ipk" class="form-control" id="ipk" value="<?php echo set_value('ipk') ?>" placeholder="Masukan IPK">
                          </div>
                        </div>
                       </div>

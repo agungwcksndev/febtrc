@@ -27,129 +27,153 @@
             <!-- form start -->
               <div class="box-body">
                 <div class="form-group">
-                  <label for="nama" class="col-sm-4 col-form-label text-right">Nama Lengkap</label>
+                  <label for="nama" class="col-sm-4 control-label">Nama Lengkap<font style="color: red;">*)</font></label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->nama ?></p>
+                    <input type="text" name="nama" class="form-control" id="nama" value="<?php echo $data_alumni->nama ?>" placeholder="Masukan Nama Lengkap">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="nim" class="col-sm-4 col-form-label text-right">NIM</label>
+                  <label for="nim" class="col-sm-4 control-label">NIM</label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->nim ?></p>
+                    <input type="text" name="nim" class="form-control" id="nim" value="<?php echo $data_alumni->nim ?>" placeholder="Masukan NIM">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="email" class="col-sm-4 col-form-label text-right">Email</label>
+                  <label for="email" class="col-sm-4 control-label">Email<font style="color: red;">*)</font></label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->email ?></p>
+                    <input type="text" name="email" class="form-control" id="email" value="<?php echo $data_alumni->email ?>" placeholder="Masukan Email">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="jenis_kelamin" class="col-sm-4 col-form-label text-right">Jenis Kelamin</label>
+                  <label for="jenis_kelamin" class="col-sm-4 control-label">Jenis Kelamin<font style="color: red;">*)</font></label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->jenis_kelamin ?></p>
+                    <select class="form-control" name="jenis_kelamin" id="jenis_kelamin">
+                      <option value=""selected disabled>Pilih Jenis Kelamin</option>
+                      <option value="Perempuan" <?php echo ($data_alumni->jenis_kelamin == 'Perempuan') ? 'selected="selected"' : '' ?>>Perempuan</option>
+                      <option value="Laki-laki" <?php echo ($data_alumni->jenis_kelamin == 'Laki-laki') ? 'selected="selected"' : '' ?>>Laki-laki</option>
+                    </select>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="golongan_darah" class="col-sm-4 col-form-label text-right">Golongan Darah</label>
+                  <label for="golongan_darah" class="col-sm-4 control-label">Golongan Darah</label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->golongan_darah ?></p>
+                    <select class="form-control" name="golongan_darah" id="golongan_darah" value="<?php echo $data_alumni->golongan_darah ?>">
+                      <option value=""selected disabled>Pilih Golongan Darah</option>
+                      <option value="O" <?php echo ($data_alumni->golongan_darah == 'O') ? 'selected="selected"' : '' ?>>O</option>
+                      <option value="A" <?php echo ($data_alumni->golongan_darah == 'A') ? 'selected="selected"' : '' ?>>A</option>
+                      <option value="B" <?php echo ($data_alumni->golongan_darah == 'B') ? 'selected="selected"' : '' ?>>B</option>
+                      <option value="AB" <?php echo ($data_alumni->golongan_darah == 'AB') ? 'selected="selected"' : '' ?>>AB</option>
+                    </select>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="tempat_lahir" class="col-sm-4 col-form-label text-right">Tempat Lahir</label>
+                  <label for="tempat_lahir" class="col-sm-4 control-label">Tempat Lahir</label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->tempat_lahir ?></p>
+                    <input type="text" name="tempat_lahir" class="form-control" id="tempat_lahir" value="<?php echo $data_alumni->tempat_lahir ?>" placeholder="Masukan Tempat Lahir">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="tanggal_lahir" class="col-sm-4 col-form-label text-right">Tanggal Lahir</label>
+                  <label for="tanggal_lahir" class="col-sm-4 control-label">Tanggal Lahir</label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->tanggal_lahir ?></p>
+                    <input type="text" name="tanggal_lahir" class="form-control" id="tanggal_lahir" value="<?php echo $data_alumni->tanggal_lahir ?>" placeholder="Masukan Tanggal Lahir">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="kewarganegaraan" class="col-sm-4 col-form-label text-right">Kewarganegaraan</label>
+                  <label for="kewarganegaraan" class="col-sm-4 control-label">Kewarganegaraan</label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->kewarganegaraan ?></p>
+                    <select class="form-control" id="kewarganegaraan" name="kewarganegaraan" value="<?php echo $data_alumni->kewarganegaraan ?>">
+                      <option value="" selected disabled>Pilih Kewarganegaraan</option>
+                      <option value="Warga Indonesia" <?php echo ($data_alumni->kewarganegaraan == 'Warga Indonesia') ? 'selected="selected"' : '' ?>>Warga Indonesia</option>
+                      <option value="Warga Keturunan" <?php echo ($data_alumni->kewarganegaraan == 'Warga Keturunan') ? 'selected="selected"' : '' ?>>Warga Keturunan</option>
+                      <option value="Warga Asing" <?php echo ($data_alumni->kewarganegaraan == 'Warga Asing"') ? 'selected="selected"' : '' ?>>Warga Asing</option>
+                    </select>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="alamat_asal" class="col-sm-4 col-form-label text-right">Alamat Asal</label>
+                  <label for="alamat_asal" class="col-sm-4 control-label">Alamat Asal</label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->alamat_asal ?></p>
+                    <input type="text" name="alamat_asal" class="form-control" id="alamat_asal" value="<?php echo $data_alumni->alamat_asal ?>" placeholder="Masukan Alamat Asal">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="kode_pos_asal" class="col-sm-4 col-form-label text-right">Kode Pos Asal</label>
+                  <label for="kode_pos_asal" class="col-sm-4 control-label">Kode Pos Asal</label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->kode_pos_asal ?></p>
+                    <input type="text" name="kode_pos_asal" class="form-control" id="kode_pos_asal" value="<?php echo $data_alumni->kode_pos_asal ?>" placeholder="Masukan Kode Pos Alamat Asal">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="alamat_sekarang" class="col-sm-4 col-form-label text-right">Alamat Sekarang</label>
+                  <label for="alamat_sekarang" class="col-sm-4 control-label">Alamat Sekarang</label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->alamat_sekarang ?></p>
+                    <input type="text" name="alamat_sekarang" class="form-control" id="alamat_sekarang" value="<?php echo $data_alumni->alamat_sekarang ?>" placeholder="Masukan Alamat Tinggal Sekarang">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="kode_pos_sekarang" class="col-sm-4 col-form-label text-right">Kode Pos Sekarang</label>
+                  <label for="kode_pos_sekarang" class="col-sm-4 control-label">Kode Pos Sekarang</label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->kode_pos_sekarang ?></p>
+                    <input type="text" name="kode_pos_sekarang" class="form-control" id="kode_pos_sekarang" value="<?php echo $data_alumni->kode_pos_sekarang ?>" placeholder="Masukan Kode Pos Alamat Tinggal Sekarang">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-4 col-form-label text-right">Negara</label>
+                  <label for="inputEmail3" class="col-sm-4 control-label">Negara</label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->negara ?></p>
+                    <select name="negara" id="negara" class="form-control" value="<?php echo $data_alumni->negara ?>">
+                      <option value="" selected disabled>Pilih Negara</option>
+                      <?php foreach ($negaras as $negara): ?>
+                        <option value="<?php echo $negara->id_negara ?>"<?php echo ($data_alumni->negara == $negara->id_negara) ? 'selected="selected"' : '' ?>><?php echo $negara->nama_negara ?></option>
+                      <?php endforeach; ?>
+                    </select>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="provinsi" class="col-sm-4 col-form-label text-right">Provinsi</label>
+                  <label for="provinsi" class="col-sm-4 control-label">Provinsi</label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->provinsi ?></p>
+                    <select name="provinsi" id="provinsi" class="form-control" value="<?php echo $data_alumni->provinsi ?>">
+                      <option selected disabled>Pilih Provinsi</option>
+                    </select>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="kota" class="col-sm-4 col-form-label text-right">Kota</label>
+                  <label for="kota" class="col-sm-4 control-label">Kota</label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->kota ?></p>
+                    <select class="form-control" id="kota" name="kota" value="<?php echo $data_alumni->kota ?>">
+                      <option selected disabled>Pilih Kota</option>
+                    </select>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="nomor_telepon" class="col-sm-4 col-form-label text-right">Nomor Telepon</label>
+                  <label for="nomor_telepon" class="col-sm-4 control-label">Nomor Telepon</label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->nomor_telepon ?></p>
+                    <input type="text" name="nomor_telepon" class="form-control" id="nomor_telepon" value="<?php echo $data_alumni->nomor_telepon ?>" placeholder="Masukan Nomor Telepon">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="nomor_hp" class="col-sm-4 col-form-label text-right">Nomor HP</label>
+                  <label for="nomor_hp" class="col-sm-4 control-label">Nomor HP<font style="color: red;">*)</font></label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->nomor_hp ?></p>
+                    <input type="text" name="nomor_hp" class="form-control" id="nomor_hp" value="<?php echo $data_alumni->nomor_hp ?>" placeholder="Masukan Nomor HP">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="website" class="col-sm-4 col-form-label text-right">Website</label>
+                  <label for="website" class="col-sm-4 control-label">Website</label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->website ?></p>
+                    <input type="text" name="website" class="form-control" id="website" value="<?php echo $data_alumni->website ?>" placeholder="Masukan Website">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="facebook" class="col-sm-4 col-form-label text-right">Facebook</label>
+                  <label for="facebook" class="col-sm-4 control-label">Facebook</label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->facebook ?></p>
+                    <input type="text" name="facebook" class="form-control" id="facebook" value="<?php echo $data_alumni->facebook ?>" placeholder="Masukan Facebook">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="twitter" class="col-sm-4 col-form-label text-right">Twitter</label>
+                  <label for="twitter" class="col-sm-4 control-label">Twitter</label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->twitter ?></p>
+                    <input type="text" name="twitter" class="form-control" id="twitter" value="<?php echo $data_alumni->twitter ?>" placeholder="Masukan Twitter">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="instagram" class="col-sm-4 col-form-label text-right">Instagram</label>
+                  <label for="instagram" class="col-sm-4 control-label">Instagram</label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->instagram ?></p>
+                    <input type="text" name="instagram" class="form-control" id="instagram" value="<?php echo $data_alumni->instagram ?>" placeholder="Masukan Instagram">
                   </div>
                 </div>
             </div>
@@ -162,67 +186,83 @@
                 <h3 class="box-title">Informasi Akun</h3>
               </div>
                   <div class="box-body">
-                    <div class="box-body box-profile">
-                      <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url(); ?>dist/img/user4-128x128.jpg" alt="User profile picture">
-                      <h3 class="profile-username text-center"><?php echo $data_alumni->username ?></h3>
-                      <div class="col-md-12 text-center">
-                        <a href="<?php echo site_url('admin/alumni/edit_alumni/'.$data_alumni->username);?>" class="btn bg-navy margin" name="button"><i class="fa fa-pencil"></i>&nbsp;&nbsp;&nbsp;Edit Profil</a>
-                        <button type="button" class="btn bg-maroon margin" name="button"><i class="fa fa-image"></i>&nbsp;&nbsp;&nbsp;Ubah Foto</button>
-                      </div>
-                    </div>
+                   <div class="form-group">
+                     <label for="username" class="col-sm-4 control-label">Username<font style="color: red;">*)</font></label>
+                     <div class="col-sm-8">
+                       <input type="text" name="username" class="form-control" id="username" value="<?php echo $data_alumni->username ?>" placeholder="Masukan Username" disabled>
+                     </div>
+                   </div>
                  </div>
               </div>
+
                <div class="box box-info">
                  <div class="box-header with-border">
                    <h3 class="box-title">Informasi Lulusan</h3>
                  </div>
                      <div class="box-body">
                        <div class="form-group">
-                         <label for="jenjang" class="col-sm-4 col-form-label text-right">Jenjang</label>
+                         <label for="jenjang" class="col-sm-4 control-label">Jenjang<font style="color: red;">*)</font></label>
                          <div class="col-sm-8">
-                           <p class="control-label-plaintext"><?php echo $data_alumni->jenjang ?></p>
+                           <select class="form-control" id="jenjang" name="jenjang" value="<?php echo $data_alumni->jenjang ?>">
+                             <option value="" selected disabled>Pilih Jenjang</option>
+                             <option value="D3">D3</option>
+                             <option value="S1">S1</option>
+                             <option value="S2">S2</option>
+                             <option value="S3">S3</option>
+                           </select>
                          </div>
                        </div>
                        <div class="form-group">
-                         <label for="jurusan" class="col-sm-4 col-form-label text-right">Jurusan</label>
+                         <label for="jurusan" class="col-sm-4 control-label">Jurusan<font style="color: red;">*)</font></label>
                          <div class="col-sm-8">
-                           <p class="control-label-plaintext"><?php echo $data_alumni->nama_jurusan ?></p>
+                           <select name="jurusan" id="jurusan" class="form-control" value="<?php echo $data_alumni->nama_jurusan ?>">
+                             <option selected disabled>Pilih Jurusan</option>
+                             <?php foreach ($list_jurusan as $jurusan): ?>
+                               <option value="<?php echo $jurusan->id_jurusan; ?>"><?php echo $jurusan->nama_jurusan; ?></option>
+                             <?php endforeach; ?>
+                           </select>
                          </div>
                        </div>
                        <div class="form-group">
-                         <label for="prodi" class="col-sm-4 col-form-label text-right">Program Studi</label>
+                         <label for="prodi" class="col-sm-4 control-label">Program Studi<font style="color: red;">*)</font></label>
                          <div class="col-sm-8">
-                           <p class="control-label-plaintext"><?php echo $data_alumni->nama_prodi ?></p>
+                           <select class="form-control" id="prodi" name="prodi" value="<?php echo $data_alumni->nama_prodi ?>">
+                             <option value=""selected disabled>Pilih Program Studi</option>
+                           </select>
                          </div>
                        </div>
                        <div class="form-group">
-                         <label for="angkatan" class="col-sm-4 col-form-label text-right">Angkatan</label>
+                         <label for="angkatan" class="col-sm-4 control-label">Angkatan<font style="color: red;">*)</font></label>
                          <div class="col-sm-8">
-                           <p class="control-label-plaintext"><?php echo $data_alumni->angkatan ?></p>
+                           <select class="form-control" id="angkatan" name="angkatan" value="<?php echo $data_alumni->angkatan ?>">
+                             <option value="" selected disabled>Pilih Tahun Angkatan</option>
+                           </select>
                          </div>
                        </div>
                        <div class="form-group">
-                         <label for="tahun_lulus" class="col-sm-4 col-form-label text-right">Tahun Lulus</label>
+                         <label for="tahun_lulus" class="col-sm-4 control-label">Tahun Lulus</label>
                          <div class="col-sm-8">
-                           <p class="control-label-plaintext"><?php echo $data_alumni->tahun_lulus ?></p>
+                           <select class="form-control" id="tahun_lulus" name="tahun_lulus" value="<?php echo $data_alumni->tahun_lulus ?>">
+                             <option value="" selected disabled>Pilih Tahun Lulus</option>
+                           </select>
                          </div>
                        </div>
                        <div class="form-group">
-                         <label for="tanggal_yudisium" class="col-sm-4 col-form-label text-right">Tanggal Yudisium</label>
+                         <label for="tanggal_yudisium" class="col-sm-4 control-label">Tanggal Yudisium</label>
                          <div class="col-sm-8">
-                           <p class="control-label-plaintext"><?php echo $data_alumni->tanggal_yudisium ?></p>
+                           <input type="text" name="tanggal_yudisium" class="form-control" id="tanggal_yudisium" value="<?php echo $data_alumni->tanggal_yudisium ?>" placeholder="Masukan Tanggal Yudisium">
                          </div>
                        </div>
                        <div class="form-group">
-                         <label for="judul_skripsi" class="col-sm-4 col-form-label text-right">Judul Skripsi</label>
+                         <label for="judul_skripsi" class="col-sm-4 control-label">Judul Skripsi</label>
                          <div class="col-sm-8">
-                           <p class="control-label-plaintext"><?php echo $data_alumni->judul_skripsi ?></p>
+                           <input type="text" name="judul_skripsi" class="form-control" id="judul_skripsi" value="<?php echo $data_alumni->judul_skripsi ?>" placeholder="Masukan Judul Skripsi">
                          </div>
                        </div>
                        <div class="form-group">
-                         <label for="ipk" class="col-sm-4 col-form-label text-right">IPK</label>
+                         <label for="ipk" class="col-sm-4 control-label">IPK</label>
                          <div class="col-sm-8">
-                           <p class="control-label-plaintext"><?php echo $data_alumni->ipk ?></p>
+                           <input type="text" name="ipk" class="form-control" id="ipk" value="<?php echo $data_alumni->ipk ?>" placeholder="Masukan IPK">
                          </div>
                        </div>
                       </div>
@@ -473,6 +513,23 @@ autoclose: true
 })
 
 $(document).ready(function(){
+
+  var e = document.getElementById("negara");
+  var alumni = document.getElementById("username").value;
+  var id_negara = e.options[e.selectedIndex].value;
+  if(id_negara != '')
+  {
+    $.ajax({
+      url:"<?php echo site_url();?>/admin/alumni/fetch_provinsi",
+      method: "POST",
+      data:{id_negara:id_negara,username:username},
+      success:function(data)
+      {
+        $('#provinsi').html(data);
+      }
+    })
+  }
+
   $('#negara').change(function(){
     var e = document.getElementById("negara");
     var id_negara = e.options[e.selectedIndex].value;
