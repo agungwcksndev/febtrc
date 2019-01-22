@@ -101,19 +101,19 @@
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-4 col-form-label text-right">Negara</label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->negara ?></p>
+                    <p class="control-label-plaintext"><?php echo $data_alumni->nama_negara ?></p>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="provinsi" class="col-sm-4 col-form-label text-right">Provinsi</label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->provinsi ?></p>
+                    <p class="control-label-plaintext"><?php echo $data_alumni->nama_provinsi ?></p>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="kota" class="col-sm-4 col-form-label text-right">Kota</label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->kota ?></p>
+                    <p class="control-label-plaintext"><?php echo $data_alumni->nama_kota ?></p>
                   </div>
                 </div>
                 <div class="form-group">

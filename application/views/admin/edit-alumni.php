@@ -16,7 +16,7 @@
    <!-- Main content -->
    <section class="content">
      <?php echo validation_errors(); ?>
-     <form class="form-horizontal" method="post" action="<?php echo site_url('admin/alumni/proses_tambah_alumni') ?>">
+     <form class="form-horizontal" method="post" action="">
      <div class="row">
      <div class="col-md-6">
        <div class="box box-info">
@@ -128,7 +128,10 @@
                   <label for="provinsi" class="col-sm-4 control-label">Provinsi</label>
                   <div class="col-sm-8">
                     <select name="provinsi" id="provinsi" class="form-control" value="<?php echo $data_alumni->provinsi ?>">
-                      <option selected disabled>Pilih Provinsi</option>
+                      <option disabled>Pilih Provinsi</option>
+                      <?php foreach ($provinsis as $provinsi): ?>
+                        <option value="<?php echo $provinsi->id_provinsi ?>"<?php echo ($data_alumni->provinsi == $provinsi->id_provinsi) ? 'selected="selected"' : '' ?>><?php echo $provinsi->nama_provinsi ?></option>
+                      <?php endforeach; ?>
                     </select>
                   </div>
                 </div>
@@ -136,7 +139,10 @@
                   <label for="kota" class="col-sm-4 control-label">Kota</label>
                   <div class="col-sm-8">
                     <select class="form-control" id="kota" name="kota" value="<?php echo $data_alumni->kota ?>">
-                      <option selected disabled>Pilih Kota</option>
+                      <option disabled>Pilih Kota</option>
+                      <?php foreach ($kotas as $kota): ?>
+                        <option value="<?php echo $kota->id_kota ?>"<?php echo ($data_alumni->kota == $kota->id_kota) ? 'selected="selected"' : '' ?>><?php echo $kota->nama_kota ?></option>
+                      <?php endforeach; ?>
                     </select>
                   </div>
                 </div>
@@ -513,22 +519,6 @@ autoclose: true
 })
 
 $(document).ready(function(){
-
-  var e = document.getElementById("negara");
-  var alumni = document.getElementById("username").value;
-  var id_negara = e.options[e.selectedIndex].value;
-  if(id_negara != '')
-  {
-    $.ajax({
-      url:"<?php echo site_url();?>/admin/alumni/fetch_provinsi",
-      method: "POST",
-      data:{id_negara:id_negara,username:username},
-      success:function(data)
-      {
-        $('#provinsi').html(data);
-      }
-    })
-  }
 
   $('#negara').change(function(){
     var e = document.getElementById("negara");

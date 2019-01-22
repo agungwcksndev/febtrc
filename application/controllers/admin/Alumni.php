@@ -349,11 +349,13 @@ class Alumni extends CI_Controller{
             $alumnis      = $this->Alumni_Model->listing();
             $negaras      = $this->Negara_Model->get_negara();
             $provinsis    = $this->Provinsi_Model->get_provinsi();
+            $kotas        = $this->Kota_Model->get_kota($data_alumni->provinsi);
             $list_jurusan = $this->Jurusan_Model->listing();
             $data = array('isi'          => 'admin/edit-alumni',
                           'negaras'      =>  $negaras,
                           'list_jurusan' =>  $list_jurusan,
                           'provinsis'    =>  $provinsis,
+                          'kotas'        =>  $kotas,
                           'data_alumni'  =>  $data_alumni
                           );
             $this->load->view("layouts/wrapper", $data, false);
@@ -392,7 +394,7 @@ class Alumni extends CI_Controller{
                     'judul_skripsi'      =>  $i->post('judul_skripsi'),
                     'ipk'                =>  $i->post('ipk')
                   );
-              $this->Alumni_Model->edit_alumni($data);
+              $this->Alumni_Model->update_alumni($data);
               $this->session->set_flashdata('success', 'Berhasil menambah alumni.');
               redirect('admin/alumni/'.$i->post('username'));
           }

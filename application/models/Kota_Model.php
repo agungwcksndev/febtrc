@@ -9,6 +9,15 @@ class Kota_Model extends CI_Model{
     $this->load->database();
   }
 
+  public function get_kota($id_provinsi){
+    $this->db->select('*');
+    $this->db->from('kota');
+    $this->db->where('id_provinsi', $id_provinsi);
+    $this->db->order_by('nama_kota');
+    $query  = $this->db->get();
+    return $query->result();
+  }
+
   public function fetch_kota($id_provinsi)
   {
     $this->db->select('*');

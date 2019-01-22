@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 15 Jan 2019 pada 10.14
+-- Waktu pembuatan: 22 Jan 2019 pada 05.21
 -- Versi server: 10.1.36-MariaDB
 -- Versi PHP: 7.2.11
 
@@ -21,6 +21,30 @@ SET time_zone = "+00:00";
 --
 -- Database: `tracertalumni`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `admin`
+--
+
+CREATE TABLE `admin` (
+  `username` varchar(16) NOT NULL,
+  `password` varchar(32) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `nama` varchar(100) NOT NULL,
+  `nomor_hp` varchar(100) NOT NULL,
+  `jenis_kelamin` varchar(100) NOT NULL,
+  `foto` varchar(100) DEFAULT NULL,
+  `active` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `admin`
+--
+
+INSERT INTO `admin` (`username`, `password`, `email`, `nama`, `nomor_hp`, `jenis_kelamin`, `foto`, `active`) VALUES
+('pmputri', 'e807f1fcf82d132f9bb018ca6738a19f', 'pmputri@gmail.com', 'Prajnadya Mahatva Putri', '08975771158', 'Perempuan', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -47,9 +71,9 @@ CREATE TABLE `alumni` (
   `kode_pos_asal` varchar(100) DEFAULT NULL,
   `alamat_sekarang` varchar(100) DEFAULT NULL,
   `kode_pos_sekarang` varchar(100) DEFAULT NULL,
-  `negara` varchar(100) DEFAULT NULL,
-  `provinsi` varchar(100) DEFAULT NULL,
-  `kota` varchar(100) DEFAULT NULL,
+  `negara` int(11) DEFAULT NULL,
+  `provinsi` int(11) DEFAULT NULL,
+  `kota` int(11) DEFAULT NULL,
   `nomor_telepon` varchar(100) DEFAULT NULL,
   `nomor_hp` varchar(100) NOT NULL,
   `jenis_kelamin` varchar(100) NOT NULL,
@@ -61,15 +85,17 @@ CREATE TABLE `alumni` (
   `twitter` varchar(100) DEFAULT NULL,
   `instagram` varchar(100) DEFAULT NULL,
   `foto` varchar(100) DEFAULT NULL,
-  `status_mhs` varchar(100) NOT NULL
+  `status_mhs` varchar(100) NOT NULL,
+  `active` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `alumni`
 --
 
-INSERT INTO `alumni` (`username`, `password`, `email`, `nim`, `nama`, `jenjang`, `id_jurusan`, `id_prodi`, `angkatan`, `tahun_lulus`, `tanggal_yudisium`, `judul_skripsi`, `ipk`, `kewarganegaraan`, `alamat_asal`, `kode_pos_asal`, `alamat_sekarang`, `kode_pos_sekarang`, `negara`, `provinsi`, `kota`, `nomor_telepon`, `nomor_hp`, `jenis_kelamin`, `golongan_darah`, `tempat_lahir`, `tanggal_lahir`, `website`, `facebook`, `twitter`, `instagram`, `foto`, `status_mhs`) VALUES
-('awkarin', 'awkarin123', 'agungwcksn@student.ub.ac.id', '155150200111018', 'Kariin Novilda', 'S1', 6, 5, '2015', '2019', '2019-01-08', 'Instagram Influence menggunakan metode drama', 4, 'Warga Indonesia', 'Jalan Ikan Gurame No. 20, Jatimulyo, Lowokwaru, Malang', '65141', 'Jalan Ikan Gurame No. 19, Jatimulyo, Lowokwaru, Malang', '65142', '101', '11', '365', '08975771158', '081232150974', 'Perempuan', 'O', 'Riau', '1997-11-29', 'www.badinfluence.com', 'awkarinfb', 'awkarintw', 'awkarinig', NULL, '');
+INSERT INTO `alumni` (`username`, `password`, `email`, `nim`, `nama`, `jenjang`, `id_jurusan`, `id_prodi`, `angkatan`, `tahun_lulus`, `tanggal_yudisium`, `judul_skripsi`, `ipk`, `kewarganegaraan`, `alamat_asal`, `kode_pos_asal`, `alamat_sekarang`, `kode_pos_sekarang`, `negara`, `provinsi`, `kota`, `nomor_telepon`, `nomor_hp`, `jenis_kelamin`, `golongan_darah`, `tempat_lahir`, `tanggal_lahir`, `website`, `facebook`, `twitter`, `instagram`, `foto`, `status_mhs`, `active`) VALUES
+('agungwcksn', 'e807f1fcf82d132f9bb018ca6738a19f', 'agungwcksn@student.ub.ac.id', '', 'Agung Wicaksono', 'S1', 6, 5, '1967', NULL, '1970-01-01', '', 0, NULL, '', '', '', '', NULL, NULL, NULL, '', '081232150974', 'Laki-laki', NULL, '', '1970-01-01', '', '', '', '', NULL, '', 1),
+('awkarinid', 'e807f1fcf82d132f9bb018ca6738a19f', 'awkarin.id@gmail.com', '155150200111019', 'Kariin Novilda', 'S1', 6, 5, '2011', '2015', '2015-07-15', 'Membangun Instagram dengan fitur pencarian jodoh menggunakan metode AHP SAW', 4, 'Warga Indonesia', 'Jalan Ikan Gurame No. 20, Jatimulyo, Lowokwaru, Malang', '65141', 'Jalan Ikan Gurame No. 19, Jatimulyo, Lowokwaru, Malang', '65142', 101, 13, 427, '08975771158', '081232150974', 'Perempuan', 'O', 'Jakarta', '1996-08-15', 'www.anyageraldine.com', 'anyageraldinefb', 'anyageraldinetw', 'anyageraldineig', NULL, '', 0);
 
 -- --------------------------------------------------------
 
@@ -912,6 +938,23 @@ INSERT INTO `negara` (`id_negara`, `nama_negara`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `operator`
+--
+
+CREATE TABLE `operator` (
+  `username` varchar(16) NOT NULL,
+  `password` varchar(32) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `nama` varchar(100) NOT NULL,
+  `nomor_hp` varchar(100) NOT NULL,
+  `jenis_kelamin` varchar(100) NOT NULL,
+  `foto` varchar(100) DEFAULT NULL,
+  `active` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `prodi`
 --
 
@@ -1022,12 +1065,21 @@ CREATE TABLE `user` (
 --
 
 --
+-- Indeks untuk tabel `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`username`);
+
+--
 -- Indeks untuk tabel `alumni`
 --
 ALTER TABLE `alumni`
   ADD PRIMARY KEY (`username`),
   ADD KEY `id_jurusan` (`id_jurusan`),
-  ADD KEY `get_prodi` (`id_prodi`);
+  ADD KEY `negara` (`negara`),
+  ADD KEY `provinsi` (`provinsi`),
+  ADD KEY `get_prodi` (`id_prodi`),
+  ADD KEY `kota` (`kota`);
 
 --
 -- Indeks untuk tabel `jurusan`
@@ -1054,6 +1106,12 @@ ALTER TABLE `lowongankerja`
 --
 ALTER TABLE `negara`
   ADD PRIMARY KEY (`id_negara`);
+
+--
+-- Indeks untuk tabel `operator`
+--
+ALTER TABLE `operator`
+  ADD PRIMARY KEY (`username`);
 
 --
 -- Indeks untuk tabel `prodi`
@@ -1131,8 +1189,11 @@ ALTER TABLE `provinsi`
 -- Ketidakleluasaan untuk tabel `alumni`
 --
 ALTER TABLE `alumni`
-  ADD CONSTRAINT `get_prodi` FOREIGN KEY (`id_prodi`) REFERENCES `prodi` (`id_prodi`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `jurusan` FOREIGN KEY (`id_jurusan`) REFERENCES `jurusan` (`id_jurusan`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `get_prodi` FOREIGN KEY (`id_prodi`) REFERENCES `prodi` (`id_prodi`),
+  ADD CONSTRAINT `jurusan` FOREIGN KEY (`id_jurusan`) REFERENCES `jurusan` (`id_jurusan`),
+  ADD CONSTRAINT `kota` FOREIGN KEY (`kota`) REFERENCES `kota` (`id_kota`),
+  ADD CONSTRAINT `negara` FOREIGN KEY (`negara`) REFERENCES `negara` (`id_negara`),
+  ADD CONSTRAINT `provinsi` FOREIGN KEY (`provinsi`) REFERENCES `provinsi` (`id_provinsi`);
 
 --
 -- Ketidakleluasaan untuk tabel `kota`
