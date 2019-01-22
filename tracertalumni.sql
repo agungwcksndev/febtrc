@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 22 Jan 2019 pada 05.21
+-- Waktu pembuatan: 22 Jan 2019 pada 05.24
 -- Versi server: 10.1.36-MariaDB
 -- Versi PHP: 7.2.11
 
@@ -44,7 +44,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`username`, `password`, `email`, `nama`, `nomor_hp`, `jenis_kelamin`, `foto`, `active`) VALUES
-('pmputri', 'e807f1fcf82d132f9bb018ca6738a19f', 'pmputri@gmail.com', 'Prajnadya Mahatva Putri', '08975771158', 'Perempuan', NULL, 1);
+('admin', 'e807f1fcf82d132f9bb018ca6738a19f', 'pmputri@gmail.com', 'Prajnadya Mahatva Putri', '08975771158', 'Perempuan', NULL, 1);
 
 -- --------------------------------------------------------
 
