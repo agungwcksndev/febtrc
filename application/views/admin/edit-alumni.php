@@ -39,9 +39,9 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="email" class="col-sm-4 control-label">Email<font style="color: red;">*)</font></label>
+                  <label for="Email" class="col-sm-4 control-label">Email<font style="color: red;">*)</font></label>
                   <div class="col-sm-8">
-                    <input type="text" name="email" class="form-control" id="email" value="<?php echo $data_alumni->email ?>" placeholder="Masukan Email">
+                    <input type="email" name="email" class="form-control" id="email" value="<?php echo $data_alumni->email ?>" placeholder="Masukan Email">
                   </div>
                 </div>
                 <div class="form-group">
@@ -210,11 +210,11 @@
                          <label for="jenjang" class="col-sm-4 control-label">Jenjang<font style="color: red;">*)</font></label>
                          <div class="col-sm-8">
                            <select class="form-control" id="jenjang" name="jenjang" value="<?php echo $data_alumni->jenjang ?>">
-                             <option value="" selected disabled>Pilih Jenjang</option>
-                             <option value="D3">D3</option>
-                             <option value="S1">S1</option>
-                             <option value="S2">S2</option>
-                             <option value="S3">S3</option>
+                             <option value=""  disabled>Pilih Jenjang</option>
+                             <option value="D3" <?php echo ($data_alumni->jenjang == 'D3') ? 'selected="selected"' : '' ?>>D3</option>
+                             <option value="S1" <?php echo ($data_alumni->jenjang == 'S1') ? 'selected="selected"' : '' ?>>S1</option>
+                             <option value="S2" <?php echo ($data_alumni->jenjang == 'S2') ? 'selected="selected"' : '' ?>>S2</option>
+                             <option value="S3" <?php echo ($data_alumni->jenjang == 'S3') ? 'selected="selected"' : '' ?>>S3</option>
                            </select>
                          </div>
                        </div>
@@ -222,9 +222,9 @@
                          <label for="jurusan" class="col-sm-4 control-label">Jurusan<font style="color: red;">*)</font></label>
                          <div class="col-sm-8">
                            <select name="jurusan" id="jurusan" class="form-control" value="<?php echo $data_alumni->nama_jurusan ?>">
-                             <option selected disabled>Pilih Jurusan</option>
-                             <?php foreach ($list_jurusan as $jurusan): ?>
-                               <option value="<?php echo $jurusan->id_jurusan; ?>"><?php echo $jurusan->nama_jurusan; ?></option>
+                             <option disabled>Pilih Jurusan</option>
+                             <?php foreach ($jurusans as $jurusan): ?>
+                               <option value="<?php echo $jurusan->id_jurusan ?>"<?php echo ($data_alumni->id_jurusan == $jurusan->id_jurusan) ? 'selected="selected"' : '' ?>><?php echo $jurusan->nama_jurusan ?></option>
                              <?php endforeach; ?>
                            </select>
                          </div>
@@ -234,6 +234,9 @@
                          <div class="col-sm-8">
                            <select class="form-control" id="prodi" name="prodi" value="<?php echo $data_alumni->nama_prodi ?>">
                              <option value=""selected disabled>Pilih Program Studi</option>
+                             <?php foreach ($prodis as $prodi): ?>
+                               <option value="<?php echo $prodi->id_prodi ?>"<?php echo ($data_alumni->id_prodi == $prodi->id_prodi) ? 'selected="selected"' : '' ?>><?php echo $prodi->nama_prodi ?></option>
+                             <?php endforeach; ?>
                            </select>
                          </div>
                        </div>
@@ -241,7 +244,10 @@
                          <label for="angkatan" class="col-sm-4 control-label">Angkatan<font style="color: red;">*)</font></label>
                          <div class="col-sm-8">
                            <select class="form-control" id="angkatan" name="angkatan" value="<?php echo $data_alumni->angkatan ?>">
-                             <option value="" selected disabled>Pilih Tahun Angkatan</option>
+                             <option value=""  disabled>Pilih Tahun Angkatan</option>
+                             <?php for ($i=1950; $i <= date('Y') ; $i++) { ?>
+                               <option value="<?php echo $i ?>"<?php echo ($data_alumni->angkatan == $i) ? 'selected="selected"' : '' ?>><?php echo $i ?></option>
+                             <?php } ?>
                            </select>
                          </div>
                        </div>
@@ -249,7 +255,10 @@
                          <label for="tahun_lulus" class="col-sm-4 control-label">Tahun Lulus</label>
                          <div class="col-sm-8">
                            <select class="form-control" id="tahun_lulus" name="tahun_lulus" value="<?php echo $data_alumni->tahun_lulus ?>">
-                             <option value="" selected disabled>Pilih Tahun Lulus</option>
+                             <option value="" disabled>Pilih Tahun Lulus</option>
+                             <?php for ($i=1950; $i <= date('Y') ; $i++) { ?>
+                               <option value="<?php echo $i ?>"<?php echo ($data_alumni->tahun_lulus == $i) ? 'selected="selected"' : '' ?>><?php echo $i ?></option>
+                             <?php } ?>
                            </select>
                          </div>
                        </div>
@@ -574,25 +583,6 @@ $(document).ready(function(){
         })
       }
     })
-    var max  = new Date().getFullYear();
-    var min  = 1961;
-    var min2 = 1950;
-    select = document.getElementById('tahun_lulus');
-    select2 = document.getElementById('angkatan');
-
-    for (var i = min; i<=max; i++){
-    var opt = document.createElement('option');
-    opt.value = i;
-    opt.innerHTML = i;
-    select.appendChild(opt);
-    }
-
-    for (var i = min2; i<=max; i++){
-    var opt = document.createElement('option');
-    opt.value = i;
-    opt.innerHTML = i;
-    select2.appendChild(opt);
-    }
   })
 })
 

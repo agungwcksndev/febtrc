@@ -107,13 +107,13 @@
                 <div class="form-group">
                   <label for="provinsi" class="col-sm-4 col-form-label text-right">Provinsi</label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->nama_provinsi ?></p>
+                    <p class="control-label-plaintext"></p>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="kota" class="col-sm-4 col-form-label text-right">Kota</label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->nama_kota ?></p>
+                    <p class="control-label-plaintext"><?php echo $data_alumni->kota ?></p>
                   </div>
                 </div>
                 <div class="form-group">
@@ -163,10 +163,10 @@
               </div>
                   <div class="box-body">
                     <div class="box-body box-profile">
-                      <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url(); ?>dist/img/user4-128x128.jpg" alt="User profile picture">
-                      <h3 class="profile-username text-center"><?php echo $data_alumni->username ?></h3>
+                      <img class="profile-user-img img-responsive img-circle" src="" alt="User profile picture">
+                      <h3 class="profile-username text-center"></h3>
                       <div class="col-md-12 text-center">
-                        <a href="<?php echo site_url('admin/alumni/edit_alumni/'.$data_alumni->username);?>" class="btn bg-navy margin" name="button"><i class="fa fa-pencil"></i>&nbsp;&nbsp;&nbsp;Edit Profil</a>
+                        <a href="<?php echo site_url('admin/alumni/edit_alumni/'.$data_alumni->username)?>" class="btn bg-navy margin" name="button"><i class="fa fa-pencil"></i>&nbsp;&nbsp;&nbsp;Edit Profil</a>
                         <button type="button" class="btn bg-maroon margin" name="button"><i class="fa fa-image"></i>&nbsp;&nbsp;&nbsp;Ubah Foto</button>
                       </div>
                     </div>

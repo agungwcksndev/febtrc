@@ -9,6 +9,15 @@ class Prodi_Model extends CI_Model{
     $this->load->database();
   }
 
+  public function list_prodi($id_jurusan){
+    $this->db->select('*');
+    $this->db->from('prodi');
+    $this->db->where('id_jurusan', $id_jurusan);
+    $this->db->order_by('nama_prodi');
+    $query  = $this->db->get();
+    return $query->result();
+  }
+
   public function get_prodi()
   {
 

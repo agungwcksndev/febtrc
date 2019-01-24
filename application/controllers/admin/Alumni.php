@@ -8,6 +8,7 @@ class Alumni extends CI_Controller{
     parent::__construct();
     $this->load->model('Alumni_Model');
     $this->load->model('Jurusan_Model');
+    $this->load->model('Prodi_Model');
     $this->load->model('Negara_Model');
     $this->load->model('Provinsi_Model');
     $this->load->model('Kota_Model');
@@ -108,7 +109,7 @@ class Alumni extends CI_Controller{
       'username',
       'username',
       'required|is_unique[alumni.username]',
-      array(  'required'  =>  'Email tidak valid',
+      array(  'required'  =>  'Anda belum mengisikan username',
               'is_unique[alumni.username]' => 'Username sudah terdaftar')
     );
 
@@ -161,6 +162,7 @@ class Alumni extends CI_Controller{
       'decimal',
       array(  'decimal'  =>  'IPK harus berupa angka desimal. Contoh : 4.00')
     );
+
         if ($valid->run()===false) {
           $alumnis      = $this->Alumni_Model->listing();
           $negaras      = $this->Negara_Model->get_negara();
@@ -234,6 +236,28 @@ class Alumni extends CI_Controller{
       }
     }
 
+    public function check_user_email($email) {
+          if($this->input->post('username'))
+          {
+              $username = $this->input->post('username');
+          }
+          else
+          {
+              $username = '';
+          }
+          $result = $this->Alumni_Model->check_unique_user_email($username, $email);
+          if($result == 0)
+          {
+              $response = true;
+          }
+          else
+          {
+              $this->form_validation->set_message('check_user_email', 'Email must be unique');
+              $response = false;
+          }
+          return $response;
+      }
+
     public function edit_alumni($username)
     {
       $data_alumni = $this->Alumni_Model->find_alumni($username);
@@ -260,11 +284,10 @@ class Alumni extends CI_Controller{
       );
 
       $valid->set_rules(
+        'Email',
         'email',
-        'email',
-        'valid_email|is_unique[alumni.email]',
-        array(  'valid_email'  =>  'Email tidak valid',
-                'is_unique[alumni.email]' => 'Email sudah terdaftar')
+        'valid_email|callback_check_user_email',
+        array(  'valid_email'  =>  'Email tidak valid')
       );
 
       $valid->set_rules(
@@ -304,14 +327,6 @@ class Alumni extends CI_Controller{
       );
 
       $valid->set_rules(
-        'username',
-        'username',
-        'required|is_unique[alumni.username]',
-        array(  'required'  =>  'Email tidak valid',
-                'is_unique[alumni.username]' => 'Username sudah terdaftar')
-      );
-
-      $valid->set_rules(
         'jenjang',
         'jenjang',
         'required',
@@ -345,17 +360,21 @@ class Alumni extends CI_Controller{
         'decimal',
         array(  'decimal'  =>  'IPK harus berupa angka desimal. Contoh : 4.00')
       );
+
+
           if ($valid->run()===false) {
             $alumnis      = $this->Alumni_Model->listing();
             $negaras      = $this->Negara_Model->get_negara();
             $provinsis    = $this->Provinsi_Model->get_provinsi();
             $kotas        = $this->Kota_Model->get_kota($data_alumni->provinsi);
-            $list_jurusan = $this->Jurusan_Model->listing();
+            $jurusans     = $this->Jurusan_Model->listing();
+            $prodis       = $this->Prodi_Model->list_prodi($data_alumni->id_jurusan);
             $data = array('isi'          => 'admin/edit-alumni',
                           'negaras'      =>  $negaras,
-                          'list_jurusan' =>  $list_jurusan,
                           'provinsis'    =>  $provinsis,
                           'kotas'        =>  $kotas,
+                          'jurusans'     =>  $jurusans,
+                          'prodis'       =>  $prodis,
                           'data_alumni'  =>  $data_alumni
                           );
             $this->load->view("layouts/wrapper", $data, false);
@@ -377,6 +396,7 @@ class Alumni extends CI_Controller{
                     'alamat_sekarang'    =>  $i->post('alamat_sekarang'),
                     'kode_pos_sekarang'  =>  $i->post('kode_pos_sekarang'),
                     'negara'             =>  $i->post('negara'),
+                    'username'           =>  $username,
                     'provinsi'           =>  $i->post('provinsi'),
                     'kota'               =>  $i->post('kota'),
                     'nomor_telepon'      =>  $i->post('nomor_telepon'),
@@ -395,7 +415,7 @@ class Alumni extends CI_Controller{
                     'ipk'                =>  $i->post('ipk')
                   );
               $this->Alumni_Model->update_alumni($data);
-              $this->session->set_flashdata('success', 'Berhasil menambah alumni.');
+              $this->session->set_flashdata('success', 'Profil alumni berhasil dirubah.');
               redirect('admin/alumni/'.$i->post('username'));
           }
     }
