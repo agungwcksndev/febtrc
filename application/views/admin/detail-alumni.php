@@ -15,13 +15,22 @@
 
    <!-- Main content -->
    <section class="content">
+     <?php if ($this->session->flashdata('success')) {
+         echo "<br>";
+         echo "<div class='alert alert-success alert-dismissible'>";
+         echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
+         echo "<h4><i class='icon fa fa-check'></i>Success!</h4>";
+         echo $this->session->flashdata('success');
+         echo "</div>";
+     };
+     ?>
      <?php echo validation_errors(); ?>
-     <form class="form-horizontal" method="post" action="<?php echo site_url('admin/alumni/proses_tambah_alumni') ?>">
+     <form class="form-horizontal" method="post" action="">
      <div class="row">
      <div class="col-md-6">
        <div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">Identitas Diri</h3>
+              <h3 class="box-title"><i class="fa fa-question-circle"></i>&nbsp;&nbsp;Identitas Diri</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
@@ -107,13 +116,13 @@
                 <div class="form-group">
                   <label for="provinsi" class="col-sm-4 col-form-label text-right">Provinsi</label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"></p>
+                    <p class="control-label-plaintext"><?php echo $data_alumni->nama_provinsi ?></p>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="kota" class="col-sm-4 col-form-label text-right">Kota</label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->kota ?></p>
+                    <p class="control-label-plaintext"><?php echo $data_alumni->nama_kota ?></p>
                   </div>
                 </div>
                 <div class="form-group">
@@ -159,14 +168,14 @@
     <div class="col-md-6">
         <div class="box box-info">
               <div class="box-header with-border">
-                <h3 class="box-title">Informasi Akun</h3>
+                <h3 class="box-title"><i class="fa fa-get-pocket"></i>&nbsp;&nbsp;Informasi Akun</h3>
               </div>
                   <div class="box-body">
                     <div class="box-body box-profile">
                       <img class="profile-user-img img-responsive img-circle" src="" alt="User profile picture">
                       <h3 class="profile-username text-center"></h3>
                       <div class="col-md-12 text-center">
-                        <a href="<?php echo site_url('admin/alumni/edit_alumni/'.$data_alumni->username)?>" class="btn bg-navy margin" name="button"><i class="fa fa-pencil"></i>&nbsp;&nbsp;&nbsp;Edit Profil</a>
+                        <a href="<?php echo site_url('admin/alumni/update_alumni/'.$data_alumni->username)?>" class="btn bg-navy margin" name="button"><i class="fa fa-pencil"></i>&nbsp;&nbsp;&nbsp;Edit Profil</a>
                         <button type="button" class="btn bg-maroon margin" name="button"><i class="fa fa-image"></i>&nbsp;&nbsp;&nbsp;Ubah Foto</button>
                       </div>
                     </div>
@@ -174,7 +183,7 @@
               </div>
                <div class="box box-info">
                  <div class="box-header with-border">
-                   <h3 class="box-title">Informasi Lulusan</h3>
+                   <h3 class="box-title"><i class="fa fa-book"></i>&nbsp;&nbsp;Informasi Lulusan</h3>
                  </div>
                      <div class="box-body">
                        <div class="form-group">
@@ -227,15 +236,50 @@
                        </div>
                       </div>
                     </div>
+                    <div class="box box-info">
+                      <div class="box-header with-border">
+                        <h3 class="box-title"><i class="fa fa-briefcase"></i>&nbsp;&nbsp;Riwayat Pekerjaan</h3>
+                        <button type="button" class="btn btn-info pull-right" name="add_riwayat_pekerjaan" data-toggle="modal" data-target="#modal-add-riwayat-pekerjaan">Tambah Riwayat Pekerjaan</button>
+                      </div>
+                          <div class="box-body">
+                            <table id="riwayat_pekerjaan" class="table table-bordered table-striped">
+                              <thead>
+                              <tr>
+                                <th>Tempat Kerja</th>
+                                <th>Tanggal Masuk</th>
+                                <th>Tanggal Keluar</th>
+                                <th>Posisi</th>
+                                <th class="text-center">Aksi</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                                <?php
+                                foreach ($riwayat_pekerjaans as $riwayat_pekerjaan): ?>
+                              <tr>
+                                <td><?php echo $riwayat_pekerjaan->tempat_kerja ?></td>
+                                <td><?php echo $riwayat_pekerjaan->mulai_kerja ?></td>
+                                <td><?php echo $riwayat_pekerjaan->berhenti_kerja ?></td>
+                                <td><?php echo $riwayat_pekerjaan->posisi ?></td>
+                                <p><td class="text-center"><a style="cursor:pointer;" class="btn btn-default" onclick="update_riwayat_pekerjaan('<?php echo $riwayat_pekerjaan->id_riwayat_pekerjaan ?>')" data-toggle="" data-target="#"><i class="fa fa-pencil"></i></a></p>
+                                <p><button onclick="return del('<?php echo $riwayat_pekerjaan->id_riwayat_pekerjaan ?>')" class="btn btn-danger"><i class="fa fa-trash"></i></button></td></p>
+                              </tr>
+                              <?php endforeach; ?>
+                              </tbody>
+                              <tfoot>
+                              <tr>
+                                <th>Tempat Kerja</th>
+                                <th>Tanggal Masuk</th>
+                                <th>Tanggal Keluar</th>
+                                <th>Posisi</th>
+                                <th class="text-center">Aksi</th>
+                              </tr>
+                              </tfoot>
+                            </table>
+                           </div>
+                         </div>
                 </div>
              </div>
           </div>
-          <!-- /.box-body -->
-          <div class="box-footer btn-toolbar">
-            <a href="<?php echo site_url('admin/alumni') ?>" class="btn btn-default pull-right">Cancel</a>
-            <button type="submit"  class="btn btn-primary pull-right" name="submit" value="Simpan">Simpan</button>
-          </div>
-          <!-- /.box-footer -->
         </form>
       </section>
    <!-- /.content -->
@@ -444,6 +488,145 @@
 </div>
 <!-- ./wrapper -->
 
+<div class="modal fade" id="modal-add-riwayat-pekerjaan" role="dialog">
+  <div class="modal-dialog">
+    <form class="" action="<?php echo site_url('admin/riwayat_pekerjaan/add_riwayat_pekerjaan') ?>" method="post">
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+
+          <button type="button" class="close" data-dismiss="modal" name="button"></button>
+          <h4 class="modal-title"></i>Detail Pekerjaan</h4>
+        </div>
+        <div class="modal-body">
+          <div class="col-md-12">
+            <div class="form-horizontal">
+              <div class="box-body">
+                <input type="hidden" name="username_add" id="username_add" class="form-control" value="<?php echo $data_alumni->username ?>" placeholder="">
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="tempat_kerja_add">Tempat Kerja</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="tempat_kerja_add" id="tempat_kerja_add" class="form-control" value="<?php echo set_value('tempat_kerja_add') ?>" placeholder="Masukan Tempat Kerja..."required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="posisi_add">Posisi</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="posisi_add" id="posisi_add" class="form-control" value="<?php echo set_value('posisi_add') ?>" placeholder="Masukan Posisi...">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="mulai_kerja_add">Mulai Kerja</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="mulai_kerja_add" id="mulai_kerja_add" class="form-control" value="<?php echo set_value('mulai_kerja_add') ?>" placeholder="Masukan Mulai Kerja..."required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="berhenti_kerja_add">Berhenti Kerja</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="berhenti_kerja_add" id="berhenti_kerja_add" class="form-control" value="<?php echo set_value('berhenti_kerja_add') ?>" placeholder="Masukan Berhenti Kerja..."required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="alamat_kerja_add">Alamat Kerja</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="alamat_kerja_add" id="alamat_kerja_add" class="form-control" value="<?php echo set_value('alamat_kerja_add') ?>" placeholder="Masukan Alamat Kerja...">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="pendapatan_per_bulan_add">Pendapatan Per Bulan</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="pendapatan_per_bulan_add" id="pendapatan_per_bulan_add" class="form-control" value="<?php echo set_value('pendapatan_per_bulan_add') ?>" placeholder="Masukan Pendapatan Per Bulan..."required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="golongan_pns_add">Golongan PNS ( Jika PNS )</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="golongan_pns_add" id="golongan_pns_add" class="form-control" value="<?php echo set_value('golongan_pns_add') ?>" placeholder="Masukan Golongan PNS...">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-default" data-dismiss="modal" name="button">Cancel</button>
+          <button type="submit" class="btn btn-primary" name="button">Update Pekerjaan</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-update-riwayat-pekerjaan" role="dialog">
+  <div class="modal-dialog">
+    <form class="" action="<?php echo site_url('admin/riwayat_pekerjaan/update_riwayat_pekerjaan') ?>" method="post">
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+
+          <button type="button" class="close" data-dismiss="modal" name="button"></button>
+          <h4 class="modal-title"></i>Detail Pekerjaan</h4>
+        </div>
+        <div class="modal-body">
+          <div class="col-md-12">
+            <div class="form-horizontal">
+              <div class="box-body">
+                <input type="hidden" name="id_riwayat_pekerjaan_up" id="id_riwayat_pekerjaan_up" class="form-control" value="" placeholder="">
+                <input type="hidden" name="username_up" id="username_up" class="form-control" value="<?php echo $data_alumni->username ?>" placeholder="">
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="tempat_kerja_up">Tempat Kerja</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="tempat_kerja_up" id="tempat_kerja_up" class="form-control" value="" placeholder="Masukan Tempat Kerja..."required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="posisi_up">Posisi</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="posisi_up" id="posisi_up" class="form-control" value="" placeholder="Masukan Posisi...">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="mulai_kerja_up">Mulai Kerja</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="mulai_kerja_up" id="mulai_kerja_up" class="form-control" value="" placeholder="Masukan Mulai Kerja..."required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="berhenti_kerja_up">Berhenti Kerja</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="berhenti_kerja_up" id="berhenti_kerja_up" class="form-control" value="" placeholder="Masukan Berhenti Kerja..."required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="alamat_kerja_up">Alamat Kerja</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="alamat_kerja_up" id="alamat_kerja_up" class="form-control" value="" placeholder="Masukan Alamat Kerja...">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="pendapatan_per_bulan_up">Pendapatan Per Bulan</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="pendapatan_per_bulan_up" id="pendapatan_per_bulan_up" class="form-control" value="" placeholder="Masukan Pendapatan Per Bulan..."required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="golongan_pns_up">Golongan PNS ( Jika PNS )</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="golongan_pns_up" id="golongan_pns_up" class="form-control" value="" placeholder="Masukan Golongan PNS...">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-default" data-dismiss="modal" name="button">Cancel</button>
+          <button type="submit" class="btn btn-primary" name="button">Update Pekerjaan</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
 <!-- jQuery 3 -->
 <script src="<?php echo base_url(); ?>bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
@@ -463,92 +646,66 @@
 <!-- page script -->
 <script>
 
-//Date picker
-$('#tanggal_yudisium').datepicker({
+function del(id) {
+     var url="<?php echo site_url();?>";
+     var r = confirm("Apakah anda yakin menghapus data ini?");
+     console.log(r);
+     if (r == true) {
+         window.location = url+"/admin/riwayat_pekerjaan/delete_riwayat_pekerjaan/"+id;
+     } else {
+         return false;
+     }
+ }
+
+$(function () {
+  $('#riwayat_pekerjaan').DataTable({
+    "columnDefs": [
+]
+  })
+})
+
+function update_riwayat_pekerjaan(id_riwayat_pekerjaan)
+{
+    //Ajax Load data from ajax
+    $.ajax({
+        url : "<?php echo site_url('admin/riwayat_pekerjaan/get_riwayat_by_id')?>/" + id_riwayat_pekerjaan,
+        type: "GET",
+        dataType: "JSON",
+        success: function(data)
+        {
+            $('[name="id_riwayat_pekerjaan_up"]').val(id_riwayat_pekerjaan);
+            $('[name="tempat_kerja_up"]').val(data.tempat_kerja);
+            $('[name="posisi_up"]').val(data.posisi);
+            $('[name="mulai_kerja_up"]').val(data.mulai_kerja);
+            $('[name="berhenti_kerja_up"]').val(data.berhenti_kerja);
+            $('[name="alamat_kerja_up"]').val(data.alamat_kerja);
+            $('[name="pendapatan_per_bulan_up"]').val(data.pendapatan_per_bulan);
+            $('[name="golongan_pns_up"]').val(data.golongan_pns);
+            $('#modal-update-riwayat-pekerjaan').modal('show'); // show bootstrap modal when complete loaded
+
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+            alert('Error get data from ajax');
+        }
+    });
+}
+
+$('#mulai_kerja_up').datepicker({
 autoclose: true
 })
 
-$('#tanggal_lahir').datepicker({
+$('#berhenti_kerja_up').datepicker({
 autoclose: true
 })
 
-$(document).ready(function(){
-  $('#negara').change(function(){
-    var e = document.getElementById("negara");
-    var id_negara = e.options[e.selectedIndex].value;
-    console.log(id_negara)
-    if(id_negara != '')
-    {
-      $.ajax({
-        url:"<?php echo site_url();?>/admin/alumni/fetch_provinsi",
-        method: "POST",
-        data:{id_negara:id_negara},
-        success:function(data)
-        {
-          $('#provinsi').html(data);
-        }
-      })
-    }
-  })
-  $('#provinsi').change(function(){
-    var e = document.getElementById("provinsi");
-    var id_provinsi = e.options[e.selectedIndex].value;
-    console.log(id_provinsi)
-    if(id_provinsi != '')
-    {
-      $.ajax({
-        url:"<?php echo site_url();?>/admin/alumni/fetch_kota",
-        method: "POST",
-        data:{id_provinsi:id_provinsi},
-        success:function(data)
-        {
-          $('#kota').html(data);
-        }
-      })
-    }
-  })
-
-  $(document).ready(function(){
-
-    $('#jurusan').change(function(){
-      var e = document.getElementById ("jurusan");
-      var id_jurusan = e.options [e.selectedIndex] .value;
-      console.log(id_jurusan)
-      if(id_jurusan != '')
-      {
-        $.ajax({
-          url:"<?php echo site_url();?>/Login/fetch_prodi",
-          method: "POST",
-          data:{id_jurusan:id_jurusan},
-          success:function(data)
-          {
-            $('#prodi').html(data);
-          }
-        })
-      }
-    })
-    var max  = new Date().getFullYear();
-    var min  = 1961;
-    var min2 = 1950;
-    select = document.getElementById('tahun_lulus');
-    select2 = document.getElementById('angkatan');
-
-    for (var i = min; i<=max; i++){
-    var opt = document.createElement('option');
-    opt.value = i;
-    opt.innerHTML = i;
-    select.appendChild(opt);
-    }
-
-    for (var i = min2; i<=max; i++){
-    var opt = document.createElement('option');
-    opt.value = i;
-    opt.innerHTML = i;
-    select2.appendChild(opt);
-    }
-  })
+$('#mulai_kerja_add').datepicker({
+autoclose: true
 })
 
+$('#berhenti_kerja_add').datepicker({
+autoclose: true
+})
 </script>
 </body>
 </html>

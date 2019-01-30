@@ -15,8 +15,13 @@
 
    <!-- Main content -->
    <section class="content">
-     <?php echo validation_errors(); ?>
-     <form class="form-horizontal" method="post" action="<?php echo site_url('admin/alumni/process_add_alumni') ?>">
+     <?php if (!empty(validation_errors())): ?>
+          <div class="alert alert-danger">
+              <a class="close" data-dismiss="alert" title="close">x</a>
+              <ul><?php echo (validation_errors('<li>', '</li>')); ?></ul>
+          </div>
+      <?php endif; ?>
+     <form class="form-horizontal" method="post" action="">
      <div class="row">
      <div class="col-md-6">
        <div class="box box-info">
@@ -29,97 +34,97 @@
                 <div class="form-group">
                   <label for="nama" class="col-sm-4 control-label">Nama Lengkap<font style="color: red;">*)</font></label>
                   <div class="col-sm-8">
-                    <input type="text" name="nama" class="form-control" id="nama" value="<?php echo set_value('nama') ?>" placeholder="Masukan Nama Lengkap">
+                    <input type="text" name="nama" class="form-control" id="nama" value="<?php echo $data_alumni->nama ?>" placeholder="Masukan Nama Lengkap">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="nim" class="col-sm-4 control-label">NIM</label>
                   <div class="col-sm-8">
-                    <input type="text" name="nim" class="form-control" id="nim" value="<?php echo set_value('nim') ?>" placeholder="Masukan NIM">
+                    <input type="text" name="nim" class="form-control" id="nim" value="<?php echo $data_alumni->nim ?>" placeholder="Masukan NIM">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="email" class="col-sm-4 control-label">Email<font style="color: red;">*)</font></label>
+                  <label for="Email" class="col-sm-4 control-label">Email<font style="color: red;">*)</font></label>
                   <div class="col-sm-8">
-                    <input type="text" name="email" class="form-control" id="email" value="<?php echo set_value('email') ?>" placeholder="Masukan Email">
+                    <input type="email" name="email" class="form-control" id="email" value="<?php echo $data_alumni->email ?>" placeholder="Masukan Email">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="jenis_kelamin" class="col-sm-4 control-label">Jenis Kelamin<font style="color: red;">*)</font></label>
                   <div class="col-sm-8">
-                    <select class="form-control" name="jenis_kelamin" id="jenis_kelamin" value="<?php echo set_value('jenis_kelamin') ?>">
+                    <select class="form-control" name="jenis_kelamin" id="jenis_kelamin">
                       <option value=""selected disabled>Pilih Jenis Kelamin</option>
-                      <option value="Perempuan">Perempuan</option>
-                      <option value="Laki-laki">Laki-laki</option>
+                      <option value="Perempuan" <?php echo ($data_alumni->jenis_kelamin == 'Perempuan') ? 'selected="selected"' : '' ?>>Perempuan</option>
+                      <option value="Laki-laki" <?php echo ($data_alumni->jenis_kelamin == 'Laki-laki') ? 'selected="selected"' : '' ?>>Laki-laki</option>
                     </select>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="golongan_darah" class="col-sm-4 control-label">Golongan Darah</label>
                   <div class="col-sm-8">
-                    <select class="form-control" name="golongan_darah" id="golongan_darah" value="<?php echo set_value('golongan_darah') ?>">
+                    <select class="form-control" name="golongan_darah" id="golongan_darah" value="<?php echo $data_alumni->golongan_darah ?>">
                       <option value=""selected disabled>Pilih Golongan Darah</option>
-                      <option value="O">O</option>
-                      <option value="A">A</option>
-                      <option value="B">B</option>
-                      <option value="AB">AB</option>
+                      <option value="O" <?php echo ($data_alumni->golongan_darah == 'O') ? 'selected="selected"' : '' ?>>O</option>
+                      <option value="A" <?php echo ($data_alumni->golongan_darah == 'A') ? 'selected="selected"' : '' ?>>A</option>
+                      <option value="B" <?php echo ($data_alumni->golongan_darah == 'B') ? 'selected="selected"' : '' ?>>B</option>
+                      <option value="AB" <?php echo ($data_alumni->golongan_darah == 'AB') ? 'selected="selected"' : '' ?>>AB</option>
                     </select>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="tempat_lahir" class="col-sm-4 control-label">Tempat Lahir</label>
                   <div class="col-sm-8">
-                    <input type="text" name="tempat_lahir" class="form-control" id="tempat_lahir" value="<?php echo set_value('tempat_lahir') ?>" placeholder="Masukan Tempat Lahir">
+                    <input type="text" name="tempat_lahir" class="form-control" id="tempat_lahir" value="<?php echo $data_alumni->tempat_lahir ?>" placeholder="Masukan Tempat Lahir">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="tanggal_lahir" class="col-sm-4 control-label">Tanggal Lahir</label>
                   <div class="col-sm-8">
-                    <input type="text" name="tanggal_lahir" class="form-control" id="tanggal_lahir" value="<?php echo set_value('tanggal_lahir') ?>" placeholder="Masukan Tanggal Lahir">
+                    <input type="text" name="tanggal_lahir" class="form-control" id="tanggal_lahir" value="<?php echo $data_alumni->tanggal_lahir ?>" placeholder="Masukan Tanggal Lahir">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="kewarganegaraan" class="col-sm-4 control-label">Kewarganegaraan</label>
                   <div class="col-sm-8">
-                    <select class="form-control" id="kewarganegaraan" name="kewarganegaraan" value="<?php echo set_value('kewarganegaraan') ?>">
+                    <select class="form-control" id="kewarganegaraan" name="kewarganegaraan" value="<?php echo $data_alumni->kewarganegaraan ?>">
                       <option value="" selected disabled>Pilih Kewarganegaraan</option>
-                      <option value="Warga Indonesia">Warga Indonesia</option>
-                      <option value="Warga Keturunan">Warga Keturunan</option>
-                      <option value="Warga Asing">Warga Asing</option>
+                      <option value="Warga Indonesia" <?php echo ($data_alumni->kewarganegaraan == 'Warga Indonesia') ? 'selected="selected"' : '' ?>>Warga Indonesia</option>
+                      <option value="Warga Keturunan" <?php echo ($data_alumni->kewarganegaraan == 'Warga Keturunan') ? 'selected="selected"' : '' ?>>Warga Keturunan</option>
+                      <option value="Warga Asing" <?php echo ($data_alumni->kewarganegaraan == 'Warga Asing"') ? 'selected="selected"' : '' ?>>Warga Asing</option>
                     </select>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="alamat_asal" class="col-sm-4 control-label">Alamat Asal</label>
                   <div class="col-sm-8">
-                    <input type="text" name="alamat_asal" class="form-control" id="alamat_asal" value="<?php echo set_value('alamat_asal') ?>" placeholder="Masukan Alamat Asal">
+                    <input type="text" name="alamat_asal" class="form-control" id="alamat_asal" value="<?php echo $data_alumni->alamat_asal ?>" placeholder="Masukan Alamat Asal">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="kode_pos_asal" class="col-sm-4 control-label">Kode Pos Asal</label>
                   <div class="col-sm-8">
-                    <input type="text" name="kode_pos_asal" class="form-control" id="kode_pos_asal" value="<?php echo set_value('kode_pos_asal') ?>" placeholder="Masukan Kode Pos Alamat Asal">
+                    <input type="text" name="kode_pos_asal" class="form-control" id="kode_pos_asal" value="<?php echo $data_alumni->kode_pos_asal ?>" placeholder="Masukan Kode Pos Alamat Asal">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="alamat_sekarang" class="col-sm-4 control-label">Alamat Sekarang</label>
                   <div class="col-sm-8">
-                    <input type="text" name="alamat_sekarang" class="form-control" id="alamat_sekarang" value="<?php echo set_value('alamat_sekarang') ?>" placeholder="Masukan Alamat Tinggal Sekarang">
+                    <input type="text" name="alamat_sekarang" class="form-control" id="alamat_sekarang" value="<?php echo $data_alumni->alamat_sekarang ?>" placeholder="Masukan Alamat Tinggal Sekarang">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="kode_pos_sekarang" class="col-sm-4 control-label">Kode Pos Sekarang</label>
                   <div class="col-sm-8">
-                    <input type="text" name="kode_pos_sekarang" class="form-control" id="kode_pos_sekarang" value="<?php echo set_value('kode_pos_sekarang') ?>" placeholder="Masukan Kode Pos Alamat Tinggal Sekarang">
+                    <input type="text" name="kode_pos_sekarang" class="form-control" id="kode_pos_sekarang" value="<?php echo $data_alumni->kode_pos_sekarang ?>" placeholder="Masukan Kode Pos Alamat Tinggal Sekarang">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-4 control-label">Negara</label>
                   <div class="col-sm-8">
-                    <select name="negara" id="negara" class="form-control" value="<?php echo set_value('negara') ?>">
+                    <select name="negara" id="negara" class="form-control" value="<?php echo $data_alumni->negara ?>">
                       <option value="" selected disabled>Pilih Negara</option>
                       <?php foreach ($negaras as $negara): ?>
-                        <option value="<?php echo $negara->id_negara ?>"><?php echo $negara->nama_negara ?></option>
+                        <option value="<?php echo $negara->id_negara ?>"<?php echo ($data_alumni->negara == $negara->id_negara) ? 'selected="selected"' : '' ?>><?php echo $negara->nama_negara ?></option>
                       <?php endforeach; ?>
                     </select>
                   </div>
@@ -127,53 +132,59 @@
                 <div class="form-group">
                   <label for="provinsi" class="col-sm-4 control-label">Provinsi</label>
                   <div class="col-sm-8">
-                    <select name="provinsi" id="provinsi" class="form-control" value="<?php echo set_value('provinsi') ?>">
-                      <option selected disabled>Pilih Provinsi</option>
+                    <select name="provinsi" id="provinsi" class="form-control" value="<?php echo $data_alumni->provinsi ?>">
+                      <option disabled>Pilih Provinsi</option>
+                      <?php foreach ($provinsis as $provinsi): ?>
+                        <option value="<?php echo $provinsi->id_provinsi ?>"<?php echo ($data_alumni->provinsi == $provinsi->id_provinsi) ? 'selected="selected"' : '' ?>><?php echo $provinsi->nama_provinsi ?></option>
+                      <?php endforeach; ?>
                     </select>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="kota" class="col-sm-4 control-label">Kota</label>
                   <div class="col-sm-8">
-                    <select class="form-control" id="kota" name="kota" value="<?php echo set_value('kota') ?>">
-                      <option selected disabled>Pilih Kota</option>
+                    <select class="form-control" id="kota" name="kota" value="<?php echo $data_alumni->kota ?>">
+                      <option disabled>Pilih Kota</option>
+                      <?php foreach ($kotas as $kota): ?>
+                        <option value="<?php echo $kota->id_kota ?>"<?php echo ($data_alumni->kota == $kota->id_kota) ? 'selected="selected"' : '' ?>><?php echo $kota->nama_kota ?></option>
+                      <?php endforeach; ?>
                     </select>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="nomor_telepon" class="col-sm-4 control-label">Nomor Telepon</label>
                   <div class="col-sm-8">
-                    <input type="text" name="nomor_telepon" class="form-control" id="nomor_telepon" value="<?php echo set_value('nomor_telepon') ?>" placeholder="Masukan Nomor Telepon">
+                    <input type="text" name="nomor_telepon" class="form-control" id="nomor_telepon" value="<?php echo $data_alumni->nomor_telepon ?>" placeholder="Masukan Nomor Telepon">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="nomor_hp" class="col-sm-4 control-label">Nomor HP<font style="color: red;">*)</font></label>
                   <div class="col-sm-8">
-                    <input type="text" name="nomor_hp" class="form-control" id="nomor_hp" value="<?php echo set_value('nomor_hp') ?>" placeholder="Masukan Nomor HP">
+                    <input type="text" name="nomor_hp" class="form-control" id="nomor_hp" value="<?php echo $data_alumni->nomor_hp ?>" placeholder="Masukan Nomor HP">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="website" class="col-sm-4 control-label">Website</label>
                   <div class="col-sm-8">
-                    <input type="text" name="website" class="form-control" id="website" value="<?php echo set_value('website') ?>" placeholder="Masukan Website">
+                    <input type="text" name="website" class="form-control" id="website" value="<?php echo $data_alumni->website ?>" placeholder="Masukan Website">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="facebook" class="col-sm-4 control-label">Facebook</label>
                   <div class="col-sm-8">
-                    <input type="text" name="facebook" class="form-control" id="facebook" value="<?php echo set_value('facebook') ?>" placeholder="Masukan Facebook">
+                    <input type="text" name="facebook" class="form-control" id="facebook" value="<?php echo $data_alumni->facebook ?>" placeholder="Masukan Facebook">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="twitter" class="col-sm-4 control-label">Twitter</label>
                   <div class="col-sm-8">
-                    <input type="text" name="twitter" class="form-control" id="twitter" value="<?php echo set_value('twitter') ?>" placeholder="Masukan Twitter">
+                    <input type="text" name="twitter" class="form-control" id="twitter" value="<?php echo $data_alumni->twitter ?>" placeholder="Masukan Twitter">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="instagram" class="col-sm-4 control-label">Instagram</label>
                   <div class="col-sm-8">
-                    <input type="text" name="instagram" class="form-control" id="instagram" value="<?php echo set_value('instagram') ?>" placeholder="Masukan Instagram">
+                    <input type="text" name="instagram" class="form-control" id="instagram" value="<?php echo $data_alumni->instagram ?>" placeholder="Masukan Instagram">
                   </div>
                 </div>
             </div>
@@ -189,19 +200,7 @@
                    <div class="form-group">
                      <label for="username" class="col-sm-4 control-label">Username<font style="color: red;">*)</font></label>
                      <div class="col-sm-8">
-                       <input type="text" name="username" class="form-control" id="username" value="<?php echo set_value('username') ?>" placeholder="Masukan Username">
-                     </div>
-                   </div>
-                   <div class="form-group">
-                     <label for="password" class="col-sm-4 control-label">Password<font style="color: red;">*)</font></label>
-                     <div class="col-sm-8">
-                       <input type="password" name="password" class="form-control" id="password" placeholder="Masukan Password">
-                     </div>
-                   </div>
-                   <div class="form-group">
-                     <label for="passconf" class="col-sm-4 control-label">Konfirmasi Password<font style="color: red;">*)</font></label>
-                     <div class="col-sm-8">
-                       <input type="password" name="passconf" class="form-control" id="passconf" placeholder="Masukan Ulang Password">
+                       <input type="text" name="username" class="form-control" id="username" value="<?php echo $data_alumni->username ?>" placeholder="Masukan Username" disabled>
                      </div>
                    </div>
                  </div>
@@ -215,22 +214,22 @@
                        <div class="form-group">
                          <label for="jenjang" class="col-sm-4 control-label">Jenjang<font style="color: red;">*)</font></label>
                          <div class="col-sm-8">
-                           <select class="form-control" id="jenjang" name="jenjang" value="<?php echo set_value('jenjang') ?>">
-                             <option value="" selected disabled>Pilih Jenjang</option>
-                             <option value="D3">D3</option>
-                             <option value="S1">S1</option>
-                             <option value="S2">S2</option>
-                             <option value="S3">S3</option>
+                           <select class="form-control" id="jenjang" name="jenjang" value="<?php echo $data_alumni->jenjang ?>">
+                             <option value=""  disabled>Pilih Jenjang</option>
+                             <option value="D3" <?php echo ($data_alumni->jenjang == 'D3') ? 'selected="selected"' : '' ?>>D3</option>
+                             <option value="S1" <?php echo ($data_alumni->jenjang == 'S1') ? 'selected="selected"' : '' ?>>S1</option>
+                             <option value="S2" <?php echo ($data_alumni->jenjang == 'S2') ? 'selected="selected"' : '' ?>>S2</option>
+                             <option value="S3" <?php echo ($data_alumni->jenjang == 'S3') ? 'selected="selected"' : '' ?>>S3</option>
                            </select>
                          </div>
                        </div>
                        <div class="form-group">
                          <label for="jurusan" class="col-sm-4 control-label">Jurusan<font style="color: red;">*)</font></label>
                          <div class="col-sm-8">
-                           <select name="jurusan" id="jurusan" class="form-control" value="<?php echo set_value('jurusan') ?>">
-                             <option selected disabled>Pilih Jurusan</option>
+                           <select name="jurusan" id="jurusan" class="form-control" value="<?php echo $data_alumni->nama_jurusan ?>">
+                             <option disabled>Pilih Jurusan</option>
                              <?php foreach ($jurusans as $jurusan): ?>
-                               <option value="<?php echo $jurusan->id_jurusan; ?>"><?php echo $jurusan->nama_jurusan; ?></option>
+                               <option value="<?php echo $jurusan->id_jurusan ?>"<?php echo ($data_alumni->id_jurusan == $jurusan->id_jurusan) ? 'selected="selected"' : '' ?>><?php echo $jurusan->nama_jurusan ?></option>
                              <?php endforeach; ?>
                            </select>
                          </div>
@@ -238,43 +237,52 @@
                        <div class="form-group">
                          <label for="prodi" class="col-sm-4 control-label">Program Studi<font style="color: red;">*)</font></label>
                          <div class="col-sm-8">
-                           <select class="form-control" id="prodi" name="prodi" value="<?php echo set_value('prodi') ?>">
+                           <select class="form-control" id="prodi" name="prodi" value="<?php echo $data_alumni->nama_prodi ?>">
                              <option value=""selected disabled>Pilih Program Studi</option>
+                             <?php foreach ($prodis as $prodi): ?>
+                               <option value="<?php echo $prodi->id_prodi ?>"<?php echo ($data_alumni->id_prodi == $prodi->id_prodi) ? 'selected="selected"' : '' ?>><?php echo $prodi->nama_prodi ?></option>
+                             <?php endforeach; ?>
                            </select>
                          </div>
                        </div>
                        <div class="form-group">
                          <label for="angkatan" class="col-sm-4 control-label">Angkatan<font style="color: red;">*)</font></label>
                          <div class="col-sm-8">
-                           <select class="form-control" id="angkatan" name="angkatan" value="<?php echo set_value('angkatan') ?>">
-                             <option value="" selected disabled>Pilih Tahun Angkatan</option>
+                           <select class="form-control" id="angkatan" name="angkatan" value="<?php echo $data_alumni->angkatan ?>">
+                             <option value=""  disabled>Pilih Tahun Angkatan</option>
+                             <?php for ($i=1950; $i <= date('Y') ; $i++) { ?>
+                               <option value="<?php echo $i ?>"<?php echo ($data_alumni->angkatan == $i) ? 'selected="selected"' : '' ?>><?php echo $i ?></option>
+                             <?php } ?>
                            </select>
                          </div>
                        </div>
                        <div class="form-group">
                          <label for="tahun_lulus" class="col-sm-4 control-label">Tahun Lulus</label>
                          <div class="col-sm-8">
-                           <select class="form-control" id="tahun_lulus" name="tahun_lulus" value="<?php echo set_value('tahun_lulus') ?>">
-                             <option value="" selected disabled>Pilih Tahun Lulus</option>
+                           <select class="form-control" id="tahun_lulus" name="tahun_lulus" value="<?php echo $data_alumni->tahun_lulus ?>">
+                             <option value="" disabled>Pilih Tahun Lulus</option>
+                             <?php for ($i=1950; $i <= date('Y') ; $i++) { ?>
+                               <option value="<?php echo $i ?>"<?php echo ($data_alumni->tahun_lulus == $i) ? 'selected="selected"' : '' ?>><?php echo $i ?></option>
+                             <?php } ?>
                            </select>
                          </div>
                        </div>
                        <div class="form-group">
                          <label for="tanggal_yudisium" class="col-sm-4 control-label">Tanggal Yudisium</label>
                          <div class="col-sm-8">
-                           <input type="text" name="tanggal_yudisium" class="form-control" id="tanggal_yudisium" value="<?php echo set_value('tanggal_yudisium') ?>" placeholder="Masukan Tanggal Yudisium">
+                           <input type="text" name="tanggal_yudisium" class="form-control" id="tanggal_yudisium" value="<?php echo $data_alumni->tanggal_yudisium ?>" placeholder="Masukan Tanggal Yudisium">
                          </div>
                        </div>
                        <div class="form-group">
                          <label for="judul_skripsi" class="col-sm-4 control-label">Judul Skripsi</label>
                          <div class="col-sm-8">
-                           <input type="text" name="judul_skripsi" class="form-control" id="judul_skripsi" value="<?php echo set_value('judul_skripsi') ?>" placeholder="Masukan Judul Skripsi">
+                           <input type="text" name="judul_skripsi" class="form-control" id="judul_skripsi" value="<?php echo $data_alumni->judul_skripsi ?>" placeholder="Masukan Judul Skripsi">
                          </div>
                        </div>
                        <div class="form-group">
                          <label for="ipk" class="col-sm-4 control-label">IPK</label>
                          <div class="col-sm-8">
-                           <input type="text" name="ipk" class="form-control" id="ipk" value="<?php echo set_value('ipk') ?>" placeholder="Masukan IPK">
+                           <input type="text" name="ipk" class="form-control" id="ipk" value="<?php echo $data_alumni->ipk ?>" placeholder="Masukan IPK">
                          </div>
                        </div>
                       </div>
@@ -525,6 +533,7 @@ autoclose: true
 })
 
 $(document).ready(function(){
+
   $('#negara').change(function(){
     var e = document.getElementById("negara");
     var id_negara = e.options[e.selectedIndex].value;
@@ -532,7 +541,7 @@ $(document).ready(function(){
     if(id_negara != '')
     {
       $.ajax({
-        url:"<?php echo site_url();?>/admin/alumni/get_provinsi_by_negara",
+        url:"<?php echo site_url();?>/admin/alumni/get_provinsi_by_negara_js",
         method: "POST",
         data:{id_negara:id_negara},
         success:function(data)
@@ -569,7 +578,7 @@ $(document).ready(function(){
       if(id_jurusan != '')
       {
         $.ajax({
-          url:"<?php echo site_url();?>/Login/fetch_prodi",
+          url:"<?php echo site_url();?>/admin/alumni/get_prodi_by_jurusan_js",
           method: "POST",
           data:{id_jurusan:id_jurusan},
           success:function(data)
@@ -579,25 +588,6 @@ $(document).ready(function(){
         })
       }
     })
-    var max  = new Date().getFullYear();
-    var min  = 1961;
-    var min2 = 1950;
-    select = document.getElementById('tahun_lulus');
-    select2 = document.getElementById('angkatan');
-
-    for (var i = min; i<=max; i++){
-    var opt = document.createElement('option');
-    opt.value = i;
-    opt.innerHTML = i;
-    select.appendChild(opt);
-    }
-
-    for (var i = min2; i<=max; i++){
-    var opt = document.createElement('option');
-    opt.value = i;
-    opt.innerHTML = i;
-    select2.appendChild(opt);
-    }
   })
 })
 

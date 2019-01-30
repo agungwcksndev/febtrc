@@ -12,33 +12,34 @@ class Alumni extends CI_Controller{
     $this->load->model('Negara_Model');
     $this->load->model('Provinsi_Model');
     $this->load->model('Kota_Model');
+    $this->load->model('Riwayat_Pekerjaan_Model');
   }
 
   function index()
   {
-    $alumnis = $this->Alumni_Model->listing();
+    $alumnis = $this->Alumni_Model->get_all_alumni();
     $data = array('isi'     => 'admin/view-alumni',
                   'alumnis'=> $alumnis
                   );
     $this->load->view("layouts/wrapper", $data, false);
   }
 
-  function tambah_alumni()
+  function add_alumni()
   {
-    $alumnis      = $this->Alumni_Model->listing();
-    $negaras      = $this->Negara_Model->get_negara();
-    $provinsis    = $this->Provinsi_Model->get_provinsi();
-    $list_jurusan = $this->Jurusan_Model->listing();
+    $alumnis      = $this->Alumni_Model->get_all_alumni();
+    $negaras      = $this->Negara_Model->get_all_negara();
+    $provinsis    = $this->Provinsi_Model->get_all_provinsi();
+    $jurusans     = $this->Jurusan_Model->get_all_jurusan();
     $data = array('isi'          => 'admin/tambah-alumni',
                   'negaras'      =>  $negaras,
-                  'list_jurusan' =>  $list_jurusan,
+                  'jurusans'     =>  $jurusans,
                   'provinsis'    =>  $provinsis,
                   'alumnis'      =>  $alumnis
                   );
     $this->load->view("layouts/wrapper", $data, false);
   }
 
-  function proses_tambah_alumni(){
+  function process_add_alumni(){
     $valid = $this->form_validation;
     $valid->set_rules(
       'nama',
@@ -159,18 +160,17 @@ class Alumni extends CI_Controller{
     $valid->set_rules(
       'ipk',
       'ipk',
-      'decimal',
-      array(  'decimal'  =>  'IPK harus berupa angka desimal. Contoh : 4.00')
+      'callback_ipk_check'
     );
 
         if ($valid->run()===false) {
-          $alumnis      = $this->Alumni_Model->listing();
-          $negaras      = $this->Negara_Model->get_negara();
-          $provinsis    = $this->Provinsi_Model->get_provinsi();
-          $list_jurusan = $this->Jurusan_Model->listing();
+          $alumnis      = $this->Alumni_Model->get_all_alumni();
+          $negaras      = $this->Negara_Model->get_all_negara();
+          $provinsis    = $this->Provinsi_Model->get_all_provinsi();
+          $jurusans = $this->Jurusan_Model->get_all_jurusan();
           $data = array('isi'          => 'admin/tambah-alumni',
                         'negaras'      =>  $negaras,
-                        'list_jurusan' =>  $list_jurusan,
+                        'jurusans' =>  $jurusans,
                         'provinsis'    =>  $provinsis,
                         'alumnis'      =>  $alumnis
                         );
@@ -212,28 +212,41 @@ class Alumni extends CI_Controller{
                   'judul_skripsi'      =>  $i->post('judul_skripsi'),
                   'ipk'                =>  $i->post('ipk')
                 );
-            $this->Alumni_Model->tambah_alumni($data);
+            $this->Alumni_Model->add_alumni($data);
             $this->session->set_flashdata('success', 'Berhasil menambah alumni.');
             redirect('admin/alumni');
         }
     }
 
-    public function fetch_provinsi(){
+    public function get_provinsi_by_negara_js(){
       if($this->input->post('id_negara'))
       {
-      echo $this->Provinsi_Model->fetch_provinsi($this->input->post('id_negara'));
+      echo $this->Provinsi_Model->get_provinsi_by_negara_js($this->input->post('id_negara'));
       }
     }
 
-    public function fetch_provinsi_edit(){
-      echo $this->Provinsi_Model->fetch_provinsi($this->input->post('id_negara'));
-    }
-
-    public function fetch_kota(){
+    public function get_kota_by_provinsi_js(){
       if($this->input->post('id_provinsi'))
       {
-      echo $this->Kota_Model->fetch_kota($this->input->post('id_provinsi'));
+      echo $this->Kota_Model->get_kota_by_provinsi_js($this->input->post('id_provinsi'));
       }
+    }
+
+    public function ipk_check($ipk)
+    {
+        if ( is_numeric($ipk) || is_float($ipk) ) {
+            return TRUE;
+        }
+        else if($ipk == "" || $ipk == null)
+        {
+          return TRUE;
+        }
+        else {
+          {
+            $this->form_validation->set_message('ipk_check', 'IPK harus angka.');
+            return FALSE;
+          }
+        }
     }
 
     public function check_user_email($email) {
@@ -258,9 +271,9 @@ class Alumni extends CI_Controller{
           return $response;
       }
 
-    public function edit_alumni($username)
+    public function update_alumni($username)
     {
-      $data_alumni = $this->Alumni_Model->find_alumni($username);
+      $data_alumni = $this->Alumni_Model->detail_alumni($username);
       $valid       = $this->form_validation;
       $valid->set_rules(
         'nama',
@@ -357,19 +370,18 @@ class Alumni extends CI_Controller{
       $valid->set_rules(
         'ipk',
         'ipk',
-        'decimal',
-        array(  'decimal'  =>  'IPK harus berupa angka desimal. Contoh : 4.00')
+        'callback_ipk_check'
       );
 
 
           if ($valid->run()===false) {
-            $alumnis      = $this->Alumni_Model->listing();
-            $negaras      = $this->Negara_Model->get_negara();
-            $provinsis    = $this->Provinsi_Model->get_provinsi();
-            $kotas        = $this->Kota_Model->get_kota($data_alumni->provinsi);
-            $jurusans     = $this->Jurusan_Model->listing();
-            $prodis       = $this->Prodi_Model->list_prodi($data_alumni->id_jurusan);
-            $data = array('isi'          => 'admin/edit-alumni',
+            $alumnis      = $this->Alumni_Model->get_all_alumni();
+            $negaras      = $this->Negara_Model->get_all_negara();
+            $provinsis    = $this->Provinsi_Model->get_provinsi_by_negara($data_alumni->negara);
+            $kotas        = $this->Kota_Model->get_kota_by_provinsi($data_alumni->provinsi);
+            $jurusans     = $this->Jurusan_Model->get_all_jurusan();
+            $prodis       = $this->Prodi_Model->get_prodi_by_jurusan($data_alumni->id_jurusan);
+            $data = array('isi'          => 'admin/update-alumni',
                           'negaras'      =>  $negaras,
                           'provinsis'    =>  $provinsis,
                           'kotas'        =>  $kotas,
@@ -416,22 +428,24 @@ class Alumni extends CI_Controller{
                   );
               $this->Alumni_Model->update_alumni($data);
               $this->session->set_flashdata('success', 'Profil alumni berhasil dirubah.');
-              redirect('admin/alumni/'.$i->post('username'));
+              redirect('admin/alumni/detail_alumni/'.$username);
           }
     }
 
     public function detail_alumni($username){
-      $data_alumni = $this->Alumni_Model->find_alumni($username);
+      $data_alumni = $this->Alumni_Model->detail_alumni($username);
+      $riwayat_pekerjaans = $this->Riwayat_Pekerjaan_Model->get_riwayat_by_alumni($username);
       $data = array('isi'     => 'admin/detail-alumni',
-                    'data_alumni'=> $data_alumni
+                    'data_alumni'=> $data_alumni,
+                    'riwayat_pekerjaans' => $riwayat_pekerjaans
                     );
       $this->load->view("layouts/wrapper", $data, false);
     }
 
-    public function hapus_alumni($username)
+    public function delete_alumni($username)
     {
       $data = array('username'  =>  $username);
-      $this->Alumni_Model->hapus_alumni($data);
+      $this->Alumni_Model->delete_alumni($data);
       $this->session->set_flashdata('success', 'Berhasil menghapus alumni');
       redirect('admin/alumni');
     }

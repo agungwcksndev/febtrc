@@ -1,9 +1,7 @@
-<!-- Content Wrapper. Contains page content -->
  <div class="content-wrapper">
-   <!-- Content Header (Page header) -->
    <section class="content-header">
      <h1>
-       Master Prodi
+       Master Progam Studi
        <small>View data</small>
      </h1>
      <ol class="breadcrumb">
@@ -12,14 +10,26 @@
        <li class="active">Data tables</li>
      </ol>
    </section>
-
-   <!-- Main content -->
    <section class="content">
+       <?php if ($this->session->flashdata('sukses')) {
+           echo "<div class='alert alert-success alert-dismissible'>";
+           echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
+           echo "<h4><i class='icon fa fa-check'></i>Success!</h4>";
+           echo $this->session->flashdata('sukses');
+           echo "</div>";
+       };
+       ?>
+       <?php if (!empty(validation_errors())): ?>
+            <div class="alert alert-danger">
+                <a class="close" data-dismiss="alert" title="close">x</a>
+                <ul><?php echo (validation_errors('<li>', '</li>')); ?></ul>
+            </div>
+        <?php endif; ?>
      <div class="row">
        <div class="col-xs-12">
          <div class="box box-info">
            <div class="box-header">
-             <h3 class="box-title">Data Prodi Fakultas Ekonomi Bisnis Universitas Brawijaya</h3>
+             <h3 class="box-title"><i class="fa fa-tag"></i>&nbsp;&nbsp;Program Studi Fakultas Ekonomi Bisnis Universitas Brawijaya</h3>
              <button type="button" class="btn btn-primary btn-flat" style="float:right;" data-toggle="modal" data-target="#modal-add-prodi"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Tambah Program Studi</button>
            </div>
            <!-- /.box-header -->
@@ -42,7 +52,7 @@
                  <td><?php echo $prodi->nama_jurusan ?></td>
                  <td><?php echo $prodi->nama_prodi ?></td>
                  <td><a class="btn btn-default" onclick="edit_prodi('<?php echo $prodi->id_prodi ?>')"<i class="fa fa-pencil"></i>&nbsp;&nbsp;Edit</a>
-                 <a href="<?php echo site_url('admin/prodi/hapus_prodi/'.$prodi->id_prodi) ?>"class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;&nbsp;Delete</a></td>
+                 <a href="<?php echo site_url('admin/prodi/delete_prodi/'.$prodi->id_prodi) ?>"class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;&nbsp;Delete</a></td>
                </tr>
                <?php $no++ ?>
                <?php endforeach; ?>
@@ -298,7 +308,7 @@
 
 <div class="modal fade" id="modal-add-prodi" role="dialog">
   <div class="modal-dialog">
-    <form class="" action="<?php echo site_url('admin/prodi/tambah_prodi') ?>" method="post">
+    <form class="" action="<?php echo site_url('admin/prodi/add_prodi') ?>" method="post">
       <div class="modal-content">
         <div class="modal-header bg-primary">
           <button type="button" class="close" data-dismiss="modal" name="button"></button>
@@ -311,9 +321,9 @@
                 <div class="form-group">
                   <label class="col-sm-3 control-label" for="">Pilih Jurusan</label>
                   <div class="col-sm-9">
-                    <select name="jurusan" id="jurusan" class="form-control" value="<?php echo set_value('jurusan') ?>">
-                      <option disabled>Pilih Jurusan</option>
-                      <?php foreach ($list_jurusan as $jurusan): ?>
+                    <select name="jurusan" id="jurusan" class="form-control" value="">
+                      <option selected disabled>Pilih Jurusan</option>
+                      <?php foreach ($jurusans as $jurusan): ?>
                         <option value="<?php echo $jurusan->id_jurusan; ?>"><?php echo $jurusan->nama_jurusan; ?></option>
                       <?php endforeach; ?>
                     </select>
@@ -358,7 +368,7 @@
                     <input type="hidden" id="id_prodi_up" name="id_prodi_up" value="">
                     <select name="nama_jurusan_up" id="nama_jurusan_up" class="form-control">
                       <option value="" disabled>Pilih Jurusan</option>
-                        <?php foreach ($list_jurusan as $jurusan): ?>
+                        <?php foreach ($jurusans as $jurusan): ?>
                           <option value="<?php echo $jurusan->id_jurusan ?>"><?php echo $jurusan->nama_jurusan ?></option>
                         <?php endforeach; ?>
                     </select>
@@ -415,7 +425,7 @@
  {
      //Ajax Load data from ajax
      $.ajax({
-         url : "<?php echo site_url('admin/prodi/getDetailProdi')?>/" + id_prodi,
+         url : "<?php echo site_url('admin/prodi/get_detail_prodi')?>/" + id_prodi,
          type: "GET",
          dataType: "JSON",
          success: function(data)

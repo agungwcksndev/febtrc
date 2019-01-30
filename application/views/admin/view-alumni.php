@@ -11,6 +11,10 @@
        <li><a href="#">Tables</a></li>
        <li class="active">Data tables</li>
      </ol>
+   </section>
+
+   <!-- Main content -->
+   <section class="content">
      <?php if ($this->session->flashdata('success')) {
          echo "<br>";
          echo "<div class='alert alert-success alert-dismissible'>";
@@ -20,16 +24,12 @@
          echo "</div>";
      };
      ?>
-   </section>
-
-   <!-- Main content -->
-   <section class="content">
      <div class="row">
        <div class="col-xs-12">
          <div class="box box-info">
            <div class="box-header">
-             <h3 class="box-title">Data Alumni Fakultas Ekonomi Bisnis Universitas Brawijaya</h3>
-               <a href="<?php echo site_url('admin/alumni/tambah_alumni') ?>" class="btn btn-primary btn-flat"  style="float:right;"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Tambah Data Alumni</a>
+             <h3 class="box-title"><i class="fa fa-users"></i>&nbsp;&nbsp;Alumni Fakultas Ekonomi Bisnis Universitas Brawijaya</h3>
+               <a href="<?php echo site_url('admin/alumni/add_alumni') ?>" class="btn btn-primary btn-flat"  style="float:right;"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Tambah Data Alumni</a>
            </div>
            <!-- /.box-header -->
            <div class="box-body">
@@ -326,7 +326,7 @@
       var url="<?php echo site_url();?>";
       var r = confirm("Apakah anda yakin menghapus data ini?");
       if (r == true) {
-          window.location = url+"/admin/alumni/hapus_alumni/"+id;
+          window.location = url+"/admin/alumni/delete_alumni/"+id;
       } else {
           return false;
       }

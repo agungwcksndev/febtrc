@@ -8,16 +8,8 @@ class Alumni_Model extends CI_Model{
     parent::__construct();
     $this->load->database();
   }
-  public function get_alumni()
-  {
-    $this->db->select('*');
-    $this->db->from('alumni');
-    $this->db->order_by('nama');
-    $query  = $this->db->get();
-    return $query->result();
-  }
 
-  public function listing()
+  public function get_all_alumni()
   {
     $this->db->select('*');
     $this->db->from('alumni');
@@ -28,12 +20,12 @@ class Alumni_Model extends CI_Model{
     return $query->result();
   }
 
-  public function tambah_alumni($data)
+  public function add_alumni($data)
   {
     $this->db->insert('alumni', $data);
   }
 
-  public function find_alumni($username){
+  public function detail_alumni($username){
     $this->db->select('*');
     $this->db->from('alumni');
     $this->db->join('jurusan', 'jurusan.id_jurusan = alumni.id_jurusan','left');
@@ -61,7 +53,7 @@ class Alumni_Model extends CI_Model{
       $this->db->update('alumni', $data);
   }
 
-  public function hapus_alumni($data)
+  public function delete_alumni($data)
   {
     $this->db->where('username',$data['username']);
     $this->db->delete('alumni', $data);

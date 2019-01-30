@@ -9,7 +9,7 @@ class Negara_Model extends CI_Model{
     $this->load->database();
   }
 
-  public function get_negara()
+  public function get_all_negara()
   {
     $this->db->select('*');
     $this->db->from('negara');

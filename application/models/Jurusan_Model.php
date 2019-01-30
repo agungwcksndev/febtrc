@@ -9,7 +9,7 @@ class Jurusan_Model extends CI_Model{
     $this->load->database();
   }
 
-  public function get_jurusan()
+  public function get_all_jurusan()
   {
     $this->db->select('*');
     $this->db->from('jurusan');
@@ -18,16 +18,7 @@ class Jurusan_Model extends CI_Model{
     return $query->result();
   }
 
-  public function listing()
-  {
-    $this->db->select('*');
-    $this->db->from('jurusan');
-    $this->db->order_by('id_jurusan', 'DESC');
-    $query  = $this->db->get();
-    return $query->result();
-  }
-
-  public function tambah_jurusan($data)
+  public function add_jurusan($data)
   {
     $this->db->insert('jurusan', $data);
   }
@@ -38,7 +29,7 @@ class Jurusan_Model extends CI_Model{
       $this->db->update('jurusan', $data);
   }
 
-  public function hapus_jurusan($data)
+  public function delete_jurusan($data)
   {
     $this->db->where('id_jurusan',$data['id_jurusan']);
     $this->db->delete('jurusan', $data);

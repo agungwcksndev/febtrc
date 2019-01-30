@@ -12,16 +12,16 @@ class Prodi extends CI_Controller{
 
   function index()
   {
-    $prodis = $this->Prodi_Model->listing();
-    $list_jurusan = $this->Jurusan_Model->get_jurusan();
+    $prodis = $this->Prodi_Model->get_all_prodi();
+    $jurusans = $this->Jurusan_Model->get_all_jurusan();
     $data = array('isi'           => 'admin/view-prodi',
-                  'prodis'       => $prodis,
-                  'list_jurusan' => $list_jurusan
+                  'prodis'        => $prodis,
+                  'jurusans'      => $jurusans
                   );
     $this->load->view("layouts/wrapper", $data, false);
   }
 
-  function tambah_prodi()
+  function add_prodi()
   {
     $valid = $this->form_validation;
 
@@ -41,8 +41,13 @@ class Prodi extends CI_Controller{
 
       if ($valid->run()===false)
       {
-          $data = array('title' => 'Data Program Studi - Tracert Alumni Fakultas Ekonomi Bisnis Universitas Brawijaya' );
-          $this->load->view('admin/prodi', $data, false);
+        $prodis = $this->Prodi_Model->get_all_prodi();
+        $jurusans = $this->Jurusan_Model->get_all_jurusan();
+        $data = array('isi'           => 'admin/view-prodi',
+                      'prodis'        => $prodis,
+                      'jurusans'      => $jurusans
+                      );
+        $this->load->view("layouts/wrapper", $data, false);
       }
       else
       {
@@ -51,14 +56,14 @@ class Prodi extends CI_Controller{
                 'id_jurusan'      =>  $i->post('jurusan'),
                 'nama_prodi'      =>  $i->post('nama_prodi')
               );
-          $this->Prodi_Model->tambah_prodi($data);
-          $this->session->set_flashdata('sukses', 'Berhasil menambah prodi.');
+          $this->Prodi_Model->add_prodi($data);
+          $this->session->set_flashdata('sukses', 'Berhasil menambah Program Studi.');
           redirect('admin/prodi');
       }
     }
 
-    public function getDetailProdi($id_prodi){
-      $data = $this->Prodi_Model->getDetailProdi($id_prodi);
+    public function get_detail_prodi($id_prodi){
+      $data = $this->Prodi_Model->get_detail_prodi($id_prodi);
       echo json_encode($data);
     }
 
@@ -84,11 +89,9 @@ class Prodi extends CI_Controller{
 
             $i  = $this->input;
             if ($valid->run()===false) {
-              $prodis = $this->Prodi_Model->listing();
-              $list_jurusan = $this->Jurusan_Model->get_jurusan();
               $data = array('isi'           => 'admin/view-prodi',
-                            'prodis'       => $prodis,
-                            'list_jurusan' => $list_jurusan
+                            'prodis'        => $prodis,
+                            'jurusans'      => $jurusans
                             );
               $this->load->view("layouts/wrapper", $data, false);
             } else {
@@ -98,16 +101,16 @@ class Prodi extends CI_Controller{
                   'id_prodi'         =>  $i->post('id_prodi_up')
                   );
                 $this->Prodi_Model->update_prodi($data);
-                $this->session->set_flashdata('notifikasi', '<center>Data Program Studi berhasil di update');
+                $this->session->set_flashdata('sukses', 'Berhasil memperbarui Program Studi');
                 redirect('admin/prodi');
               }
             }
 
-    public function hapus_prodi($id)
+    public function delete_prodi($id)
     {
       $data = array('id_prodi'  =>  $id);
-      $this->Prodi_Model->hapus_prodi($data);
-      $this->session->set_flashdata('success', '<center>Berhasil menghapus program studi.');
+      $this->Prodi_Model->delete_prodi($data);
+      $this->session->set_flashdata('sukses', 'Berhasil menghapus Program Studi.');
       redirect('admin/prodi');
     }
 

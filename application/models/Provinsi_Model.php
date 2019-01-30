@@ -10,7 +10,7 @@ class Provinsi_Model extends CI_Model{
     $this->load->model('Alumni_Model');
   }
 
-  public function get_provinsi()
+  public function get_all_provinsi()
   {
     $this->db->select('*');
     $this->db->from('provinsi');
@@ -19,7 +19,16 @@ class Provinsi_Model extends CI_Model{
     return $query->result();
   }
 
-  public function fetch_provinsi($id_negara)
+  public function get_provinsi_by_negara($id_negara)
+  {
+    $this->db->select('*');
+    $this->db->from('provinsi');
+    $this->db->where('id_negara', $id_negara);
+    $this->db->order_by('nama_provinsi', 'ASC');
+    $query  = $this->db->get();
+    return $query->result();
+}
+  public function get_provinsi_by_negara_js($id_negara)
   {
     $this->db->select('*');
     $this->db->from('provinsi');
@@ -30,29 +39,6 @@ class Provinsi_Model extends CI_Model{
     foreach($query->result() as $row)
     {
       $output .= '<option value="'.$row->id_provinsi.'">'.$row->nama_provinsi.'</option>';
-    }
-    $output .= '<option value="9999">Lain-lain</option>';
-
-    return $output;
-  }
-
-  public function fetch_provinsi_edit($id_negara,$username)
-  {
-    $this->db->select('*');
-    $this->db->from('provinsi');
-    $this->db->where('id_negara', $id_negara);
-    $this->db->order_by('nama_provinsi', 'ASC');
-    $query  = $this->db->get();
-    $alumn  = $this->Alumni_Model->find_alumni($username);
-    $output = '<option value="" disabled>Pilih Provinsi</option>';
-    foreach($query->result() as $row)
-    {
-      if ($alumn->provinsi == $row->id_provinsi) {
-        '<option value="'.$row->id_provinsi.'" selected>'.$row->nama_provinsi.'</option>';
-      }
-      else {
-        '<option value="'.$row->id_provinsi.'">'.$row->nama_provinsi.'</option>';
-      }
     }
     $output .= '<option value="9999">Lain-lain</option>';
 

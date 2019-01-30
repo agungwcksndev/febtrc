@@ -15,11 +15,19 @@
 
    <!-- Main content -->
    <section class="content">
+     <?php if ($this->session->flashdata('sukses')) {
+         echo "<div class='alert alert-success alert-dismissible'>";
+         echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
+         echo "<h4><i class='icon fa fa-check'></i>Success!</h4>";
+         echo $this->session->flashdata('sukses');
+         echo "</div>";
+     };
+     ?>
      <div class="row">
        <div class="col-xs-12">
          <div class="box box-info">
            <div class="box-header">
-             <h3 class="box-title">Data Jurusan Fakultas Ekonomi Bisnis Universitas Brawijaya</h3>
+             <h3 class="box-title"><i class="fa fa-bookmark"></i>&nbsp;&nbsp;Jurusan Fakultas Ekonomi Bisnis Universitas Brawijaya</h3>
                <button type="button" class="btn btn-primary btn-flat" style="float:right;" data-toggle="modal" data-target="#modal-add-jurusan"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Tambah Jurusan</button>
            </div>
            <!-- /.box-header -->
@@ -43,7 +51,7 @@
                    '<?php echo $jurusan->id_jurusan ?>',
                    '<?php echo $jurusan->nama_jurusan ?>'
                    )" data-toggle="modal" data-target="#modal-update-jurusan"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Edit</a>
-                 <a href="<?php echo site_url('admin/jurusan/hapus_jurusan/'.$jurusan->id_jurusan) ?>" class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;&nbsp;Hapus</a></td>
+                 <button class="btn btn-danger" onclick="del('<?php echo $jurusan->id_jurusan ?>')"><i class="fa fa-trash"></i>&nbsp;&nbsp;Hapus</button></td>
                </tr>
                <?php $no++ ?>
                <?php endforeach; ?>
@@ -273,7 +281,7 @@
 
 <div class="modal fade" id="modal-add-jurusan" role="dialog">
   <div class="modal-dialog">
-    <form class="" action="<?php echo site_url('admin/jurusan/tambah_jurusan') ?>" method="post">
+    <form class="" action="<?php echo site_url('admin/jurusan/add_jurusan') ?>" method="post">
       <div class="modal-content">
         <div class="modal-header bg-primary">
           <button type="button" class="close" data-dismiss="modal" name="button"></button>
@@ -368,6 +376,16 @@
    $("#nama_jurusan_up").val($nama_jurusan);
    console.log(nama_jurusan);
  }
+
+ function del(id) {
+      var url="<?php echo site_url();?>";
+      var r = confirm("Apakah anda yakin menghapus data jurusan ini?");
+      if (r == true) {
+          window.location = url+"/admin/jurusan/delete_jurusan/"+id;
+      } else {
+          return false;
+      }
+  }
 </script>
 </body>
 </html>

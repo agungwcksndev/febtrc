@@ -9,7 +9,7 @@ class Kota_Model extends CI_Model{
     $this->load->database();
   }
 
-  public function get_kota($id_provinsi){
+  public function get_kota_by_provinsi($id_provinsi){
     $this->db->select('*');
     $this->db->from('kota');
     $this->db->where('id_provinsi', $id_provinsi);
@@ -18,7 +18,7 @@ class Kota_Model extends CI_Model{
     return $query->result();
   }
 
-  public function fetch_kota($id_provinsi)
+  public function get_kota_by_provinsi_js($id_provinsi)
   {
     $this->db->select('*');
     $this->db->from('kota');

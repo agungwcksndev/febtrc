@@ -11,14 +11,14 @@ class Jurusan extends CI_Controller{
 
   function index()
   {
-    $jurusans = $this->Jurusan_Model->listing();
+    $jurusans = $this->Jurusan_Model->get_all_jurusan();
     $data = array('isi'     => 'admin/view-jurusan',
                   'jurusans'=> $jurusans
                   );
     $this->load->view("layouts/wrapper", $data, false);
   }
 
-  function tambah_jurusan()
+  function add_jurusan()
   {
     $valid = $this->form_validation;
     $valid->set_rules(
@@ -39,7 +39,7 @@ class Jurusan extends CI_Controller{
           $data = array(
                 'nama_jurusan'      =>  $i->post('nama_jurusan')
               );
-          $this->Jurusan_Model->tambah_jurusan($data);
+          $this->Jurusan_Model->add_jurusan($data);
           $this->session->set_flashdata('sukses', 'Berhasil menambah jurusan.');
           redirect('admin/jurusan');
       }
@@ -58,7 +58,7 @@ class Jurusan extends CI_Controller{
         if ($valid->run()===false)
         {
             $data = array('title' => 'Data Jurusan - Tracert Alumni Fakultas Ekonomi Bisnis Universitas Brawijaya' );
-            $this->load->view('admin/v_jurusan', $data, false);
+            $this->load->view('admin/view_jurusan', $data, false);
         }
         else
         {
@@ -68,16 +68,16 @@ class Jurusan extends CI_Controller{
                   'nama_jurusan'      =>  $i->post('nama_jurusan_up')
                 );
             $this->Jurusan_Model->update_jurusan($data);
-            $this->session->set_flashdata('success', 'Berhasil merubah jurusan.');
+            $this->session->set_flashdata('sukses', 'Jurusan berhasil diperbarui');
             redirect('admin/jurusan');
         }
     }
 
-    public function hapus_jurusan($id)
+    public function delete_jurusan($id)
     {
       $data = array('id_jurusan'  =>  $id);
-      $this->Jurusan_Model->hapus_jurusan($data);
-      $this->session->set_flashdata('success', '<center>Berhasil menghapus jurusan.');
+      $this->Jurusan_Model->delete_jurusan($data);
+      $this->session->set_flashdata('sukses', 'Berhasil menghapus jurusan.');
       redirect('admin/jurusan');
     }
 
