@@ -218,20 +218,6 @@ class Alumni extends CI_Controller{
         }
     }
 
-    public function get_provinsi_by_negara_js(){
-      if($this->input->post('id_negara'))
-      {
-      echo $this->Provinsi_Model->get_provinsi_by_negara_js($this->input->post('id_negara'));
-      }
-    }
-
-    public function get_kota_by_provinsi_js(){
-      if($this->input->post('id_provinsi'))
-      {
-      echo $this->Kota_Model->get_kota_by_provinsi_js($this->input->post('id_provinsi'));
-      }
-    }
-
     public function ipk_check($ipk)
     {
         if ( is_numeric($ipk) || is_float($ipk) ) {

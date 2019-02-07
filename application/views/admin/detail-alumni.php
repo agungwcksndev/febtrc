@@ -74,7 +74,10 @@
                 <div class="form-group">
                   <label for="tanggal_lahir" class="col-sm-4 col-form-label text-right">Tanggal Lahir</label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->tanggal_lahir ?></p>
+                    <?php
+                    $tanggal_lahir =  date_create($data_alumni->tanggal_lahir);
+                     ?>
+                    <p class="control-label-plaintext"><?php echo date_format($tanggal_lahir,"d F Y") ?></p>
                   </div>
                 </div>
                 <div class="form-group">
@@ -172,7 +175,7 @@
               </div>
                   <div class="box-body">
                     <div class="box-body box-profile">
-                      <img class="profile-user-img img-responsive img-circle" src="" alt="User profile picture">
+                      <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url('img/alumni_pic/'.$data_alumni->foto) ?>" alt="User profile picture">
                       <h3 class="profile-username text-center"></h3>
                       <div class="col-md-12 text-center">
                         <a href="<?php echo site_url('admin/alumni/update_alumni/'.$data_alumni->username)?>" class="btn bg-navy margin" name="button"><i class="fa fa-pencil"></i>&nbsp;&nbsp;&nbsp;Edit Profil</a>
@@ -261,7 +264,7 @@
                                 <td><?php echo $riwayat_pekerjaan->berhenti_kerja ?></td>
                                 <td><?php echo $riwayat_pekerjaan->posisi ?></td>
                                 <p><td class="text-center"><a style="cursor:pointer;" class="btn btn-default" onclick="update_riwayat_pekerjaan('<?php echo $riwayat_pekerjaan->id_riwayat_pekerjaan ?>')" data-toggle="" data-target="#"><i class="fa fa-pencil"></i></a></p>
-                                <p><button onclick="return del('<?php echo $riwayat_pekerjaan->id_riwayat_pekerjaan ?>')" class="btn btn-danger"><i class="fa fa-trash"></i></button></td></p>
+                                <p><button type="button" onclick="del('<?php echo $riwayat_pekerjaan->id_riwayat_pekerjaan ?>')" class="btn btn-danger"><i class="fa fa-trash"></i></button></p></td>
                               </tr>
                               <?php endforeach; ?>
                               </tbody>
@@ -550,7 +553,7 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-default" data-dismiss="modal" name="button">Cancel</button>
-          <button type="submit" class="btn btn-primary" name="button">Update Pekerjaan</button>
+          <button type="submit" class="btn btn-primary" name="button">Tambah Riwayat Pekerjaan</button>
         </div>
       </div>
     </form>
@@ -620,7 +623,7 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-default" data-dismiss="modal" name="button">Cancel</button>
-          <button type="submit" class="btn btn-primary" name="button">Update Pekerjaan</button>
+          <button type="submit" class="btn btn-primary" name="button">Update Riwayat Pekerjaan</button>
         </div>
       </div>
     </form>
@@ -649,9 +652,9 @@
 function del(id) {
      var url="<?php echo site_url();?>";
      var r = confirm("Apakah anda yakin menghapus data ini?");
-     console.log(r);
+     var username = document.getElementById('username_add').value;
      if (r == true) {
-         window.location = url+"/admin/riwayat_pekerjaan/delete_riwayat_pekerjaan/"+id;
+         window.location = url+"/admin/riwayat_pekerjaan/delete_riwayat_pekerjaan/"+id+"/"+username;
      } else {
          return false;
      }

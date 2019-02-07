@@ -569,7 +569,7 @@ $(document).ready(function(){
       if(id_jurusan != '')
       {
         $.ajax({
-          url:"<?php echo site_url();?>/Login/fetch_prodi",
+          url:"<?php echo site_url();?>/admin/prodi/get_prodi_by_jurusan_js",
           method: "POST",
           data:{id_jurusan:id_jurusan},
           success:function(data)

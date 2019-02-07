@@ -114,4 +114,11 @@ class Prodi extends CI_Controller{
       redirect('admin/prodi');
     }
 
+    public function get_prodi_by_jurusan_js(){
+      if($this->input->post('id_jurusan'))
+      {
+      echo $this->Prodi_Model->get_prodi_by_jurusan_js($this->input->post('id_jurusan'));
+      }
+    }
+
 }

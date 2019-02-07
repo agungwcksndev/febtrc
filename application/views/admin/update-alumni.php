@@ -292,7 +292,7 @@
           </div>
           <!-- /.box-body -->
           <div class="box-footer btn-toolbar">
-            <a href="<?php echo site_url('admin/alumni') ?>" class="btn btn-default pull-right">Cancel</a>
+            <a href="<?php echo site_url('admin/alumni/detail_alumni/'.$data_alumni->username) ?>" class="btn btn-default pull-right">Cancel</a>
             <button type="submit"  class="btn btn-primary pull-right" name="submit" value="Simpan">Simpan</button>
           </div>
           <!-- /.box-footer -->
@@ -541,7 +541,7 @@ $(document).ready(function(){
     if(id_negara != '')
     {
       $.ajax({
-        url:"<?php echo site_url();?>/admin/alumni/get_provinsi_by_negara_js",
+        url:"<?php echo site_url();?>/provinsi/get_provinsi_by_negara_js",
         method: "POST",
         data:{id_negara:id_negara},
         success:function(data)
@@ -558,7 +558,7 @@ $(document).ready(function(){
     if(id_provinsi != '')
     {
       $.ajax({
-        url:"<?php echo site_url();?>/admin/alumni/get_kota_by_provinsi_js",
+        url:"<?php echo site_url();?>/kota/get_kota_by_provinsi_js",
         method: "POST",
         data:{id_provinsi:id_provinsi},
         success:function(data)
@@ -578,7 +578,7 @@ $(document).ready(function(){
       if(id_jurusan != '')
       {
         $.ajax({
-          url:"<?php echo site_url();?>/admin/alumni/get_prodi_by_jurusan_js",
+          url:"<?php echo site_url();?>/admin/prodi/get_prodi_by_jurusan_js",
           method: "POST",
           data:{id_jurusan:id_jurusan},
           success:function(data)

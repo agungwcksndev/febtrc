@@ -13,8 +13,8 @@ class Login extends CI_Controller{
 
   function index()
   {
-    $list_jurusan = $this->Jurusan_Model->get_jurusan();
-    $list_prodi   = $this->Prodi_Model->get_prodi();
+    $list_jurusan = $this->Jurusan_Model->get_all_jurusan();
+    $list_prodi   = $this->Prodi_Model->get_all_prodi();
 
     $valid = $this->form_validation;
     $valid->set_rules(
@@ -72,7 +72,7 @@ class Login extends CI_Controller{
                 if($check_login_alumni['detail_alumni']->active == 1){
                   $this->session->set_userdata('username', $username);
                   $this->session->set_userdata('nama', $check_login_alumni['detail_alumni']->nama);
-                    redirect(site_url('alumni/dashboard'), 'refresh');
+                    redirect(site_url('alumni/profile'), 'refresh');
                 }
                 else{
                   $this->session->set_flashdata('notifikasi', '<center>Akun belum aktif.<br> Silahkan verifikasi email terlebih dahulu</center>');
@@ -89,7 +89,7 @@ class Login extends CI_Controller{
   {
     if($this->input->post('id_jurusan'))
     {
-    echo $this->Prodi_Model->fetch_prodi($this->input->post('id_jurusan'));
+    echo $this->Prodi_Model->get_prodi_by_jurusan_js($this->input->post('id_jurusan'));
     }
   }
 }

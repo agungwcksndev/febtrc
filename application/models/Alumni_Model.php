@@ -36,7 +36,6 @@ class Alumni_Model extends CI_Model{
     $this->db->where('username', $username);
     $query  = $this->db->get();
     return $query->row();
-
   }
 
   public function check_unique_user_email($username = '', $email) {

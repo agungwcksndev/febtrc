@@ -29,7 +29,7 @@
          <div class="box box-info">
            <div class="box-header">
              <h3 class="box-title"><i class="fa fa-users"></i>&nbsp;&nbsp;Alumni Fakultas Ekonomi Bisnis Universitas Brawijaya</h3>
-               <a href="<?php echo site_url('admin/alumni/add_alumni') ?>" class="btn btn-primary btn-flat"  style="float:right;"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Tambah Data Alumni</a>
+               <a href="<?php echo site_url('admin/alumni/add_alumni') ?>" class="btn btn-info"  style="float:right;"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Tambah Data Alumni</a>
            </div>
            <!-- /.box-header -->
            <div class="box-body">
