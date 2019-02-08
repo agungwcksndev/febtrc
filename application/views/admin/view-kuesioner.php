@@ -3,7 +3,7 @@
    <!-- Content Header (Page header) -->
    <section class="content-header">
      <h1>
-       Master Kuisioner
+       Master Kuesioner
        <small>View data</small>
      </h1>
      <ol class="breadcrumb">
@@ -19,8 +19,8 @@
        <div class="col-xs-12">
          <div class="box box-info">
            <div class="box-header">
-             <h3 class="box-title">Data Kuisioner Tracert Alumni Fakultas Ekonomi Bisnis Universitas Brawijaya</h3>
-               <button type="button" class="btn btn-primary btn-flat" style="float:right;" data-toggle="modal" data-target="#modal-add-paket"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Tambah Paket Soal</button>
+             <h3 class="box-title">Data Kuesioner Tracert Alumni Fakultas Ekonomi Bisnis Universitas Brawijaya</h3>
+               <button type="button" class="btn btn-primary btn-flat" style="float:right;" data-toggle="modal" data-target="#modal-add-paket"><i class="fa fa-plus-circle"></i>&ensp;&nbsp;Tambah Paket Soal</button>
            </div>
            <!-- /.box-header -->
            <div class="box-body">
@@ -42,8 +42,8 @@
                  <td><?php echo $paket_soal->jenjang_soal ?></td>
                  <td><?php echo $paket_soal->nama_paket ?></td>
                  <td class="text-center">
-                   <a style="cursor:pointer;" class="btn btn-primary" onclick="get_daftar_soal('<?php echo $paket_soal->id_paket ?>')"><i class="fa fa-book"></i>&nbsp;&nbsp;Daftar Soal</a>
-                   <a style="cursor:pointer;" class="btn btn-default" onclick="edit_paket(<?php echo $paket_soal->id_paket ?>)"<i class="fa fa-pencil" ></i>&nbsp;&nbsp;Edit</a>
+                   <a style="cursor:pointer;" class="btn btn-primary" href="<?php echo site_url('/admin/daftar_soal/lihat_daftar_soal/'.$paket_soal->id_paket) ?>"><i class="fa fa-book"></i>&nbsp;&nbsp;Daftar Soal</a>
+                   <a style="cursor:pointer;" class="btn btn-default" onclick="edit_paket(<?php echo $paket_soal->id_paket ?>)"><i class="fa fa-pencil" ></i>&nbsp;&nbsp;Edit</a>
                    <button onclick="del('<?php echo $paket_soal->id_paket ?>')" class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;&nbsp;Hapus</button>
                  </td>
                </tr>
@@ -276,7 +276,7 @@
 
 <div class="modal fade" id="modal-add-paket" role="dialog">
   <div class="modal-dialog">
-    <form class="" action="<?php echo site_url('admin/quisioner/tambah_paket_soal') ?>" method="post">
+    <form class="" action="<?php echo site_url('admin/kuesioner/tambah_paket_soal') ?>" method="post">
       <div class="modal-content">
         <div class="modal-header bg-primary">
           <button type="button" class="close" data-dismiss="modal" name="button"></button>
@@ -290,7 +290,7 @@
                   <label class="col-sm-3 control-label" for="">Pilih Jenjang Soal</label>
                   <div class="col-sm-9">
                     <select name="jenjang_soal" id="jenjang_soal" class="form-control">
-                      <option selected disabled>Pilih jenjang Soal...</option>
+                      <option selected disabled>Pilih jenjang soal</option>
                       <option value="D3">D3</option>
                       <option value="S1">S1</option>
                       <option value="S2">S2</option>
@@ -319,7 +319,7 @@
 
 <div class="modal fade" id="modal-update-paket" role="dialog">
   <div class="modal-dialog">
-    <form class="" action="<?php echo site_url('admin/quisioner/update_paket_soal') ?>" method="post">
+    <form class="" action="<?php echo site_url('admin/kuesioner/update_paket_soal') ?>" method="post">
       <div class="modal-content">
         <div class="modal-header bg-primary">
           <button type="button" class="close" data-dismiss="modal" name="button"></button>
@@ -383,23 +383,20 @@
  $(function () {
    $('#example1').DataTable({
      "columnDefs": [
-  { "width": "5%", "targets": 0 },
-  { "width": "10%", "targets": 1 },
-  { "width": "25%", "targets": 3 }
-]
+       { "width": "5%", "targets": 0 },
+       { "width": "10%", "targets": 1 },
+       { "width": "25%", "targets": 3 }
+     ],
+     "scrollY": true,
+     "scrollX": true
    })
  })
-
- function get_daftar_soal(id) {
-      var url="<?php echo site_url();?>";
-      window.location = url+"/admin/daftar_soal/lihat_daftar_soal/"+id;
-  }
 
  function edit_paket(id_paket)
  {
      //Ajax Load data from ajax
      $.ajax({
-         url : "<?php echo site_url('admin/quisioner/getDetailPaket')?>/" + id_paket,
+         url : "<?php echo site_url('admin/kuesioner/getDetailPaket')?>/" + id_paket,
          type: "GET",
          dataType: "JSON",
          success: function(data)
@@ -421,7 +418,7 @@
       var url="<?php echo site_url();?>";
       var r = confirm("Apakah anda yakin menghapus data ini?");
       if (r == true) {
-          window.location = url+"/admin/quisioner/hapus_paket_soal/"+id;
+          window.location = url+"/admin/kuesioner/hapus_paket_soal/"+id;
       } else {
           return false;
       }
