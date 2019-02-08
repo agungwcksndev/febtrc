@@ -38,176 +38,6 @@
 </head>
 <body>
 
-<!-- Fixed Sidebar Left -->
-
-<div class="fixed-sidebar fixed-sidebar-responsive">
-
-	<div class="fixed-sidebar-left sidebar--small" id="sidebar-left-responsive">
-		<a href="#" class="logo js-sidebar-open">
-			<img src="<?php echo base_url('resource/img/') ?>logo.png" alt="Olympus">
-		</a>
-
-	</div>
-
-	<div class="fixed-sidebar-left sidebar--large" id="sidebar-left-1-responsive">
-		<a href="#" class="logo">
-			<img src="<?php echo base_url('resource/img/') ?>logo.png" alt="Olympus">
-			<h6 class="logo-title">olympus</h6>
-		</a>
-
-		<div class="mCustomScrollbar" data-mcs-theme="dark">
-
-			<div class="control-block">
-				<div class="author-page author vcard inline-items">
-					<div class="author-thumb">
-						<img alt="author" src="<?php echo base_url('resource/img/') ?>author-page.jpg" class="avatar">
-						<span class="icon-status online"></span>
-					</div>
-					<a href="02-ProfilePage.html" class="author-name fn">
-						<div class="author-title">
-							James Spiegel <svg class="olymp-dropdown-arrow-icon"><use xlink:href="<?php echo base_url('resource/icons/') ?>icons.svg#olymp-dropdown-arrow-icon"></use></svg>
-						</div>
-						<span class="author-subtitle">SPACE COWBOY</span>
-					</a>
-				</div>
-			</div>
-
-			<div class="ui-block-title ui-block-title-small">
-				<h6 class="title">MAIN SECTIONS</h6>
-			</div>
-
-			<ul class="left-menu">
-				<li>
-					<a href="#" class="js-sidebar-open">
-						<svg class="olymp-close-icon left-menu-icon"><use xlink:href="<?php echo base_url('resource/icons/') ?>icons.svg#olymp-close-icon"></use></svg>
-						<span class="left-menu-title">Collapse Menu</span>
-					</a>
-				</li>
-				<li>
-					<a href="mobile-index.html">
-						<svg class="olymp-newsfeed-icon left-menu-icon" data-toggle="tooltip" data-placement="right"   data-original-title="NEWSFEED"><use xlink:href="<?php echo base_url('resource/icons/') ?>icons.svg#olymp-newsfeed-icon"></use></svg>
-						<span class="left-menu-title">Newsfeed</span>
-					</a>
-				</li>
-				<li>
-					<a href="Mobile-28-YourAccount-PersonalInformation.html">
-						<svg class="olymp-star-icon left-menu-icon"  data-toggle="tooltip" data-placement="right"   data-original-title="FAV PAGE"><use xlink:href="<?php echo base_url('resource/icons/') ?>icons.svg#olymp-star-icon"></use></svg>
-						<span class="left-menu-title">Fav Pages Feed</span>
-					</a>
-				</li>
-				<li>
-					<a href="mobile-29-YourAccount-AccountSettings.html">
-						<svg class="olymp-happy-faces-icon left-menu-icon"  data-toggle="tooltip" data-placement="right"   data-original-title="FRIEND GROUPS"><use xlink:href="<?php echo base_url('resource/icons/') ?>icons.svg#olymp-happy-faces-icon"></use></svg>
-						<span class="left-menu-title">Friend Groups</span>
-					</a>
-				</li>
-				<li>
-					<a href="Mobile-30-YourAccount-ChangePassword.html">
-						<svg class="olymp-headphones-icon left-menu-icon"  data-toggle="tooltip" data-placement="right"   data-original-title="MUSIC&PLAYLISTS"><use xlink:href="<?php echo base_url('resource/icons/') ?>icons.svg#olymp-headphones-icon"></use></svg>
-						<span class="left-menu-title">Music & Playlists</span>
-					</a>
-				</li>
-				<li>
-					<a href="Mobile-31-YourAccount-HobbiesAndInterests.html">
-						<svg class="olymp-weather-icon left-menu-icon"  data-toggle="tooltip" data-placement="right"   data-original-title="WEATHER APP"><use xlink:href="<?php echo base_url('resource/icons/') ?>icons.svg#olymp-weather-icon"></use></svg>
-						<span class="left-menu-title">Weather App</span>
-					</a>
-				</li>
-				<li>
-					<a href="Mobile-32-YourAccount-EducationAndEmployement.html">
-						<svg class="olymp-calendar-icon left-menu-icon"  data-toggle="tooltip" data-placement="right"   data-original-title="CALENDAR AND EVENTS"><use xlink:href="<?php echo base_url('resource/icons/') ?>icons.svg#olymp-calendar-icon"></use></svg>
-						<span class="left-menu-title">Calendar and Events</span>
-					</a>
-				</li>
-				<li>
-					<a href="Mobile-33-YourAccount-Notifications.html">
-						<svg class="olymp-badge-icon left-menu-icon"  data-toggle="tooltip" data-placement="right"   data-original-title="Community Badges"><use xlink:href="<?php echo base_url('resource/icons/') ?>icons.svg#olymp-badge-icon"></use></svg>
-						<span class="left-menu-title">Community Badges</span>
-					</a>
-				</li>
-				<li>
-					<a href="Mobile-34-YourAccount-ChatMessages.html">
-						<svg class="olymp-cupcake-icon left-menu-icon"  data-toggle="tooltip" data-placement="right"   data-original-title="Friends Birthdays"><use xlink:href="<?php echo base_url('resource/icons/') ?>icons.svg#olymp-cupcake-icon"></use></svg>
-						<span class="left-menu-title">Friends Birthdays</span>
-					</a>
-				</li>
-				<li>
-					<a href="Mobile-35-YourAccount-FriendsRequests.html">
-						<svg class="olymp-stats-icon left-menu-icon"  data-toggle="tooltip" data-placement="right"   data-original-title="Account Stats"><use xlink:href="<?php echo base_url('resource/icons/') ?>icons.svg#olymp-stats-icon"></use></svg>
-						<span class="left-menu-title">Account Stats</span>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<svg class="olymp-manage-widgets-icon left-menu-icon"  data-toggle="tooltip" data-placement="right"   data-original-title="Manage Widgets"><use xlink:href="<?php echo base_url('resource/icons/') ?>icons.svg#olymp-manage-widgets-icon"></use></svg>
-						<span class="left-menu-title">Manage Widgets</span>
-					</a>
-				</li>
-			</ul>
-
-			<div class="ui-block-title ui-block-title-small">
-				<h6 class="title">YOUR ACCOUNT</h6>
-			</div>
-
-			<ul class="account-settings">
-				<li>
-					<a href="#">
-
-						<svg class="olymp-menu-icon"><use xlink:href="<?php echo base_url('resource/icons/') ?>icons.svg#olymp-menu-icon"></use></svg>
-
-						<span>Profile Settings</span>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<svg class="olymp-star-icon left-menu-icon"  data-toggle="tooltip" data-placement="right"   data-original-title="FAV PAGE"><use xlink:href="<?php echo base_url('resource/icons/') ?>icons.svg#olymp-star-icon"></use></svg>
-
-						<span>Create Fav Page</span>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<svg class="olymp-logout-icon"><use xlink:href="<?php echo base_url('resource/icons/') ?>icons.svg#olymp-logout-icon"></use></svg>
-
-						<span>Log Out</span>
-					</a>
-				</li>
-			</ul>
-
-			<div class="ui-block-title ui-block-title-small">
-				<h6 class="title">About Olympus</h6>
-			</div>
-
-			<ul class="about-olympus">
-				<li>
-					<a href="#">
-						<span>Terms and Conditions</span>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<span>FAQs</span>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<span>Careers</span>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<span>Contact</span>
-					</a>
-				</li>
-			</ul>
-
-		</div>
-	</div>
-</div>
-
-<!-- ... end Fixed Sidebar Left -->
-
-
 <!-- Fixed Sidebar Right -->
 
 <div class="fixed-sidebar right">
@@ -1074,7 +904,7 @@
 
 			<div class="author-page author vcard inline-items more">
 				<div class="author-thumb">
-					<img alt="author" src="<?php echo base_url('resource/img/') ?>author-page.jpg" class="avatar">
+					<img alt="author" src="<?php echo base_url('img/alumni_pic/'.$this->session->userdata('foto')) ?>" class="avatar" style="max-width:50px;height:50px;">
 					<span class="icon-status online"></span>
 					<div class="more-dropdown more-with-triangle">
 						<div class="mCustomScrollbar" data-mcs-theme="dark">
@@ -1084,7 +914,7 @@
 
 							<ul class="account-settings">
 								<li>
-									<a href="29-YourAccount-AccountSettings.html">
+									<a href="<?php echo site_url('alumni/settings') ?>">
 
 										<svg class="olymp-menu-icon"><use xlink:href="<?php echo base_url('resource/icons/') ?>icons.svg#olymp-menu-icon"></use></svg>
 
@@ -1092,65 +922,13 @@
 									</a>
 								</li>
 								<li>
-									<a href="36-FavPage-SettingsAndCreatePopup.html">
-										<svg class="olymp-star-icon left-menu-icon"  data-toggle="tooltip" data-placement="right"   data-original-title="FAV PAGE"><use xlink:href="<?php echo base_url('resource/icons/') ?>icons.svg#olymp-star-icon"></use></svg>
-
-										<span>Create Fav Page</span>
-									</a>
-								</li>
-								<li>
-									<a href="#">
+									<a href="<?php echo site_url('login/logout') ?>">
 										<svg class="olymp-logout-icon"><use xlink:href="<?php echo base_url('resource/icons/') ?>icons.svg#olymp-logout-icon"></use></svg>
 
 										<span>Log Out</span>
 									</a>
 								</li>
 							</ul>
-
-							<div class="ui-block-title ui-block-title-small">
-								<h6 class="title">Chat Settings</h6>
-							</div>
-
-							<ul class="chat-settings">
-								<li>
-									<a href="#">
-										<span class="icon-status online"></span>
-										<span>Online</span>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<span class="icon-status away"></span>
-										<span>Away</span>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<span class="icon-status disconected"></span>
-										<span>Disconnected</span>
-									</a>
-								</li>
-
-								<li>
-									<a href="#">
-										<span class="icon-status status-invisible"></span>
-										<span>Invisible</span>
-									</a>
-								</li>
-							</ul>
-
-							<div class="ui-block-title ui-block-title-small">
-								<h6 class="title">Custom Status</h6>
-							</div>
-
-							<form class="form-group with-button custom-status">
-								<input class="form-control" placeholder="" type="text" value="Space Cowboy">
-
-								<button class="bg-purple">
-									<svg class="olymp-check-icon"><use xlink:href="<?php echo base_url('resource/icons/') ?>icons.svg#olymp-check-icon"></use></svg>
-								</button>
-							</form>
-
 							<div class="ui-block-title ui-block-title-small">
 								<h6 class="title">About Olympus</h6>
 							</div>
@@ -1183,9 +961,9 @@
 				</div>
 				<a href="02-ProfilePage.html" class="author-name fn">
 					<div class="author-title">
-						James Spiegel <svg class="olymp-dropdown-arrow-icon"><use xlink:href="<?php echo base_url('resource/icons/') ?>icons.svg#olymp-dropdown-arrow-icon"></use></svg>
+						<?php echo $this->session->userdata('nama'); ?> <svg class="olymp-dropdown-arrow-icon"><use xlink:href="<?php echo base_url('resource/icons/') ?>icons.svg#olymp-dropdown-arrow-icon"></use></svg>
 					</div>
-					<span class="author-subtitle">SPACE COWBOY</span>
+					<span class="author-subtitle"><?php echo $this->session->userdata('prodi'); ?></span>
 				</a>
 			</div>
 

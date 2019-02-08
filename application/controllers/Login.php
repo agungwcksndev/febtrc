@@ -50,6 +50,8 @@ class Login extends CI_Controller{
               if ($check_login_admin['detail_admin']->active == 1) {
                   $this->session->set_userdata('username', $username);
                   $this->session->set_userdata('nama', $check_login_admin['detail_admin']->nama);
+                  $this->session->set_userdata('foto', $check_login_admin['detail_admin']->foto);
+                  $this->session->set_userdata('akses_level', 'admin');
                     redirect(site_url('admin/dashboard'), 'refresh');
                   }
                   else{
@@ -61,6 +63,8 @@ class Login extends CI_Controller{
                 if($check_login_operator['detail_operator']->active == 1){
                   $this->session->set_userdata('username', $username);
                   $this->session->set_userdata('nama', $check_login_operator['detail_operator']->nama);
+                  $this->session->set_userdata('foto', $check_login_operator['detail_operator']->foto);
+                  $this->session->set_userdata('akses_level', 'operator');
                     redirect(site_url('operator/dashboard'), 'refresh');
                 }
                 else{
@@ -72,7 +76,10 @@ class Login extends CI_Controller{
                 if($check_login_alumni['detail_alumni']->active == 1){
                   $this->session->set_userdata('username', $username);
                   $this->session->set_userdata('nama', $check_login_alumni['detail_alumni']->nama);
-                    redirect(site_url('alumni/profile'), 'refresh');
+                  $this->session->set_userdata('foto', $check_login_alumni['detail_alumni']->foto);
+                  $this->session->set_userdata('prodi', $check_login_alumni['detail_alumni']->nama_prodi);
+                  $this->session->set_userdata('akses_level', 'alumni');
+                    redirect(site_url('alumni/profile/'.$username), 'refresh');
                 }
                 else{
                   $this->session->set_flashdata('notifikasi', '<center>Akun belum aktif.<br> Silahkan verifikasi email terlebih dahulu</center>');
@@ -85,11 +92,19 @@ class Login extends CI_Controller{
               }
             }
 }
-  function fetch_prodi()
+  public function fetch_prodi()
   {
     if($this->input->post('id_jurusan'))
     {
     echo $this->Prodi_Model->get_prodi_by_jurusan_js($this->input->post('id_jurusan'));
     }
   }
+
+  public function logout(){
+  $this->session->unset_userdata('username');
+  $this->session->unset_userdata('akses_level');
+  $this->session->unset_userdata('nama');
+  $this->session->set_flashdata('notifikasi', '<center>Anda berhasil logout</center>');
+  redirect(site_url('login'),'refresh');
+}
 }

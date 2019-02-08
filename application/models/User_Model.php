@@ -42,6 +42,8 @@ class User_Model extends CI_Model{
   public function login_alumni($username, $password){
     $this->db->select('*');
     $this->db->from('alumni');
+    $this->db->join('jurusan', 'jurusan.id_jurusan = alumni.id_jurusan');
+    $this->db->join('prodi', 'prodi.id_prodi = alumni.id_prodi');
     $this->db->where(array( 'username'  =>  $username,
                             'password'  =>  $password));
     $this->db->order_by('username','DESC');
