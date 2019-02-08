@@ -32,7 +32,7 @@
 										<a href="<?php echo site_url('alumni/settings/change_password') ?>">Ganti Password</a>
 									</li>
 									<li>
-										<a href="<?php echo site_url('alumni/riwayat_pekerjaans') ?>">Riwayat Pekerjaan</a>
+										<a href="<?php echo site_url('alumni/settings/riwayat_pekerjaan') ?>">Riwayat Pekerjaan</a>
 									</li>
 								</ul>
 							</div>

@@ -131,18 +131,6 @@
 							<span class="text"><?php echo $user->email; ?></span>
 						</li>
 						<li>
-							<span class="title">NIM:</span>
-							<span class="text">
-							<?php
-							if ($user->nim != null || $user->nim != '' ) {
-								echo $user->nim;
-							}else {
-								echo "-";
-							}
-							?>
-							</span>
-						</li>
-						<li>
 							<span class="title">Jenis Kelamin:</span>
 							<span class="text"><?php echo $user->jenis_kelamin ?></span>
 						</li>
@@ -164,18 +152,6 @@
 								<?php
 								if ($user->tempat_lahir != null || $user->tempat_lahir != '' ) {
 									echo $user->tempat_lahir;
-								}else {
-									echo "-";
-								}
-								?>
-							</span>
-						</li>
-						<li>
-							<span class="title">Tanggal Lahir:</span>
-							<span class="text">
-								<?php
-								if ($user->tanggal_lahir != null || $user->tanggal_lahir != '' ) {
-									echo $user->tanggal_lahir;
 								}else {
 									echo "-";
 								}
@@ -272,18 +248,6 @@
 								<?php
 								if ($user->kota != null || $user->kota != '' ) {
 									echo $user->kota;
-								}else {
-									echo "-";
-								}
-								?>
-							</span>
-						</li>
-						<li>
-							<span class="title">Nomor Telepon:</span>
-							<span class="text">
-								<?php
-								if ($user->nomor_telepon != null || $user->nomor_telepon != '' ) {
-									echo $user->nomor_telepon;
 								}else {
 									echo "-";
 								}

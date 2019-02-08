@@ -51,12 +51,12 @@
                  foreach ($alumnis as $alumni): ?>
                <tr>
                  <td class="text-center"><?php echo $no ?></td>
-                 <td><?php echo $alumni->nama ?></td>
+                 <td> <a href="<?php echo site_url('alumni/profile/'.$alumni->username) ?>"><?php echo $alumni->nama ?></a></td>
                  <td class="text-center"><?php echo $alumni->jenjang ?></td>
                  <td><?php echo $alumni->nama_jurusan ?></td>
                  <td><?php echo $alumni->nama_prodi ?></td>
                  <td class="text-center"><?php echo $alumni->angkatan ?></td>
-                 <td class="text-center"><a style="cursor:pointer;" class="btn btn-default" onclick="detail('<?php echo $alumni->username ?>')" data-toggle="" data-target="#"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Detail</a>
+                 <td class="text-center"> <button type="button" name="button" class="btn btn-success"> <i class="fa fa-whatsapp"></i> Broadcast Questioner</button>&nbsp;<a style="cursor:pointer;" class="btn btn-default" onclick="detail('<?php echo $alumni->username ?>')" data-toggle="" data-target="#"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Detail</a>
                  <button onclick="del('<?php echo $alumni->username ?>')" class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;&nbsp;Hapus</button></td>
                </tr>
                <?php $no++ ?>
@@ -310,7 +310,7 @@
    $('#example1').DataTable({
      "columnDefs": [
        { "width": "5%", "targets": 0 },
-       { "width": "20%", "targets": 6 }
+       { "width": "33%", "targets": 6 }
     ]
    })
  })

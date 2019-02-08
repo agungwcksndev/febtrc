@@ -18,6 +18,16 @@ class Riwayat_Pekerjaan_Model extends CI_Model{
     return $query->result();
   }
 
+  public function get_riwayat_by_alumni_latest($username){
+    $this->db->select('*');
+    $this->db->from('riwayat_pekerjaan');
+    $this->db->where('username', $username);
+    $this->db->order_by('id_riwayat_pekerjaan', 'DESC');
+    $this->db->limit(1);
+    $query  = $this->db->get();
+    return $query->result();
+  }
+
   public function get_riwayat_by_id($id_riwayat_pekerjaan){
     $this->db->select('*');
     $this->db->from('riwayat_pekerjaan');
@@ -25,6 +35,7 @@ class Riwayat_Pekerjaan_Model extends CI_Model{
     $query = $this->db->get();
     return $query->row();
   }
+
 
   public function add_riwayat_pekerjaan($data)
   {

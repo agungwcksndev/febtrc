@@ -252,6 +252,7 @@
                                 <th>Tanggal Masuk</th>
                                 <th>Tanggal Keluar</th>
                                 <th>Posisi</th>
+                                <th>Pendapatan / Bulan</th>
                                 <th class="text-center">Aksi</th>
                               </tr>
                               </thead>
@@ -263,6 +264,7 @@
                                 <td><?php echo $riwayat_pekerjaan->mulai_kerja ?></td>
                                 <td><?php echo $riwayat_pekerjaan->berhenti_kerja ?></td>
                                 <td><?php echo $riwayat_pekerjaan->posisi ?></td>
+                                <td><?php echo $riwayat_pekerjaan->pendapatan_per_bulan ?></td>
                                 <p><td class="text-center"><a style="cursor:pointer;" class="btn btn-default" onclick="update_riwayat_pekerjaan('<?php echo $riwayat_pekerjaan->id_riwayat_pekerjaan ?>')" data-toggle="" data-target="#"><i class="fa fa-pencil"></i></a></p>
                                 <p><button type="button" onclick="del('<?php echo $riwayat_pekerjaan->id_riwayat_pekerjaan ?>')" class="btn btn-danger"><i class="fa fa-trash"></i></button></p></td>
                               </tr>

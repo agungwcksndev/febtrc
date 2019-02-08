@@ -10,9 +10,21 @@ class Profile extends CI_Controller{
     $this->load->model('Riwayat_Pekerjaan_Model');
   }
 
-  function index()
+  function _remap($method,$args)
   {
-    $username = $this->session->userdata('username');
+
+       if (method_exists($this, $method))
+       {
+           $this->$method($args);
+       }
+      else
+       {
+           $this->index($method,$args);
+      }
+ }
+
+  function index($username)
+  {
     $user = $this->Alumni_Model->detail_alumni($username);
     $pekerjaans = $this->Riwayat_Pekerjaan_Model->get_riwayat_by_alumni($username);
     $data = array('isi'     => 'alumni/profile',
