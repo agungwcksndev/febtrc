@@ -23,7 +23,7 @@ class Daftar_Soal extends CI_Controller{
     $this->load->view("layouts/wrapper", $data, false);
   }
 
-  function tambah_soal()
+  function add_soal()
   {
     $valid = $this->form_validation;
     $valid->set_rules(
@@ -60,7 +60,7 @@ class Daftar_Soal extends CI_Controller{
                 'soal'      =>  $i->post('soal'),
                 'tipe_soal' =>  $i->post('tipe_soal')
               );
-          $this->DaftarSoal_Model->tambah_soal($data);
+          $this->DaftarSoal_Model->add_soal($data);
           $this->session->set_flashdata('sukses', 'Berhasil Menambah Soal Quisioner.');
           redirect('admin/daftar_soal');
       }
@@ -125,7 +125,7 @@ class Daftar_Soal extends CI_Controller{
       $daftar_soal_paket = $this->DaftarSoal_Model->find_daftar_soal($id_paket);
       $list_paket = $this->Quisioner_Model->get_paket_soal();
       $list_tipe = $this->DaftarSoal_Model->get_tipe();
-      $data = array('isi'     => 'admin/daftar-soal-paket',
+      $data = array('isi'     => 'admin/daftar-soal',
                     'daftar_soal_paket'=> $daftar_soal_paket,
                     'list_tipe'=> $list_tipe,
                     'list_paket' => $list_paket
@@ -133,10 +133,10 @@ class Daftar_Soal extends CI_Controller{
       $this->load->view("layouts/wrapper", $data, false);
     }
 
-    public function hapus_soal($id)
+    public function delete_soal($id)
     {
       $data = array('id_soal'  =>  $id);
-      $this->DaftarSoal_Model->hapus_soal($data);
+      $this->DaftarSoal_Model->delete_soal($data);
       $this->session->set_flashdata('success', 'Berhasil menghapus soal quisioner');
       redirect('admin/daftar_soal');
     }

@@ -18,7 +18,7 @@ class Alumni extends CI_Controller{
   function index()
   {
     $alumnis = $this->Alumni_Model->get_all_alumni();
-    $data = array('isi'     => 'admin/view-alumni',
+    $data = array('isi'     => 'admin/v-alumni',
                   'alumnis'=> $alumnis
                   );
     $this->load->view("layouts/wrapper", $data, false);
@@ -30,7 +30,7 @@ class Alumni extends CI_Controller{
     $negaras      = $this->Negara_Model->get_all_negara();
     $provinsis    = $this->Provinsi_Model->get_all_provinsi();
     $jurusans     = $this->Jurusan_Model->get_all_jurusan();
-    $data = array('isi'          => 'admin/tambah-alumni',
+    $data = array('isi'          => 'admin/add-alumni',
                   'negaras'      =>  $negaras,
                   'jurusans'     =>  $jurusans,
                   'provinsis'    =>  $provinsis,
@@ -168,7 +168,7 @@ class Alumni extends CI_Controller{
           $negaras      = $this->Negara_Model->get_all_negara();
           $provinsis    = $this->Provinsi_Model->get_all_provinsi();
           $jurusans = $this->Jurusan_Model->get_all_jurusan();
-          $data = array('isi'          => 'admin/tambah-alumni',
+          $data = array('isi'          => 'admin/add-alumni',
                         'negaras'      =>  $negaras,
                         'jurusans' =>  $jurusans,
                         'provinsis'    =>  $provinsis,

@@ -287,7 +287,7 @@ class Settings extends CI_Controller{
             $username = $this->session->userdata('username');
             $user = $this->Alumni_Model->detail_alumni($username);
             $pekerjaans = $this->Riwayat_Pekerjaan_Model->get_riwayat_by_alumni($username);
-            $data = array('isi'     => 'alumni/view-riwayat-pekerjaan',
+            $data = array('isi'     => 'alumni/v-riwayat-pekerjaan',
                           'user'=> $user,
                           'pekerjaans'=> $pekerjaans
                           );

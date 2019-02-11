@@ -64,8 +64,9 @@
           </span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="<?php echo site_url('admin/kuesioner'); ?>"><i class="fa fa-circle-o"></i> Daftar Paket Soal</a></li>
-          <li><a href="<?php echo site_url('admin/daftar_soal'); ?>"><i class="fa fa-circle-o"></i> Daftar Soal</a></li>
+          <li><a href="<?php echo site_url('admin/kuesioner_fakultas'); ?>"><i class="fa fa-circle-o"></i> Daftar Paket Fakultas</a></li>
+          <li><a href="<?php echo site_url('admin/kuesioner_prodi'); ?>"><i class="fa fa-circle-o"></i> Daftar Paket Prodi</a></li>
+          <li><a href="<?php echo site_url('admin/kuesioner_jurusan'); ?>"><i class="fa fa-circle-o"></i> Daftar Paket Jurusan</a></li>
         </ul>
       </li>
       <li>

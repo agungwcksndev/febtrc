@@ -276,7 +276,7 @@
 
 <div class="modal fade" id="modal-add-paket" role="dialog">
   <div class="modal-dialog">
-    <form class="" action="<?php echo site_url('admin/kuesioner/tambah_paket_soal') ?>" method="post">
+    <form class="" action="<?php echo site_url('admin/kuesioner/add_paket_soal') ?>" method="post">
       <div class="modal-content">
         <div class="modal-header bg-primary">
           <button type="button" class="close" data-dismiss="modal" name="button"></button>
@@ -383,12 +383,10 @@
  $(function () {
    $('#example1').DataTable({
      "columnDefs": [
-       { "width": "5%", "targets": 0 },
-       { "width": "10%", "targets": 1 },
-       { "width": "25%", "targets": 3 }
-     ],
-     "scrollY": true,
-     "scrollX": true
+  { "width": "5%", "targets": 0 },
+  { "width": "10%", "targets": 1 },
+  { "width": "25%", "targets": 3 }
+]
    })
  })
 
@@ -418,7 +416,7 @@
       var url="<?php echo site_url();?>";
       var r = confirm("Apakah anda yakin menghapus data ini?");
       if (r == true) {
-          window.location = url+"/admin/kuesioner/hapus_paket_soal/"+id;
+          window.location = url+"/admin/kuesioner/delete_paket_soal/"+id;
       } else {
           return false;
       }

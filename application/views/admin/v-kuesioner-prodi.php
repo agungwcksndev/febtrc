@@ -3,7 +3,7 @@
    <!-- Content Header (Page header) -->
    <section class="content-header">
      <h1>
-       Master Admin
+       Master Kuesioner
        <small>View data</small>
      </h1>
      <ol class="breadcrumb">
@@ -11,15 +11,6 @@
        <li><a href="#">Tables</a></li>
        <li class="active">Data tables</li>
      </ol>
-     <?php if ($this->session->flashdata('success')) {
-         echo "<br>";
-         echo "<div class='alert alert-success alert-dismissible'>";
-         echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
-         echo "<h4><i class='icon fa fa-check'></i>Success!</h4>";
-         echo $this->session->flashdata('success');
-         echo "</div>";
-     };
-     ?>
    </section>
 
    <!-- Main content -->
@@ -28,8 +19,8 @@
        <div class="col-xs-12">
          <div class="box box-info">
            <div class="box-header">
-             <h3 class="box-title">Data Administrator Fakultas Ekonomi Bisnis Universitas Brawijaya</h3>
-               <a href="<?php echo site_url('admin/admin/tambah_admin') ?>" class="btn btn-primary btn-flat"  style="float:right;"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Tambah Data Admin</a>
+             <h3 class="box-title">Data Kuesioner Tracert Alumni Fakultas Ekonomi Bisnis Universitas Brawijaya</h3>
+               <button type="button" class="btn btn-primary btn-flat" style="float:right;" data-toggle="modal" data-target="#modal-add-paket"><i class="fa fa-plus-circle"></i>&ensp;&nbsp;Tambah Paket Soal</button>
            </div>
            <!-- /.box-header -->
            <div class="box-body">
@@ -37,25 +28,24 @@
                <thead>
                <tr>
                  <th class="text-center">No.</th>
-                 <th>Nama</th>
-                 <th>Username</th>
-                 <th>Email</th>
-                 <th>Nomor HP</th>
+                 <th>Jenjang Soal</th>
+                 <th>Nama Paket Soal</th>
                  <th class="text-center">Aksi</th>
                </tr>
                </thead>
                <tbody>
                  <?php
                  $no = 1;
-                 foreach ($admins as $admin): ?>
+                 foreach ($paket_soals as $paket_soal): ?>
                <tr>
                  <td class="text-center"><?php echo $no ?></td>
-                 <td><?php echo $admin->nama ?></td>
-                 <td><?php echo $admin->username ?></td>
-                 <td><?php echo $admin->email ?></td>
-                 <td><?php echo $admin->nomor_hp ?></td>
-                 <td class="text-center"><a style="cursor:pointer;" class="btn btn-default" onclick="detail('<?php echo $admin->username ?>')" data-toggle="" data-target="#"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Detail</a>
-                 <button onclick="del('<?php echo $admin->username ?>')" class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;&nbsp;Hapus</button></td>
+                 <td><?php echo $paket_soal->jenjang_soal ?></td>
+                 <td><?php echo $paket_soal->nama_paket ?></td>
+                 <td class="text-center">
+                   <a style="cursor:pointer;" class="btn btn-primary" href="<?php echo site_url('/admin/daftar_soal/lihat_daftar_soal/'.$paket_soal->id_paket) ?>"><i class="fa fa-book"></i>&nbsp;&nbsp;Daftar Soal</a>
+                   <a style="cursor:pointer;" class="btn btn-default" onclick="edit_paket(<?php echo $paket_soal->id_paket ?>)"><i class="fa fa-pencil" ></i>&nbsp;&nbsp;Edit</a>
+                   <button onclick="del('<?php echo $paket_soal->id_paket ?>')" class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;&nbsp;Hapus</button>
+                 </td>
                </tr>
                <?php $no++ ?>
                <?php endforeach; ?>
@@ -63,10 +53,8 @@
                <tfoot>
                <tr>
                  <th class="text-center">No.</th>
-                 <th>Nama</th>
-                 <th>Username</th>
-                 <th>Email</th>
-                 <th>Nomor HP</th>
+                 <th>Jenjang Soal</th>
+                 <th>Nama paket Soal</th>
                  <th class="text-center">Aksi</th>
                </tr>
                </tfoot>
@@ -286,6 +274,95 @@
 </div>
 <!-- ./wrapper -->
 
+<div class="modal fade" id="modal-add-paket" role="dialog">
+  <div class="modal-dialog">
+    <form class="" action="<?php echo site_url('admin/kuesioner/add_paket_soal') ?>" method="post">
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <button type="button" class="close" data-dismiss="modal" name="button"></button>
+          <h4 class="modal-title"></i>Form Tambah Paket Soal</h4>
+        </div>
+        <div class="modal-body">
+          <div class="col-md-12">
+            <div class="form-horizontal">
+              <div class="box-body">
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="">Pilih Jenjang Soal</label>
+                  <div class="col-sm-9">
+                    <select name="jenjang_soal" id="jenjang_soal" class="form-control">
+                      <option selected disabled>Pilih jenjang soal</option>
+                      <option value="D3">D3</option>
+                      <option value="S1">S1</option>
+                      <option value="S2">S2</option>
+                      <option value="S3">S3</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="">Nama Paket Soal</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="nama_paket" id="nama_paket" class="form-control" value="" placeholder="Masukan Nama Paket Soal..."required>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-default" data-dismiss="modal" name="button">Cancel</button>
+          <button type="submit" class="btn btn-primary" name="button">Tambah Paket Soal</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-update-paket" role="dialog">
+  <div class="modal-dialog">
+    <form class="" action="<?php echo site_url('admin/kuesioner/update_paket_soal') ?>" method="post">
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <button type="button" class="close" data-dismiss="modal" name="button"></button>
+          <h4 class="modal-title"></i>Form Update Paket Soal</h4>
+        </div>
+        <div class="modal-body">
+          <div class="col-md-12">
+            <div class="form-horizontal">
+              <div class="box-body">
+                <input type="hidden" name="id_paket_up" id="id_paket_up" class="form-control" value="" placeholder="">
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="">Jenjang Soal</label>
+                  <div class="col-sm-9">
+                    <input type="hidden" id="id_paket_up" name="id_paket_up" value="">
+                    <select name="jenjang_soal_up" id="jenjang_soal_up" class="form-control">
+                      <option value="" disabled>Pilih jenjang Soal</option>
+                        <?php foreach ($list_jenjang as $paket_soal): ?>
+                          <option value="<?php echo $paket_soal->jenjang_soal ?>"><?php echo $paket_soal->jenjang_soal ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="">Nama Paket Soal</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="nama_paket_up" id="nama_paket_up" class="form-control" value="" placeholder="Masukan Nama Paket Soal..."required>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-default" data-dismiss="modal" name="button">Cancel</button>
+          <button type="submit" class="btn btn-primary" name="button">Update Paket Soal</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
 <!-- jQuery 3 -->
 <script src="<?php echo base_url(); ?>bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
@@ -306,33 +383,45 @@
  $(function () {
    $('#example1').DataTable({
      "columnDefs": [
-       { "width": "5%", "targets": 0 },
-       { "width": "20%", "targets": 5 }
-    ]
+  { "width": "5%", "targets": 0 },
+  { "width": "10%", "targets": 1 },
+  { "width": "25%", "targets": 3 }
+]
    })
  })
 
- function get_admin($username,$nama)
+ function edit_paket(id_paket)
  {
-   $("#username_up").val($username);
-   $("#nama_up").val($nama);
-   console.log(nama);
+     //Ajax Load data from ajax
+     $.ajax({
+         url : "<?php echo site_url('admin/kuesioner/getDetailPaket')?>/" + id_paket,
+         type: "GET",
+         dataType: "JSON",
+         success: function(data)
+         {
+             $('[name="id_paket_up"]').val(data.id_paket);
+             $('[name="jenjang_soal_up"]').val(data.jenjang_soal);
+             $('[name="nama_paket_up"]').val(data.nama_paket);
+             $('#modal-update-paket').modal('show'); // show bootstrap modal when complete loaded
+
+         },
+         error: function (jqXHR, textStatus, errorThrown)
+         {
+             alert('Error get data from ajax');
+         }
+     });
  }
 
  function del(id) {
       var url="<?php echo site_url();?>";
       var r = confirm("Apakah anda yakin menghapus data ini?");
       if (r == true) {
-          window.location = url+"/admin/admin/hapus_admin/"+id;
+          window.location = url+"/admin/kuesioner/delete_paket_soal/"+id;
       } else {
           return false;
       }
   }
 
-  function detail(id) {
-       var url="<?php echo site_url();?>";
-       window.location = url+"/admin/admin/detail_admin/"+id;
-   }
 </script>
 </body>
 </html>

@@ -1,12 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Admin extends CI_Controller{
+class Operator extends CI_Controller{
 
   public function __construct()
   {
     parent::__construct();
-    $this->load->model('Admin_Model');
+    $this->load->model('Operator_Model');
     $this->load->model('Jurusan_Model');
     $this->load->model('Negara_Model');
     $this->load->model('Provinsi_Model');
@@ -15,23 +15,23 @@ class Admin extends CI_Controller{
 
   function index()
   {
-    $admins = $this->Admin_Model->listing();
-    $data = array('isi'     => 'admin/v-admin',
-                  'admins'=> $admins
+    $operators = $this->Operator_Model->listing();
+    $data = array('isi'     => 'admin/v-operator',
+                  'operators'=> $operators
                   );
     $this->load->view("layouts/wrapper", $data, false);
   }
 
-  function add_admin()
+  function add_operator()
   {
-    $admins      = $this->Admin_Model->listing();
-    $data = array('isi'          => 'admin/add-admin',
-                  'admins'      =>  $admins
+    $operators      = $this->Operator_Model->listing();
+    $data = array('isi'          => 'admin/add-operator',
+                  'operators'      =>  $operators
                   );
     $this->load->view("layouts/wrapper", $data, false);
   }
 
-  function proses_add_admin(){
+  function proses_add_operator(){
     $valid = $this->form_validation;
     $valid->set_rules(
       'nama',
@@ -43,9 +43,9 @@ class Admin extends CI_Controller{
     $valid->set_rules(
       'email',
       'email',
-      'valid_email|is_unique[admin.email]',
+      'valid_email|is_unique[operator.email]',
       array(  'valid_email'  =>  'Email tidak valid',
-              'is_unique[admin.email]' => 'Email sudah terdaftar')
+              'is_unique[operator.email]' => 'Email sudah terdaftar')
     );
 
     $valid->set_rules(
@@ -59,15 +59,15 @@ class Admin extends CI_Controller{
     $valid->set_rules(
       'username',
       'username',
-      'required|is_unique[admin.username]',
+      'required|is_unique[operator.username]',
       array(  'required'  =>  'Email tidak valid',
-              'is_unique[admin.username]' => 'Username sudah terdaftar')
+              'is_unique[operator.username]' => 'Username sudah terdaftar')
     );
 
     $valid->set_rules(
       'password',
       'password',
-      'required|is_unique[admin.username]',
+      'required|is_unique[operator.username]',
       array(  'required'  =>  'Anda belum mengisikan password')
     );
 
@@ -80,9 +80,9 @@ class Admin extends CI_Controller{
     );
 
         if ($valid->run()===false) {
-          $admins      = $this->Admin_Model->listing();
-          $data = array('isi'          => 'admin/add-admin',
-                        'admins'      =>  $admins
+          $operators      = $this->Operator_Model->listing();
+          $data = array('isi'          => 'admin/add-operator',
+                        'operators'      =>  $operators
                         );
           $this->load->view("layouts/wrapper", $data, false);
         } else {
@@ -97,15 +97,15 @@ class Admin extends CI_Controller{
                   'username'           =>  $i->post('username'),
                   'password'           =>  md5($i->post('password')),
                 );
-            $this->Admin_Model->add_admin($data);
-            $this->session->set_flashdata('success', 'Berhasil menambah admin.');
-            redirect('admin/admin');
+            $this->Operator_Model->add_operator($data);
+            $this->session->set_flashdata('success', 'Berhasil menambah operator.');
+            redirect('admin/operator');
         }
     }
 
-    public function edit_admin($username)
+    public function edit_operator($username)
     {
-      $data_admin = $this->Admin_Model->find_admin($username);
+      $data_operator = $this->Operator_Model->find_operator($username);
       $valid       = $this->form_validation;
       $valid->set_rules(
         'nama',
@@ -131,9 +131,9 @@ class Admin extends CI_Controller{
       $valid->set_rules(
         'email',
         'email',
-        'valid_email|is_unique[admin.email]',
+        'valid_email|is_unique[operator.email]',
         array(  'valid_email'  =>  'Email tidak valid',
-                'is_unique[admin.email]' => 'Email sudah terdaftar')
+                'is_unique[operator.email]' => 'Email sudah terdaftar')
       );
 
       $valid->set_rules(
@@ -175,9 +175,9 @@ class Admin extends CI_Controller{
       $valid->set_rules(
         'username',
         'username',
-        'required|is_unique[admin.username]',
+        'required|is_unique[operator.username]',
         array(  'required'  =>  'Email tidak valid',
-                'is_unique[admin.username]' => 'Username sudah terdaftar')
+                'is_unique[operator.username]' => 'Username sudah terdaftar')
       );
 
       $valid->set_rules(
@@ -215,15 +215,15 @@ class Admin extends CI_Controller{
         array(  'decimal'  =>  'IPK harus berupa angka desimal. Contoh : 4.00')
       );
           if ($valid->run()===false) {
-            $admins      = $this->Admin_Model->listing();
+            $operators      = $this->Operator_Model->listing();
             $negaras      = $this->Negara_Model->get_negara();
             $provinsis    = $this->Provinsi_Model->get_provinsi();
             $list_jurusan = $this->Jurusan_Model->listing();
-            $data = array('isi'          => 'admin/edit-admin',
+            $data = array('isi'          => 'admin/edit-operator',
                           'negaras'      =>  $negaras,
                           'list_jurusan' =>  $list_jurusan,
                           'provinsis'    =>  $provinsis,
-                          'data_admin'  =>  $data_admin
+                          'data_operator'  =>  $data_operator
                           );
             $this->load->view("layouts/wrapper", $data, false);
           } else {
@@ -261,25 +261,25 @@ class Admin extends CI_Controller{
                     'judul_skripsi'      =>  $i->post('judul_skripsi'),
                     'ipk'                =>  $i->post('ipk')
                   );
-              $this->Admin_Model->edit_admin($data);
-              $this->session->set_flashdata('success', 'Berhasil menambah admin.');
-              redirect('admin/admin/'.$i->post('username'));
+              $this->Operator_Model->edit_operator($data);
+              $this->session->set_flashdata('success', 'Berhasil menambah operator.');
+              redirect('admin/operator/'.$i->post('username'));
           }
     }
 
-    public function detail_admin($username){
-      $data_admin = $this->Admin_Model->find_admin($username);
-      $data = array('isi'     => 'admin/detail-admin',
-                    'data_admin'=> $data_admin
+    public function detail_operator($username){
+      $data_operator = $this->Operator_Model->find_operator($username);
+      $data = array('isi'     => 'admin/detail-operator',
+                    'data_operator'=> $data_operator
                     );
       $this->load->view("layouts/wrapper", $data, false);
     }
 
-    public function delete_admin($username)
+    public function delete_operator($username)
     {
       $data = array('username'  =>  $username);
-      $this->Admin_Model->delete_admin($data);
-      $this->session->set_flashdata('success', 'Berhasil menghapus admin');
-      redirect('admin/admin');
+      $this->Operator_Model->delete_operator($data);
+      $this->session->set_flashdata('success', 'Berhasil menghapus operator');
+      redirect('admin/operator');
     }
   }

@@ -3,8 +3,8 @@
    <!-- Content Header (Page header) -->
    <section class="content-header">
      <h1>
-       Master Alumni
-       <small>Tambah Data Alumni Fakultas Ekonomi dan Bisnis</small>
+       Master Admin
+       <small>Tambah Data Admin Fakultas Ekonomi dan Bisnis</small>
      </h1>
      <ol class="breadcrumb">
        <li><a href="#"><i class="fa fa-folder-open"></i> Home</a></li>
@@ -16,7 +16,7 @@
    <!-- Main content -->
    <section class="content">
      <?php echo validation_errors(); ?>
-     <form class="form-horizontal" method="post" action="<?php echo site_url('admin/alumni/proses_add_alumni') ?>">
+     <form class="form-horizontal" method="post" action="<?php echo site_url('admin/admin/proses_add_admin') ?>">
      <div class="row">
      <div class="col-md-6">
        <div class="box box-info">
@@ -27,129 +27,31 @@
             <!-- form start -->
               <div class="box-body">
                 <div class="form-group">
-                  <label for="nama" class="col-sm-4 col-form-label text-right">Nama Lengkap</label>
+                  <label for="nama" class="col-sm-4 control-label">Nama Lengkap<font style="color: red;">*)</font></label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->nama ?></p>
+                    <input type="text" name="nama" class="form-control" id="nama" value="<?php echo set_value('nama') ?>" placeholder="Masukan Nama Lengkap">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="nim" class="col-sm-4 col-form-label text-right">NIM</label>
+                  <label for="jenis_kelamin" class="col-sm-4 control-label">Jenis Kelamin<font style="color: red;">*)</font></label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->nim ?></p>
+                    <select class="form-control" name="jenis_kelamin" id="jenis_kelamin" value="<?php echo set_value('jenis_kelamin') ?>">
+                      <option value=""selected disabled>Pilih Jenis Kelamin</option>
+                      <option value="Perempuan">Perempuan</option>
+                      <option value="Laki-laki">Laki-laki</option>
+                    </select>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="email" class="col-sm-4 col-form-label text-right">Email</label>
+                  <label for="email" class="col-sm-4 control-label">Email<font style="color: red;">*)</font></label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->email ?></p>
+                    <input type="text" name="email" class="form-control" id="email" value="<?php echo set_value('email') ?>" placeholder="Masukan Email">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="jenis_kelamin" class="col-sm-4 col-form-label text-right">Jenis Kelamin</label>
+                  <label for="nomor_hp" class="col-sm-4 control-label">Nomor HP<font style="color: red;">*)</font></label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->jenis_kelamin ?></p>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="golongan_darah" class="col-sm-4 col-form-label text-right">Golongan Darah</label>
-                  <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->golongan_darah ?></p>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="tempat_lahir" class="col-sm-4 col-form-label text-right">Tempat Lahir</label>
-                  <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->tempat_lahir ?></p>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="tanggal_lahir" class="col-sm-4 col-form-label text-right">Tanggal Lahir</label>
-                  <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->tanggal_lahir ?></p>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="kewarganegaraan" class="col-sm-4 col-form-label text-right">Kewarganegaraan</label>
-                  <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->kewarganegaraan ?></p>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="alamat_asal" class="col-sm-4 col-form-label text-right">Alamat Asal</label>
-                  <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->alamat_asal ?></p>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="kode_pos_asal" class="col-sm-4 col-form-label text-right">Kode Pos Asal</label>
-                  <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->kode_pos_asal ?></p>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="alamat_sekarang" class="col-sm-4 col-form-label text-right">Alamat Sekarang</label>
-                  <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->alamat_sekarang ?></p>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="kode_pos_sekarang" class="col-sm-4 col-form-label text-right">Kode Pos Sekarang</label>
-                  <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->kode_pos_sekarang ?></p>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-4 col-form-label text-right">Negara</label>
-                  <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->nama_negara ?></p>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="provinsi" class="col-sm-4 col-form-label text-right">Provinsi</label>
-                  <div class="col-sm-8">
-                    <p class="control-label-plaintext"></p>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="kota" class="col-sm-4 col-form-label text-right">Kota</label>
-                  <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->kota ?></p>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="nomor_telepon" class="col-sm-4 col-form-label text-right">Nomor Telepon</label>
-                  <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->nomor_telepon ?></p>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="nomor_hp" class="col-sm-4 col-form-label text-right">Nomor HP</label>
-                  <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->nomor_hp ?></p>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="website" class="col-sm-4 col-form-label text-right">Website</label>
-                  <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->website ?></p>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="facebook" class="col-sm-4 col-form-label text-right">Facebook</label>
-                  <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->facebook ?></p>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="twitter" class="col-sm-4 col-form-label text-right">Twitter</label>
-                  <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->twitter ?></p>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="instagram" class="col-sm-4 col-form-label text-right">Instagram</label>
-                  <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_alumni->instagram ?></p>
+                    <input type="text" name="nomor_hp" class="form-control" id="nomor_hp" value="<?php echo set_value('nomor_hp') ?>" placeholder="Masukan Nomor HP">
                   </div>
                 </div>
             </div>
@@ -162,77 +64,32 @@
                 <h3 class="box-title">Informasi Akun</h3>
               </div>
                   <div class="box-body">
-                    <div class="box-body box-profile">
-                      <img class="profile-user-img img-responsive img-circle" src="" alt="User profile picture">
-                      <h3 class="profile-username text-center"></h3>
-                      <div class="col-md-12 text-center">
-                        <a href="<?php echo site_url('admin/alumni/edit_alumni/'.$data_alumni->username)?>" class="btn bg-navy margin" name="button"><i class="fa fa-pencil"></i>&nbsp;&nbsp;&nbsp;Edit Profil</a>
-                        <button type="button" class="btn bg-maroon margin" name="button"><i class="fa fa-image"></i>&nbsp;&nbsp;&nbsp;Ubah Foto</button>
-                      </div>
-                    </div>
+                   <div class="form-group">
+                     <label for="username" class="col-sm-4 control-label">Username<font style="color: red;">*)</font></label>
+                     <div class="col-sm-8">
+                       <input type="text" name="username" class="form-control" id="username" value="<?php echo set_value('username') ?>" placeholder="Masukan Username">
+                     </div>
+                   </div>
+                   <div class="form-group">
+                     <label for="password" class="col-sm-4 control-label">Password<font style="color: red;">*)</font></label>
+                     <div class="col-sm-8">
+                       <input type="password" name="password" class="form-control" id="password" placeholder="Masukan Password">
+                     </div>
+                   </div>
+                   <div class="form-group">
+                     <label for="passconf" class="col-sm-4 control-label">Konfirmasi Password<font style="color: red;">*)</font></label>
+                     <div class="col-sm-8">
+                       <input type="password" name="passconf" class="form-control" id="passconf" placeholder="Masukan Ulang Password">
+                     </div>
+                   </div>
                  </div>
               </div>
-               <div class="box box-info">
-                 <div class="box-header with-border">
-                   <h3 class="box-title">Informasi Lulusan</h3>
-                 </div>
-                     <div class="box-body">
-                       <div class="form-group">
-                         <label for="jenjang" class="col-sm-4 col-form-label text-right">Jenjang</label>
-                         <div class="col-sm-8">
-                           <p class="control-label-plaintext"><?php echo $data_alumni->jenjang ?></p>
-                         </div>
-                       </div>
-                       <div class="form-group">
-                         <label for="jurusan" class="col-sm-4 col-form-label text-right">Jurusan</label>
-                         <div class="col-sm-8">
-                           <p class="control-label-plaintext"><?php echo $data_alumni->nama_jurusan ?></p>
-                         </div>
-                       </div>
-                       <div class="form-group">
-                         <label for="prodi" class="col-sm-4 col-form-label text-right">Program Studi</label>
-                         <div class="col-sm-8">
-                           <p class="control-label-plaintext"><?php echo $data_alumni->nama_prodi ?></p>
-                         </div>
-                       </div>
-                       <div class="form-group">
-                         <label for="angkatan" class="col-sm-4 col-form-label text-right">Angkatan</label>
-                         <div class="col-sm-8">
-                           <p class="control-label-plaintext"><?php echo $data_alumni->angkatan ?></p>
-                         </div>
-                       </div>
-                       <div class="form-group">
-                         <label for="tahun_lulus" class="col-sm-4 col-form-label text-right">Tahun Lulus</label>
-                         <div class="col-sm-8">
-                           <p class="control-label-plaintext"><?php echo $data_alumni->tahun_lulus ?></p>
-                         </div>
-                       </div>
-                       <div class="form-group">
-                         <label for="tanggal_yudisium" class="col-sm-4 col-form-label text-right">Tanggal Yudisium</label>
-                         <div class="col-sm-8">
-                           <p class="control-label-plaintext"><?php echo $data_alumni->tanggal_yudisium ?></p>
-                         </div>
-                       </div>
-                       <div class="form-group">
-                         <label for="judul_skripsi" class="col-sm-4 col-form-label text-right">Judul Skripsi</label>
-                         <div class="col-sm-8">
-                           <p class="control-label-plaintext"><?php echo $data_alumni->judul_skripsi ?></p>
-                         </div>
-                       </div>
-                       <div class="form-group">
-                         <label for="ipk" class="col-sm-4 col-form-label text-right">IPK</label>
-                         <div class="col-sm-8">
-                           <p class="control-label-plaintext"><?php echo $data_alumni->ipk ?></p>
-                         </div>
-                       </div>
-                      </div>
-                    </div>
                 </div>
              </div>
           </div>
           <!-- /.box-body -->
           <div class="box-footer btn-toolbar">
-            <a href="<?php echo site_url('admin/alumni') ?>" class="btn btn-default pull-right">Cancel</a>
+            <a href="<?php echo site_url('admin/admin') ?>" class="btn btn-default pull-right">Cancel</a>
             <button type="submit"  class="btn btn-primary pull-right" name="submit" value="Simpan">Simpan</button>
           </div>
           <!-- /.box-footer -->
@@ -480,7 +337,7 @@ $(document).ready(function(){
     if(id_negara != '')
     {
       $.ajax({
-        url:"<?php echo site_url();?>/admin/alumni/fetch_provinsi",
+        url:"<?php echo site_url();?>/admin/admin/fetch_provinsi",
         method: "POST",
         data:{id_negara:id_negara},
         success:function(data)
@@ -497,7 +354,7 @@ $(document).ready(function(){
     if(id_provinsi != '')
     {
       $.ajax({
-        url:"<?php echo site_url();?>/admin/alumni/fetch_kota",
+        url:"<?php echo site_url();?>/admin/admin/fetch_kota",
         method: "POST",
         data:{id_provinsi:id_provinsi},
         success:function(data)

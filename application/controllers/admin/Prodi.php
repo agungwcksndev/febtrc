@@ -14,7 +14,7 @@ class Prodi extends CI_Controller{
   {
     $prodis = $this->Prodi_Model->get_all_prodi();
     $jurusans = $this->Jurusan_Model->get_all_jurusan();
-    $data = array('isi'           => 'admin/view-prodi',
+    $data = array('isi'           => 'admin/v-prodi',
                   'prodis'        => $prodis,
                   'jurusans'      => $jurusans
                   );
@@ -43,7 +43,7 @@ class Prodi extends CI_Controller{
       {
         $prodis = $this->Prodi_Model->get_all_prodi();
         $jurusans = $this->Jurusan_Model->get_all_jurusan();
-        $data = array('isi'           => 'admin/view-prodi',
+        $data = array('isi'           => 'admin/v-prodi',
                       'prodis'        => $prodis,
                       'jurusans'      => $jurusans
                       );
@@ -68,28 +68,27 @@ class Prodi extends CI_Controller{
     }
 
     public function update_prodi()
-        {
-            $valid = $this->form_validation;
-
-            $valid->set_rules(
+    {
+      $valid = $this->form_validation;
+      $valid->set_rules(
                 'nama_jurusan_up',
                 'nama_jurusan_up',
                 'required',
-                array(
-              'required'  =>  'Anda belum memilih Jurusan.')
-            );
+              array(
+                'required'  =>  'Anda belum memilih Jurusan.')
+              );
 
-            $valid->set_rules(
+      $valid->set_rules(
                 'nama_prodi_up',
                 'nama_prodi_up',
                 'required',
-                array(
-              'required'  =>  'Anda belum mengisikan Nama Jurusan.')
-            );
+              array(
+                'required'  =>  'Anda belum mengisikan Nama Jurusan.')
+             );
 
             $i  = $this->input;
             if ($valid->run()===false) {
-              $data = array('isi'           => 'admin/view-prodi',
+              $data = array('isi'           => 'admin/v-prodi',
                             'prodis'        => $prodis,
                             'jurusans'      => $jurusans
                             );

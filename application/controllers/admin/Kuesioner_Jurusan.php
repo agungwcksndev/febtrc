@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Kuesioner extends CI_Controller{
+class Kuesioner_Jurusan extends CI_Controller{
 
   public function __construct()
   {
@@ -13,14 +13,14 @@ class Kuesioner extends CI_Controller{
   {
     $paket_soals = $this->Kuesioner_Model->listing();
     $list_jenjang = $this->Kuesioner_Model->get_jenjang();
-    $data = array('isi'     => 'admin/view-kuesioner',
+    $data = array('isi'     => 'admin/v-kuesioner-jurusan',
                   'paket_soals'=> $paket_soals,
                   'list_jenjang' => $list_jenjang
                   );
     $this->load->view("layouts/wrapper", $data, false);
   }
 
-  function tambah_paket_soal()
+  function add_paket_soal()
   {
     $valid = $this->form_validation;
     $valid->set_rules(
@@ -40,7 +40,7 @@ class Kuesioner extends CI_Controller{
       if ($valid->run()===false)
       {
           $data = array('title' => 'Data Kuesioner - Tracert Alumni Fakultas Ekonomi Bisnis Universitas Brawijaya' );
-          $this->load->view('admin/kuesioner', $data, false);
+          $this->load->view('admin/kuesioner_jurusan', $data, false);
       }
       else
       {
@@ -49,9 +49,9 @@ class Kuesioner extends CI_Controller{
                 'jenjang_soal'    =>  $i->post('jenjang_soal'),
                 'nama_paket'      =>  $i->post('nama_paket')
               );
-          $this->Kuesioner_Model->tambah_paket_soal($data);
+          $this->Kuesioner_Model->add_paket_soal($data);
           $this->session->set_flashdata('sukses', 'Berhasil menambah Paket Soal.');
-          redirect('admin/kuesioner');
+          redirect('admin/kuesioner_jurusan');
       }
     }
 
@@ -82,11 +82,10 @@ class Kuesioner extends CI_Controller{
         {
             $paket_soals= $this->Kuesioner_Model->listing();
             $list_jenjang = $this->Kuesioner_Model->get_jenjang();
-            $data = array('isi'          => 'admin/view-kuesioner',
+            $data = array('isi'          => 'admin/v-kuesioner-jurusan',
                           'paket_soals'  => $paket_soals,
                           'list_jenjang' => $list_jenjang
                           );
-            // $this->load->view('admin/v_kuesioner', $data, false);
             $this->load->view("layouts/wrapper", $data, false);
         }
         else
@@ -102,10 +101,10 @@ class Kuesioner extends CI_Controller{
         }
     }
 
-    public function hapus_paket_soal($id)
+    public function delete_paket_soal($id)
     {
       $data = array('id_paket'  =>  $id);
-      $this->Kuesioner_Model->hapus_paket_soal($data);
+      $this->Kuesioner_Model->delete_paket_soal($data);
       $this->session->set_flashdata('success', 'Berhasil menghapus paket soal');
       redirect('admin/kuesioner');
     }
