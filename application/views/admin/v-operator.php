@@ -28,8 +28,8 @@
        <div class="col-xs-12">
          <div class="box box-info">
            <div class="box-header">
-             <h3 class="box-title">Data Administrator Fakultas Ekonomi Bisnis Universitas Brawijaya</h3>
-               <a href="<?php echo site_url('admin/admin/tambah_admin') ?>" class="btn btn-primary btn-flat"  style="float:right;"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Tambah Data Admin</a>
+             <h3 class="box-title"><i class="fa fa-users"></i>&nbsp;&nbsp;Data Operator Fakultas Ekonomi Bisnis Universitas Brawijaya</h3>
+               <a href="<?php echo site_url('admin/operator/add_operator') ?>" class="btn btn-primary btn-flat"  style="float:right;"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Tambah Data Operator</a>
            </div>
            <!-- /.box-header -->
            <div class="box-body">
@@ -47,15 +47,15 @@
                <tbody>
                  <?php
                  $no = 1;
-                 foreach ($admins as $admin): ?>
+                 foreach ($operators as $operator): ?>
                <tr>
                  <td class="text-center"><?php echo $no ?></td>
-                 <td><?php echo $admin->nama ?></td>
-                 <td><?php echo $admin->username ?></td>
-                 <td><?php echo $admin->email ?></td>
-                 <td><?php echo $admin->nomor_hp ?></td>
-                 <td class="text-center"><a style="cursor:pointer;" class="btn btn-default" onclick="detail('<?php echo $admin->username ?>')" data-toggle="" data-target="#"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Detail</a>
-                 <button onclick="del('<?php echo $admin->username ?>')" class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;&nbsp;Hapus</button></td>
+                 <td><?php echo $operator->nama ?></td>
+                 <td><?php echo $operator->username ?></td>
+                 <td><?php echo $operator->email ?></td>
+                 <td><?php echo $operator->nomor_hp ?></td>
+                 <td class="text-center"><a style="cursor:pointer;" class="btn btn-default" onclick="detail('<?php echo $operator->username ?>')" data-toggle="" data-target="#"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Detail</a>
+                 <button onclick="del('<?php echo $operator->username ?>')" class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;&nbsp;Hapus</button></td>
                </tr>
                <?php $no++ ?>
                <?php endforeach; ?>
@@ -312,7 +312,7 @@
    })
  })
 
- function get_admin($username,$nama)
+ function get_operator($username,$nama)
  {
    $("#username_up").val($username);
    $("#nama_up").val($nama);
@@ -323,7 +323,7 @@
       var url="<?php echo site_url();?>";
       var r = confirm("Apakah anda yakin menghapus data ini?");
       if (r == true) {
-          window.location = url+"/admin/admin/hapus_admin/"+id;
+          window.location = url+"/admin/operator/delete_operator/"+id;
       } else {
           return false;
       }
@@ -331,7 +331,7 @@
 
   function detail(id) {
        var url="<?php echo site_url();?>";
-       window.location = url+"/admin/admin/detail_admin/"+id;
+       window.location = url+"/admin/operator/detail_operator/"+id;
    }
 </script>
 </body>

@@ -45,7 +45,7 @@ class DaftarSoal_Model extends CI_Model{
     $this->db->where('id_paket', $id_paket);
     $this->db->order_by('soal', 'ASC');
     $query  = $this->db->get();
-    $output = '<option value="">Pilih Soal Quisioner</option>';
+    $output = '<option value="">Pilih Soal Kuesioner</option>';
     foreach($query->result() as $row)
     {
       $output .= '<option value="'.$row->id_soal.'">'.$row->soal.'</option>';
@@ -61,7 +61,7 @@ class DaftarSoal_Model extends CI_Model{
 		return $query->row();
   }
 
-  public function tambah_soal($data)
+  public function add_soal($data)
   {
     $this->db->insert('daftar_soal', $data);
   }
@@ -81,7 +81,7 @@ class DaftarSoal_Model extends CI_Model{
       $this->db->update('daftar_soal', $data);
   }
 
-  public function hapus_soal($data)
+  public function delete_soal($data)
   {
     $this->db->where('id_soal',$data['id_soal']);
     $this->db->delete('daftar_soal', $data);

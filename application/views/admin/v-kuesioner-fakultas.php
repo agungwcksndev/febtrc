@@ -3,8 +3,8 @@
    <!-- Content Header (Page header) -->
    <section class="content-header">
      <h1>
-       Master Kuisioner
-       <small>Data Soal Kuesioner Alumni Fakultas Ekonomi Bisnis Universitas Brawijaya</small>
+       Master Kuesioner
+       <small>View data</small>
      </h1>
      <ol class="breadcrumb">
        <li><a href="#"><i class="fa fa-folder-open"></i> Home</a></li>
@@ -19,49 +19,46 @@
        <div class="col-xs-12">
          <div class="box box-info">
            <div class="box-header">
-             <h3 class="box-title">Daftar Soal <?php echo $detail_paket->nama_paket ?></h3>
-                <button type="button" class="btn btn-primary btn-flat" style="float:right;" data-toggle="modal" data-target="#modal-add-soal"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Tambah Soal Kuisioner</button>
+             <h3 class="box-title">Data Kuesioner Tracert Alumni Fakultas Ekonomi Bisnis Universitas Brawijaya</h3>
+               <button type="button" class="btn btn-primary btn-flat" style="float:right;" data-toggle="modal" data-target="#modal-add-paket"><i class="fa fa-plus-circle"></i>&ensp;&nbsp;Tambah Paket Soal</button>
            </div>
            <!-- /.box-header -->
            <div class="box-body">
-             <div class="table-responsive">
-               <table id="example1" class="table table-bordered table-striped">
-                 <thead>
-                 <tr>
-                   <th class="text-center">No.</th>
-                   <th>Tipe Soal</th>
-                   <th>Soal</th>
-                   <th class="text-center">Aksi</th>
-                 </tr>
-                 </thead>
-                 <tbody>
-                   <?php
-                   $no = 1;
-                   foreach ($daftar_soal_paket as $daftar_soal): ?>
-                 <tr>
-                   <td class="text-center"><?php echo $no ?></td>
-                   <td><?php echo $daftar_soal->tipe_soal ?></td>
-                   <td><?php echo $daftar_soal->soal ?></td>
-                   <input type="hidden" id="id_paket" name="id_paket" value="<?php echo $daftar_soal->id_paket ?>" >
-                   <td class="text-center">
-                     <a style="cursor:pointer;" class="btn btn-primary" href="<?php echo site_url('/admin/daftar_jawaban/get_jawaban_soal/'.$daftar_soal->id_soal) ?>"><i class="fa fa-book"></i>&nbsp;&nbsp;Detail</a>
-                     <a class="btn btn-default" onclick="edit_soal('<?php echo $daftar_soal->id_soal ?>')"<i class="fa fa-pencil"></i>&nbsp;&nbsp;Edit</a>
-                     <button onclick="del('<?php echo $daftar_soal->id_soal ?>')"class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;&nbsp;Delete</a>
-                   </td>
-                 </tr>
-                 <?php $no++ ?>
-                 <?php endforeach; ?>
-                 </tbody>
-                 <tfoot>
-                 <tr>
-                   <th class="text-center">No.</th>
-                   <th>Tipe Soal</th>
-                   <th>Soal</th>
-                   <th class="text-center">Aksi</th>
-                 </tr>
-                 </tfoot>
-               </table>
-             </div>
+             <table id="example1" class="table table-bordered table-striped">
+               <thead>
+               <tr>
+                 <th class="text-center">No.</th>
+                 <th>Jenjang Soal</th>
+                 <th>Nama Paket Soal</th>
+                 <th class="text-center">Aksi</th>
+               </tr>
+               </thead>
+               <tbody>
+                 <?php
+                 $no = 1;
+                 foreach ($paket_soals as $paket_soal): ?>
+               <tr>
+                 <td class="text-center"><?php echo $no ?></td>
+                 <td><?php echo $paket_soal->jenjang_soal ?></td>
+                 <td><?php echo $paket_soal->nama_paket ?></td>
+                 <td class="text-center">
+                   <a style="cursor:pointer;" class="btn btn-primary" href="<?php echo site_url('/admin/daftar_soal/lihat_daftar_soal/'.$paket_soal->id_paket) ?>"><i class="fa fa-book"></i>&nbsp;&nbsp;Daftar Soal</a>
+                   <a style="cursor:pointer;" class="btn btn-default" onclick="edit_paket(<?php echo $paket_soal->id_paket ?>)"><i class="fa fa-pencil" ></i>&nbsp;&nbsp;Edit</a>
+                   <button onclick="del('<?php echo $paket_soal->id_paket ?>')" class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;&nbsp;Hapus</button>
+                 </td>
+               </tr>
+               <?php $no++ ?>
+               <?php endforeach; ?>
+               </tbody>
+               <tfoot>
+               <tr>
+                 <th class="text-center">No.</th>
+                 <th>Jenjang Soal</th>
+                 <th>Nama paket Soal</th>
+                 <th class="text-center">Aksi</th>
+               </tr>
+               </tfoot>
+             </table>
            </div>
            <!-- /.box-body -->
          </div>
@@ -277,51 +274,34 @@
 </div>
 <!-- ./wrapper -->
 
-
-<div class="modal fade" id="modal-add-soal" role="dialog">
+<div class="modal fade" id="modal-add-paket" role="dialog">
   <div class="modal-dialog">
-    <form class="" action="<?php echo site_url('admin/daftar_soal/add_soal') ?>" method="post">
+    <form class="" action="<?php echo site_url('admin/kuesioner_fakultas/add_paket_soal') ?>" method="post">
       <div class="modal-content">
         <div class="modal-header bg-primary">
           <button type="button" class="close" data-dismiss="modal" name="button"></button>
-          <h4 class="modal-title"></i>Form Tambah Soal Kuesioner</h4>
+          <h4 class="modal-title"></i>Form Tambah Paket Soal</h4>
         </div>
         <div class="modal-body">
           <div class="col-md-12">
             <div class="form-horizontal">
               <div class="box-body">
-                <input type="hidden" name="id_paket" id="id_paket" value="<?php echo $detail_paket->id_paket ?>" placeholder="">
                 <div class="form-group">
-                  <div class="col-sm-9"></div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Pilih Paket Soal</label>
+                  <label class="col-sm-3 control-label" for="">Pilih Jenjang Soal</label>
                   <div class="col-sm-9">
-                    <select name="nama_paket" id="nama_paket" class="form-control">
-                        <option><?php echo $detail_paket->nama_paket; ?></option>
+                    <select name="jenjang_soal" id="jenjang_soal" class="form-control">
+                      <option selected disabled>Pilih jenjang soal</option>
+                      <option value="D3">D3</option>
+                      <option value="S1">S1</option>
+                      <option value="S2">S2</option>
+                      <option value="S3">S3</option>
                     </select>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Pilih Tipe Soal</label>
+                  <label class="col-sm-3 control-label" for="">Nama Paket Soal</label>
                   <div class="col-sm-9">
-                    <select name="tipe_soal" id="tipe_soal" class="form-control">
-                      <option selected disabled>Pilih tipe soal</option>
-                      <option value="Short Text">Short Text</option>
-                      <option value="Paragraf Text">Paragraf Text</option>
-                      <option value="Multiple choice">Multiple choice</option>
-                      <option value="Chkeckbox">Chkeckbox</option>
-                      <option value="Dropdown">Dropdown</option>
-                      <option value="Scale">Scale</option>
-                      <option value="Date">Date</option>
-                      <option value="Time">Time</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Soal Kuisioner</label>
-                  <div class="col-sm-9">
-                    <input type="text" name="soal" id="soal" class="form-control" value="" placeholder="Masukan Soal Kuisioner..."required>
+                    <input type="text" name="nama_paket" id="nama_paket" class="form-control" value="" placeholder="Masukan Nama Paket Soal..."required>
                   </div>
                 </div>
               </div>
@@ -330,45 +310,42 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-default" data-dismiss="modal" name="button">Cancel</button>
-          <button type="submit" class="btn btn-primary" name="button">Tambah Soal Kuisioner</button>
+          <button type="submit" class="btn btn-primary" name="button">Tambah Paket Soal</button>
         </div>
       </div>
     </form>
   </div>
 </div>
 
-<div class="modal fade" id="modal-update-soal" role="dialog">
+<div class="modal fade" id="modal-update-paket" role="dialog">
   <div class="modal-dialog">
-    <form class="" action="<?php echo site_url('admin/daftar_soal/update_soal') ?>" method="post">
+    <form class="" action="<?php echo site_url('admin/kuesioner_fakultas/update_paket_soal') ?>" method="post">
       <div class="modal-content">
         <div class="modal-header bg-primary">
           <button type="button" class="close" data-dismiss="modal" name="button"></button>
-          <h4 class="modal-title"></i>Form Update Soal Kuisioner</h4>
+          <h4 class="modal-title"></i>Form Update Paket Soal</h4>
         </div>
         <div class="modal-body">
           <div class="col-md-12">
             <div class="form-horizontal">
               <div class="box-body">
-                <input type="hidden" name="id_paket_up" id="id_paket_up" value="" placeholder="">
+                <input type="hidden" name="id_paket_up" id="id_paket_up" class="form-control" value="" placeholder="">
                 <div class="form-group">
-                  <div class="col-sm-9"></div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Tipe Soal</label>
+                  <label class="col-sm-3 control-label" for="">Jenjang Soal</label>
                   <div class="col-sm-9">
-                    <input type="hidden" id="id_soal_up" name="id_soal_up" value="">
-                    <select name="tipe_soal_up" id="tipe_soal_up" class="form-control">
-                      <option value="" disabled>Pilih Tipe Soal</option>
-                        <?php foreach ($list_tipe as $daftar_soal): ?>
-                          <option value="<?php echo $daftar_soal->tipe_soal ?>"><?php echo $daftar_soal->tipe_soal ?></option>
+                    <input type="hidden" id="id_paket_up" name="id_paket_up" value="">
+                    <select name="jenjang_soal_up" id="jenjang_soal_up" class="form-control">
+                      <option value="" disabled>Pilih jenjang Soal</option>
+                        <?php foreach ($list_jenjang as $paket_soal): ?>
+                          <option value="<?php echo $paket_soal->jenjang_soal ?>"><?php echo $paket_soal->jenjang_soal ?></option>
                         <?php endforeach; ?>
                     </select>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Soal Kuisioner</label>
+                  <label class="col-sm-3 control-label" for="">Nama Paket Soal</label>
                   <div class="col-sm-9">
-                    <input type="text" name="soal_up" id="soal_up" class="form-control" value="" placeholder="Masukan Soal Kuisioner..."required>
+                    <input type="text" name="nama_paket_up" id="nama_paket_up" class="form-control" value="" placeholder="Masukan Nama Paket Soal..."required>
                   </div>
                 </div>
               </div>
@@ -377,12 +354,14 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-default" data-dismiss="modal" name="button">Cancel</button>
-          <button type="submit" class="btn btn-primary" name="button">Update Soal Kuesioner</button>
+          <button type="submit" class="btn btn-primary" name="button">Update Paket Soal</button>
         </div>
       </div>
     </form>
   </div>
 </div>
+
+
 
 <!-- jQuery 3 -->
 <script src="<?php echo base_url(); ?>bower_components/jquery/dist/jquery.min.js"></script>
@@ -401,32 +380,30 @@
 <script src="<?php echo base_url(); ?>dist/js/demo.js"></script>
 <!-- page script -->
 <script>
-
  $(function () {
    $('#example1').DataTable({
      "columnDefs": [
-       { "width": "5%", "targets": 0 },
-       { "width": "10%", "targets": 1 },
-       { "width": "65%", "targets": 2 },
-       { "width": "20%", "targets": 3 }
-     ]
+  { "width": "5%", "targets": 0 },
+  { "width": "10%", "targets": 1 },
+  { "width": "25%", "targets": 3 }
+]
    })
  })
 
- function edit_soal(id_soal)
+ function edit_paket(id_paket)
  {
      //Ajax Load data from ajax
      $.ajax({
-         url : "<?php echo site_url('admin/daftar_soal/getDetailSoal')?>/" + id_soal,
+         url : "<?php echo site_url('admin/kuesioner_fakultas/getDetailPaket')?>/" + id_paket,
          type: "GET",
          dataType: "JSON",
          success: function(data)
          {
-             $('[name="id_soal_up"]').val(data.id_soal);
              $('[name="id_paket_up"]').val(data.id_paket);
-             $('[name="soal_up"]').val(data.soal);
-             $('[name="tipe_soal_up"]').val(data.tipe_soal);
-             $('#modal-update-soal').modal('show'); // show bootstrap modal when complete loaded
+             $('[name="jenjang_soal_up"]').val(data.jenjang_soal);
+             $('[name="nama_paket_up"]').val(data.nama_paket);
+             $('#modal-update-paket').modal('show'); // show bootstrap modal when complete loaded
+
          },
          error: function (jqXHR, textStatus, errorThrown)
          {
@@ -438,9 +415,8 @@
  function del(id) {
       var url="<?php echo site_url();?>";
       var r = confirm("Apakah anda yakin menghapus data ini?");
-      var id_paket=document.getElementById('id_paket').value;
       if (r == true) {
-          window.location = url+"/admin/daftar_soal/delete_soal/"+id+"/"+id_paket;
+          window.location = url+"/admin/kuesioner_fakultas/delete_paket_soal/"+id;
       } else {
           return false;
       }

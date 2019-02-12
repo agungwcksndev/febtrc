@@ -3,8 +3,8 @@
    <!-- Content Header (Page header) -->
    <section class="content-header">
      <h1>
-       Master Admin
-       <small>Tambah Data Admin Fakultas Ekonomi dan Bisnis</small>
+       Master Kuisioner
+       <small>View Daftar Pilihan Jawaban Soal Kuesioner Alumni Fakultas Ekonomi Bisnis Universitas Brawijaya</small>
      </h1>
      <ol class="breadcrumb">
        <li><a href="#"><i class="fa fa-folder-open"></i> Home</a></li>
@@ -15,86 +15,58 @@
 
    <!-- Main content -->
    <section class="content">
-     <?php echo validation_errors(); ?>
-     <form class="form-horizontal" method="post" action="<?php echo site_url('admin/admin/proses_tambah_admin') ?>">
      <div class="row">
-     <div class="col-md-6">
-       <div class="box box-info">
-            <div class="box-header with-border">
-              <h3 class="box-title">Identitas Diri</h3>
-            </div>
-            <!-- /.box-header -->
-            <!-- form start -->
-              <div class="box-body">
-                <div class="form-group">
-                  <label for="nama" class="col-sm-4 control-label">Nama Lengkap<font style="color: red;">*)</font></label>
-                  <div class="col-sm-8">
-                    <input type="text" name="nama" class="form-control" id="nama" value="<?php echo set_value('nama') ?>" placeholder="Masukan Nama Lengkap">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="jenis_kelamin" class="col-sm-4 control-label">Jenis Kelamin<font style="color: red;">*)</font></label>
-                  <div class="col-sm-8">
-                    <select class="form-control" name="jenis_kelamin" id="jenis_kelamin" value="<?php echo set_value('jenis_kelamin') ?>">
-                      <option value=""selected disabled>Pilih Jenis Kelamin</option>
-                      <option value="Perempuan">Perempuan</option>
-                      <option value="Laki-laki">Laki-laki</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="email" class="col-sm-4 control-label">Email<font style="color: red;">*)</font></label>
-                  <div class="col-sm-8">
-                    <input type="text" name="email" class="form-control" id="email" value="<?php echo set_value('email') ?>" placeholder="Masukan Email">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="nomor_hp" class="col-sm-4 control-label">Nomor HP<font style="color: red;">*)</font></label>
-                  <div class="col-sm-8">
-                    <input type="text" name="nomor_hp" class="form-control" id="nomor_hp" value="<?php echo set_value('nomor_hp') ?>" placeholder="Masukan Nomor HP">
-                  </div>
-                </div>
-            </div>
-          </div>
-        </div>
-
-    <div class="col-md-6">
-        <div class="box box-info">
-              <div class="box-header with-border">
-                <h3 class="box-title">Informasi Akun</h3>
-              </div>
-                  <div class="box-body">
-                   <div class="form-group">
-                     <label for="username" class="col-sm-4 control-label">Username<font style="color: red;">*)</font></label>
-                     <div class="col-sm-8">
-                       <input type="text" name="username" class="form-control" id="username" value="<?php echo set_value('username') ?>" placeholder="Masukan Username">
-                     </div>
-                   </div>
-                   <div class="form-group">
-                     <label for="password" class="col-sm-4 control-label">Password<font style="color: red;">*)</font></label>
-                     <div class="col-sm-8">
-                       <input type="password" name="password" class="form-control" id="password" placeholder="Masukan Password">
-                     </div>
-                   </div>
-                   <div class="form-group">
-                     <label for="passconf" class="col-sm-4 control-label">Konfirmasi Password<font style="color: red;">*)</font></label>
-                     <div class="col-sm-8">
-                       <input type="password" name="passconf" class="form-control" id="passconf" placeholder="Masukan Ulang Password">
-                     </div>
-                   </div>
-                 </div>
-              </div>
-                </div>
-             </div>
-          </div>
-          <!-- /.box-body -->
-          <div class="box-footer btn-toolbar">
-            <a href="<?php echo site_url('admin/admin') ?>" class="btn btn-default pull-right">Cancel</a>
-            <button type="submit"  class="btn btn-primary pull-right" name="submit" value="Simpan">Simpan</button>
-          </div>
-          <!-- /.box-footer -->
-        </form>
-      </section>
+       <div class="col-xs-12">
+         <div class="box box-info">
+           <div class="box-header">
+             <h3 class="box-title"><?php echo $detail_soal->soal ?></h3>
+                <button type="button" class="btn btn-primary btn-flat" style="float:right;" data-toggle="modal" data-target="#modal-add-jawaban"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Tambah Pilihan Jawaban</button>
+           </div>
+           <!-- /.box-header -->
+           <div class="box-body">
+             <table id="example1" class="table table-bordered table-striped">
+               <thead>
+               <tr>
+                 <th class="text-center">No.</th>
+                 <th>Soal</th>
+                 <th>Pilihan Jawaban</th>
+                 <th class="text-center">Aksi</th>
+               </tr>
+               </thead>
+               <tbody>
+                 <?php
+                 $no = 1;
+                 foreach ($daftar_jawaban as $daftar_jawaban): ?>
+               <tr>
+                 <td class="text-center"><?php echo $no ?></td>
+                 <td><?php echo $daftar_jawaban->soal ?></td>
+                 <td><?php echo $daftar_jawaban->jawaban ?></td>
+                 <input type="hidden" id="id_soal" name="id_soal" value="<?php echo $daftar_jawaban->id_soal ?>" >
+                 <td class="text-center">
+                   <a class="btn btn-default" onclick="edit_jawaban('<?php echo $daftar_jawaban->id_jawaban ?>')"<i class="fa fa-pencil"></i>&nbsp;&nbsp;Edit</a>
+                   <button onclick="del('<?php echo $daftar_jawaban->id_jawaban ?>')"class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;&nbsp;Delete</a>
+                 </td>
+               </tr>
+               <?php $no++ ?>
+               <?php endforeach; ?>
+               </tbody>
+               <tfoot>
+               <tr>
+                 <th class="text-center">No.</th>
+                 <th>Soal</th>
+                 <th>Pilihan Jawaban</th>
+                 <th class="text-center">Aksi</th>
+               </tr>
+               </tfoot>
+             </table>
+           </div>
+           <!-- /.box-body -->
+         </div>
+         <!-- /.box -->
+       </div>
+       <!-- /.col -->
+     <!-- /.row -->
+   </section>
    <!-- /.content -->
  </div>
  <!-- /.content-wrapper -->
@@ -226,6 +198,7 @@
      <!-- /.tab-pane -->
      <!-- Settings tab content -->
      <div class="tab-pane" id="control-sidebar-settings-tab">
+       <form method="post">
          <h3 class="control-sidebar-heading">General Settings</h3>
 
          <div class="form-group">
@@ -289,7 +262,7 @@
            </label>
          </div>
          <!-- /.form-group -->
-
+       </form>
      </div>
      <!-- /.tab-pane -->
    </div>
@@ -301,6 +274,86 @@
 </div>
 <!-- ./wrapper -->
 
+
+<div class="modal fade" id="modal-add-jawaban" role="dialog">
+  <div class="modal-dialog">
+    <form class="" action="<?php echo site_url('admin/daftar_jawaban/add_jawaban') ?>" method="post">
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <button type="button" class="close" data-dismiss="modal" name="button"></button>
+          <h4 class="modal-title"></i>Form Tambah Jawaban Soal Kuesioner</h4>
+        </div>
+        <div class="modal-body">
+          <div class="col-md-12">
+            <div class="form-horizontal">
+              <div class="box-body">
+                <input type="hidden" name="id_soal" id="id_soal" class="form-control" value="<?php echo $detail_soal->id_soal ?>">
+                <div class="form-group">
+                  <div class="col-sm-9"></div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="">Soal Kuesioner</label>
+                  <div class="col-sm-9">
+                    <select name="soal_up" id="soal_up" class="form-control">
+                          <option selected disabled><?php echo $detail_soal->soal; ?></option>
+                    </select>
+                    <!-- <textarea name="soal" id="soal" class="form-control" disabled></textarea> -->
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="">Pilihan Jawaban</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="jawaban" id="jawaban" class="form-control" value="" placeholder="Masukan Pilihan Jawaban ..."required>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-default" data-dismiss="modal" name="button">Cancel</button>
+          <button type="submit" class="btn btn-primary" name="button">Tambah Soal Kuisioner</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-update-soal" role="dialog">
+  <div class="modal-dialog">
+    <form class="" action="<?php echo site_url('admin/daftar_jawaban/update_jawaban') ?>" method="post">
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <button type="button" class="close" data-dismiss="modal" name="button"></button>
+          <h4 class="modal-title"></i>Form Update Jawaban Soal Kuisioner</h4>
+        </div>
+        <div class="modal-body">
+          <div class="col-md-12">
+            <div class="form-horizontal">
+              <div class="box-body">
+                <input type="hidden" name="id_soal_up" id="id_soal_up" class="form-control" value="">
+                <div class="form-group">
+                  <div class="col-sm-9"></div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="">Pilihan Jawaban</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="jawaban_up" id="jawaban_up" class="form-control" value="" placeholder="Masukan Pilihan Jawaban ..."required>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-default" data-dismiss="modal" name="button">Cancel</button>
+          <button type="submit" class="btn btn-primary" name="button">Update Jawaban</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
 <!-- jQuery 3 -->
 <script src="<?php echo base_url(); ?>bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
@@ -308,7 +361,6 @@
 <!-- DataTables -->
 <script src="<?php echo base_url(); ?>bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url(); ?>bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<script src="<?php echo base_url(); ?>bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- SlimScroll -->
 <script src="<?php echo base_url(); ?>bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
@@ -320,91 +372,49 @@
 <!-- page script -->
 <script>
 
-//Date picker
-$('#tanggal_yudisium').datepicker({
-autoclose: true
-})
+ $(function () {
+   $('#example1').DataTable({
+     "columnDefs": [
+  { "width": "5%", "targets": 0 },
+  { "width": "10%", "targets": 1 },
+  { "width": "30%", "targets": 2 },
+  { "width": "10%", "targets": 3 },
+  { "width": "17%", "targets": 4 }
+]
+   })
+ })
 
-$('#tanggal_lahir').datepicker({
-autoclose: true
-})
+ function edit_jawaban(id_jawaban)
+ {
+     //Ajax Load data from ajax
+     $.ajax({
+         url : "<?php echo site_url('admin/daftar_jawaban/getDetailJawaban')?>/" + id_jawaban,
+         type: "GET",
+         dataType: "JSON",
+         success: function(data)
+         {
+             $('[name="id_soal_up"]').val(data.id_soal);
+             $('[name="id_jawaban_up"]').val(data.id_jawaban);
+             $('[name="jawaban_up"]').val(data.jawaban);
+             $('#modal-update-soal').modal('show'); // show bootstrap modal when complete loaded
+         },
+         error: function (jqXHR, textStatus, errorThrown)
+         {
+             alert('Error get data from ajax');
+         }
+     });
+ }
 
-$(document).ready(function(){
-  $('#negara').change(function(){
-    var e = document.getElementById("negara");
-    var id_negara = e.options[e.selectedIndex].value;
-    console.log(id_negara)
-    if(id_negara != '')
-    {
-      $.ajax({
-        url:"<?php echo site_url();?>/admin/admin/fetch_provinsi",
-        method: "POST",
-        data:{id_negara:id_negara},
-        success:function(data)
-        {
-          $('#provinsi').html(data);
-        }
-      })
-    }
-  })
-  $('#provinsi').change(function(){
-    var e = document.getElementById("provinsi");
-    var id_provinsi = e.options[e.selectedIndex].value;
-    console.log(id_provinsi)
-    if(id_provinsi != '')
-    {
-      $.ajax({
-        url:"<?php echo site_url();?>/admin/admin/fetch_kota",
-        method: "POST",
-        data:{id_provinsi:id_provinsi},
-        success:function(data)
-        {
-          $('#kota').html(data);
-        }
-      })
-    }
-  })
-
-  $(document).ready(function(){
-
-    $('#jurusan').change(function(){
-      var e = document.getElementById ("jurusan");
-      var id_jurusan = e.options [e.selectedIndex] .value;
-      console.log(id_jurusan)
-      if(id_jurusan != '')
-      {
-        $.ajax({
-          url:"<?php echo site_url();?>/Login/fetch_prodi",
-          method: "POST",
-          data:{id_jurusan:id_jurusan},
-          success:function(data)
-          {
-            $('#prodi').html(data);
-          }
-        })
+ function del(id) {
+      var url="<?php echo site_url();?>";
+      var r = confirm("Apakah anda yakin menghapus data ini?");
+      var id_soal=document.getElementById('id_soal').value;
+      if (r == true) {
+          window.location = url+"/admin/daftar_jawaban/delete_jawaban/"+id+"/"+id_soal;
+      } else {
+          return false;
       }
-    })
-    var max  = new Date().getFullYear();
-    var min  = 1961;
-    var min2 = 1950;
-    select = document.getElementById('tahun_lulus');
-    select2 = document.getElementById('angkatan');
-
-    for (var i = min; i<=max; i++){
-    var opt = document.createElement('option');
-    opt.value = i;
-    opt.innerHTML = i;
-    select.appendChild(opt);
-    }
-
-    for (var i = min2; i<=max; i++){
-    var opt = document.createElement('option');
-    opt.value = i;
-    opt.innerHTML = i;
-    select2.appendChild(opt);
-    }
-  })
-})
+  }
 
 </script>
 </body>

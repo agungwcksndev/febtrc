@@ -1,17 +1,17 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Admin_Model extends CI_Model{
+class Operator_Model extends CI_Model{
 
   public function __construct()
   {
     parent::__construct();
     $this->load->database();
   }
-  public function get_admin()
+  public function get_operator()
   {
     $this->db->select('*');
-    $this->db->from('admin');
+    $this->db->from('operator');
     $this->db->order_by('nama');
     $query  = $this->db->get();
     return $query->result();
@@ -20,34 +20,34 @@ class Admin_Model extends CI_Model{
   public function listing()
   {
     $this->db->select('*');
-    $this->db->from('admin');
+    $this->db->from('operator');
     $this->db->order_by('username', 'DESC');
     $query  = $this->db->get();
     return $query->result();
   }
 
-  public function add_admin($data)
+  public function add_operator($data)
   {
-    $this->db->insert('admin', $data);
+    $this->db->insert('operator', $data);
   }
 
-  public function find_admin($username){
+  public function find_operator($username){
     $this->db->select('*');
-    $this->db->from('admin');
+    $this->db->from('operator');
     $this->db->where('username', $username);
     $query  = $this->db->get();
     return $query->row();
   }
 
-  public function update_admin($data)
+  public function update_operator($data)
   {
       $this->db->where('username', $data['username']);
-      $this->db->update('admin', $data);
+      $this->db->update('operator', $data);
   }
 
-  public function delete_admin($data)
+  public function delete_operator($data)
   {
     $this->db->where('username',$data['username']);
-    $this->db->delete('admin', $data);
+    $this->db->delete('operator', $data);
   }
 }

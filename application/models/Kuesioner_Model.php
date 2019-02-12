@@ -45,7 +45,7 @@ class Kuesioner_Model extends CI_Model{
     return $query->row();
   }
 
-  public function tambah_paket_soal($data)
+  public function add_paket_soal($data)
   {
     $this->db->insert('paket_soal', $data);
   }
@@ -64,7 +64,7 @@ class Kuesioner_Model extends CI_Model{
       $this->db->update('paket_soal', $data);
   }
 
-  public function hapus_paket_soal($data)
+  public function delete_paket_soal($data)
   {
     $this->db->where('id_paket',$data['id_paket']);
     $this->db->delete('paket_soal', $data);
