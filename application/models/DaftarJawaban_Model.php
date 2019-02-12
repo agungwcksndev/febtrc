@@ -34,6 +34,14 @@ class DaftarJawaban_Model extends CI_Model{
     return $output;
   }
 
+  public function getDetailJawaban($id_jawaban){
+    $this->db->select('*');
+    $this->db->from('daftar_jawaban');
+		$this->db->where('id_jawaban',$id_jawaban);
+		$query = $this->db->get();
+		return $query->row();
+  }
+
   public function add_jawaban($data)
   {
     $this->db->insert('daftar_jawaban', $data);

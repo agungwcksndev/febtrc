@@ -353,7 +353,6 @@
     <form class="" action="<?php echo site_url('admin/prodi/update_prodi') ?>" method="post">
       <div class="modal-content">
         <div class="modal-header bg-primary">
-
           <button type="button" class="close" data-dismiss="modal" name="button"></button>
           <h4 class="modal-title"></i>Form Update Program Studi</h4>
         </div>

@@ -28,7 +28,6 @@
                <thead>
                <tr>
                  <th class="text-center">No.</th>
-                 <th>Soal</th>
                  <th>Pilihan Jawaban</th>
                  <th class="text-center">Aksi</th>
                </tr>
@@ -39,7 +38,6 @@
                  foreach ($daftar_jawaban as $daftar_jawaban): ?>
                <tr>
                  <td class="text-center"><?php echo $no ?></td>
-                 <td><?php echo $daftar_jawaban->soal ?></td>
                  <td><?php echo $daftar_jawaban->jawaban ?></td>
                  <input type="hidden" id="id_soal" name="id_soal" value="<?php echo $daftar_jawaban->id_soal ?>" >
                  <td class="text-center">
@@ -53,7 +51,6 @@
                <tfoot>
                <tr>
                  <th class="text-center">No.</th>
-                 <th>Soal</th>
                  <th>Pilihan Jawaban</th>
                  <th class="text-center">Aksi</th>
                </tr>
@@ -287,15 +284,14 @@
           <div class="col-md-12">
             <div class="form-horizontal">
               <div class="box-body">
-                <input type="hidden" name="id_soal" id="id_soal" class="form-control" value="<?php echo $detail_soal->id_soal ?>">
                 <div class="form-group">
                   <div class="col-sm-9"></div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-3 control-label" for="">Soal Kuesioner</label>
                   <div class="col-sm-9">
-                    <select name="soal_up" id="soal_up" class="form-control">
-                          <option selected disabled><?php echo $detail_soal->soal; ?></option>
+                    <select name="soal" id="soal" class="form-control">
+                      <option value="<?php echo $detail_soal->id_soal ?>"><?php echo $detail_soal->soal; ?></option>
                     </select>
                     <!-- <textarea name="soal" id="soal" class="form-control" disabled></textarea> -->
                   </div>
@@ -312,7 +308,7 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-default" data-dismiss="modal" name="button">Cancel</button>
-          <button type="submit" class="btn btn-primary" name="button">Tambah Soal Kuisioner</button>
+          <button type="submit" class="btn btn-primary" name="button">Tambah Jawaban Kuisioner</button>
         </div>
       </div>
     </form>
@@ -332,6 +328,7 @@
             <div class="form-horizontal">
               <div class="box-body">
                 <input type="hidden" name="id_soal_up" id="id_soal_up" class="form-control" value="">
+                <input type="hidden" name="id_jawaban_up" id="id_jawaban_up" class="form-control" value="">
                 <div class="form-group">
                   <div class="col-sm-9"></div>
                 </div>
@@ -376,10 +373,8 @@
    $('#example1').DataTable({
      "columnDefs": [
   { "width": "5%", "targets": 0 },
-  { "width": "10%", "targets": 1 },
-  { "width": "30%", "targets": 2 },
-  { "width": "10%", "targets": 3 },
-  { "width": "17%", "targets": 4 }
+  { "width": "30%", "targets": 1 },
+  { "width": "17%", "targets": 2 }
 ]
    })
  })
