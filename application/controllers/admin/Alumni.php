@@ -18,14 +18,7 @@ class Alumni extends CI_Controller{
   function index()
   {
     $alumnis = $this->Alumni_Model->get_all_alumni();
-<<<<<<< HEAD
-    echo "<pre>";
-    print_r($alumnis);
-    exit();
-    $data = array('isi'     => 'admin/view-alumni',
-=======
     $data = array('isi'     => 'admin/v-alumni',
->>>>>>> ef4d65e706e69ca601efe449ba7b66e45c2f78c3
                   'alumnis'=> $alumnis
                   );
     $this->load->view("layouts/wrapper", $data, false);
@@ -217,7 +210,8 @@ class Alumni extends CI_Controller{
                   'tahun_lulus'        =>  $i->post('tahun_lulus'),
                   'tanggal_yudisium'   =>  $tgl_yudisium_proc,
                   'judul_skripsi'      =>  $i->post('judul_skripsi'),
-                  'ipk'                =>  $i->post('ipk')
+                  'ipk'                =>  $i->post('ipk'),
+                  'registered_date'  =>  date("Y-m-d")
                 );
             $this->Alumni_Model->add_alumni($data);
             $this->session->set_flashdata('success', 'Berhasil menambah alumni.');
@@ -417,7 +411,7 @@ class Alumni extends CI_Controller{
                     'tahun_lulus'        =>  $i->post('tahun_lulus'),
                     'tanggal_yudisium'   =>  $tgl_yudisium_proc,
                     'judul_skripsi'      =>  $i->post('judul_skripsi'),
-                    'ipk'                =>  $i->post('ipk')
+                    'ipk'                =>  $i->post('ipk'),
                   );
               $this->Alumni_Model->update_alumni($data);
               $this->session->set_flashdata('success', 'Profil alumni berhasil dirubah.');

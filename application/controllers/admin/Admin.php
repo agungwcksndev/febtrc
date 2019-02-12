@@ -31,7 +31,7 @@ class Admin extends CI_Controller{
     $this->load->view("layouts/wrapper", $data, false);
   }
 
-  function proses_add_admin(){
+  function process_add_admin(){
     $valid = $this->form_validation;
     $valid->set_rules(
       'nama',
@@ -105,6 +105,75 @@ class Admin extends CI_Controller{
 
     public function edit_admin($username)
     {
+      $data_admin = $this->Admin_Model->find_admin($username);
+      $valid       = $this->form_validation;
+      $valid->set_rules(
+        'nama',
+        'nama',
+        'required',
+        array(  'required'  =>  'Anda belum mengisikan nama')
+      );
+
+      $valid->set_rules(
+        'email',
+        'email',
+        'valid_email|is_unique[admin.email]',
+        array(  'valid_email'  =>  'Email tidak valid',
+                'is_unique[admin.email]' => 'Email sudah terdaftar')
+      );
+
+      $valid->set_rules(
+        'nomor_hp',
+        'nomor_hp',
+        'required|numeric',
+        array(  'required' =>  'Anda belum mengisikan nomor hp',
+                'numeric'  =>  'Nomor Telepon harus berupa angka')
+      );
+
+      $valid->set_rules(
+        'username',
+        'username',
+        'required|is_unique[admin.username]',
+        array(  'required'  =>  'Email tidak valid',
+                'is_unique[admin.username]' => 'Username sudah terdaftar')
+      );
+          if ($valid->run()===false) {
+            $admins      = $this->Admin_Model->listing();
+            $negaras      = $this->Negara_Model->get_negara();
+            $provinsis    = $this->Provinsi_Model->get_provinsi();
+            $list_jurusan = $this->Jurusan_Model->listing();
+            $data = array('isi'          => 'admin/edit-admin',
+                          'negaras'      =>  $negaras,
+                          'list_jurusan' =>  $list_jurusan,
+                          'provinsis'    =>  $provinsis,
+                          'data_admin'  =>  $data_admin
+                          );
+            $this->load->view("layouts/wrapper", $data, false);
+          } else {
+              $i  = $this->input;
+              $tgl_lahir_proc = date("Y-m-d",strtotime($_POST['tanggal_lahir']));
+              $tgl_yudisium_proc = date("Y-m-d",strtotime($_POST['tanggal_yudisium']));
+              $data = array(
+                    'nama'               =>  $i->post('nama'),
+                    'email'              =>  $i->post('email'),
+                    'jenis_kelamin'      =>  $i->post('jenis_kelamin'),
+                    'nomor_hp'           =>  $i->post('nomor_hp')
+                  );
+              $this->Admin_Model->edit_admin($data);
+              $this->session->set_flashdata('success', 'Berhasil menambah admin.');
+              redirect('admin/admin/'.$i->post('username'));
+          }
+    }
+
+    public function detail_admin($username){
+      $data_admin = $this->Admin_Model->find_admin($username);
+      $data = array('isi'     => 'admin/detail-admin',
+                    'data_admin'=> $data_admin
+                    );
+      $this->load->view("layouts/wrapper", $data, false);
+    }
+
+    public function update_admin($username){
       $data_admin = $this->Admin_Model->find_admin($username);
       $valid       = $this->form_validation;
       $valid->set_rules(
@@ -214,65 +283,58 @@ class Admin extends CI_Controller{
         'decimal',
         array(  'decimal'  =>  'IPK harus berupa angka desimal. Contoh : 4.00')
       );
-          if ($valid->run()===false) {
-            $admins      = $this->Admin_Model->listing();
-            $negaras      = $this->Negara_Model->get_negara();
-            $provinsis    = $this->Provinsi_Model->get_provinsi();
-            $list_jurusan = $this->Jurusan_Model->listing();
-            $data = array('isi'          => 'admin/edit-admin',
-                          'negaras'      =>  $negaras,
-                          'list_jurusan' =>  $list_jurusan,
-                          'provinsis'    =>  $provinsis,
-                          'data_admin'  =>  $data_admin
-                          );
-            $this->load->view("layouts/wrapper", $data, false);
-          } else {
-              $i  = $this->input;
-              $tgl_lahir_proc = date("Y-m-d",strtotime($_POST['tanggal_lahir']));
-              $tgl_yudisium_proc = date("Y-m-d",strtotime($_POST['tanggal_yudisium']));
-              $data = array(
-                    'nama'               =>  $i->post('nama'),
-                    'nim'                =>  $i->post('nim'),
-                    'email'              =>  $i->post('email'),
-                    'jenis_kelamin'      =>  $i->post('jenis_kelamin'),
-                    'golongan_darah'     =>  $i->post('golongan_darah'),
-                    'tempat_lahir'       =>  $i->post('tempat_lahir'),
-                    'tanggal_lahir'      =>  $tgl_lahir_proc,
-                    'kewarganegaraan'    =>  $i->post('kewarganegaraan'),
-                    'alamat_asal'        =>  $i->post('alamat_asal'),
-                    'kode_pos_asal'      =>  $i->post('kode_pos_asal'),
-                    'alamat_sekarang'    =>  $i->post('alamat_sekarang'),
-                    'kode_pos_sekarang'  =>  $i->post('kode_pos_sekarang'),
-                    'negara'             =>  $i->post('negara'),
-                    'provinsi'           =>  $i->post('provinsi'),
-                    'kota'               =>  $i->post('kota'),
-                    'nomor_telepon'      =>  $i->post('nomor_telepon'),
-                    'nomor_hp'           =>  $i->post('nomor_hp'),
-                    'website'            =>  $i->post('website'),
-                    'facebook'           =>  $i->post('facebook'),
-                    'twitter'            =>  $i->post('twitter'),
-                    'instagram'          =>  $i->post('instagram'),
-                    'jenjang'            =>  $i->post('jenjang'),
-                    'id_jurusan'         =>  $i->post('jurusan'),
-                    'id_prodi'           =>  $i->post('prodi'),
-                    'angkatan'           =>  $i->post('angkatan'),
-                    'tahun_lulus'        =>  $i->post('tahun_lulus'),
-                    'tanggal_yudisium'   =>  $tgl_yudisium_proc,
-                    'judul_skripsi'      =>  $i->post('judul_skripsi'),
-                    'ipk'                =>  $i->post('ipk')
-                  );
-              $this->Admin_Model->edit_admin($data);
-              $this->session->set_flashdata('success', 'Berhasil menambah admin.');
-              redirect('admin/admin/'.$i->post('username'));
-          }
-    }
 
-    public function detail_admin($username){
-      $data_admin = $this->Admin_Model->find_admin($username);
-      $data = array('isi'     => 'admin/detail-admin',
-                    'data_admin'=> $data_admin
-                    );
-      $this->load->view("layouts/wrapper", $data, false);
+      if ($valid->run()===false) {
+        $admins      = $this->Admin_Model->listing();
+        $negaras      = $this->Negara_Model->get_negara();
+        $provinsis    = $this->Provinsi_Model->get_provinsi();
+        $list_jurusan = $this->Jurusan_Model->listing();
+        $data = array('isi'          => 'admin/edit-admin',
+                      'negaras'      =>  $negaras,
+                      'list_jurusan' =>  $list_jurusan,
+                      'provinsis'    =>  $provinsis,
+                      'data_admin'  =>  $data_admin
+                      );
+        $this->load->view("layouts/wrapper", $data, false);
+      } else {
+          $i  = $this->input;
+          $tgl_lahir_proc = date("Y-m-d",strtotime($_POST['tanggal_lahir']));
+          $tgl_yudisium_proc = date("Y-m-d",strtotime($_POST['tanggal_yudisium']));
+          $data = array(
+                'nama'               =>  $i->post('nama'),
+                'nim'                =>  $i->post('nim'),
+                'email'              =>  $i->post('email'),
+                'jenis_kelamin'      =>  $i->post('jenis_kelamin'),
+                'golongan_darah'     =>  $i->post('golongan_darah'),
+                'tempat_lahir'       =>  $i->post('tempat_lahir'),
+                'tanggal_lahir'      =>  $tgl_lahir_proc,
+                'kewarganegaraan'    =>  $i->post('kewarganegaraan'),
+                'alamat_asal'        =>  $i->post('alamat_asal'),
+                'kode_pos_asal'      =>  $i->post('kode_pos_asal'),
+                'alamat_sekarang'    =>  $i->post('alamat_sekarang'),
+                'kode_pos_sekarang'  =>  $i->post('kode_pos_sekarang'),
+                'negara'             =>  $i->post('negara'),
+                'provinsi'           =>  $i->post('provinsi'),
+                'kota'               =>  $i->post('kota'),
+                'nomor_telepon'      =>  $i->post('nomor_telepon'),
+                'nomor_hp'           =>  $i->post('nomor_hp'),
+                'website'            =>  $i->post('website'),
+                'facebook'           =>  $i->post('facebook'),
+                'twitter'            =>  $i->post('twitter'),
+                'instagram'          =>  $i->post('instagram'),
+                'jenjang'            =>  $i->post('jenjang'),
+                'id_jurusan'         =>  $i->post('jurusan'),
+                'id_prodi'           =>  $i->post('prodi'),
+                'angkatan'           =>  $i->post('angkatan'),
+                'tahun_lulus'        =>  $i->post('tahun_lulus'),
+                'tanggal_yudisium'   =>  $tgl_yudisium_proc,
+                'judul_skripsi'      =>  $i->post('judul_skripsi'),
+                'ipk'                =>  $i->post('ipk')
+              );
+          $this->Admin_Model->edit_admin($data);
+          $this->session->set_flashdata('success', 'Berhasil menambah admin.');
+          redirect('admin/admin/'.$i->post('username'));
+      }
     }
 
     public function delete_admin($username)

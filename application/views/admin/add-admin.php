@@ -16,7 +16,7 @@
    <!-- Main content -->
    <section class="content">
      <?php echo validation_errors(); ?>
-     <form class="form-horizontal" method="post" action="<?php echo site_url('admin/admin/proses_add_admin') ?>">
+     <form class="form-horizontal" method="post" action="<?php echo site_url('admin/admin/process_add_admin') ?>">
      <div class="row">
      <div class="col-md-6">
        <div class="box box-info">

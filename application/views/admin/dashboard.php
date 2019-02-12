@@ -16,13 +16,13 @@
     <section class="content">
       <!-- Small boxes (Stat box) -->
       <div class="row">
-        <div class="col-lg-3 col-xs-6">
+        <div class="col-lg-6 col-xs-6">
           <!-- small box -->
           <div class="small-box bg-aqua">
             <div class="inner">
-              <h3>150</h3>
+              <h3><?php echo $total_alumni ?></h3>
 
-              <p>New Orders</p>
+              <p>Total Alumni</p>
             </div>
             <div class="icon">
               <i class="ion ion-bag"></i>
@@ -31,13 +31,13 @@
           </div>
         </div>
         <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
+        <div class="col-lg-6 col-xs-6">
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>53<sup style="font-size: 20px">%</sup></h3>
+              <h3><?php echo $total_today ?></h3>
 
-              <p>Bounce Rate</p>
+              <p>Alumni Terdaftar Hari ini</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -46,13 +46,15 @@
           </div>
         </div>
         <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-xs-6">
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>44</h3>
+              <h3><?php echo $total_ie; ?></h3>
 
-              <p>User Registrations</p>
+              <p>Alumni Ilmu Ekonomi</p>
             </div>
             <div class="icon">
               <i class="ion ion-person-add"></i>
@@ -61,13 +63,13 @@
           </div>
         </div>
         <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
+        <div class="col-lg-4 col-xs-6">
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>65</h3>
+              <h3><?php echo $total_akuntansi ?></h3>
 
-              <p>Unique Visitors</p>
+              <p>Alumni Akuntansi</p>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
@@ -76,6 +78,20 @@
           </div>
         </div>
         <!-- ./col -->
+        <div class="col-lg-4 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3><?php echo $total_manajemen ?></h3>
+
+              <p>Alumni Manajemen</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="<?php echo base_url(); ?>#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
       </div>
       <!-- /.row -->
       <!-- Main row -->
