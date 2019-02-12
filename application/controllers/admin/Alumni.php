@@ -18,6 +18,9 @@ class Alumni extends CI_Controller{
   function index()
   {
     $alumnis = $this->Alumni_Model->get_all_alumni();
+    echo "<pre>";
+    print_r($alumnis);
+    exit();
     $data = array('isi'     => 'admin/view-alumni',
                   'alumnis'=> $alumnis
                   );
