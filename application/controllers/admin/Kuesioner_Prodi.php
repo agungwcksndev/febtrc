@@ -39,8 +39,8 @@ class Kuesioner_Prodi extends CI_Controller{
 
       if ($valid->run()===false)
       {
-          $data = array('title' => 'Data Kuesioner - Tracert Alumni Fakultas Ekonomi Bisnis Universitas Brawijaya' );
-          $this->load->view('admin/kuesioner_prodi', $data, false);
+          $this->session->set_flashdata('natifikasi', 'Gagal menambah Paket Soal.');
+          redirect('admin/kuesioner_prodi');
       }
       else
       {
@@ -97,7 +97,7 @@ class Kuesioner_Prodi extends CI_Controller{
                 );
             $this->Kuesioner_Model->update_paket_soal($data);
             $this->session->set_flashdata('notifikasi', 'Berhasil merubah paket soal!');
-            redirect('admin/kuesioner');
+            redirect('admin/kuesioner_prodi');
         }
     }
 
@@ -106,6 +106,6 @@ class Kuesioner_Prodi extends CI_Controller{
       $data = array('id_paket'  =>  $id);
       $this->Kuesioner_Model->delete_paket_soal($data);
       $this->session->set_flashdata('success', 'Berhasil menghapus paket soal');
-      redirect('admin/kuesioner');
+      redirect('admin/kuesioner_prodi');
     }
   }

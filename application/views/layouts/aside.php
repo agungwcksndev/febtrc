@@ -52,7 +52,7 @@
         </ul>
       </li>
       <li>
-        <a href="<?php echo base_url(); ?>pages/calendar.html">
+        <a href="#">
           <i class="fa fa-suitcase"></i> <span>Lowongan Pekerjaan</span>
         </a>
       </li>
@@ -65,16 +65,16 @@
         </a>
         <ul class="treeview-menu">
           <li><a href="<?php echo site_url('admin/kuesioner_fakultas'); ?>"><i class="fa fa-circle-o"></i> Daftar Paket Fakultas</a></li>
-          <li><a href="<?php echo site_url('admin/kuesioner_prodi'); ?>"><i class="fa fa-circle-o"></i> Daftar Paket Prodi</a></li>
           <li><a href="<?php echo site_url('admin/kuesioner_jurusan'); ?>"><i class="fa fa-circle-o"></i> Daftar Paket Jurusan</a></li>
+          <li><a href="<?php echo site_url('admin/kuesioner_prodi'); ?>"><i class="fa fa-circle-o"></i> Daftar Paket Prodi</a></li>
         </ul>
       </li>
       <li>
-        <a href="<?php echo base_url(); ?>pages/mailbox/mailbox.html">
+        <a href="#">
           <i class="fa fa-credit-card"></i> <span>Kartu Alumni</span>
         </a>
       </li>
-      <li><a href="<?php echo base_url(); ?>https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
+      <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
       <li class="header">LABELS</li>
       <li><a href="<?php echo base_url(); ?>#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
       <li><a href="<?php echo base_url(); ?>#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>

@@ -276,7 +276,7 @@
 
 <div class="modal fade" id="modal-add-paket" role="dialog">
   <div class="modal-dialog">
-    <form class="" action="<?php echo site_url('admin/kuesioner/add_paket_soal') ?>" method="post">
+    <form class="" action="<?php echo site_url('admin/kuesioner_prodi/add_paket_soal') ?>" method="post">
       <div class="modal-content">
         <div class="modal-header bg-primary">
           <button type="button" class="close" data-dismiss="modal" name="button"></button>
@@ -319,7 +319,7 @@
 
 <div class="modal fade" id="modal-update-paket" role="dialog">
   <div class="modal-dialog">
-    <form class="" action="<?php echo site_url('admin/kuesioner/update_paket_soal') ?>" method="post">
+    <form class="" action="<?php echo site_url('admin/kuesioner_prodi/update_paket_soal') ?>" method="post">
       <div class="modal-content">
         <div class="modal-header bg-primary">
           <button type="button" class="close" data-dismiss="modal" name="button"></button>
@@ -394,7 +394,7 @@
  {
      //Ajax Load data from ajax
      $.ajax({
-         url : "<?php echo site_url('admin/kuesioner/getDetailPaket')?>/" + id_paket,
+         url : "<?php echo site_url('admin/kuesioner_prodi/getDetailPaket')?>/" + id_paket,
          type: "GET",
          dataType: "JSON",
          success: function(data)
@@ -416,7 +416,7 @@
       var url="<?php echo site_url();?>";
       var r = confirm("Apakah anda yakin menghapus data ini?");
       if (r == true) {
-          window.location = url+"/admin/kuesioner/delete_paket_soal/"+id;
+          window.location = url+"/admin/kuesioner_prodi/delete_paket_soal/"+id;
       } else {
           return false;
       }

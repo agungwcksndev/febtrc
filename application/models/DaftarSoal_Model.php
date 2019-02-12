@@ -45,7 +45,7 @@ class DaftarSoal_Model extends CI_Model{
     $this->db->where('id_paket', $id_paket);
     $this->db->order_by('soal', 'ASC');
     $query  = $this->db->get();
-    $output = '<option value="">Pilih Soal Quisioner</option>';
+    $output = '<option value="">Pilih Soal Kuesioner</option>';
     foreach($query->result() as $row)
     {
       $output .= '<option value="'.$row->id_soal.'">'.$row->soal.'</option>';

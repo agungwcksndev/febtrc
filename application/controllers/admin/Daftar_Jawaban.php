@@ -15,37 +15,50 @@ class Daftar_Jawaban extends CI_Controller{
 
   }
 
+  public function get_jawaban_soal($id_soal)
+  {
+    $daftar_jawaban = $this->DaftarJawaban_Model->find_daftar_jawaban($id_soal);
+    $detail_soal = $this->DaftarSoal_Model->getDetailSoal($id_soal);
+    $data = array('isi'            => 'admin/v-jawaban',
+                  'daftar_jawaban' => $daftar_jawaban,
+                  'detail_soal'    => $detail_soal
+                 );
+    $this->load->view("layouts/wrapper", $data, false);
+  }
+
   function add_jawaban()
   {
+    $valid = $this->form_validation;
     $valid->set_rules(
         'soal',
-        'Soal',
+        'soal',
         'required',
         array(  'required'  =>  'Anda belum mengisikan soal kuesioner.')
       );
 
     $valid->set_rules(
         'jawaban',
-        'Jawaban',
+        'jawaban',
         'required',
         array(  'required'  =>  'Anda belum mengisikan jawaban soal kuesioner.')
         );
 
+      $i  = $this->input;
       if ($valid->run()===false)
       {
-          $data = array('title' => 'Data Jawaban Soal Kuesioner - Tracert Alumni Fakultas Ekonomi Bisnis Universitas Brawijaya' );
-          $this->load->view('admin/daftar_jawaban', $data, false);
+        $this->session->set_flashdata('notifikasi', '<center>Pilihan Jawaban Gagal di Tambahkan');
+        redirect('admin/daftar_jawaban/get_jawaban_soal/'.$i->post("id_soal"));
       }
       else
       {
-          $i  = $this->input;
           $data = array(
-                'id_soal'      =>  $i->post('soal'),
-                'jawaban'      =>  $i->post('jawaban')
+                'id_soal'     =>  $i->post('id_soal'),
+                'id_jawaban'  =>  $i->post('id_jawaban'),
+                'jawaban'     =>  $i->post('jawaban')
               );
           $this->DaftarJawaban_Model->add_jawaban($data);
           $this->session->set_flashdata('sukses', 'Berhasil Menambah Jawaban Soal Kuesioner.');
-          redirect('admin/daftar_jawaban');
+          redirect('admin/daftar_jawaban/get_jawaban_soal/'.$i->post("id_soal"));
       }
     }
 
@@ -56,6 +69,7 @@ class Daftar_Jawaban extends CI_Controller{
 
     public function update_jawaban()
     {
+      $valid = $this->form_validation;
       $valid->set_rules(
           'soal_up',
           'soal_up',
@@ -73,31 +87,19 @@ class Daftar_Jawaban extends CI_Controller{
         $i  = $this->input;
         if ($valid->run()===false)
         {
-            $daftar_jawabs = $this->DaftarJawaban_Model->listing();
-            $data = array('isi'            => 'admin/v-jawaban',
-                          'daftar_jawabs'  => $daftar_jawabs
-                          );
-            $this->load->view("layouts/wrapper", $data, false);
+          $this->session->set_flashdata('notifikasi', '<center>Pilihan Jawaban Gagal di Update');
+          redirect('admin/daftar_jawaban/get_jawaban_soal/'.$i->post("id_soal"));
         }
         else {
             $data = array(
-              'id_soal'            =>  $i->post('soal_up'),
+              'id_soal'            =>  $i->post('id_soal_up'),
               'jawaban'            =>  $i->post('jawaban_up'),
               'id_jawaban'         =>  $i->post('id_jawaban_up')
               );
             $this->DaftarJawaban_Model->update_jawaban($data);
             $this->session->set_flashdata('notifikasi', '<center>Data Jawban Soal Kuesioner berhasil di update');
-            redirect('admin/daftar_jawaban');
+            redirect('admin/daftar_jawaban/get_jawaban_soal/'.$i->post("id_soal"));
         }
-    }
-
-    public function get_jawaban_soal($id_soal)
-    {
-      $daftar_jawaban = $this->DaftarJawaban_Model->find_daftar_jawaban($id_soal);
-      $data = array('isi'            => 'admin/v-jawaban',
-                    'daftar_jawaban' => $daftar_jawaban
-                   );
-      $this->load->view("layouts/wrapper", $data, false);
     }
 
     public function delete_jawaban($id_jawaban,$id_soal)

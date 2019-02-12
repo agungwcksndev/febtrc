@@ -4,7 +4,7 @@
    <section class="content-header">
      <h1>
        Master Kuisioner
-       <small>View daftar jawaban</small>
+       <small>View Daftar Pilihan Jawaban Soal Kuesioner Alumni Fakultas Ekonomi Bisnis Universitas Brawijaya</small>
      </h1>
      <ol class="breadcrumb">
        <li><a href="#"><i class="fa fa-folder-open"></i> Home</a></li>
@@ -19,7 +19,7 @@
        <div class="col-xs-12">
          <div class="box box-info">
            <div class="box-header">
-             <h3 class="box-title">Data Jawaban Kuisioner Alumni Fakultas Ekonomi Bisnis Universitas Brawijaya</h3>
+             <h3 class="box-title"><?php echo $detail_soal->soal ?></h3>
                 <button type="button" class="btn btn-primary btn-flat" style="float:right;" data-toggle="modal" data-target="#modal-add-jawaban"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Tambah Pilihan Jawaban</button>
            </div>
            <!-- /.box-header -->
@@ -43,7 +43,7 @@
                  <td><?php echo $daftar_jawaban->jawaban ?></td>
                  <input type="hidden" id="id_soal" name="id_soal" value="<?php echo $daftar_jawaban->id_soal ?>" >
                  <td class="text-center">
-                   <a class="btn btn-default" onclick="edit_soal('<?php echo $daftar_jawaban->id_jawaban ?>')"<i class="fa fa-pencil"></i>&nbsp;&nbsp;Edit</a>
+                   <a class="btn btn-default" onclick="edit_jawaban('<?php echo $daftar_jawaban->id_jawaban ?>')"<i class="fa fa-pencil"></i>&nbsp;&nbsp;Edit</a>
                    <button onclick="del('<?php echo $daftar_jawaban->id_jawaban ?>')"class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;&nbsp;Delete</a>
                  </td>
                </tr>
@@ -281,43 +281,29 @@
       <div class="modal-content">
         <div class="modal-header bg-primary">
           <button type="button" class="close" data-dismiss="modal" name="button"></button>
-          <h4 class="modal-title"></i>Form Tambah Jawaban Soal Kuisioner</h4>
+          <h4 class="modal-title"></i>Form Tambah Jawaban Soal Kuesioner</h4>
         </div>
         <div class="modal-body">
           <div class="col-md-12">
             <div class="form-horizontal">
               <div class="box-body">
+                <input type="hidden" name="id_soal" id="id_soal" class="form-control" value="<?php echo $detail_soal->id_soal ?>">
                 <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Pilih Paket Soal</label>
+                  <div class="col-sm-9"></div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="">Soal Kuesioner</label>
                   <div class="col-sm-9">
-                    <select name="daftar_soal" id="daftar_soal" class="form-control">
-                      <option selected disabled>Pilih paket soal</option>
-                       <?php foreach ($list_soal as $daftar_soal): ?>
-                        <textarea value="<?php echo $daftar_soal->id_soal; ?>"><?php echo $daftar_soal->soal; ?></textarea>
-                      <?php endforeach; ?>
+                    <select name="soal_up" id="soal_up" class="form-control">
+                          <option selected disabled><?php echo $detail_soal->soal; ?></option>
                     </select>
+                    <!-- <textarea name="soal" id="soal" class="form-control" disabled></textarea> -->
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Pilih Tipe Soal</label>
+                  <label class="col-sm-3 control-label" for="">Pilihan Jawaban</label>
                   <div class="col-sm-9">
-                    <select name="tipe_soal" id="tipe_soal" class="form-control">
-                      <option selected disabled>Pilih tipe soal</option>
-                      <option value="Short Text">Short Text</option>
-                      <option value="Paragraf Text">Paragraf Text</option>
-                      <option value="Multiple choice">Multiple choice</option>
-                      <option value="Chkeckbox">Chkeckbox</option>
-                      <option value="Dropdown">Dropdown</option>
-                      <option value="Scale">Scale</option>
-                      <option value="Date">Date</option>
-                      <option value="Time">Time</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Soal Kuisioner</label>
-                  <div class="col-sm-9">
-                    <input type="text" name="soal" id="soal" class="form-control" value="" placeholder="Masukan Soal Kuisioner..."required>
+                    <input type="text" name="jawaban" id="jawaban" class="form-control" value="" placeholder="Masukan Pilihan Jawaban ..."required>
                   </div>
                 </div>
               </div>
@@ -335,42 +321,24 @@
 
 <div class="modal fade" id="modal-update-soal" role="dialog">
   <div class="modal-dialog">
-    <form class="" action="<?php echo site_url('admin/daftar_soal/update_soal') ?>" method="post">
+    <form class="" action="<?php echo site_url('admin/daftar_jawaban/update_jawaban') ?>" method="post">
       <div class="modal-content">
         <div class="modal-header bg-primary">
           <button type="button" class="close" data-dismiss="modal" name="button"></button>
-          <h4 class="modal-title"></i>Form Update Soal Kuisioner</h4>
+          <h4 class="modal-title"></i>Form Update Jawaban Soal Kuisioner</h4>
         </div>
         <div class="modal-body">
           <div class="col-md-12">
             <div class="form-horizontal">
               <div class="box-body">
-                <input type="hidden" name="id_soal_up" id="id_soal_up" class="form-control" value="" placeholder="">
+                <input type="hidden" name="id_soal_up" id="id_soal_up" class="form-control" value="">
                 <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Paket Soal</label>
-                  <div class="col-sm-9">
-                    <input type="hidden" id="id_jawaban_up" name="id_jawaban_up" value="">
-                    <select name="soal_up" id="soal_up" class="form-control">
-                      <option value="<?php echo $daftar_soal->id_soal ?>"><?php echo $daftar_soal->soal ?></option>
-                    </select>
-                  </div>
+                  <div class="col-sm-9"></div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Soal Kuisioner</label>
+                  <label class="col-sm-3 control-label" for="">Pilihan Jawaban</label>
                   <div class="col-sm-9">
-                    <input type="text" name="soal_up" id="soal_up" class="form-control" value="" placeholder="Masukan Soal Kuisioner..."required>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Tipe Soal</label>
-                  <div class="col-sm-9">
-                    <input type="hidden" id="id_soal_up" name="id_soal_up" value="">
-                    <select name="tipe_soal_up" id="tipe_soal_up" class="form-control">
-                      <option value="" disabled>Pilih Tipe Soal</option>
-                        <?php foreach ($list_tipe as $daftar_jawaban): ?>
-                          <option value="<?php echo $daftar_jawaban->tipe_soal ?>"><?php echo $daftar_jawaban->tipe_soal ?></option>
-                        <?php endforeach; ?>
-                    </select>
+                    <input type="text" name="jawaban_up" id="jawaban_up" class="form-control" value="" placeholder="Masukan Pilihan Jawaban ..."required>
                   </div>
                 </div>
               </div>
@@ -379,7 +347,7 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-default" data-dismiss="modal" name="button">Cancel</button>
-          <button type="submit" class="btn btn-primary" name="button">Update Soal Kuisioner</button>
+          <button type="submit" class="btn btn-primary" name="button">Update Jawaban</button>
         </div>
       </div>
     </form>
@@ -426,9 +394,8 @@
          success: function(data)
          {
              $('[name="id_soal_up"]').val(data.id_soal);
-             $('[name="nama_paket_up"]').val(data.id_paket);
-             $('[name="soal_up"]').val(data.soal);
-             $('[name="tipe_soal_up"]').val(data.tipe_soal);
+             $('[name="id_jawaban_up"]').val(data.id_jawaban);
+             $('[name="jawaban_up"]').val(data.jawaban);
              $('#modal-update-soal').modal('show'); // show bootstrap modal when complete loaded
          },
          error: function (jqXHR, textStatus, errorThrown)
@@ -440,8 +407,8 @@
 
  function del(id) {
       var url="<?php echo site_url();?>";
-      var id_soal=document.getElementById('id_soal').value;
       var r = confirm("Apakah anda yakin menghapus data ini?");
+      var id_soal=document.getElementById('id_soal').value;
       if (r == true) {
           window.location = url+"/admin/daftar_jawaban/delete_jawaban/"+id+"/"+id_soal;
       } else {

@@ -284,17 +284,21 @@
       <div class="modal-content">
         <div class="modal-header bg-primary">
           <button type="button" class="close" data-dismiss="modal" name="button"></button>
-          <h4 class="modal-title"></i>Form Tambah Soal Kuisioner</h4>
+          <h4 class="modal-title"></i>Form Tambah Soal Kuesioner</h4>
         </div>
         <div class="modal-body">
           <div class="col-md-12">
             <div class="form-horizontal">
               <div class="box-body">
+                <input type="hidden" name="id_paket" id="id_paket" value="<?php echo $detail_paket->id_paket ?>" placeholder="">
+                <div class="form-group">
+                  <div class="col-sm-9"></div>
+                </div>
                 <div class="form-group">
                   <label class="col-sm-3 control-label" for="">Pilih Paket Soal</label>
                   <div class="col-sm-9">
-                    <select name="paket_soal" id="paket_soal" class="form-control">
-                        <option selected disabled><?php echo $detail_paket->nama_paket; ?></option>
+                    <select name="nama_paket" id="nama_paket" class="form-control">
+                        <option><?php echo $detail_paket->nama_paket; ?></option>
                     </select>
                   </div>
                 </div>
@@ -347,9 +351,7 @@
               <div class="box-body">
                 <input type="hidden" name="id_paket_up" id="id_paket_up" value="" placeholder="">
                 <div class="form-group">
-                  <div class="col-sm-9">
-                    <input type="hidden" id="id_soal_up" name="id_soal_up" value="">
-                  </div>
+                  <div class="col-sm-9"></div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-3 control-label" for="">Tipe Soal</label>
@@ -375,7 +377,7 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-default" data-dismiss="modal" name="button">Cancel</button>
-          <button type="submit" class="btn btn-primary" name="button">Update Soal Kuisioner</button>
+          <button type="submit" class="btn btn-primary" name="button">Update Soal Kuesioner</button>
         </div>
       </div>
     </form>

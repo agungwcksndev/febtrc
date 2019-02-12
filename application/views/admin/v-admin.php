@@ -28,7 +28,7 @@
        <div class="col-xs-12">
          <div class="box box-info">
            <div class="box-header">
-             <h3 class="box-title">Data Administrator Fakultas Ekonomi Bisnis Universitas Brawijaya</h3>
+             <h3 class="box-title"><i class="fa fa-users"></i>&nbsp;&nbsp;Data Administrator Fakultas Ekonomi Bisnis Universitas Brawijaya</h3>
                <a href="<?php echo site_url('admin/admin/add_admin') ?>" class="btn btn-primary btn-flat"  style="float:right;"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Tambah Data Admin</a>
            </div>
            <!-- /.box-header -->
