@@ -3,8 +3,8 @@
    <!-- Content Header (Page header) -->
    <section class="content-header">
      <h1>
-       Master Admin
-       <small>Tambah Admin Fakultas Ekonomi dan Bisnis</small>
+       Master Operator
+       <small>Detail Operator Fakultas Ekonomi dan Bisnis</small>
      </h1>
      <ol class="breadcrumb">
        <li><a href="#"><i class="fa fa-folder-open"></i> Home</a></li>
@@ -16,7 +16,7 @@
    <!-- Main content -->
    <section class="content">
      <?php echo validation_errors(); ?>
-     <form class="form-horizontal" method="post" action="<?php echo site_url('admin/admin/proses_add_admin') ?>">
+     <form class="form-horizontal" method="post" action="<?php echo site_url('admin/operator/proses_add_operator') ?>">
      <div class="row">
      <div class="col-md-6">
        <div class="box box-info">
@@ -29,25 +29,25 @@
                 <div class="form-group">
                   <label for="nama" class="col-sm-4 col-form-label text-right">Nama Lengkap</label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_admin->nama ?></p>
+                    <p class="control-label-plaintext"><?php echo $data_operator->nama ?></p>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="email" class="col-sm-4 col-form-label text-right">Email</label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_admin->email ?></p>
+                    <p class="control-label-plaintext"><?php echo $data_operator->email ?></p>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="jenis_kelamin" class="col-sm-4 col-form-label text-right">Jenis Kelamin</label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_admin->jenis_kelamin ?></p>
+                    <p class="control-label-plaintext"><?php echo $data_operator->jenis_kelamin ?></p>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="nomor_hp" class="col-sm-4 col-form-label text-right">Nomor HP</label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_admin->nomor_hp ?></p>
+                    <p class="control-label-plaintext"><?php echo $data_operator->nomor_hp ?></p>
                   </div>
                 </div>
             </div>
@@ -64,7 +64,7 @@
                       <img class="profile-user-img img-responsive img-circle" src="" alt="User profile picture">
                       <h3 class="profile-username text-center"></h3>
                       <div class="col-md-12 text-center">
-                        <a href="<?php echo site_url('admin/admin/update_admin/'.$data_admin->username)?>" class="btn bg-navy margin" name="button"><i class="fa fa-pencil"></i>&nbsp;&nbsp;&nbsp;Edit Profil</a>
+                        <a href="<?php echo site_url('admin/operator/update_operator/'.$data_operator->username)?>" class="btn bg-navy margin" name="button"><i class="fa fa-pencil"></i>&nbsp;&nbsp;&nbsp;Edit Profil</a>
                         <button type="button" class="btn bg-maroon margin" name="button"><i class="fa fa-image"></i>&nbsp;&nbsp;&nbsp;Ganti Foto</button>
                         <button type="button" class="btn bg-maroon margin" name="button"><i class="fa fa-image"></i>&nbsp;&nbsp;&nbsp;Ganti Password</button>
                       </div>
@@ -293,9 +293,9 @@
 <script src="<?php echo base_url(); ?>bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
 <script src="<?php echo base_url(); ?>bower_components/fastclick/lib/fastclick.js"></script>
-<!-- AdminLTE App -->
+<!-- OperatorLTE App -->
 <script src="<?php echo base_url(); ?>dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
+<!-- OperatorLTE for demo purposes -->
 <script src="<?php echo base_url(); ?>dist/js/demo.js"></script>
 <!-- page script -->
 <script>
@@ -317,7 +317,7 @@ $(document).ready(function(){
     if(id_negara != '')
     {
       $.ajax({
-        url:"<?php echo site_url();?>/admin/admin/fetch_provinsi",
+        url:"<?php echo site_url();?>/admin/operator/fetch_provinsi",
         method: "POST",
         data:{id_negara:id_negara},
         success:function(data)
@@ -334,7 +334,7 @@ $(document).ready(function(){
     if(id_provinsi != '')
     {
       $.ajax({
-        url:"<?php echo site_url();?>/admin/admin/fetch_kota",
+        url:"<?php echo site_url();?>/admin/operator/fetch_kota",
         method: "POST",
         data:{id_provinsi:id_provinsi},
         success:function(data)

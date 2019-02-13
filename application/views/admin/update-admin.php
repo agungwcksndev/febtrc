@@ -4,81 +4,91 @@
    <section class="content-header">
      <h1>
        Master Admin
-       <small>View data</small>
+       <small>Tambah Admin Fakultas Ekonomi dan Bisnis</small>
      </h1>
      <ol class="breadcrumb">
        <li><a href="#"><i class="fa fa-folder-open"></i> Home</a></li>
        <li><a href="#">Tables</a></li>
        <li class="active">Data tables</li>
      </ol>
-     <?php if ($this->session->flashdata('success')) {
-         echo "<br>";
-         echo "<div class='alert alert-success alert-dismissible'>";
-         echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
-         echo "<h4><i class='icon fa fa-check'></i>Success!</h4>";
-         echo $this->session->flashdata('success');
-         echo "</div>";
-     };
-     ?>
    </section>
 
    <!-- Main content -->
    <section class="content">
+     <?php if (!empty(validation_errors())): ?>
+          <div class="alert alert-danger">
+              <a class="close" data-dismiss="alert" title="close">x</a>
+              <ul><?php echo (validation_errors('<li>', '</li>')); ?></ul>
+          </div>
+      <?php endif; ?>
+     <form class="form-horizontal" method="post" action="">
      <div class="row">
-       <div class="col-xs-12">
-         <div class="box box-info">
-           <div class="box-header">
-             <h3 class="box-title"><i class="fa fa-users"></i>&nbsp;&nbsp;Data Operator Fakultas Ekonomi Bisnis Universitas Brawijaya</h3>
-               <a href="<?php echo site_url('admin/operator/add_operator') ?>" class="btn btn-primary btn-flat"  style="float:right;"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Tambah Data Operator</a>
+     <div class="col-md-6">
+       <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Identitas Diri</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+              <div class="box-body">
+                <div class="form-group">
+                  <label for="nama" class="col-sm-4 control-label">Nama Lengkap<font style="color: red;">*)</font></label>
+                  <div class="col-sm-8">
+                    <input type="text" name="nama" class="form-control" id="nama" value="<?php echo $data_admin->nama ?>" placeholder="Masukan Nama Lengkap">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="Email" class="col-sm-4 control-label">Email<font style="color: red;">*)</font></label>
+                  <div class="col-sm-8">
+                    <input type="email" name="email" class="form-control" id="email" value="<?php echo $data_admin->email ?>" placeholder="Masukan Email">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="jenis_kelamin" class="col-sm-4 control-label">Jenis Kelamin<font style="color: red;">*)</font></label>
+                  <div class="col-sm-8">
+                    <select class="form-control" name="jenis_kelamin" id="jenis_kelamin">
+                      <option value=""selected disabled>Pilih Jenis Kelamin</option>
+                      <option value="Perempuan" <?php echo ($data_admin->jenis_kelamin == 'Perempuan') ? 'selected="selected"' : '' ?>>Perempuan</option>
+                      <option value="Laki-laki" <?php echo ($data_admin->jenis_kelamin == 'Laki-laki') ? 'selected="selected"' : '' ?>>Laki-laki</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="nomor_hp" class="col-sm-4 control-label">Nomor HP<font style="color: red;">*)</font></label>
+                  <div class="col-sm-8">
+                    <input type="text" name="nomor_hp" class="form-control" id="nomor_hp" value="<?php echo $data_admin->nomor_hp ?>" placeholder="Masukan Nomor HP">
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+
+    <div class="col-md-6">
+        <div class="box box-info">
+              <div class="box-header with-border">
+                <h3 class="box-title">Informasi Akun</h3>
+              </div>
+                  <div class="box-body">
+                   <div class="form-group">
+                     <label for="user" class="col-sm-4 control-label">Username<font style="color: red;">*)</font></label>
+                     <div class="col-sm-8">
+                       <input type="text" name="user" class="form-control" id="user" value="<?php echo $data_admin->username ?>" placeholder=""disabled>
+                       <input type="hidden" name="username" class="form-control" id="username" value="<?php echo $data_admin->username ?>" placeholder="">
+                     </div>
+                   </div>
+                 </div>
+              </div>
+             </div>
            </div>
-           <!-- /.box-header -->
-           <div class="box-body">
-             <table id="example1" class="table table-bordered table-striped">
-               <thead>
-               <tr>
-                 <th class="text-center">No.</th>
-                 <th>Nama</th>
-                 <th>Username</th>
-                 <th>Email</th>
-                 <th>Nomor HP</th>
-                 <th class="text-center">Aksi</th>
-               </tr>
-               </thead>
-               <tbody>
-                 <?php
-                 $no = 1;
-                 foreach ($operators as $operator): ?>
-               <tr>
-                 <td class="text-center"><?php echo $no ?></td>
-                 <td><?php echo $operator->nama ?></td>
-                 <td><?php echo $operator->username ?></td>
-                 <td><?php echo $operator->email ?></td>
-                 <td><?php echo $operator->nomor_hp ?></td>
-                 <td class="text-center"><a style="cursor:pointer;" class="btn btn-default" onclick="detail('<?php echo $operator->username ?>')" data-toggle="" data-target="#"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Detail</a>
-                 <button onclick="del('<?php echo $operator->username ?>')" class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;&nbsp;Hapus</button></td>
-               </tr>
-               <?php $no++ ?>
-               <?php endforeach; ?>
-               </tbody>
-               <tfoot>
-               <tr>
-                 <th class="text-center">No.</th>
-                 <th>Nama</th>
-                 <th>Username</th>
-                 <th>Email</th>
-                 <th>Nomor HP</th>
-                 <th class="text-center">Aksi</th>
-               </tr>
-               </tfoot>
-             </table>
-           </div>
-           <!-- /.box-body -->
-         </div>
-         <!-- /.box -->
-       </div>
-       <!-- /.col -->
-     <!-- /.row -->
-   </section>
+          </div>
+          <!-- /.box-body -->
+          <div class="box-footer btn-toolbar">
+            <a href="<?php echo site_url('admin/admin/detail_admin/'.$data_admin->username) ?>" class="btn btn-default pull-right">Cancel</a>
+            <button type="submit"  class="btn btn-primary pull-right" name="submit" value="Simpan">Simpan</button>
+          </div>
+          <!-- /.box-footer -->
+        </form>
+      </section>
    <!-- /.content -->
  </div>
  <!-- /.content-wrapper -->
@@ -210,7 +220,6 @@
      <!-- /.tab-pane -->
      <!-- Settings tab content -->
      <div class="tab-pane" id="control-sidebar-settings-tab">
-       <form method="post">
          <h3 class="control-sidebar-heading">General Settings</h3>
 
          <div class="form-group">
@@ -274,7 +283,7 @@
            </label>
          </div>
          <!-- /.form-group -->
-       </form>
+
      </div>
      <!-- /.tab-pane -->
    </div>
@@ -293,6 +302,7 @@
 <!-- DataTables -->
 <script src="<?php echo base_url(); ?>bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url(); ?>bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="<?php echo base_url(); ?>bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- SlimScroll -->
 <script src="<?php echo base_url(); ?>bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
@@ -303,36 +313,75 @@
 <script src="<?php echo base_url(); ?>dist/js/demo.js"></script>
 <!-- page script -->
 <script>
- $(function () {
-   $('#example1').DataTable({
-     "columnDefs": [
-       { "width": "5%", "targets": 0 },
-       { "width": "20%", "targets": 5 }
-    ]
-   })
- })
 
- function get_operator($username,$nama)
- {
-   $("#username_up").val($username);
-   $("#nama_up").val($nama);
-   console.log(nama);
- }
+//Date picker
+$('#tanggal_yudisium').datepicker({
+autoclose: true
+})
 
- function del(id) {
-      var url="<?php echo site_url();?>";
-      var r = confirm("Apakah anda yakin menghapus data ini?");
-      if (r == true) {
-          window.location = url+"/admin/operator/delete_operator/"+id;
-      } else {
-          return false;
+$('#tanggal_lahir').datepicker({
+autoclose: true
+})
+
+$(document).ready(function(){
+
+  $('#negara').change(function(){
+    var e = document.getElementById("negara");
+    var id_negara = e.options[e.selectedIndex].value;
+    console.log(id_negara)
+    if(id_negara != '')
+    {
+      $.ajax({
+        url:"<?php echo site_url();?>/provinsi/get_provinsi_by_negara_js",
+        method: "POST",
+        data:{id_negara:id_negara},
+        success:function(data)
+        {
+          $('#provinsi').html(data);
+        }
+      })
+    }
+  })
+  $('#provinsi').change(function(){
+    var e = document.getElementById("provinsi");
+    var id_provinsi = e.options[e.selectedIndex].value;
+    console.log(id_provinsi)
+    if(id_provinsi != '')
+    {
+      $.ajax({
+        url:"<?php echo site_url();?>/kota/get_kota_by_provinsi_js",
+        method: "POST",
+        data:{id_provinsi:id_provinsi},
+        success:function(data)
+        {
+          $('#kota').html(data);
+        }
+      })
+    }
+  })
+
+  $(document).ready(function(){
+
+    $('#jurusan').change(function(){
+      var e = document.getElementById ("jurusan");
+      var id_jurusan = e.options [e.selectedIndex] .value;
+      console.log(id_jurusan)
+      if(id_jurusan != '')
+      {
+        $.ajax({
+          url:"<?php echo site_url();?>/admin/prodi/get_prodi_by_jurusan_js",
+          method: "POST",
+          data:{id_jurusan:id_jurusan},
+          success:function(data)
+          {
+            $('#prodi').html(data);
+          }
+        })
       }
-  }
+    })
+  })
+})
 
-  function detail(id) {
-       var url="<?php echo site_url();?>";
-       window.location = url+"/admin/operator/detail_operator/"+id;
-   }
 </script>
 </body>
 </html>

@@ -3,8 +3,8 @@
    <!-- Content Header (Page header) -->
    <section class="content-header">
      <h1>
-       Master Admin
-       <small>Tambah Admin Fakultas Ekonomi dan Bisnis</small>
+       Master Operator
+       <small>Tambah Operator Fakultas Ekonomi dan Bisnis</small>
      </h1>
      <ol class="breadcrumb">
        <li><a href="#"><i class="fa fa-folder-open"></i> Home</a></li>
@@ -16,7 +16,7 @@
    <!-- Main content -->
    <section class="content">
      <?php echo validation_errors(); ?>
-     <form class="form-horizontal" method="post" action="<?php echo site_url('admin/admin/proses_add_admin') ?>">
+     <form class="form-horizontal" method="post" action="<?php echo site_url('admin/operator/process_add_operator') ?>">
      <div class="row">
      <div class="col-md-6">
        <div class="box box-info">
@@ -27,27 +27,31 @@
             <!-- form start -->
               <div class="box-body">
                 <div class="form-group">
-                  <label for="nama" class="col-sm-4 col-form-label text-right">Nama Lengkap</label>
+                  <label for="nama" class="col-sm-4 control-label">Nama Lengkap<font style="color: red;">*)</font></label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_admin->nama ?></p>
+                    <input type="text" name="nama" class="form-control" id="nama" value="<?php echo set_value('nama') ?>" placeholder="Masukan Nama Lengkap">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="email" class="col-sm-4 col-form-label text-right">Email</label>
+                  <label for="jenis_kelamin" class="col-sm-4 control-label">Jenis Kelamin<font style="color: red;">*)</font></label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_admin->email ?></p>
+                    <select class="form-control" name="jenis_kelamin" id="jenis_kelamin" value="<?php echo set_value('jenis_kelamin') ?>">
+                      <option value=""selected disabled>Pilih Jenis Kelamin</option>
+                      <option value="Perempuan">Perempuan</option>
+                      <option value="Laki-laki">Laki-laki</option>
+                    </select>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="jenis_kelamin" class="col-sm-4 col-form-label text-right">Jenis Kelamin</label>
+                  <label for="email" class="col-sm-4 control-label">Email<font style="color: red;">*)</font></label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_admin->jenis_kelamin ?></p>
+                    <input type="text" name="email" class="form-control" id="email" value="<?php echo set_value('email') ?>" placeholder="Masukan Email">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="nomor_hp" class="col-sm-4 col-form-label text-right">Nomor HP</label>
+                  <label for="nomor_hp" class="col-sm-4 control-label">Nomor HP<font style="color: red;">*)</font></label>
                   <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_admin->nomor_hp ?></p>
+                    <input type="text" name="nomor_hp" class="form-control" id="nomor_hp" value="<?php echo set_value('nomor_hp') ?>" placeholder="Masukan Nomor HP">
                   </div>
                 </div>
             </div>
@@ -60,19 +64,35 @@
                 <h3 class="box-title">Informasi Akun</h3>
               </div>
                   <div class="box-body">
-                    <div class="box-body box-profile">
-                      <img class="profile-user-img img-responsive img-circle" src="" alt="User profile picture">
-                      <h3 class="profile-username text-center"></h3>
-                      <div class="col-md-12 text-center">
-                        <a href="<?php echo site_url('admin/admin/update_admin/'.$data_admin->username)?>" class="btn bg-navy margin" name="button"><i class="fa fa-pencil"></i>&nbsp;&nbsp;&nbsp;Edit Profil</a>
-                        <button type="button" class="btn bg-maroon margin" name="button"><i class="fa fa-image"></i>&nbsp;&nbsp;&nbsp;Ganti Foto</button>
-                        <button type="button" class="btn bg-maroon margin" name="button"><i class="fa fa-image"></i>&nbsp;&nbsp;&nbsp;Ganti Password</button>
-                      </div>
-                    </div>
+                   <div class="form-group">
+                     <label for="username" class="col-sm-4 control-label">Username<font style="color: red;">*)</font></label>
+                     <div class="col-sm-8">
+                       <input type="text" name="username" class="form-control" id="username" value="<?php echo set_value('username') ?>" placeholder="Masukan Username">
+                     </div>
+                   </div>
+                   <div class="form-group">
+                     <label for="password" class="col-sm-4 control-label">Password<font style="color: red;">*)</font></label>
+                     <div class="col-sm-8">
+                       <input type="password" name="password" class="form-control" id="password" placeholder="Masukan Password">
+                     </div>
+                   </div>
+                   <div class="form-group">
+                     <label for="passconf" class="col-sm-4 control-label">Konfirmasi Password<font style="color: red;">*)</font></label>
+                     <div class="col-sm-8">
+                       <input type="password" name="passconf" class="form-control" id="passconf" placeholder="Masukan Ulang Password">
+                     </div>
+                   </div>
                  </div>
               </div>
+                </div>
              </div>
           </div>
+          <!-- /.box-body -->
+          <div class="box-footer btn-toolbar">
+            <a href="<?php echo site_url('admin/operator') ?>" class="btn btn-default pull-right">Cancel</a>
+            <button type="submit"  class="btn btn-primary pull-right" name="submit" value="Simpan">Simpan</button>
+          </div>
+          <!-- /.box-footer -->
         </form>
       </section>
    <!-- /.content -->
@@ -293,9 +313,9 @@
 <script src="<?php echo base_url(); ?>bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
 <script src="<?php echo base_url(); ?>bower_components/fastclick/lib/fastclick.js"></script>
-<!-- AdminLTE App -->
+<!-- OperatorLTE App -->
 <script src="<?php echo base_url(); ?>dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
+<!-- OperatorLTE for demo purposes -->
 <script src="<?php echo base_url(); ?>dist/js/demo.js"></script>
 <!-- page script -->
 <script>
@@ -317,7 +337,7 @@ $(document).ready(function(){
     if(id_negara != '')
     {
       $.ajax({
-        url:"<?php echo site_url();?>/admin/admin/fetch_provinsi",
+        url:"<?php echo site_url();?>/admin/operator/fetch_provinsi",
         method: "POST",
         data:{id_negara:id_negara},
         success:function(data)
@@ -334,7 +354,7 @@ $(document).ready(function(){
     if(id_provinsi != '')
     {
       $.ajax({
-        url:"<?php echo site_url();?>/admin/admin/fetch_kota",
+        url:"<?php echo site_url();?>/admin/operator/fetch_kota",
         method: "POST",
         data:{id_provinsi:id_provinsi},
         success:function(data)

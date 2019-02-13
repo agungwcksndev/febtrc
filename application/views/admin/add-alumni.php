@@ -4,7 +4,7 @@
    <section class="content-header">
      <h1>
        Master Alumni
-       <small>Tambah Data Alumni Fakultas Ekonomi dan Bisnis</small>
+       <small>Tambah Alumni Fakultas Ekonomi dan Bisnis</small>
      </h1>
      <ol class="breadcrumb">
        <li><a href="#"><i class="fa fa-folder-open"></i> Home</a></li>

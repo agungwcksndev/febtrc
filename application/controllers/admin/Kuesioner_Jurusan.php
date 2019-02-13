@@ -13,7 +13,7 @@ class Kuesioner_Jurusan extends CI_Controller{
   {
     $paket_soals = $this->Kuesioner_Model->listing();
     $list_jenjang = $this->Kuesioner_Model->get_jenjang();
-    $data = array('isi'     => 'admin/v-kuesioner-jurusan',
+    $data = array('isi'     => 'admin/view-kuesioner-jurusan',
                   'paket_soals'=> $paket_soals,
                   'list_jenjang' => $list_jenjang
                   );
@@ -82,7 +82,7 @@ class Kuesioner_Jurusan extends CI_Controller{
         {
             $paket_soals= $this->Kuesioner_Model->listing();
             $list_jenjang = $this->Kuesioner_Model->get_jenjang();
-            $data = array('isi'          => 'admin/v-kuesioner-jurusan',
+            $data = array('isi'          => 'admin/view-kuesioner-jurusan',
                           'paket_soals'  => $paket_soals,
                           'list_jenjang' => $list_jenjang
                           );

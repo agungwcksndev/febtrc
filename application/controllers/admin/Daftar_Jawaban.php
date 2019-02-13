@@ -19,7 +19,7 @@ class Daftar_Jawaban extends CI_Controller{
   {
     $daftar_jawaban = $this->DaftarJawaban_Model->find_daftar_jawaban($id_soal);
     $detail_soal    = $this->DaftarSoal_Model   ->getDetailSoal($id_soal);
-    $data = array('isi'            => 'admin/v-jawaban',
+    $data = array('isi'            => 'admin/view-jawaban',
                   'daftar_jawaban' => $daftar_jawaban,
                   'detail_soal'    => $detail_soal
                  );

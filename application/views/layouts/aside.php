@@ -46,9 +46,9 @@
           </span>
         </a>
         <ul class="treeview-menu">
+          <li><a href="<?php echo site_url('admin/admin'); ?>"><i class="fa fa-circle-o"></i> Admin</a></li>
+          <li><a href="<?php echo site_url('admin/operator'); ?>"><i class="fa fa-circle-o"></i> Operator</a></li>
           <li><a href="<?php echo site_url('admin/alumni'); ?>"><i class="fa fa-circle-o"></i> Alumni</a></li>
-         <li><a href="<?php echo site_url('admin/operator'); ?>"><i class="fa fa-circle-o"></i> Operator</a></li>
-         <li><a href="<?php echo site_url('admin/admin'); ?>"><i class="fa fa-circle-o"></i> Admin</a></li>
         </ul>
       </li>
       <li>

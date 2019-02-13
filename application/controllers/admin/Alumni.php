@@ -18,7 +18,7 @@ class Alumni extends CI_Controller{
   function index()
   {
     $alumnis = $this->Alumni_Model->get_all_alumni();
-    $data = array('isi'     => 'admin/v-alumni',
+    $data = array('isi'     => 'admin/view-alumni',
                   'alumnis'=> $alumnis
                   );
     $this->load->view("layouts/wrapper", $data, false);

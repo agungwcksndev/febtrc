@@ -14,7 +14,7 @@ class Prodi extends CI_Controller{
   {
     $prodis = $this->Prodi_Model->get_all_prodi();
     $jurusans = $this->Jurusan_Model->get_all_jurusan();
-    $data = array('isi'           => 'admin/v-prodi',
+    $data = array('isi'           => 'admin/view-prodi',
                   'prodis'        => $prodis,
                   'jurusans'      => $jurusans
                   );
@@ -43,7 +43,7 @@ class Prodi extends CI_Controller{
       {
         $prodis = $this->Prodi_Model->get_all_prodi();
         $jurusans = $this->Jurusan_Model->get_all_jurusan();
-        $data = array('isi'           => 'admin/v-prodi',
+        $data = array('isi'           => 'admin/view-prodi',
                       'prodis'        => $prodis,
                       'jurusans'      => $jurusans
                       );
@@ -88,7 +88,7 @@ class Prodi extends CI_Controller{
 
             $i  = $this->input;
             if ($valid->run()===false) {
-              $data = array('isi'           => 'admin/v-prodi',
+              $data = array('isi'           => 'admin/view-prodi',
                             'prodis'        => $prodis,
                             'jurusans'      => $jurusans
                             );

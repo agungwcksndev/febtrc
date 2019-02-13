@@ -12,7 +12,7 @@ class Jurusan extends CI_Controller{
   function index()
   {
     $jurusans = $this->Jurusan_Model->get_all_jurusan();
-    $data = array('isi'     => 'admin/v-jurusan',
+    $data = array('isi'     => 'admin/view-jurusan',
                   'jurusans'=> $jurusans
                   );
     $this->load->view("layouts/wrapper", $data, false);
@@ -59,7 +59,7 @@ class Jurusan extends CI_Controller{
         if ($valid->run()===false)
         {
             $data = array('title' => 'Data Jurusan - Tracert Alumni Fakultas Ekonomi Bisnis Universitas Brawijaya' );
-            $this->load->view('admin/v-jurusan', $data, false);
+            $this->load->view('admin/view-jurusan', $data, false);
         }
         else
         {

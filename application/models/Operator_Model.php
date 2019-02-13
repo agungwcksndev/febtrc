@@ -8,20 +8,11 @@ class Operator_Model extends CI_Model{
     parent::__construct();
     $this->load->database();
   }
-  public function get_operator()
+  public function get_all_operator()
   {
     $this->db->select('*');
     $this->db->from('operator');
     $this->db->order_by('nama');
-    $query  = $this->db->get();
-    return $query->result();
-  }
-
-  public function listing()
-  {
-    $this->db->select('*');
-    $this->db->from('operator');
-    $this->db->order_by('username', 'DESC');
     $query  = $this->db->get();
     return $query->result();
   }
@@ -31,12 +22,20 @@ class Operator_Model extends CI_Model{
     $this->db->insert('operator', $data);
   }
 
-  public function find_operator($username){
+  public function detail_operator($username){
     $this->db->select('*');
     $this->db->from('operator');
     $this->db->where('username', $username);
     $query  = $this->db->get();
     return $query->row();
+  }
+
+  public function check_unique_user_email($username = '', $email) {
+    $this->db->where('email', $email);
+    if($username) {
+        $this->db->where_not_in('username', $username);
+    }
+    return $this->db->get('operator')->num_rows();
   }
 
   public function update_operator($data)

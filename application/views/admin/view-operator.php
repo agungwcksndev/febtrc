@@ -3,78 +3,82 @@
    <!-- Content Header (Page header) -->
    <section class="content-header">
      <h1>
-       Master Admin
-       <small>Tambah Admin Fakultas Ekonomi dan Bisnis</small>
+       Master Operator
+       <small>View data</small>
      </h1>
      <ol class="breadcrumb">
        <li><a href="#"><i class="fa fa-folder-open"></i> Home</a></li>
        <li><a href="#">Tables</a></li>
        <li class="active">Data tables</li>
      </ol>
+     <?php if ($this->session->flashdata('success')) {
+         echo "<br>";
+         echo "<div class='alert alert-success alert-dismissible'>";
+         echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
+         echo "<h4><i class='icon fa fa-check'></i>Success!</h4>";
+         echo $this->session->flashdata('success');
+         echo "</div>";
+     };
+     ?>
    </section>
 
    <!-- Main content -->
    <section class="content">
-     <?php echo validation_errors(); ?>
-     <form class="form-horizontal" method="post" action="<?php echo site_url('admin/admin/proses_add_admin') ?>">
      <div class="row">
-     <div class="col-md-6">
-       <div class="box box-info">
-            <div class="box-header with-border">
-              <h3 class="box-title">Identitas Diri</h3>
-            </div>
-            <!-- /.box-header -->
-            <!-- form start -->
-              <div class="box-body">
-                <div class="form-group">
-                  <label for="nama" class="col-sm-4 col-form-label text-right">Nama Lengkap</label>
-                  <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_admin->nama ?></p>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="email" class="col-sm-4 col-form-label text-right">Email</label>
-                  <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_admin->email ?></p>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="jenis_kelamin" class="col-sm-4 col-form-label text-right">Jenis Kelamin</label>
-                  <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_admin->jenis_kelamin ?></p>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="nomor_hp" class="col-sm-4 col-form-label text-right">Nomor HP</label>
-                  <div class="col-sm-8">
-                    <p class="control-label-plaintext"><?php echo $data_admin->nomor_hp ?></p>
-                  </div>
-                </div>
-            </div>
-          </div>
-        </div>
-
-    <div class="col-md-6">
-        <div class="box box-info">
-              <div class="box-header with-border">
-                <h3 class="box-title">Informasi Akun</h3>
-              </div>
-                  <div class="box-body">
-                    <div class="box-body box-profile">
-                      <img class="profile-user-img img-responsive img-circle" src="" alt="User profile picture">
-                      <h3 class="profile-username text-center"></h3>
-                      <div class="col-md-12 text-center">
-                        <a href="<?php echo site_url('admin/admin/update_admin/'.$data_admin->username)?>" class="btn bg-navy margin" name="button"><i class="fa fa-pencil"></i>&nbsp;&nbsp;&nbsp;Edit Profil</a>
-                        <button type="button" class="btn bg-maroon margin" name="button"><i class="fa fa-image"></i>&nbsp;&nbsp;&nbsp;Ganti Foto</button>
-                        <button type="button" class="btn bg-maroon margin" name="button"><i class="fa fa-image"></i>&nbsp;&nbsp;&nbsp;Ganti Password</button>
-                      </div>
-                    </div>
-                 </div>
-              </div>
-             </div>
-          </div>
-        </form>
-      </section>
+       <div class="col-xs-12">
+         <div class="box box-info">
+           <div class="box-header">
+             <h3 class="box-title"><i class="fa fa-users"></i>&nbsp;&nbsp;Data Operator Fakultas Ekonomi Bisnis Universitas Brawijaya</h3>
+               <a href="<?php echo site_url('admin/operator/add_operator') ?>" class="btn btn-primary btn-flat"  style="float:right;"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Tambah Data Operator</a>
+           </div>
+           <!-- /.box-header -->
+           <div class="box-body">
+             <table id="example1" class="table table-bordered table-striped">
+               <thead>
+               <tr>
+                 <th class="text-center">No.</th>
+                 <th>Nama</th>
+                 <th>Username</th>
+                 <th>Email</th>
+                 <th>Nomor HP</th>
+                 <th class="text-center">Aksi</th>
+               </tr>
+               </thead>
+               <tbody>
+                 <?php
+                 $no = 1;
+                 foreach ($operators as $operator): ?>
+               <tr>
+                 <td class="text-center"><?php echo $no ?></td>
+                 <td><?php echo $operator->nama ?></td>
+                 <td><?php echo $operator->username ?></td>
+                 <td><?php echo $operator->email ?></td>
+                 <td><?php echo $operator->nomor_hp ?></td>
+                 <td class="text-center"><a style="cursor:pointer;" class="btn btn-default" onclick="detail('<?php echo $operator->username ?>')" data-toggle="" data-target="#"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Detail</a>
+                 <button onclick="del('<?php echo $operator->username ?>')" class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;&nbsp;Hapus</button></td>
+               </tr>
+               <?php $no++ ?>
+               <?php endforeach; ?>
+               </tbody>
+               <tfoot>
+               <tr>
+                 <th class="text-center">No.</th>
+                 <th>Nama</th>
+                 <th>Username</th>
+                 <th>Email</th>
+                 <th>Nomor HP</th>
+                 <th class="text-center">Aksi</th>
+               </tr>
+               </tfoot>
+             </table>
+           </div>
+           <!-- /.box-body -->
+         </div>
+         <!-- /.box -->
+       </div>
+       <!-- /.col -->
+     <!-- /.row -->
+   </section>
    <!-- /.content -->
  </div>
  <!-- /.content-wrapper -->
@@ -206,6 +210,7 @@
      <!-- /.tab-pane -->
      <!-- Settings tab content -->
      <div class="tab-pane" id="control-sidebar-settings-tab">
+       <form method="post">
          <h3 class="control-sidebar-heading">General Settings</h3>
 
          <div class="form-group">
@@ -269,7 +274,7 @@
            </label>
          </div>
          <!-- /.form-group -->
-
+       </form>
      </div>
      <!-- /.tab-pane -->
    </div>
@@ -288,104 +293,46 @@
 <!-- DataTables -->
 <script src="<?php echo base_url(); ?>bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url(); ?>bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<script src="<?php echo base_url(); ?>bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- SlimScroll -->
 <script src="<?php echo base_url(); ?>bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
 <script src="<?php echo base_url(); ?>bower_components/fastclick/lib/fastclick.js"></script>
-<!-- AdminLTE App -->
+<!-- OperatorLTE App -->
 <script src="<?php echo base_url(); ?>dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
+<!-- OperatorLTE for demo purposes -->
 <script src="<?php echo base_url(); ?>dist/js/demo.js"></script>
 <!-- page script -->
 <script>
+ $(function () {
+   $('#example1').DataTable({
+     "columnDefs": [
+       { "width": "5%", "targets": 0 },
+       { "width": "20%", "targets": 5 }
+    ]
+   })
+ })
 
-//Date picker
-$('#tanggal_yudisium').datepicker({
-autoclose: true
-})
+ function get_operator($username,$nama)
+ {
+   $("#username_up").val($username);
+   $("#nama_up").val($nama);
+   console.log(nama);
+ }
 
-$('#tanggal_lahir').datepicker({
-autoclose: true
-})
-
-$(document).ready(function(){
-  $('#negara').change(function(){
-    var e = document.getElementById("negara");
-    var id_negara = e.options[e.selectedIndex].value;
-    console.log(id_negara)
-    if(id_negara != '')
-    {
-      $.ajax({
-        url:"<?php echo site_url();?>/admin/admin/fetch_provinsi",
-        method: "POST",
-        data:{id_negara:id_negara},
-        success:function(data)
-        {
-          $('#provinsi').html(data);
-        }
-      })
-    }
-  })
-  $('#provinsi').change(function(){
-    var e = document.getElementById("provinsi");
-    var id_provinsi = e.options[e.selectedIndex].value;
-    console.log(id_provinsi)
-    if(id_provinsi != '')
-    {
-      $.ajax({
-        url:"<?php echo site_url();?>/admin/admin/fetch_kota",
-        method: "POST",
-        data:{id_provinsi:id_provinsi},
-        success:function(data)
-        {
-          $('#kota').html(data);
-        }
-      })
-    }
-  })
-
-  $(document).ready(function(){
-
-    $('#jurusan').change(function(){
-      var e = document.getElementById ("jurusan");
-      var id_jurusan = e.options [e.selectedIndex] .value;
-      console.log(id_jurusan)
-      if(id_jurusan != '')
-      {
-        $.ajax({
-          url:"<?php echo site_url();?>/Login/fetch_prodi",
-          method: "POST",
-          data:{id_jurusan:id_jurusan},
-          success:function(data)
-          {
-            $('#prodi').html(data);
-          }
-        })
+ function del(id) {
+      var url="<?php echo site_url();?>";
+      var r = confirm("Apakah anda yakin menghapus data ini?");
+      if (r == true) {
+          window.location = url+"/admin/operator/delete_operator/"+id;
+      } else {
+          return false;
       }
-    })
-    var max  = new Date().getFullYear();
-    var min  = 1961;
-    var min2 = 1950;
-    select = document.getElementById('tahun_lulus');
-    select2 = document.getElementById('angkatan');
+  }
 
-    for (var i = min; i<=max; i++){
-    var opt = document.createElement('option');
-    opt.value = i;
-    opt.innerHTML = i;
-    select.appendChild(opt);
-    }
-
-    for (var i = min2; i<=max; i++){
-    var opt = document.createElement('option');
-    opt.value = i;
-    opt.innerHTML = i;
-    select2.appendChild(opt);
-    }
-  })
-})
-
+  function detail(id) {
+       var url="<?php echo site_url();?>";
+       window.location = url+"/admin/operator/detail_operator/"+id;
+   }
 </script>
 </body>
 </html>
