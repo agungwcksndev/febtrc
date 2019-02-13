@@ -42,6 +42,9 @@
                  <th>Jurusan</th>
                  <th>Program Studi</th>
                  <th class="text-center">Angkatan</th>
+                 <th class="text-center">Tempat Kerja</th>
+                 <th class="text-center">Posisi</th>
+                 <th class="text-center">Pendapatan</th>
                  <th class="text-center">Aksi</th>
                </tr>
                </thead>
@@ -56,8 +59,20 @@
                  <td><?php echo $alumni->nama_jurusan ?></td>
                  <td><?php echo $alumni->nama_prodi ?></td>
                  <td class="text-center"><?php echo $alumni->angkatan ?></td>
-                 <td class="text-center"> <button type="button" name="button" class="btn btn-success"> <i class="fa fa-whatsapp"></i> Broadcast Questioner</button>&nbsp;<a style="cursor:pointer;" class="btn btn-default" onclick="detail('<?php echo $alumni->username ?>')" data-toggle="" data-target="#"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Detail</a>
-                 <button onclick="del('<?php echo $alumni->username ?>')" class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;&nbsp;Hapus</button></td>
+                 <td class="text-center"><?php echo $alumni->tempat_kerja ?></td>
+                 <td class="text-center"><?php echo $alumni->posisi ?></td>
+                 <td class="text-center">Rp. <?php
+                 $gaji = number_format($alumni->pendapatan_per_bulan,0,',','.');
+                 echo $gaji ?></td>
+                 <td class="text-center">
+                  <div class="row" style="margin-bottom:6px;">
+                    <button type="button" name="button" class="btn btn-success"> <i class="fa fa-whatsapp"></i> Broadcast Questioner</button>
+                  </div>
+                  <div class="row">
+                    <a style="cursor:pointer;" class="btn btn-default" onclick="detail('<?php echo $alumni->username ?>')" data-toggle="" data-target="#"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Detail</a>
+                   &nbsp;&nbsp;<button onclick="del('<?php echo $alumni->username ?>')" class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;&nbsp;Hapus</button>
+                  </div>
+                  </td>
                </tr>
                <?php $no++ ?>
                <?php endforeach; ?>
@@ -70,6 +85,9 @@
                  <th>Jurusan</th>
                  <th>Program Studi</th>
                  <th  class="text-center">Angkatan</th>
+                 <th class="text-center">Tempat Kerja</th>
+                 <th class="text-center">Posisi</th>
+                 <th class="text-center">Pendapatan</th>
                  <th class="text-center">Aksi</th>
                </tr>
                </tfoot>
@@ -310,7 +328,7 @@
    $('#example1').DataTable({
      "columnDefs": [
        { "width": "5%", "targets": 0 },
-       { "width": "33%", "targets": 6 }
+       { "width": "18%", "targets": 6 }
     ]
    })
  })

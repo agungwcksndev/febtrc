@@ -12,22 +12,24 @@ class Alumni_Model extends CI_Model{
   public function get_all_alumni()
   {
 
-    $this->db->select('*');
-    $this->db->from('alumni');
-    $this->db->join('jurusan', 'jurusan.id_jurusan = alumni.id_jurusan');
-    $this->db->join('prodi', 'prodi.id_prodi = alumni.id_prodi');
-    $this->db->order_by('username', 'DESC');
-    $query  = $this->db->get();
-    return $query->result();
-    // $query=$this->db->query("SELECT nama,posisi,tempat_kerja, max(mulai_kerja) as tanggal_mulai_kerja
-    //                           from alumni
-    //                           INNER JOIN Riwayat_Pekerjaan ON Riwayat_Pekerjaan.username=Alumni.Username
-    //                           INNER JOIN Jurusan ON Jurusan.id_jurusan = Alumni.id_jurusan
-    //                           INNER JOIN Prodi ON Prodi.id_prodi = Alumni.id_prodi
-    //                           WHERE Riwayat_Pekerjaan.mulai_kerja = max(riwayatmulai_kerja)
-    //
-    //                           ORDER BY nama");
-    //  return $query->result_array();
+    // $this->db->select('*');
+    // $this->db->from('alumni');
+    // $this->db->join('jurusan', 'jurusan.id_jurusan = alumni.id_jurusan');
+    // $this->db->join('prodi', 'prodi.id_prodi = alumni.id_prodi');
+    // $this->db->order_by('username', 'DESC');
+    // $query  = $this->db->get();
+    // return $query->result();
+    $query=$this->db->query("SELECT *
+      FROM alumni LEFT JOIN riwayat_pekerjaan s ON s.username = alumni.username
+      LEFT JOIN jurusan ON jurusan.id_jurusan = alumni.id_jurusan
+      LEFT JOIN prodi ON prodi.id_prodi = alumni.id_prodi
+      WHERE(
+          SELECT COUNT(*)
+          FROM riwayat_pekerjaan f
+          WHERE s.username = f.username AND s.mulai_kerja <= f.mulai_kerja
+          ) <=1
+      ORDER BY s.mulai_kerja DESC");
+     return $query->result();
   }
 
   public function count_alumni(){
