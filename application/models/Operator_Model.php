@@ -49,4 +49,17 @@ class Operator_Model extends CI_Model{
     $this->db->where('username',$data['username']);
     $this->db->delete('operator', $data);
   }
+
+  function changeActiveState($username, $key)
+  {
+   $data = array(
+   'active' => 1
+   );
+
+   $this->db->where('md5(generatednum)', $key);
+   $this->db->where('username', $username);
+   $this->db->update('operator', $data);
+
+   return true;
+  }
 }

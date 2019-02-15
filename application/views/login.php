@@ -43,7 +43,12 @@
           echo "<div class='alert alert-danger'><center>";
           echo $this->session->flashdata('notifikasi');
           echo "</center></div>";
-      }
+      }else if($this->session->flashdata('sukses')) {
+          echo "<br>";
+          echo "<div class='alert alert-success'><center>";
+          echo $this->session->flashdata('sukses');
+          echo "</center></div>";
+        }
    ?>
     <form action="<?php echo site_url('login'); ?>" method="post">
       <div class="form-group has-feedback">

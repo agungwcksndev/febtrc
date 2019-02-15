@@ -87,8 +87,7 @@ class Admin extends CI_Controller{
           $this->load->view("layouts/wrapper", $data, false);
         } else {
             $i  = $this->input;
-            $tgl_lahir_proc = date("Y-m-d",strtotime($_POST['tanggal_lahir']));
-            $tgl_yudisium_proc = date("Y-m-d",strtotime($_POST['tanggal_yudisium']));
+            $rand = bin2hex(random_bytes(12));
             $data = array(
                   'nama'               =>  $i->post('nama'),
                   'email'              =>  $i->post('email'),
@@ -96,10 +95,50 @@ class Admin extends CI_Controller{
                   'nomor_hp'           =>  $i->post('nomor_hp'),
                   'username'           =>  $i->post('username'),
                   'password'           =>  md5($i->post('password')),
+                  'generatednum'       =>  $rand
                 );
             $this->Admin_Model->add_admin($data);
-            $this->session->set_flashdata('success', 'Berhasil menambah admin.');
-            redirect('admin/admin');
+            $encrypted_id = md5($rand);
+            $this->load->library('email');
+            $config = array();
+            $config['charset'] = 'utf-8';
+            $config['useragent'] = 'Codeigniter';
+            $config['protocol']= "smtp";
+            $config['mailtype']= "html";
+            $config['smtp_host']= "ssl://smtp.gmail.com";//pengaturan smtp
+            $config['smtp_port']= "465";
+            $config['smtp_timeout']= "400";
+            $config['smtp_user']= "sam.paijo77@gmail.com"; // isi dengan email kamu
+            $config['smtp_pass']= "eyeofluci666"; // isi dengan password kamu
+            $config['crlf']="\r\n";
+            $config['newline']="\r\n";
+            $config['wordwrap'] = true;
+            //memanggil library email dan set konfigurasi untuk pengiriman email
+
+            $this->email->initialize($config);
+            //konfigurasi pengiriman
+            $this->email->from($config['smtp_user']);
+            $this->email->to($i->post('email'));
+            $this->email->subject("Verifikasi Akun");
+            $message .="Hi ".$i->post('nama')."<br>";
+            $message .="Anda terdaftar sebagai admin di Tracert Alumni Fakultas Ekonomi Bisnis Universitas Brawijaya<br>";
+            $message .="Untuk dapat mengakses akun anda, silahkan verifikasi email anda terlebih dahulu melalui link berikut<br>";
+            $message .="<br>";
+            $message .="<a href='".site_url('admin/account/verification/'.$i->post('username').'/'.$encrypted_id.'')."'>Verifikasi Disini</a><br>";
+            $message .="<br>";
+            $message .="<br>";
+            $message .="===========================================================================<br>";
+            $message .="PSIK Fakultas Ekonomi Bisnis<br>";
+            $message .="Universitas Brawijaya<br>";
+            $message .="<a href='http://feb.ub.ac.id'>feb.ub.ac.id</a>";
+            $this->email->message($message);
+
+            if ($this->email->send()) {
+              $this->session->set_flashdata('success', 'Berhasil menambah admin.');
+              redirect('admin/admin');
+            } else {
+              echo "gagal kirim email";
+            }
         }
     }
 

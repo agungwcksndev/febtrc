@@ -11,18 +11,10 @@ class Alumni_Model extends CI_Model{
 
   public function get_all_alumni()
   {
-
-    // $this->db->select('*');
-    // $this->db->from('alumni');
-    // $this->db->join('jurusan', 'jurusan.id_jurusan = alumni.id_jurusan');
-    // $this->db->join('prodi', 'prodi.id_prodi = alumni.id_prodi');
-    // $this->db->order_by('username', 'DESC');
-    // $query  = $this->db->get();
-    // return $query->result();
-    $query=$this->db->query("SELECT *
+    $query=$this->db->query("SELECT alumni.username,alumni.nama,alumni.angkatan,alumni.jenjang,jurusan.nama_jurusan,prodi.nama_prodi,tempat_kerja,posisi,pendapatan_per_bulan
       FROM alumni LEFT JOIN riwayat_pekerjaan s ON s.username = alumni.username
-      LEFT JOIN jurusan ON jurusan.id_jurusan = alumni.id_jurusan
-      LEFT JOIN prodi ON prodi.id_prodi = alumni.id_prodi
+      JOIN jurusan ON jurusan.id_jurusan = alumni.id_jurusan
+      JOIN prodi ON prodi.id_prodi = alumni.id_prodi
       WHERE(
           SELECT COUNT(*)
           FROM riwayat_pekerjaan f
@@ -110,5 +102,17 @@ class Alumni_Model extends CI_Model{
   {
     $this->db->where('username',$data['username']);
     $this->db->delete('alumni', $data);
+  }
+  function changeActiveState($username, $key)
+  {
+   $data = array(
+   'active' => 1
+   );
+
+   $this->db->where('md5(generatednum)', $key);
+   $this->db->where('username', $username);
+   $this->db->update('alumni', $data);
+
+   return true;
   }
 }

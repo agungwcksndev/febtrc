@@ -163,6 +163,14 @@ class Alumni extends CI_Controller{
       'callback_ipk_check'
     );
 
+    $config['upload_path']          = './img/alumni_pic/';
+    $config['allowed_types']        = 'gif|jpg|png';
+    $config['max_size']             = 3000;
+    $config['max_width']            = 5000;
+    $config['max_height']           = 5000;
+    $config['encrypt_name']         = TRUE;
+
+    $this->load->library('upload', $config);
         if ($valid->run()===false) {
           $alumnis      = $this->Alumni_Model->get_all_alumni();
           $negaras      = $this->Negara_Model->get_all_negara();
@@ -176,7 +184,9 @@ class Alumni extends CI_Controller{
                         );
           $this->load->view("layouts/wrapper", $data, false);
         } else {
+          if ( ! $this->upload->do_upload('foto')){
             $i  = $this->input;
+            $rand = bin2hex(random_bytes(12));
             $tgl_lahir_proc = date("Y-m-d",strtotime($_POST['tanggal_lahir']));
             $tgl_yudisium_proc = date("Y-m-d",strtotime($_POST['tanggal_yudisium']));
             $data = array(
@@ -202,6 +212,7 @@ class Alumni extends CI_Controller{
                   'twitter'            =>  $i->post('twitter'),
                   'instagram'          =>  $i->post('instagram'),
                   'username'           =>  $i->post('username'),
+                  'foto'                =>  'default.png',
                   'password'           =>  md5($i->post('password')),
                   'jenjang'            =>  $i->post('jenjang'),
                   'id_jurusan'         =>  $i->post('jurusan'),
@@ -211,11 +222,137 @@ class Alumni extends CI_Controller{
                   'tanggal_yudisium'   =>  $tgl_yudisium_proc,
                   'judul_skripsi'      =>  $i->post('judul_skripsi'),
                   'ipk'                =>  $i->post('ipk'),
-                  'registered_date'  =>  date("Y-m-d")
+                  'registered_date'    =>  date("Y-m-d"),
+                  'generatednum'       =>  $rand
                 );
             $this->Alumni_Model->add_alumni($data);
-            $this->session->set_flashdata('success', 'Berhasil menambah alumni.');
-            redirect('admin/alumni');
+            $encrypted_id = md5($rand);
+            $this->load->library('email');
+            $config = array();
+            $config['charset'] = 'utf-8';
+            $config['useragent'] = 'Codeigniter';
+            $config['protocol']= "smtp";
+            $config['mailtype']= "html";
+            $config['smtp_host']= "ssl://smtp.gmail.com";//pengaturan smtp
+            $config['smtp_port']= "465";
+            $config['smtp_timeout']= "400";
+            $config['smtp_user']= "sam.paijo77@gmail.com"; // isi dengan email kamu
+            $config['smtp_pass']= "eyeofluci666"; // isi dengan password kamu
+            $config['crlf']="\r\n";
+            $config['newline']="\r\n";
+            $config['wordwrap'] = true;
+            //memanggil library email dan set konfigurasi untuk pengiriman email
+
+            $this->email->initialize($config);
+            //konfigurasi pengiriman
+            $this->email->from($config['smtp_user']);
+            $this->email->to($i->post('email'));
+            $this->email->subject("Verifikasi Akun");
+            $message .="Hi ".$i->post('nama')."<br>";
+            $message .="Anda terdaftar sebagai alumni di Tracert Alumni Fakultas Ekonomi Bisnis Universitas Brawijaya<br>";
+            $message .="Untuk dapat mengakses akun anda, silahkan verifikasi email anda terlebih dahulu melalui link berikut<br>";
+            $message .="<br>";
+            $message .="<a href='".site_url('alumni/account/verification/'.$i->post('username').'/'.$encrypted_id.'')."'>Verifikasi Disini</a><br>";
+            $message .="<br>";
+            $message .="<br>";
+            $message .="===========================================================================<br>";
+            $message .="PSIK Fakultas Ekonomi Bisnis<br>";
+            $message .="Universitas Brawijaya<br>";
+            $message .="<a href='http://feb.ub.ac.id'>feb.ub.ac.id</a>";
+            $this->email->message($message);
+
+            if ($this->email->send()) {
+              $this->session->set_flashdata('success', 'Berhasil menambah alumni.');
+              redirect('admin/alumni');
+            } else {
+              echo "gagal kirim email";
+            }
+          }
+          else{
+            $i  = $this->input;
+            $rand = bin2hex(random_bytes(12));
+            $tgl_lahir_proc = date("Y-m-d",strtotime($_POST['tanggal_lahir']));
+            $tgl_yudisium_proc = date("Y-m-d",strtotime($_POST['tanggal_yudisium']));
+            $data = array(
+                  'nama'               =>  $i->post('nama'),
+                  'nim'                =>  $i->post('nim'),
+                  'email'              =>  $i->post('email'),
+                  'jenis_kelamin'      =>  $i->post('jenis_kelamin'),
+                  'golongan_darah'     =>  $i->post('golongan_darah'),
+                  'tempat_lahir'       =>  $i->post('tempat_lahir'),
+                  'tanggal_lahir'      =>  $tgl_lahir_proc,
+                  'kewarganegaraan'    =>  $i->post('kewarganegaraan'),
+                  'alamat_asal'        =>  $i->post('alamat_asal'),
+                  'kode_pos_asal'      =>  $i->post('kode_pos_asal'),
+                  'alamat_sekarang'    =>  $i->post('alamat_sekarang'),
+                  'kode_pos_sekarang'  =>  $i->post('kode_pos_sekarang'),
+                  'negara'             =>  $i->post('negara'),
+                  'provinsi'           =>  $i->post('provinsi'),
+                  'kota'               =>  $i->post('kota'),
+                  'nomor_telepon'      =>  $i->post('nomor_telepon'),
+                  'nomor_hp'           =>  $i->post('nomor_hp'),
+                  'website'            =>  $i->post('website'),
+                  'facebook'           =>  $i->post('facebook'),
+                  'twitter'            =>  $i->post('twitter'),
+                  'instagram'          =>  $i->post('instagram'),
+                  'foto'               =>  $this->upload->data('file_name'),
+                  'username'           =>  $i->post('username'),
+                  'password'           =>  md5($i->post('password')),
+                  'jenjang'            =>  $i->post('jenjang'),
+                  'id_jurusan'         =>  $i->post('jurusan'),
+                  'id_prodi'           =>  $i->post('prodi'),
+                  'angkatan'           =>  $i->post('angkatan'),
+                  'tahun_lulus'        =>  $i->post('tahun_lulus'),
+                  'tanggal_yudisium'   =>  $tgl_yudisium_proc,
+                  'judul_skripsi'      =>  $i->post('judul_skripsi'),
+                  'ipk'                =>  $i->post('ipk'),
+                  'registered_date'    =>  date("Y-m-d"),
+                  'generatednum'       =>  $rand
+                );
+            $this->Alumni_Model->add_alumni($data);
+            $encrypted_id = md5($rand);
+            $this->load->library('email');
+            $config = array();
+            $config['charset'] = 'utf-8';
+            $config['useragent'] = 'Codeigniter';
+            $config['protocol']= "smtp";
+            $config['mailtype']= "html";
+            $config['smtp_host']= "ssl://smtp.gmail.com";//pengaturan smtp
+            $config['smtp_port']= "465";
+            $config['smtp_timeout']= "400";
+            $config['smtp_user']= "sam.paijo77@gmail.com"; // isi dengan email kamu
+            $config['smtp_pass']= "eyeofluci666"; // isi dengan password kamu
+            $config['crlf']="\r\n";
+            $config['newline']="\r\n";
+            $config['wordwrap'] = true;
+            //memanggil library email dan set konfigurasi untuk pengiriman email
+
+            $this->email->initialize($config);
+            //konfigurasi pengiriman
+            $this->email->from($config['smtp_user']);
+            $this->email->to($i->post('email'));
+            $this->email->subject("Verifikasi Akun");
+            $message .="Hi ".$i->post('nama')."<br>";
+            $message .="Anda terdaftar sebagai alumni di Tracert Alumni Fakultas Ekonomi Bisnis Universitas Brawijaya<br>";
+            $message .="Untuk dapat mengakses akun anda, silahkan verifikasi email anda terlebih dahulu melalui link berikut<br>";
+            $message .="<br>";
+            $message .="<a href='".site_url('alumni/account/verification/'.$i->post('username').'/'.$encrypted_id.'')."'>Verifikasi Disini</a><br>";
+            $message .="<br>";
+            $message .="<br>";
+            $message .="===========================================================================<br>";
+            $message .="PSIK Fakultas Ekonomi Bisnis<br>";
+            $message .="Universitas Brawijaya<br>";
+            $message .="<a href='http://feb.ub.ac.id'>feb.ub.ac.id</a>";
+            $this->email->message($message);
+
+            if ($this->email->send()) {
+              $this->session->set_flashdata('success', 'Berhasil menambah alumni.');
+              redirect('admin/alumni');
+            } else {
+              echo "gagal kirim email";
+            }
+          }
+
         }
     }
 
