@@ -291,6 +291,9 @@
             <div class="form-horizontal">
               <div class="box-body">
                 <div class="form-group">
+                  <div class="col-sm-9"></div>
+                </div>
+                <div class="form-group">
                   <label class="col-sm-3 control-label" for="">Nama Jurusan</label>
                   <div class="col-sm-9">
                     <input type="text" name="nama_jurusan" id="nama_jurusan" class="form-control" value="<?php echo set_value('nama_jurusan') ?>" placeholder="Masukan Nama Jurusan..."required>
@@ -321,6 +324,9 @@
           <div class="col-md-12">
             <div class="form-horizontal">
               <div class="box-body">
+                <div class="form-group">
+                  <div class="col-sm-9"></div>
+                </div>
                 <input type="hidden" name="id_jurusan_up" id="id_jurusan_up" class="form-control" value="" placeholder="">
                 <div class="form-group">
                   <label class="col-sm-3 control-label" for="">Nama Jurusan</label>

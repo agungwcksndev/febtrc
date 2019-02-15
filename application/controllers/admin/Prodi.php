@@ -76,7 +76,7 @@ class Prodi extends CI_Controller{
                 'required',
               array(
                 'required'  =>  'Anda belum memilih Jurusan.')
-              );
+      );
 
       $valid->set_rules(
                 'nama_prodi_up',
@@ -84,7 +84,7 @@ class Prodi extends CI_Controller{
                 'required',
               array(
                 'required'  =>  'Anda belum mengisikan Nama Jurusan.')
-             );
+     );
 
             $i  = $this->input;
             if ($valid->run()===false) {

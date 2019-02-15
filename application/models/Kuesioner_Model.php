@@ -18,10 +18,31 @@ class Kuesioner_Model extends CI_Model{
     return $query->result();
   }
 
-  public function listing()
+  public function listingByFakultas()
   {
     $this->db->select('*');
     $this->db->from('paket_soal');
+    $this->db->where('tingkat_kuesioner',"Fakultas");
+    $this->db->order_by('id_paket', 'DESC');
+    $query  = $this->db->get();
+    return $query->result();
+  }
+
+  public function listingByJurusan()
+  {
+    $this->db->select('*');
+    $this->db->from('paket_soal');
+    $this->db->where('tingkat_kuesioner',"Jurusan");
+    $this->db->order_by('id_paket', 'DESC');
+    $query  = $this->db->get();
+    return $query->result();
+  }
+
+  public function listingByProdi()
+  {
+    $this->db->select('*');
+    $this->db->from('paket_soal');
+    $this->db->where('tingkat_kuesioner',"Prodi");
     $this->db->order_by('id_paket', 'DESC');
     $query  = $this->db->get();
     return $query->result();
@@ -33,6 +54,28 @@ class Kuesioner_Model extends CI_Model{
     $this->db->select('jenjang_soal');
     $this->db->from('paket_soal');
     $this->db->order_by('jenjang_soal');
+    $query  = $this->db->get();
+    return $query->result();
+  }
+
+  public function get_tingkat_jurusan()
+  {
+    $this->db->distinct();
+    $this->db->select('nama_tingkat');
+    $this->db->from('paket_soal');
+    $this->db->where('tingkat_kuesioner',"Jurusan");
+    $this->db->order_by('nama_tingkat');
+    $query  = $this->db->get();
+    return $query->result();
+  }
+
+  public function get_tingkat_prodi()
+  {
+    $this->db->distinct();
+    $this->db->select('nama_tingkat');
+    $this->db->from('paket_soal');
+    $this->db->where('tingkat_kuesioner',"Prodi");
+    $this->db->order_by('nama_tingkat');
     $query  = $this->db->get();
     return $query->result();
   }

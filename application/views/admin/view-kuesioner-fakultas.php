@@ -287,6 +287,11 @@
             <div class="form-horizontal">
               <div class="box-body">
                 <div class="form-group">
+                  <div class="col-sm-9"></div>
+                </div>
+                <input type="hidden" name="tingkat_kuesioner" id="tingkat_kuesioner" class="form-control" value="Fakultas">
+                <input type="hidden" name="nama_tingkat" id="nama_tingkat" class="form-control" value="FEB">
+                <div class="form-group">
                   <label class="col-sm-3 control-label" for="">Pilih Jenjang Soal</label>
                   <div class="col-sm-9">
                     <select name="jenjang_soal" id="jenjang_soal" class="form-control">
@@ -329,6 +334,9 @@
           <div class="col-md-12">
             <div class="form-horizontal">
               <div class="box-body">
+                <div class="form-group">
+                  <div class="col-sm-9"></div>
+                </div>
                 <input type="hidden" name="id_paket_up" id="id_paket_up" class="form-control" value="" placeholder="">
                 <div class="form-group">
                   <label class="col-sm-3 control-label" for="">Jenjang Soal</label>

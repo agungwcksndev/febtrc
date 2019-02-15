@@ -319,6 +319,9 @@
             <div class="form-horizontal">
               <div class="box-body">
                 <div class="form-group">
+                  <div class="col-sm-9"></div>
+                </div>
+                <div class="form-group">
                   <label class="col-sm-3 control-label" for="">Pilih Jurusan</label>
                   <div class="col-sm-9">
                     <select name="jurusan" id="jurusan" class="form-control" value="">
@@ -360,6 +363,9 @@
           <div class="col-md-12">
             <div class="form-horizontal">
               <div class="box-body">
+                <div class="form-group">
+                  <div class="col-sm-9"></div>
+                </div>
                 <input type="hidden" name="id_prodi_up" id="id_prodi_up" class="form-control" value="" placeholder="">
                 <div class="form-group">
                   <label class="col-sm-3 control-label" for="">Jurusan</label>

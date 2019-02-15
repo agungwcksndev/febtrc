@@ -11,7 +11,7 @@ class Kuesioner_Fakultas extends CI_Controller{
 
   function index()
   {
-    $paket_soals = $this->Kuesioner_Model->listing();
+    $paket_soals = $this->Kuesioner_Model->listingByFakultas();
     $list_jenjang = $this->Kuesioner_Model->get_jenjang();
     $data = array('isi'     => 'admin/view-kuesioner-fakultas',
                   'paket_soals'=> $paket_soals,
@@ -28,14 +28,28 @@ class Kuesioner_Fakultas extends CI_Controller{
         'Jenjang_soal',
         'required',
         array(  'required'  =>  'Anda belum memilih jenjang soal.')
-      );
+    );
 
     $valid->set_rules(
         'nama_paket',
         'Nama_paket',
         'required',
         array(  'required'  =>  'Anda belum mengisikan nama paket soal.')
-      );
+    );
+
+    $valid->set_rules(
+        'tingkat_kuesioner',
+        'Tingkat_kuesioner',
+        'required',
+        array(  'required'  =>  'Anda belum mengisikan nama paket soal.')
+    );
+
+    $valid->set_rules(
+        'nama_tingkat',
+        'Nama_tingkat',
+        'required',
+        array(  'required'  =>  'Anda belum mengisikan nama paket soal.')
+    );
 
       $i  = $this->input;
       if ($valid->run()===false)
@@ -46,8 +60,10 @@ class Kuesioner_Fakultas extends CI_Controller{
       else
       {
           $data = array(
-                'jenjang_soal'    =>  $i->post('jenjang_soal'),
-                'nama_paket'      =>  $i->post('nama_paket')
+                'jenjang_soal'      =>  $i->post('jenjang_soal'),
+                'nama_paket'        =>  $i->post('nama_paket'),
+                'tingkat_kuesioner' =>  $i->post('tingkat_kuesioner'),
+                'nama_tingkat'      =>  $i->post('nama_tingkat')
               );
           $this->Kuesioner_Model->add_paket_soal($data);
           $this->session->set_flashdata('sukses', 'Berhasil menambah Paket Soal.');
@@ -76,11 +92,12 @@ class Kuesioner_Fakultas extends CI_Controller{
           'nama_paket_up',
           'required',
           array(  'required'  =>  'Anda belum mengisikan nama paket soal.')
-        );
+      );
+
         $i  = $this->input;
         if ($valid->run()===false)
         {
-            $paket_soals= $this->Kuesioner_Model->listing();
+            $paket_soals= $this->Kuesioner_Model->listingByFakultas();
             $list_jenjang = $this->Kuesioner_Model->get_jenjang();
             $data = array('isi'          => 'admin/view-kuesioner-fakultas',
                           'paket_soals'  => $paket_soals,
