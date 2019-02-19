@@ -29,8 +29,9 @@
                <tr>
                  <th class="text-center">No.</th>
                  <th>Jenjang Soal</th>
+                 <th>Angkatan</th>
                  <th>Paket Soal</th>
-                 <th>Proram Studi</th>
+                 <th>Program Studi</th>
                  <th class="text-center">Aksi</th>
                </tr>
                </thead>
@@ -41,6 +42,7 @@
                <tr>
                  <td class="text-center"><?php echo $no ?></td>
                  <td><?php echo $paket_soal->jenjang_soal ?></td>
+                 <td><?php echo $paket_soal->angkatan ?></td>
                  <td><?php echo $paket_soal->nama_paket ?></td>
                  <td><?php echo $paket_soal->nama_tingkat ?></td>
                  <td class="text-center">
@@ -56,8 +58,9 @@
                <tr>
                  <th class="text-center">No.</th>
                  <th>Jenjang Soal</th>
+                 <th>Angkatan</th>
                  <th>Paket Soal</th>
-                 <th>Proram Studi</th>
+                 <th>Program Studi</th>
                  <th class="text-center">Aksi</th>
                </tr>
                </tfoot>
@@ -294,14 +297,22 @@
                 </div>
                 <input type="hidden" name="tingkat_kuesioner" id="tingkat_kuesioner" class="form-control" value="Prodi">
                 <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Pilih Jenjang Soal</label>
+                  <label class="col-sm-3 control-label" for="">Pilih Jenjang</label>
                   <div class="col-sm-9">
                     <select name="jenjang_soal" id="jenjang_soal" class="form-control">
-                      <option selected disabled>Pilih jenjang soal</option>
+                      <option selected disabled>Pilih jenjang</option>
                       <option value="D3">D3</option>
                       <option value="S1">S1</option>
                       <option value="S2">S2</option>
                       <option value="S3">S3</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="">Angkatan</label>
+                  <div class="col-sm-9">
+                    <select name="angkatan" id="angkatan" class="form-control">
+                      <option selected disabled>Pilih Angkatan</option>
                     </select>
                   </div>
                 </div>
@@ -317,7 +328,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Nama Paket Soal</label>
+                  <label class="col-sm-3 control-label" for="">Nama Paket</label>
                   <div class="col-sm-9">
                     <input type="text" name="nama_paket" id="nama_paket" class="form-control" value="" placeholder="Masukan Nama Paket Soal..."required>
                   </div>
@@ -357,9 +368,18 @@
                     <input type="hidden" id="id_paket_up" name="id_paket_up" value="">
                     <select name="jenjang_soal_up" id="jenjang_soal_up" class="form-control">
                       <option value="" disabled>Pilih jenjang Soal</option>
-                        <?php foreach ($list_jenjang as $paket_soal): ?>
-                          <option value="<?php echo $paket_soal->jenjang_soal ?>"><?php echo $paket_soal->jenjang_soal ?></option>
-                        <?php endforeach; ?>
+                      <option value="D3">D3</option>
+                      <option value="S1">S1</option>
+                      <option value="S2">S2</option>
+                      <option value="S3">S3</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="">Angkatan</label>
+                  <div class="col-sm-9">
+                    <select name="angkatan_up" id="angkatan_up" class="form-control">
+                      <option selected disabled>Pilih Angkatan</option>
                     </select>
                   </div>
                 </div>
@@ -368,9 +388,9 @@
                   <div class="col-sm-9">
                    <input type="hidden" id="id_paket_up" name="id_paket_up" value="">
                     <select name="nama_tingkat_up" id="nama_tingkat_up" class="form-control">
-                      <option value="" disabled>Pilih program studi</option>
-                      <?php foreach ($list_nama_tingkat as $prodi): ?>
-                        <option value="<?php echo $prodi->nama_tingkat ?>"><?php echo $prodi->nama_tingkat ?></option>
+                      <option selected disabled>Pilih program studi</option>
+                      <?php foreach ($prodis as $prodi): ?>
+                        <option><?php echo $prodi->nama_prodi; ?></option>
                       <?php endforeach; ?>
                     </select>
                   </div>
@@ -424,6 +444,25 @@
    })
  })
 
+  var max  = new Date().getFullYear();
+  var min  = 1961;
+  var min2 = 1950;
+  select = document.getElementById('angkatan');
+  select2 = document.getElementById('angkatan_up');
+
+  for (var i = min; i<=max; i++){
+  var opt = document.createElement('option');
+  opt.value = i;
+  opt.innerHTML = i;
+  select.appendChild(opt);
+  }
+
+  for (var i = min; i<=max; i++){
+  var opt = document.createElement('option');
+  opt.value = i;
+  opt.innerHTML = i;
+  select2.appendChild(opt);
+  }
  function edit_paket(id_paket)
  {
      //Ajax Load data from ajax
@@ -435,6 +474,7 @@
          {
              $('[name="id_paket_up"]').val(data.id_paket);
              $('[name="jenjang_soal_up"]').val(data.jenjang_soal);
+             $('[name="angkatan_up"]').val(data.angkatan);
              $('[name="nama_paket_up"]').val(data.nama_paket);
              $('[name="nama_tingkat_up"]').val(data.nama_tingkat);
              $('#modal-update-paket').modal('show'); // show bootstrap modal when complete loaded

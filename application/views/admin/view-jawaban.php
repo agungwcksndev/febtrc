@@ -287,15 +287,7 @@
                 <div class="form-group">
                   <div class="col-sm-9"></div>
                 </div>
-                <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Soal Kuesioner</label>
-                  <div class="col-sm-9">
-                    <select name="soal" id="soal" class="form-control">
-                      <option value="<?php echo $detail_soal->id_soal ?>"><?php echo $detail_soal->soal; ?></option>
-                    </select>
-                    <!-- <textarea name="soal" id="soal" class="form-control" disabled></textarea> -->
-                  </div>
-                </div>
+                <input type="hidden" name="soal" id="soal" value="<?php echo $detail_soal->id_soal ?>">
                 <div class="form-group">
                   <label class="col-sm-3 control-label" for="">Pilihan Jawaban</label>
                   <div class="col-sm-9">

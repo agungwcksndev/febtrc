@@ -29,8 +29,8 @@
                  <thead>
                  <tr>
                    <th class="text-center">No.</th>
-                   <th>Tipe Soal</th>
                    <th>Soal</th>
+                   <th>Tipe Soal</th>
                    <th class="text-center">Aksi</th>
                  </tr>
                  </thead>
@@ -40,8 +40,8 @@
                    foreach ($daftar_soal_paket as $daftar_soal): ?>
                  <tr>
                    <td class="text-center"><?php echo $no ?></td>
-                   <td><?php echo $daftar_soal->tipe_soal ?></td>
                    <td><?php echo $daftar_soal->soal ?></td>
+                   <td><?php echo $daftar_soal->tipe_soal ?></td>
                    <input type="hidden" id="id_paket" name="id_paket" value="<?php echo $daftar_soal->id_paket ?>" >
                    <td class="text-center">
                      <a style="cursor:pointer;" class="btn btn-primary" href="<?php echo site_url('/admin/daftar_jawaban/get_jawaban_soal/'.$daftar_soal->id_soal) ?>"><i class="fa fa-book"></i>&nbsp;&nbsp;Detail</a>
@@ -55,8 +55,8 @@
                  <tfoot>
                  <tr>
                    <th class="text-center">No.</th>
-                   <th>Tipe Soal</th>
                    <th>Soal</th>
+                   <th>Tipe Soal</th>
                    <th class="text-center">Aksi</th>
                  </tr>
                  </tfoot>
@@ -294,14 +294,7 @@
                 <div class="form-group">
                   <div class="col-sm-9"></div>
                 </div>
-                <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Pilih Paket Soal</label>
-                  <div class="col-sm-9">
-                    <select name="nama_paket" id="nama_paket" class="form-control">
-                        <option><?php echo $detail_paket->nama_paket; ?></option>
-                    </select>
-                  </div>
-                </div>
+                <input type="hidden" name="nama_paket" id="nama_paket" value="<?php echo $detail_paket->nama_paket; ?>">
                 <div class="form-group">
                   <label class="col-sm-3 control-label" for="">Pilih Tipe Soal</label>
                   <div class="col-sm-9">
@@ -310,11 +303,8 @@
                       <option value="Short Text">Short Text</option>
                       <option value="Paragraf Text">Paragraf Text</option>
                       <option value="Multiple choice">Multiple choice</option>
-                      <option value="Chkeckbox">Chkeckbox</option>
+                      <option value="Chkeckbox">Checkbox</option>
                       <option value="Dropdown">Dropdown</option>
-                      <option value="Scale">Scale</option>
-                      <option value="Date">Date</option>
-                      <option value="Time">Time</option>
                     </select>
                   </div>
                 </div>
@@ -358,10 +348,15 @@
                   <div class="col-sm-9">
                     <input type="hidden" id="id_soal_up" name="id_soal_up" value="">
                     <select name="tipe_soal_up" id="tipe_soal_up" class="form-control">
-                      <option value="" disabled>Pilih Tipe Soal</option>
-                        <?php foreach ($list_tipe as $daftar_soal): ?>
-                          <option value="<?php echo $daftar_soal->tipe_soal ?>"><?php echo $daftar_soal->tipe_soal ?></option>
-                        <?php endforeach; ?>
+                      <option selected disabled>Pilih tipe soal</option>
+                      <option value="Short Text">Short Text</option>
+                      <option value="Paragraf Text">Paragraf Text</option>
+                      <option value="Multiple choice">Multiple choice</option>
+                      <option value="Chkeckbox">Chkeckbox</option>
+                      <option value="Dropdown">Dropdown</option>
+                      <option value="Scale">Scale</option>
+                      <option value="Date">Date</option>
+                      <option value="Time">Time</option>
                     </select>
                   </div>
                 </div>
@@ -406,9 +401,9 @@
    $('#example1').DataTable({
      "columnDefs": [
        { "width": "5%", "targets": 0 },
-       { "width": "10%", "targets": 1 },
-       { "width": "65%", "targets": 2 },
-       { "width": "20%", "targets": 3 }
+       { "width": "59%", "targets": 1 },
+       { "width": "10%", "targets": 2 },
+       { "width": "26%", "targets": 3 }
      ]
    })
  })

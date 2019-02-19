@@ -28,8 +28,9 @@
                <thead>
                <tr>
                  <th class="text-center">No.</th>
-                 <th>Jenjang Soal</th>
-                 <th>Paket Soal</th>
+                 <th>Jenjang</th>
+                 <th>Angkatan</th>
+                 <th>Paket</th>
                  <th>Jurusan</th>
                  <th class="text-center">Aksi</th>
                </tr>
@@ -41,6 +42,7 @@
                <tr>
                  <td class="text-center"><?php echo $no ?></td>
                  <td><?php echo $paket_soal->jenjang_soal ?></td>
+                 <td><?php echo $paket_soal->angkatan ?></td>
                  <td><?php echo $paket_soal->nama_paket ?></td>
                  <td><?php echo $paket_soal->nama_tingkat ?></td>
                  <td class="text-center">
@@ -55,8 +57,9 @@
                <tfoot>
                <tr>
                  <th class="text-center">No.</th>
-                 <th>Jenjang Soal</th>
-                 <th>Paket Soal</th>
+                 <th>Jenjang</th>
+                 <th>Angkatan</th>
+                 <th>Paket</th>
                  <th>Jurusan</th>
                  <th class="text-center">Aksi</th>
                </tr>
@@ -283,7 +286,7 @@
       <div class="modal-content">
         <div class="modal-header bg-primary">
           <button type="button" class="close" data-dismiss="modal" name="button"></button>
-          <h4 class="modal-title"></i>Form Tambah Paket Soal</h4>
+          <h4 class="modal-title"></i>Form Tambah Paket</h4>
         </div>
         <div class="modal-body">
           <div class="col-md-12">
@@ -294,7 +297,7 @@
                 </div>
                 <input type="hidden" name="tingkat_kuesioner" id="tingkat_kuesioner" class="form-control" value="Jurusan">
                 <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Pilih Jenjang Soal</label>
+                  <label class="col-sm-3 control-label" for="">Pilih Jenjang</label>
                   <div class="col-sm-9">
                     <select name="jenjang_soal" id="jenjang_soal" class="form-control">
                       <option selected disabled>Pilih jenjang soal</option>
@@ -302,6 +305,14 @@
                       <option value="S1">S1</option>
                       <option value="S2">S2</option>
                       <option value="S3">S3</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="">Angkatan</label>
+                  <div class="col-sm-9">
+                    <select name="angkatan" id="angkatan" class="form-control">
+                      <option selected disabled>Pilih Angkatan</option>
                     </select>
                   </div>
                 </div>
@@ -317,9 +328,9 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Nama Paket Soal</label>
+                  <label class="col-sm-3 control-label" for="">Nama Paket</label>
                   <div class="col-sm-9">
-                    <input type="text" name="nama_paket" id="nama_paket" class="form-control" value="" placeholder="Masukan Nama Paket Soal..."required>
+                    <input type="text" name="nama_paket" id="nama_paket" class="form-control" value="" placeholder="Masukan Nama Paket..."required>
                   </div>
                 </div>
               </div>
@@ -328,7 +339,7 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-default" data-dismiss="modal" name="button">Cancel</button>
-          <button type="submit" class="btn btn-primary" name="button">Tambah Paket Soal</button>
+          <button type="submit" class="btn btn-primary" name="button">Tambah Paket</button>
         </div>
       </div>
     </form>
@@ -341,7 +352,7 @@
       <div class="modal-content">
         <div class="modal-header bg-primary">
           <button type="button" class="close" data-dismiss="modal" name="button"></button>
-          <h4 class="modal-title"></i>Form Update Paket Soal</h4>
+          <h4 class="modal-title"></i>Form Update Paket</h4>
         </div>
         <div class="modal-body">
           <div class="col-md-12">
@@ -352,14 +363,23 @@
                 </div>
                 <input type="hidden" name="id_paket_up" id="id_paket_up" class="form-control" value="" placeholder="">
                 <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Jenjang Soal</label>
+                  <label class="col-sm-3 control-label" for="">Jenjang</label>
                   <div class="col-sm-9">
                     <input type="hidden" id="id_paket_up" name="id_paket_up" value="">
                     <select name="jenjang_soal_up" id="jenjang_soal_up" class="form-control">
-                      <option value="" disabled>Pilih jenjang Soal</option>
-                        <?php foreach ($list_jenjang as $jenjang): ?>
-                          <option value="<?php echo $jenjang->jenjang_soal ?>"><?php echo $jenjang->jenjang_soal ?></option>
-                        <?php endforeach; ?>
+                      <option selected disabled>Pilih jenjang</option>
+                      <option value="D3">D3</option>
+                      <option value="S1">S1</option>
+                      <option value="S2">S2</option>
+                      <option value="S3">S3</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" for="">Angkatan</label>
+                  <div class="col-sm-9">
+                    <select name="angkatan_up" id="angkatan_up" class="form-control">
+                      <option selected disabled>Pilih Angkatan</option>
                     </select>
                   </div>
                 </div>
@@ -369,16 +389,16 @@
                    <input type="hidden" id="id_paket_up" name="id_paket_up" value="">
                     <select name="nama_tingkat_up" id="nama_tingkat_up" class="form-control">
                       <option value="" disabled>Pilih jurusan</option>
-                      <?php foreach ($list_nama_tingkat as $jurusan): ?>
-                        <option value="<?php echo $jurusan->nama_tingkat ?>"><?php echo $jurusan->nama_tingkat ?></option>
+                      <?php foreach ($jurusans as $jurusan): ?>
+                        <option><?php echo $jurusan->nama_jurusan; ?></option>
                       <?php endforeach; ?>
                     </select>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Nama Paket Soal</label>
+                  <label class="col-sm-3 control-label" for="">Nama Paket</label>
                   <div class="col-sm-9">
-                    <input type="text" name="nama_paket_up" id="nama_paket_up" class="form-control" value="" placeholder="Masukan Nama Paket Soal..."required>
+                    <input type="text" name="nama_paket_up" id="nama_paket_up" class="form-control" value="" placeholder="Masukan Nama Paket..."required>
                   </div>
                 </div>
               </div>
@@ -387,7 +407,7 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-default" data-dismiss="modal" name="button">Cancel</button>
-          <button type="submit" class="btn btn-primary" name="button">Update Paket Soal</button>
+          <button type="submit" class="btn btn-primary" name="button">Update Paket</button>
         </div>
       </div>
     </form>
@@ -424,6 +444,26 @@
    })
  })
 
+ var max  = new Date().getFullYear();
+ var min  = 1961;
+ var min2 = 1950;
+ select = document.getElementById('angkatan');
+ select2 = document.getElementById('angkatan_up');
+
+ for (var i = min; i<=max; i++){
+ var opt = document.createElement('option');
+ opt.value = i;
+ opt.innerHTML = i;
+ select.appendChild(opt);
+ }
+
+ for (var i = min; i<=max; i++){
+ var opt = document.createElement('option');
+ opt.value = i;
+ opt.innerHTML = i;
+ select2.appendChild(opt);
+ }
+
  function edit_paket(id_paket)
  {
      //Ajax Load data from ajax
@@ -435,6 +475,7 @@
          {
              $('[name="id_paket_up"]').val(data.id_paket);
              $('[name="jenjang_soal_up"]').val(data.jenjang_soal);
+             $('[name="angkatan_up"]').val(data.angkatan);
              $('[name="nama_paket_up"]').val(data.nama_paket);
              $('[name="nama_tingkat_up"]').val(data.nama_tingkat);
              $('#modal-update-paket').modal('show'); // show bootstrap modal when complete loaded

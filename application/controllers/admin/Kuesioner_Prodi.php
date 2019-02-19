@@ -36,6 +36,13 @@ class Kuesioner_Prodi extends CI_Controller{
       );
 
     $valid->set_rules(
+        'angkatan',
+        'Angkatan',
+        'required',
+        array(  'required'  =>  'Anda belum memilih angkatan.')
+      );
+
+    $valid->set_rules(
         'nama_paket',
         'Nama_paket',
         'required',
@@ -66,6 +73,7 @@ class Kuesioner_Prodi extends CI_Controller{
           $i  = $this->input;
           $data = array(
                 'jenjang_soal'      =>  $i->post('jenjang_soal'),
+                'angkatan'      =>  $i->post('angkatan'),
                 'nama_paket'        =>  $i->post('nama_paket'),
                 'tingkat_kuesioner' =>  $i->post('tingkat_kuesioner'),
                 'nama_tingkat'      =>  $i->post('nama_tingkat')
@@ -90,6 +98,14 @@ class Kuesioner_Prodi extends CI_Controller{
           'required',
           array(
         'required'  =>  'Anda belum memilih jenjang soal.')
+      );
+
+      $valid->set_rules(
+          'angkatan_up',
+          'angkatan_up',
+          'required',
+          array(
+        'required'  =>  'Anda belum memilih angkatan.')
       );
 
       $valid->set_rules(
@@ -125,6 +141,7 @@ class Kuesioner_Prodi extends CI_Controller{
         {
             $data = array(
                   'jenjang_soal'    => $i->post('jenjang_soal_up'),
+                  'angkatan'    => $i->post('angkatan_up'),
                   'nama_paket'      => $i->post('nama_paket_up'),
                   'id_paket'        => $i->post('id_paket_up'),
                   'nama_tingkat'      => $i->post('nama_tingkat_up')

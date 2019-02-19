@@ -27,28 +27,35 @@ class Kuesioner_Fakultas extends CI_Controller{
         'jenjang_soal',
         'Jenjang_soal',
         'required',
-        array(  'required'  =>  'Anda belum memilih jenjang soal.')
+        array(  'required'  =>  'Anda belum memilih jenjang.')
+    );
+
+    $valid->set_rules(
+        'angkatan',
+        'Angkatan',
+        'required',
+        array(  'required'  =>  'Anda belum mengisikan angkatan.')
     );
 
     $valid->set_rules(
         'nama_paket',
         'Nama_paket',
         'required',
-        array(  'required'  =>  'Anda belum mengisikan nama paket soal.')
+        array(  'required'  =>  'Anda belum mengisikan nama paket.')
     );
 
     $valid->set_rules(
         'tingkat_kuesioner',
         'Tingkat_kuesioner',
         'required',
-        array(  'required'  =>  'Anda belum mengisikan nama paket soal.')
+        array(  'required'  =>  'Anda belum mengisikan nama paket.')
     );
 
     $valid->set_rules(
         'nama_tingkat',
         'Nama_tingkat',
         'required',
-        array(  'required'  =>  'Anda belum mengisikan nama paket soal.')
+        array(  'required'  =>  'Anda belum mengisikan nama paket.')
     );
 
       $i  = $this->input;
@@ -61,6 +68,7 @@ class Kuesioner_Fakultas extends CI_Controller{
       {
           $data = array(
                 'jenjang_soal'      =>  $i->post('jenjang_soal'),
+                'angkatan'          =>  $i->post('angkatan'),
                 'nama_paket'        =>  $i->post('nama_paket'),
                 'tingkat_kuesioner' =>  $i->post('tingkat_kuesioner'),
                 'nama_tingkat'      =>  $i->post('nama_tingkat')
@@ -110,6 +118,7 @@ class Kuesioner_Fakultas extends CI_Controller{
             $data = array(
                   'jenjang_soal'    => $i->post('jenjang_soal_up'),
                   'nama_paket'      => $i->post('nama_paket_up'),
+                  'angkatan'        => $i->post('angkatan_up'),
                   'id_paket'        => $i->post('id_paket_up')
                 );
             $this->Kuesioner_Model->update_paket_soal($data);
