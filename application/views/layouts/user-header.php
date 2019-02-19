@@ -961,9 +961,15 @@
 				</div>
 				<a href="02-ProfilePage.html" class="author-name fn">
 					<div class="author-title">
-						<?php echo $this->session->userdata('nama'); ?> <svg class="olymp-dropdown-arrow-icon"><use xlink:href="<?php echo base_url('resource/icons/') ?>icons.svg#olymp-dropdown-arrow-icon"></use></svg>
+						<?php
+							$jumlah = 1;
+							$str = $this->session->userdata('nama');
+							$cut_str = implode(" ", array_slice(explode(" ", $str), 0, $jumlah));
+							echo $cut_str."...";
+							?>
+						<svg class="olymp-dropdown-arrow-icon"><use xlink:href="<?php echo base_url('resource/icons/') ?>icons.svg#olymp-dropdown-arrow-icon"></use></svg>
 					</div>
-					<span class="author-subtitle"><?php echo $this->session->userdata('prodi'); ?></span>
+					<span class="author-subtitle"><?php echo $this->session->userdata('jurusan'); ?></span>
 				</a>
 			</div>
 

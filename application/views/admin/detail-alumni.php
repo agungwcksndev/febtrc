@@ -175,11 +175,11 @@
               </div>
                   <div class="box-body">
                     <div class="box-body box-profile">
-                      <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url('img/alumni_pic/'.$data_alumni->foto) ?>" alt="User profile picture">
+                      <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url('img/alumni_pic/'.$data_alumni->foto) ?>" style="width:150px;height:150px;" alt="User profile picture">
                       <h3 class="profile-username text-center"></h3>
                       <div class="col-md-12 text-center">
                         <a href="<?php echo site_url('admin/alumni/update_alumni/'.$data_alumni->username)?>" class="btn bg-navy margin" name="button"><i class="fa fa-pencil"></i>&nbsp;&nbsp;&nbsp;Edit Profil</a>
-                        <button type="button" class="btn bg-maroon margin" name="button"><i class="fa fa-image"></i>&nbsp;&nbsp;&nbsp;Ubah Foto</button>
+                        <a href="<?php echo site_url('admin/alumni/update_foto/'.$data_alumni->username)?>" type="button" class="btn bg-maroon margin" name="button"><i class="fa fa-image"></i>&nbsp;&nbsp;&nbsp;Ubah Foto</a>
                       </div>
                     </div>
                  </div>
