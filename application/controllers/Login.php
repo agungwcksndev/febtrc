@@ -77,7 +77,7 @@ class Login extends CI_Controller{
                   $this->session->set_userdata('username', $username);
                   $this->session->set_userdata('nama', $check_login_alumni['detail_alumni']->nama);
                   $this->session->set_userdata('foto', $check_login_alumni['detail_alumni']->foto);
-                  $this->session->set_userdata('prodi', $check_login_alumni['detail_alumni']->nama_prodi);
+                  $this->session->set_userdata('jurusan', $check_login_alumni['detail_alumni']->nama_jurusan);
                   $this->session->set_userdata('akses_level', 'alumni');
                     redirect(site_url('alumni/profile/'.$username), 'refresh');
                 }
@@ -103,8 +103,9 @@ class Login extends CI_Controller{
   public function logout(){
   $this->session->unset_userdata('username');
   $this->session->unset_userdata('akses_level');
+  $this->session->unset_userdata('foto');
   $this->session->unset_userdata('nama');
   $this->session->set_flashdata('notifikasi', '<center>Anda berhasil logout</center>');
-  redirect(site_url('login'),'refresh');
+  redirect(site_url('login'));
 }
 }
