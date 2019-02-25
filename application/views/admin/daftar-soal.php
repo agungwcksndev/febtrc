@@ -3,8 +3,8 @@
    <!-- Content Header (Page header) -->
    <section class="content-header">
      <h1>
-       Master Kuisioner
-       <small>Data Soal Kuesioner Alumni Fakultas Ekonomi Bisnis Universitas Brawijaya</small>
+       Soal Kuesioner
+       <small>Soal Kuesioner Fakultas Ekonomi Bisnis</small>
      </h1>
      <ol class="breadcrumb">
        <li><a href="#"><i class="fa fa-folder-open"></i> Home</a></li>
@@ -20,7 +20,9 @@
          <div class="box box-info">
            <div class="box-header">
              <h3 class="box-title">Daftar Soal <?php echo $detail_paket->nama_paket ?></h3>
-                <button type="button" class="btn btn-primary btn-flat" style="float:right;" data-toggle="modal" data-target="#modal-add-soal"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Tambah Soal Kuisioner</button>
+             <div class="btn-toolbar">
+                <button type="button" class="btn btn-primary" style="float:right;" data-toggle="modal" data-target="#modal-add-soal"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Tambah Soal</button>
+             </div>
            </div>
            <!-- /.box-header -->
            <div class="box-body">
@@ -44,8 +46,8 @@
                    <td><?php echo $daftar_soal->tipe_soal ?></td>
                    <input type="hidden" id="id_paket" name="id_paket" value="<?php echo $daftar_soal->id_paket ?>" >
                    <td class="text-center">
-                     <a style="cursor:pointer;" class="btn btn-primary" href="<?php echo site_url('/admin/daftar_jawaban/get_jawaban_soal/'.$daftar_soal->id_soal) ?>"><i class="fa fa-book"></i>&nbsp;&nbsp;Detail</a>
-                     <a class="btn btn-default" onclick="edit_soal('<?php echo $daftar_soal->id_soal ?>')"<i class="fa fa-pencil"></i>&nbsp;&nbsp;Edit</a>
+                     <a style="cursor:pointer;" class="btn btn-primary" href="<?php echo site_url('/admin/daftar_jawaban/get_jawaban_soal/'.$daftar_soal->id_soal) ?>"><i class="fa fa-check-circle"></i>&nbsp;&nbsp;Jawaban</a>
+                     <a class="btn btn-default" onclick="edit_soal('<?php echo $daftar_soal->id_soal ?>')"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Edit</a>
                      <button onclick="del('<?php echo $daftar_soal->id_soal ?>')"class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;&nbsp;Delete</a>
                    </td>
                  </tr>
@@ -284,7 +286,7 @@
       <div class="modal-content">
         <div class="modal-header bg-primary">
           <button type="button" class="close" data-dismiss="modal" name="button"></button>
-          <h4 class="modal-title"></i>Form Tambah Soal Kuesioner</h4>
+          <h4 class="modal-title"></i>Tambah Soal</h4>
         </div>
         <div class="modal-body">
           <div class="col-md-12">
@@ -296,22 +298,22 @@
                 </div>
                 <input type="hidden" name="nama_paket" id="nama_paket" value="<?php echo $detail_paket->nama_paket; ?>">
                 <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Pilih Tipe Soal</label>
+                  <label class="col-sm-3 control-label" for="">Tipe Soal</label>
                   <div class="col-sm-9">
                     <select name="tipe_soal" id="tipe_soal" class="form-control">
-                      <option selected disabled>Pilih tipe soal</option>
-                      <option value="Short Text">Short Text</option>
-                      <option value="Paragraf Text">Paragraf Text</option>
-                      <option value="Multiple choice">Multiple choice</option>
-                      <option value="Chkeckbox">Checkbox</option>
+                      <option selected disabled>Pilih Tipe Soal</option>
+                      <option value="Checkbox">Checkbox</option>
+                      <option value="Multiple Choice">Multiple choice</option>
                       <option value="Dropdown">Dropdown</option>
+                      <option value="Paragraf Text">Paragraf Text</option>
+                      <option value="Short Text">Short Text</option>
                     </select>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Soal Kuisioner</label>
+                  <label class="col-sm-3 control-label" for="">Soal</label>
                   <div class="col-sm-9">
-                    <input type="text" name="soal" id="soal" class="form-control" value="" placeholder="Masukan Soal Kuisioner..."required>
+                    <input type="text" name="soal" id="soal" class="form-control" value="" placeholder="Masukan Soal..."required>
                   </div>
                 </div>
               </div>
@@ -319,8 +321,8 @@
           </div>
         </div>
         <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" name="button">Tambah Soal</button>
           <button type="submit" class="btn btn-default" data-dismiss="modal" name="button">Cancel</button>
-          <button type="submit" class="btn btn-primary" name="button">Tambah Soal Kuisioner</button>
         </div>
       </div>
     </form>
@@ -333,7 +335,7 @@
       <div class="modal-content">
         <div class="modal-header bg-primary">
           <button type="button" class="close" data-dismiss="modal" name="button"></button>
-          <h4 class="modal-title"></i>Form Update Soal Kuisioner</h4>
+          <h4 class="modal-title"></i>Update Soal</h4>
         </div>
         <div class="modal-body">
           <div class="col-md-12">
@@ -349,21 +351,18 @@
                     <input type="hidden" id="id_soal_up" name="id_soal_up" value="">
                     <select name="tipe_soal_up" id="tipe_soal_up" class="form-control">
                       <option selected disabled>Pilih tipe soal</option>
-                      <option value="Short Text">Short Text</option>
-                      <option value="Paragraf Text">Paragraf Text</option>
-                      <option value="Multiple choice">Multiple choice</option>
-                      <option value="Chkeckbox">Chkeckbox</option>
+                      <option value="Checkbox">Checkbox</option>
+                      <option value="Multiple Choice">Multiple choice</option>
                       <option value="Dropdown">Dropdown</option>
-                      <option value="Scale">Scale</option>
-                      <option value="Date">Date</option>
-                      <option value="Time">Time</option>
+                      <option value="Paragraf Text">Paragraf Text</option>
+                      <option value="Short Text">Short Text</option>
                     </select>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Soal Kuisioner</label>
+                  <label class="col-sm-3 control-label" for="">Soal</label>
                   <div class="col-sm-9">
-                    <input type="text" name="soal_up" id="soal_up" class="form-control" value="" placeholder="Masukan Soal Kuisioner..."required>
+                    <input type="text" name="soal_up" id="soal_up" class="form-control" value="" placeholder="Masukan Soal..."required>
                   </div>
                 </div>
               </div>
@@ -371,8 +370,8 @@
           </div>
         </div>
         <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" name="button">Update Soal</button>
           <button type="submit" class="btn btn-default" data-dismiss="modal" name="button">Cancel</button>
-          <button type="submit" class="btn btn-primary" name="button">Update Soal Kuesioner</button>
         </div>
       </div>
     </form>
@@ -401,9 +400,9 @@
    $('#example1').DataTable({
      "columnDefs": [
        { "width": "5%", "targets": 0 },
-       { "width": "59%", "targets": 1 },
+       { "width": "40%", "targets": 1 },
        { "width": "10%", "targets": 2 },
-       { "width": "26%", "targets": 3 }
+       { "width": "20%", "targets": 3 }
      ]
    })
  })

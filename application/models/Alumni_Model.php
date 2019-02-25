@@ -11,7 +11,8 @@ class Alumni_Model extends CI_Model{
 
   public function get_all_alumni()
   {
-    $query=$this->db->query("SELECT alumni.username,alumni.nama,alumni.angkatan,alumni.jenjang,jurusan.nama_jurusan,prodi.nama_prodi,tempat_kerja,posisi,pendapatan_per_bulan
+    $query=$this->db->query("SELECT
+      alumni.username,alumni.nama,alumni.angkatan,alumni.jenjang,jurusan.nama_jurusan,prodi.nama_prodi,tempat_kerja,posisi,pendapatan_per_bulan
       FROM alumni LEFT JOIN riwayat_pekerjaan s ON s.username = alumni.username
       JOIN jurusan ON jurusan.id_jurusan = alumni.id_jurusan
       JOIN prodi ON prodi.id_prodi = alumni.id_prodi

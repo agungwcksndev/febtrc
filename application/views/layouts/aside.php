@@ -51,11 +51,6 @@
           <li><a href="<?php echo site_url('admin/alumni'); ?>"><i class="fa fa-circle-o"></i> Alumni</a></li>
         </ul>
       </li>
-      <li>
-        <a href="#">
-          <i class="fa fa-suitcase"></i> <span>Lowongan Pekerjaan</span>
-        </a>
-      </li>
       <li class="treeview">
         <a href="<?php echo base_url(); ?>">
           <i class="fa fa-book"></i> <span>Kuesioner</span>
@@ -67,7 +62,13 @@
           <li><a href="<?php echo site_url('admin/kuesioner_fakultas'); ?>"><i class="fa fa-circle-o"></i> Daftar Paket Fakultas</a></li>
           <li><a href="<?php echo site_url('admin/kuesioner_jurusan'); ?>"><i class="fa fa-circle-o"></i> Daftar Paket Jurusan</a></li>
           <li><a href="<?php echo site_url('admin/kuesioner_prodi'); ?>"><i class="fa fa-circle-o"></i> Daftar Paket Prodi</a></li>
+          <li><a href="<?php echo site_url('admin/kuesioner'); ?>"><i class="fa fa-circle-o"></i> Kuesioner</a></li>
         </ul>
+      </li>
+      <li>
+        <a href="#">
+          <i class="fa fa-suitcase"></i> <span>Lowongan Pekerjaan</span>
+        </a>
       </li>
       <li>
         <a href="#">

@@ -3,8 +3,8 @@
    <!-- Content Header (Page header) -->
    <section class="content-header">
      <h1>
-       Master Alumni
-       <small>View data</small>
+       Master Admin
+       <small>Tambah Admin Fakultas Ekonomi dan Bisnis</small>
      </h1>
      <ol class="breadcrumb">
        <li><a href="#"><i class="fa fa-folder-open"></i> Home</a></li>
@@ -15,91 +15,53 @@
 
    <!-- Main content -->
    <section class="content">
-     <?php if ($this->session->flashdata('success')) {
-         echo "<br>";
-         echo "<div class='alert alert-success alert-dismissible'>";
-         echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
-         echo "<h4><i class='icon fa fa-check'></i>Success!</h4>";
-         echo $this->session->flashdata('success');
-         echo "</div>";
-     };
-     ?>
+     <?php echo validation_errors(); ?>
+     <form class="form-horizontal" method="post" action="<?php echo site_url('admin/admin/proses_add_admin') ?>">
      <div class="row">
-       <div class="col-xs-12">
-         <div class="box box-info">
-           <div class="box-header">
-             <h3 class="box-title"><i class="fa fa-users"></i>&nbsp;&nbsp;Alumni Fakultas Ekonomi Bisnis Universitas Brawijaya</h3>
-               <a href="<?php echo site_url('admin/alumni/add_alumni') ?>" class="btn btn-info"  style="float:right;"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Tambah Data Alumni</a>
-           </div>
-           <!-- /.box-header -->
-           <div class="box-body">
-             <table id="example1" class="table table-bordered table-striped">
-               <thead>
-               <tr>
-                 <th class="text-center">No.</th>
-                 <th>Nama</th>
-                 <th class="text-center">Jenjang</th>
-                 <th>Jurusan</th>
-                 <th>Program Studi</th>
-                 <th class="text-center">Angkatan</th>
-                 <th class="text-center">Tempat Kerja</th>
-                 <th class="text-center">Posisi</th>
-                 <th class="text-center">Pendapatan</th>
-                 <th class="text-center">Aksi</th>
-               </tr>
-               </thead>
-               <tbody>
-                 <?php
-                 $no = 1;
-                 foreach ($alumnis as $alumni): ?>
-               <tr>
-                 <td class="text-center"><?php echo $no ?></td>
-                 <td> <a href="<?php echo site_url('alumni/profile/'.$alumni->username) ?>"><?php echo $alumni->nama ?></a></td>
-                 <td class="text-center"><?php echo $alumni->jenjang ?></td>
-                 <td><?php echo $alumni->nama_jurusan ?></td>
-                 <td><?php echo $alumni->nama_prodi ?></td>
-                 <td class="text-center"><?php echo $alumni->angkatan ?></td>
-                 <td class="text-center"><?php echo $alumni->tempat_kerja ?></td>
-                 <td class="text-center"><?php echo $alumni->posisi ?></td>
-                 <td class="text-center">Rp. <?php
-                 $gaji = number_format($alumni->pendapatan_per_bulan,0,',','.');
-                 echo $gaji ?></td>
-                 <td class="text-center">
-                  <div class="row" style="margin-bottom:6px;">
-                    <button type="button" name="button" class="btn btn-success"> <i class="fa fa-whatsapp"></i> Broadcast Questioner</button>
+     <div class="col-md-12">
+       <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Preview Kuesioner</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <div class="box-body">
+              <?php foreach ($kuesioner as $kuesioner):?>
+                <?php
+                $id_soal = ''
+                if($id_soal != $kuesioner->id_soal){
+                  $i = 1;
+                ?>
+
+                <?php
+                if($kuesioner->tipe_soal == 'Dropdown'){
+                ?>
+                <div class="form-group">
+                  <label for="<?php echo $i; ?>" class="col-sm-4 control-label"><?php echo $kuesioner->soal ?><font style="color: red;">*)</font></label>
+                  <div class="col-sm-8">
+                    <select class="form-control" name="<?php echo $i; ?>" id="<?php echo $i; ?>" value="<?php echo set_value('<?php echo $i; ?>') ?>">
+                      <option value=""selected disabled>Pilih Jawaban</option>
+                      <option value="Perempuan">Perempuan</option>
+                      <option value="Laki-laki">Laki-laki</option>
+                    </select>
                   </div>
-                  <div class="row">
-                    <a style="cursor:pointer;" class="btn btn-default" onclick="detail('<?php echo $alumni->username ?>')" data-toggle="" data-target="#"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Detail</a>
-                   &nbsp;&nbsp;<button onclick="del('<?php echo $alumni->username ?>')" class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;&nbsp;Hapus</button>
+                </div>
+
+              <?php endforeach; ?>
+              <!-- <form class="form-horizontal" action="#" method="post">
+                <div class="form-group">
+                  <label for="nama" class="col-md-2 control-label">Nama Lengkap<font style="color: red;">*)</font></label>
+                  <div class="col-sm-8">
+                    <input type="text" name="nama" class="form-control" id="nama" value="" placeholder="Masukan Nama Lengkap">
                   </div>
-                  </td>
-               </tr>
-               <?php $no++ ?>
-               <?php endforeach; ?>
-               </tbody>
-               <tfoot>
-               <tr>
-                 <th class="text-center">No.</th>
-                 <th>Nama</th>
-                 <th class="text-center">Jenjang</th>
-                 <th>Jurusan</th>
-                 <th>Program Studi</th>
-                 <th  class="text-center">Angkatan</th>
-                 <th class="text-center">Tempat Kerja</th>
-                 <th class="text-center">Posisi</th>
-                 <th class="text-center">Pendapatan</th>
-                 <th class="text-center">Aksi</th>
-               </tr>
-               </tfoot>
-             </table>
-           </div>
-           <!-- /.box-body -->
-         </div>
-         <!-- /.box -->
-       </div>
-       <!-- /.col -->
-     <!-- /.row -->
-   </section>
+                </div>
+              </form> -->
+            </div>
+          </div>
+        </div>
+          </div>
+        </form>
+      </section>
    <!-- /.content -->
  </div>
  <!-- /.content-wrapper -->
@@ -231,7 +193,6 @@
      <!-- /.tab-pane -->
      <!-- Settings tab content -->
      <div class="tab-pane" id="control-sidebar-settings-tab">
-       <form method="post">
          <h3 class="control-sidebar-heading">General Settings</h3>
 
          <div class="form-group">
@@ -295,7 +256,7 @@
            </label>
          </div>
          <!-- /.form-group -->
-       </form>
+
      </div>
      <!-- /.tab-pane -->
    </div>
@@ -314,6 +275,7 @@
 <!-- DataTables -->
 <script src="<?php echo base_url(); ?>bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url(); ?>bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="<?php echo base_url(); ?>bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- SlimScroll -->
 <script src="<?php echo base_url(); ?>bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
@@ -324,36 +286,93 @@
 <script src="<?php echo base_url(); ?>dist/js/demo.js"></script>
 <!-- page script -->
 <script>
- $(function () {
-   $('#example1').DataTable({
-     "columnDefs": [
-       { "width": "5%", "targets": 0 },
-       { "width": "18%", "targets": 9 }
-    ]
-   })
- })
 
- function get_alumni($username,$nama)
- {
-   $("#username_up").val($username);
-   $("#nama_up").val($nama);
-   console.log(nama);
- }
+//Date picker
+$('#tanggal_yudisium').datepicker({
+autoclose: true
+})
 
- function del(id) {
-      var url="<?php echo site_url();?>";
-      var r = confirm("Apakah anda yakin menghapus data ini?");
-      if (r == true) {
-          window.location = url+"/admin/alumni/delete_alumni/"+id;
-      } else {
-          return false;
+$('#tanggal_lahir').datepicker({
+autoclose: true
+})
+
+$(document).ready(function(){
+  $('#negara').change(function(){
+    var e = document.getElementById("negara");
+    var id_negara = e.options[e.selectedIndex].value;
+    console.log(id_negara)
+    if(id_negara != '')
+    {
+      $.ajax({
+        url:"<?php echo site_url();?>/admin/admin/fetch_provinsi",
+        method: "POST",
+        data:{id_negara:id_negara},
+        success:function(data)
+        {
+          $('#provinsi').html(data);
+        }
+      })
+    }
+  })
+  $('#provinsi').change(function(){
+    var e = document.getElementById("provinsi");
+    var id_provinsi = e.options[e.selectedIndex].value;
+    console.log(id_provinsi)
+    if(id_provinsi != '')
+    {
+      $.ajax({
+        url:"<?php echo site_url();?>/admin/admin/fetch_kota",
+        method: "POST",
+        data:{id_provinsi:id_provinsi},
+        success:function(data)
+        {
+          $('#kota').html(data);
+        }
+      })
+    }
+  })
+
+  $(document).ready(function(){
+
+    $('#jurusan').change(function(){
+      var e = document.getElementById ("jurusan");
+      var id_jurusan = e.options [e.selectedIndex] .value;
+      console.log(id_jurusan)
+      if(id_jurusan != '')
+      {
+        $.ajax({
+          url:"<?php echo site_url();?>/Login/fetch_prodi",
+          method: "POST",
+          data:{id_jurusan:id_jurusan},
+          success:function(data)
+          {
+            $('#prodi').html(data);
+          }
+        })
       }
-  }
+    })
+    var max  = new Date().getFullYear();
+    var min  = 1961;
+    var min2 = 1950;
+    select = document.getElementById('tahun_lulus');
+    select2 = document.getElementById('angkatan');
 
-  function detail(id) {
-       var url="<?php echo site_url();?>";
-       window.location = url+"/admin/alumni/detail_alumni/"+id;
-   }
+    for (var i = min; i<=max; i++){
+    var opt = document.createElement('option');
+    opt.value = i;
+    opt.innerHTML = i;
+    select.appendChild(opt);
+    }
+
+    for (var i = min2; i<=max; i++){
+    var opt = document.createElement('option');
+    opt.value = i;
+    opt.innerHTML = i;
+    select2.appendChild(opt);
+    }
+  })
+})
+
 </script>
 </body>
 </html>

@@ -3,8 +3,8 @@
    <!-- Content Header (Page header) -->
    <section class="content-header">
      <h1>
-       Master Kuesioner
-       <small>View data</small>
+       Paket Kuesioner
+       <small>View Paket</small>
      </h1>
      <ol class="breadcrumb">
        <li><a href="#"><i class="fa fa-folder-open"></i> Home</a></li>
@@ -19,8 +19,8 @@
        <div class="col-xs-12">
          <div class="box box-info">
            <div class="box-header">
-             <h3 class="box-title">Data Kuesioner Tracert Alumni Fakultas Ekonomi Bisnis Universitas Brawijaya</h3>
-               <button type="button" class="btn btn-primary btn-flat" style="float:right;" data-toggle="modal" data-target="#modal-add-paket"><i class="fa fa-plus-circle"></i>&ensp;&nbsp;Tambah Paket Soal</button>
+             <h3 class="box-title">Paket Kuesioner Program Studi</h3>
+               <button type="button" class="btn btn-primary btn-flat" style="float:right;" data-toggle="modal" data-target="#modal-add-paket"><i class="fa fa-plus-circle"></i>&ensp;&nbsp;Tambah Paket</button>
            </div>
            <!-- /.box-header -->
            <div class="box-body">
@@ -28,9 +28,9 @@
                <thead>
                <tr>
                  <th class="text-center">No.</th>
-                 <th>Jenjang Soal</th>
+                 <th>Jenjang</th>
                  <th>Angkatan</th>
-                 <th>Paket Soal</th>
+                 <th>Nama Paket</th>
                  <th>Program Studi</th>
                  <th class="text-center">Aksi</th>
                </tr>
@@ -46,7 +46,7 @@
                  <td><?php echo $paket_soal->nama_paket ?></td>
                  <td><?php echo $paket_soal->nama_tingkat ?></td>
                  <td class="text-center">
-                   <a style="cursor:pointer;" class="btn btn-primary" href="<?php echo site_url('/admin/daftar_soal/lihat_daftar_soal/'.$paket_soal->id_paket) ?>"><i class="fa fa-book"></i>&nbsp;&nbsp;Daftar Soal</a>
+                   <a style="cursor:pointer;" class="btn btn-primary" href="<?php echo site_url('/admin/daftar_soal/lihat_daftar_soal/'.$paket_soal->id_paket) ?>"><i class="fa fa-eye"></i>&nbsp;&nbsp;Daftar Soal</a>
                    <a style="cursor:pointer;" class="btn btn-default" onclick="edit_paket(<?php echo $paket_soal->id_paket ?>)"><i class="fa fa-pencil" ></i>&nbsp;&nbsp;Edit</a>
                    <button onclick="del('<?php echo $paket_soal->id_paket ?>')" class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;&nbsp;Hapus</button>
                  </td>
@@ -57,9 +57,9 @@
                <tfoot>
                <tr>
                  <th class="text-center">No.</th>
-                 <th>Jenjang Soal</th>
+                 <th>Jenjang</th>
                  <th>Angkatan</th>
-                 <th>Paket Soal</th>
+                 <th>Nama Paket</th>
                  <th>Program Studi</th>
                  <th class="text-center">Aksi</th>
                </tr>
@@ -286,7 +286,7 @@
       <div class="modal-content">
         <div class="modal-header bg-primary">
           <button type="button" class="close" data-dismiss="modal" name="button"></button>
-          <h4 class="modal-title"></i>Form Tambah Paket Soal</h4>
+          <h4 class="modal-title"></i>Tambah Paket</h4>
         </div>
         <div class="modal-body">
           <div class="col-md-12">
@@ -297,10 +297,10 @@
                 </div>
                 <input type="hidden" name="tingkat_kuesioner" id="tingkat_kuesioner" class="form-control" value="Prodi">
                 <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Pilih Jenjang</label>
+                  <label class="col-sm-3 control-label" for="">Jenjang</label>
                   <div class="col-sm-9">
                     <select name="jenjang_soal" id="jenjang_soal" class="form-control">
-                      <option selected disabled>Pilih jenjang</option>
+                      <option selected disabled>Pilih Jenjang</option>
                       <option value="D3">D3</option>
                       <option value="S1">S1</option>
                       <option value="S2">S2</option>
@@ -317,10 +317,10 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Pilih Program Studi</label>
+                  <label class="col-sm-3 control-label" for="">Program Studi</label>
                   <div class="col-sm-9">
                     <select name="nama_tingkat" id="nama_tingkat" class="form-control">
-                      <option selected disabled>Pilih program studi</option>
+                      <option selected disabled>Pilih Program Studi</option>
                       <?php foreach ($prodis as $prodi): ?>
                         <option><?php echo $prodi->nama_prodi; ?></option>
                       <?php endforeach; ?>
@@ -330,7 +330,7 @@
                 <div class="form-group">
                   <label class="col-sm-3 control-label" for="">Nama Paket</label>
                   <div class="col-sm-9">
-                    <input type="text" name="nama_paket" id="nama_paket" class="form-control" value="" placeholder="Masukan Nama Paket Soal..."required>
+                    <input type="text" name="nama_paket" id="nama_paket" class="form-control" value="" placeholder="Masukan Nama Paket..."required>
                   </div>
                 </div>
               </div>
@@ -338,8 +338,8 @@
           </div>
         </div>
         <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" name="button">Tambah Paket</button>
           <button type="submit" class="btn btn-default" data-dismiss="modal" name="button">Cancel</button>
-          <button type="submit" class="btn btn-primary" name="button">Tambah Paket Soal</button>
         </div>
       </div>
     </form>
@@ -352,7 +352,7 @@
       <div class="modal-content">
         <div class="modal-header bg-primary">
           <button type="button" class="close" data-dismiss="modal" name="button"></button>
-          <h4 class="modal-title"></i>Form Update Paket Soal</h4>
+          <h4 class="modal-title"></i>Update Paket</h4>
         </div>
         <div class="modal-body">
           <div class="col-md-12">
@@ -363,11 +363,11 @@
                 </div>
                 <input type="hidden" name="id_paket_up" id="id_paket_up" class="form-control" value="" placeholder="">
                 <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Jenjang Soal</label>
+                  <label class="col-sm-3 control-label" for="">Jenjang</label>
                   <div class="col-sm-9">
                     <input type="hidden" id="id_paket_up" name="id_paket_up" value="">
                     <select name="jenjang_soal_up" id="jenjang_soal_up" class="form-control">
-                      <option value="" disabled>Pilih jenjang Soal</option>
+                      <option value="" disabled>Pilih Jenjang</option>
                       <option value="D3">D3</option>
                       <option value="S1">S1</option>
                       <option value="S2">S2</option>
@@ -384,11 +384,11 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Pilih Program Studi</label>
+                  <label class="col-sm-3 control-label" for="">Program Studi</label>
                   <div class="col-sm-9">
                    <input type="hidden" id="id_paket_up" name="id_paket_up" value="">
                     <select name="nama_tingkat_up" id="nama_tingkat_up" class="form-control">
-                      <option selected disabled>Pilih program studi</option>
+                      <option selected disabled>Pilih Program Studi</option>
                       <?php foreach ($prodis as $prodi): ?>
                         <option><?php echo $prodi->nama_prodi; ?></option>
                       <?php endforeach; ?>
@@ -396,9 +396,9 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Nama Paket Soal</label>
+                  <label class="col-sm-3 control-label" for="">Nama Paket</label>
                   <div class="col-sm-9">
-                    <input type="text" name="nama_paket_up" id="nama_paket_up" class="form-control" value="" placeholder="Masukan Nama Paket Soal..."required>
+                    <input type="text" name="nama_paket_up" id="nama_paket_up" class="form-control" value="" placeholder="Masukan Nama Paket..."required>
                   </div>
                 </div>
               </div>
@@ -406,8 +406,8 @@
           </div>
         </div>
         <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" name="button">Update Paket</button>
           <button type="submit" class="btn btn-default" data-dismiss="modal" name="button">Cancel</button>
-          <button type="submit" class="btn btn-primary" name="button">Update Paket Soal</button>
         </div>
       </div>
     </form>
@@ -438,8 +438,8 @@
      "columnDefs": [
   { "width": "5%", "targets": 0 },
   { "width": "10%", "targets": 1 },
-  { "width": "25%", "targets": 2 },
-  { "width": "20%", "targets": 4 }
+  { "width": "20%", "targets": 3 },
+  { "width": "18%", "targets": 5 }
 ]
    })
  })

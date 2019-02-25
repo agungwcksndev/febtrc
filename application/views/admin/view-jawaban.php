@@ -4,7 +4,7 @@
    <section class="content-header">
      <h1>
        Master Kuisioner
-       <small>View Daftar Pilihan Jawaban Soal Kuesioner Alumni Fakultas Ekonomi Bisnis Universitas Brawijaya</small>
+       <small>View Daftar Jawaban Soal Kuesioner Alumni Fakultas Ekonomi Bisnis Universitas Brawijaya</small>
      </h1>
      <ol class="breadcrumb">
        <li><a href="#"><i class="fa fa-folder-open"></i> Home</a></li>
@@ -20,7 +20,10 @@
          <div class="box box-info">
            <div class="box-header">
              <h3 class="box-title"><?php echo $detail_soal->soal ?></h3>
-                <button type="button" class="btn btn-primary btn-flat" style="float:right;" data-toggle="modal" data-target="#modal-add-jawaban"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Tambah Pilihan Jawaban</button>
+             <div class="btn-toolbar">
+               <a href="<?php echo site_url('admin/daftar_soal/lihat_daftar_soal/'.$detail_soal->id_paket) ?>" type="button" class="btn btn-default" style="float:right;"><i class="fa fa-reply"></i>&nbsp;&nbsp;&nbsp;Kembali</a>
+               <button type="button" class="btn btn-primary" style="float:right;" data-toggle="modal" data-target="#modal-add-jawaban"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Tambah Jawaban</button>
+             </div>
            </div>
            <!-- /.box-header -->
            <div class="box-body">
@@ -28,7 +31,7 @@
                <thead>
                <tr>
                  <th class="text-center">No.</th>
-                 <th>Pilihan Jawaban</th>
+                 <th>Jawaban</th>
                  <th class="text-center">Aksi</th>
                </tr>
                </thead>
@@ -41,7 +44,7 @@
                  <td><?php echo $daftar_jawaban->jawaban ?></td>
                  <input type="hidden" id="id_soal" name="id_soal" value="<?php echo $daftar_jawaban->id_soal ?>" >
                  <td class="text-center">
-                   <a class="btn btn-default" onclick="edit_jawaban('<?php echo $daftar_jawaban->id_jawaban ?>')"<i class="fa fa-pencil"></i>&nbsp;&nbsp;Edit</a>
+                   <a class="btn btn-default" onclick="edit_jawaban('<?php echo $daftar_jawaban->id_jawaban ?>')"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Edit</a>
                    <button onclick="del('<?php echo $daftar_jawaban->id_jawaban ?>')"class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;&nbsp;Delete</a>
                  </td>
                </tr>
@@ -51,7 +54,7 @@
                <tfoot>
                <tr>
                  <th class="text-center">No.</th>
-                 <th>Pilihan Jawaban</th>
+                 <th>Jawaban</th>
                  <th class="text-center">Aksi</th>
                </tr>
                </tfoot>
@@ -278,7 +281,7 @@
       <div class="modal-content">
         <div class="modal-header bg-primary">
           <button type="button" class="close" data-dismiss="modal" name="button"></button>
-          <h4 class="modal-title"></i>Form Tambah Jawaban Soal Kuesioner</h4>
+          <h4 class="modal-title"></i>Tambah Jawaban</h4>
         </div>
         <div class="modal-body">
           <div class="col-md-12">
@@ -289,9 +292,9 @@
                 </div>
                 <input type="hidden" name="soal" id="soal" value="<?php echo $detail_soal->id_soal ?>">
                 <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Pilihan Jawaban</label>
+                  <label class="col-sm-3 control-label" for="">Jawaban</label>
                   <div class="col-sm-9">
-                    <input type="text" name="jawaban" id="jawaban" class="form-control" value="" placeholder="Masukan Pilihan Jawaban ..."required>
+                    <input type="text" name="jawaban" id="jawaban" class="form-control" value="" placeholder="Masukan Jawaban ..."required>
                   </div>
                 </div>
               </div>
@@ -299,8 +302,8 @@
           </div>
         </div>
         <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" name="button">Tambah Jawaban</button>
           <button type="submit" class="btn btn-default" data-dismiss="modal" name="button">Cancel</button>
-          <button type="submit" class="btn btn-primary" name="button">Tambah Jawaban Kuisioner</button>
         </div>
       </div>
     </form>
@@ -313,7 +316,7 @@
       <div class="modal-content">
         <div class="modal-header bg-primary">
           <button type="button" class="close" data-dismiss="modal" name="button"></button>
-          <h4 class="modal-title"></i>Form Update Jawaban Soal Kuisioner</h4>
+          <h4 class="modal-title"></i>Update Jawaban</h4>
         </div>
         <div class="modal-body">
           <div class="col-md-12">
@@ -325,9 +328,9 @@
                   <div class="col-sm-9"></div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Pilihan Jawaban</label>
+                  <label class="col-sm-3 control-label" for="">Jawaban</label>
                   <div class="col-sm-9">
-                    <input type="text" name="jawaban_up" id="jawaban_up" class="form-control" value="" placeholder="Masukan Pilihan Jawaban ..."required>
+                    <input type="text" name="jawaban_up" id="jawaban_up" class="form-control" value="" placeholder="Masukan Jawaban ..."required>
                   </div>
                 </div>
               </div>
@@ -335,8 +338,8 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-default" data-dismiss="modal" name="button">Cancel</button>
           <button type="submit" class="btn btn-primary" name="button">Update Jawaban</button>
+          <button type="submit" class="btn btn-default" data-dismiss="modal" name="button">Cancel</button>
         </div>
       </div>
     </form>

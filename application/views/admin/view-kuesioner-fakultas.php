@@ -3,8 +3,8 @@
    <!-- Content Header (Page header) -->
    <section class="content-header">
      <h1>
-       Master Kuesioner
-       <small>View data</small>
+       Paket Kuesioner
+       <small>View Paket</small>
      </h1>
      <ol class="breadcrumb">
        <li><a href="#"><i class="fa fa-folder-open"></i> Home</a></li>
@@ -19,8 +19,8 @@
        <div class="col-xs-12">
          <div class="box box-info">
            <div class="box-header">
-             <h3 class="box-title">Data Kuesioner Tracert Alumni Fakultas Ekonomi Bisnis Universitas Brawijaya</h3>
-               <button type="button" class="btn btn-primary btn-flat" style="float:right;" data-toggle="modal" data-target="#modal-add-paket"><i class="fa fa-plus-circle"></i>&ensp;&nbsp;Tambah Paket Soal</button>
+             <h3 class="box-title">Paket Kuesioner Fakultas Ekonomi Bisnis</h3>
+               <button type="button" class="btn btn-primary" style="float:right;" data-toggle="modal" data-target="#modal-add-paket"><i class="fa fa-plus-circle"></i>&ensp;&nbsp;Tambah Paket</button>
            </div>
            <!-- /.box-header -->
            <div class="box-body">
@@ -44,7 +44,7 @@
                  <td><?php echo $paket_soal->angkatan ?></td>
                  <td><?php echo $paket_soal->nama_paket ?></td>
                  <td class="text-center">
-                   <a style="cursor:pointer;" class="btn btn-primary" href="<?php echo site_url('/admin/daftar_soal/lihat_daftar_soal/'.$paket_soal->id_paket) ?>"><i class="fa fa-book"></i>&nbsp;&nbsp;Daftar Soal</a>
+                   <a style="cursor:pointer;" class="btn btn-primary" href="<?php echo site_url('/admin/daftar_soal/lihat_daftar_soal/'.$paket_soal->id_paket) ?>"><i class="fa fa-eye"></i>&nbsp;&nbsp;Daftar Soal</a>
                    <a style="cursor:pointer;" class="btn btn-default" onclick="edit_paket(<?php echo $paket_soal->id_paket ?>)"><i class="fa fa-pencil" ></i>&nbsp;&nbsp;Edit</a>
                    <button onclick="del('<?php echo $paket_soal->id_paket ?>')" class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;&nbsp;Hapus</button>
                  </td>
@@ -283,7 +283,7 @@
       <div class="modal-content">
         <div class="modal-header bg-primary">
           <button type="button" class="close" data-dismiss="modal" name="button"></button>
-          <h4 class="modal-title"></i>Form Tambah Paket Soal</h4>
+          <h4 class="modal-title"></i>Tambah Paket</h4>
         </div>
         <div class="modal-body">
           <div class="col-md-12">
@@ -317,7 +317,7 @@
                 <div class="form-group">
                   <label class="col-sm-3 control-label" for="">Nama Paket</label>
                   <div class="col-sm-9">
-                    <input type="text" name="nama_paket" id="nama_paket" class="form-control" value="" placeholder="Masukan Nama Paket Soal..."required>
+                    <input type="text" name="nama_paket" id="nama_paket" class="form-control" value="" placeholder="Masukan Nama Paket..."required>
                   </div>
                 </div>
               </div>
@@ -325,8 +325,8 @@
           </div>
         </div>
         <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" name="button">Tambah Paket</button>
           <button type="submit" class="btn btn-default" data-dismiss="modal" name="button">Cancel</button>
-          <button type="submit" class="btn btn-primary" name="button">Tambah Paket Soal</button>
         </div>
       </div>
     </form>
@@ -339,7 +339,7 @@
       <div class="modal-content">
         <div class="modal-header bg-primary">
           <button type="button" class="close" data-dismiss="modal" name="button"></button>
-          <h4 class="modal-title"></i>Form Update Paket Soal</h4>
+          <h4 class="modal-title"></i>Update Paket</h4>
         </div>
         <div class="modal-body">
           <div class="col-md-12">
@@ -372,9 +372,9 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Nama Paket Soal</label>
+                  <label class="col-sm-3 control-label" for="">Nama Paket</label>
                   <div class="col-sm-9">
-                    <input type="text" name="nama_paket_up" id="nama_paket_up" class="form-control" value="" placeholder="Masukan Nama Paket Soal..."required>
+                    <input type="text" name="nama_paket_up" id="nama_paket_up" class="form-control" value="" placeholder="Masukan Nama Paket..."required>
                   </div>
                 </div>
               </div>
@@ -382,8 +382,8 @@
           </div>
         </div>
         <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" name="button">Update Paket</button>
           <button type="submit" class="btn btn-default" data-dismiss="modal" name="button">Cancel</button>
-          <button type="submit" class="btn btn-primary" name="button">Update Paket Soal</button>
         </div>
       </div>
     </form>
