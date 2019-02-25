@@ -269,8 +269,8 @@ class Settings extends CI_Controller{
               $this->load->view("layouts/user-settings-wrapper", $data, false);
             } else {
                 $i  = $this->input;
-                $yudisium = str_replace('/', '-', $_POST['datetimepicker']);
-                $tgl_yudisium_proc = date("Y-m-d",strtotime($yudisium));
+                $tgl_yudisum = str_replace('/', '-', $_POST['datetimepicker']);
+                $tgl_yudisium_proc = date('Y-m-d', strtotime($tgl_yudisum));
                 $data = array(
                       'username'           =>  $username,
                       'jenjang'            =>  $i->post('jenjang'),
@@ -336,14 +336,16 @@ class Settings extends CI_Controller{
             } else {
               if(!isset($_POST['sekarang'])){
                 $username = $this->session->userdata('username');
-                $tanggal_mulai = date("Y-m-d",strtotime($_POST['datetimepicker']));
-                $tanggal_berhenti = date("Y-m-d",strtotime($_POST['datetimepicker2']));
+                $tanggal_mulai = str_replace('/', '-', $_POST['datetimepicker']);
+                $tanggal_mulai_proc = date('Y-m-d', strtotime($tanggal_mulai));
+                $tanggal_berhenti = str_replace('/', '-', $_POST['datetimepicker2']);
+                $tanggal_berhenti_proc = date('Y-m-d', strtotime($tanggal_berhenti));
                 $data = array(
                   'username'               =>  $username,
                   'tempat_kerja'           =>  $i->post('tempat_kerja'),
                   'posisi'                 =>  $i->post('posisi'),
-                  'mulai_kerja'            =>  $tanggal_mulai,
-                  'berhenti_kerja'         =>  $tanggal_berhenti,
+                  'mulai_kerja'            =>  $tanggal_mulai_proc,
+                  'berhenti_kerja'         =>  $tanggal_berhenti_proc,
                   'posisi'                 =>  $i->post('posisi'),
                   'alamat_kerja'           =>  $i->post('alamat'),
                   'pendapatan_per_bulan'   =>  $i->post('pendapatan_per_bulan'),
@@ -354,14 +356,16 @@ class Settings extends CI_Controller{
                 redirect('alumni/settings/riwayat_pekerjaan');
               }else{
                 $username = $this->session->userdata('username');
-                $tanggal_mulai = date("Y-m-d",strtotime($_POST['datetimepicker']));
-                $tanggal_berhenti = date("Y-m-d",strtotime($_POST['datetimepicker2']));
+                $tanggal_mulai = str_replace('/', '-', $_POST['datetimepicker']);
+                $tanggal_mulai_proc = date('Y-m-d', strtotime($tanggal_mulai));
+                $tanggal_berhenti = str_replace('/', '-', $_POST['datetimepicker2']);
+                $tanggal_berhenti_proc = date('Y-m-d', strtotime($tanggal_berhenti));
                 $data = array(
                   'username'               =>  $username,
                   'tempat_kerja'           =>  $i->post('tempat_kerja'),
                   'posisi'                 =>  $i->post('posisi'),
-                  'mulai_kerja'            =>  $tanggal_mulai,
-                  'berhenti_kerja'         =>  $tanggal_berhenti,
+                  'mulai_kerja'            =>  $tanggal_mulai_proc,
+                  'berhenti_kerja'         =>  $tanggal_berhenti_proc,
                   'sekarang'               =>  '1',
                   'posisi'                 =>  $i->post('posisi'),
                   'alamat_kerja'           =>  $i->post('alamat'),
@@ -415,14 +419,17 @@ class Settings extends CI_Controller{
             } else {
               if(!isset($_POST['sekarang'])){
                 $username = $this->session->userdata('username');
-                $tanggal_mulai = date("Y-m-d",strtotime($_POST['datetimepicker']));
-                $tanggal_berhenti = date("Y-m-d",strtotime($_POST['datetimepicker2']));
+                $tanggal_mulai = str_replace('/', '-', $_POST['datetimepicker']);
+                $tanggal_mulai_proc = date('Y-m-d', strtotime($tanggal_mulai));
+                $tanggal_berhenti = str_replace('/', '-', $_POST['datetimepicker2']);
+                $tanggal_berhenti_proc = date('Y-m-d', strtotime($tanggal_berhenti));
                 $data = array(
                   'username'               =>  $username,
+                  'id_riwayat_pekerjaan'   =>  $i->post('id_riwayat_pekerjaan'),
                   'tempat_kerja'           =>  $i->post('tempat_kerja'),
                   'posisi'                 =>  $i->post('posisi'),
-                  'mulai_kerja'            =>  $tanggal_mulai,
-                  'berhenti_kerja'         =>  $tanggal_berhenti,
+                  'mulai_kerja'            =>  $tanggal_mulai_proc,
+                  'berhenti_kerja'         =>  $tanggal_berhenti_proc,
                   'posisi'                 =>  $i->post('posisi'),
                   'alamat_kerja'           =>  $i->post('alamat'),
                   'pendapatan_per_bulan'   =>  $i->post('pendapatan_per_bulan'),
@@ -433,20 +440,24 @@ class Settings extends CI_Controller{
                 redirect('alumni/settings/riwayat_pekerjaan');
               }else{
                 $username = $this->session->userdata('username');
-                $tanggal_mulai = date("Y-m-d",strtotime($_POST['datetimepicker']));
-                $tanggal_berhenti = date("Y-m-d",strtotime($_POST['datetimepicker2']));
+                $tanggal_mulai = str_replace('/', '-', $_POST['datetimepicker']);
+                $tanggal_mulai_proc = date('Y-m-d', strtotime($tanggal_mulai));
+                $tanggal_berhenti = str_replace('/', '-', $_POST['datetimepicker2']);
+                $tanggal_berhenti_proc = date('Y-m-d', strtotime($tanggal_berhenti));
                 $data = array(
                   'username'               =>  $username,
+                  'id_riwayat_pekerjaan'   =>  $i->post('id_riwayat_pekerjaan'),
                   'tempat_kerja'           =>  $i->post('tempat_kerja'),
                   'posisi'                 =>  $i->post('posisi'),
-                  'mulai_kerja'            =>  $tanggal_mulai,
-                  'berhenti_kerja'         =>  $tanggal_berhenti,
+                  'mulai_kerja'            =>  $tanggal_mulai_proc,
+                  'berhenti_kerja'         =>  $tanggal_berhenti_proc,
                   'sekarang'               =>  '1',
                   'posisi'                 =>  $i->post('posisi'),
                   'alamat_kerja'           =>  $i->post('alamat'),
                   'pendapatan_per_bulan'   =>  $i->post('pendapatan_per_bulan'),
                   'golongan_pns'           =>  $i->post('golongan_pns')
                   );
+                
                 $this->Riwayat_Pekerjaan_Model->update_riwayat_pekerjaan($data);
                 $this->session->set_flashdata('success', 'Berhasil memperbarui Riwayat Pekerjaan');
                 redirect('alumni/settings/riwayat_pekerjaan');

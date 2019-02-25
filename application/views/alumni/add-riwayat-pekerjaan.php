@@ -4,7 +4,7 @@
 		<div class="col-xl-9 order-xl-2 col-lg-9 order-lg-2 col-md-12 order-md-1 col-sm-12 col-xs-12">
 			<div class="ui-block">
 				<div class="ui-block-title">
-					<h6 class="title">Informasi Lulusan</h6>
+					<h6 class="title">Tambah Riwayat Pekerjaan</h6>
 				</div>
 				<div class="ui-block-content">
 		     <form class="form-horizontal" method="post" action="">
@@ -39,85 +39,84 @@
 									</div>
 								</div>
 							 <?php endif; ?>
-							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-								<div class="form-group label-floating is-select">
-									<label class="control-label">Jenjang</label>
-									<select class="selectpicker form-control" name="jenjang" size="auto">
-										<option value=""  disabled>Pilih Jenjang</option>
-										<option value="D3" <?php echo ($user->jenjang == 'D3') ? 'selected="selected"' : '' ?>>D3</option>
-										<option value="S1" <?php echo ($user->jenjang == 'S1') ? 'selected="selected"' : '' ?>>S1</option>
-										<option value="S2" <?php echo ($user->jenjang == 'S2') ? 'selected="selected"' : '' ?>>S2</option>
-										<option value="S3" <?php echo ($user->jenjang == 'S3') ? 'selected="selected"' : '' ?>>S3</option>
-									</select>
-								</div>
+							 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+								 <div class="form-group label-floating">
+									 <label class="control-label">Tempat Kerja</label>
+									 <input class="form-control" placeholder="" name="tempat_kerja" type="text" value="<?php echo set_value('tempat_kerja') ?>">
+								 </div>
+							 </div>
+							 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+								 <div class="form-group label-floating">
+									 <label class="control-label">Posisi</label>
+									 <input class="form-control" placeholder="" name="posisi" type="text" value="<?php echo set_value('posisi') ?>">
+								 </div>
+							 </div>
+							 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								 <div class="form-group date-time-picker label-floating">
+									 <label class="control-label">Mulai Kerja</label>
+									 <input name="datetimepicker" value="<?php echo set_value('datetimepicker') ?>" />
+									 <span class="input-group-addon">
+										 <svg class="olymp-month-calendar-icon icon"><use xlink:href="<?php echo base_url('icons')?>/icons.svg#olymp-month-calendar-icon"></use></svg>
+									 </span>
+								 </div>
+							 </div>
+							 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								 <div class="form-group date-time-picker label-floating">
+									 <label class="control-label">Berhenti Kerja</label>
+									 <input name="datetimepicker2" value="<?php echo set_value('datetimepicker2') ?>" />
+									 <span class="input-group-addon">
+										 <svg class="olymp-month-calendar-icon icon"><use xlink:href="<?php echo base_url('icons')?>/icons.svg#olymp-month-calendar-icon"></use></svg>
+									 </span>
+								 </div>
+							 </div>
+							 <div class="col-lg-12 col-sm-12 col-sm-12 col-xs-12">
+ 								<div class="remember" style="float:right;">
+ 									<div class="checkbox">
+ 										<label>
+											<input name='sekarang' type='checkbox' value='sekarang'>
+ 											Sekarang
+ 										</label>
+ 									</div>
+ 								</div>
 							</div>
-							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-								<div class="form-group label-floating is-select">
-									<label class="control-label">Angkatan</label>
-									<select class="selectpicker form-control" name="angkatan" size="auto">
-										<option value="" disabled>Pilih Tahun Angkatan</option>
-										<?php for ($i=1950; $i <= date('Y') ; $i++) { ?>
-											<option value="<?php echo $i ?>"<?php echo ($user->angkatan == $i) ? 'selected="selected"' : '' ?>><?php echo $i ?></option>
-										<?php } ?>
-									</select>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-								<div class="form-group label-floating is-select">
-									<label class="control-label">Jurusan</label>
-									<select class="selectpicker form-control" id="jurusan" name="jurusan" size="auto">
-										<option disabled>Pilih Jurusan</option>
-										<?php foreach ($jurusans as $jurusan): ?>
-											<option value="<?php echo $jurusan->id_jurusan ?>"<?php echo ($user->id_jurusan == $jurusan->id_jurusan) ? 'selected="selected"' : '' ?>><?php echo $jurusan->nama_jurusan ?></option>
-										<?php endforeach; ?>
-									</select>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-								<div class="form-group label-floating is-select">
-                  <label class="control-label">Progam Studi</label>
-                  <select class="selectpicker form-control" name="prodi" id="prodi" size="auto">
-										<option value=""selected disabled>Pilih Program Studi</option>
-										<?php foreach ($prodis as $prodi): ?>
-											<option value="<?php echo $prodi->id_prodi ?>"<?php echo ($user->id_prodi == $prodi->id_prodi) ? 'selected="selected"' : '' ?>><?php echo $prodi->nama_prodi ?></option>
-										<?php endforeach; ?>
-									</select>
-                </div>
-							</div>
-							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-								<div class="form-group label-floating">
-									<label class="control-label">Judul Skripsi</label>
-									<input class="form-control" placeholder="" name="judul_skripsi" type="text" value="<?php echo $user->judul_skripsi ?>">
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-								<div class="form-group date-time-picker label-floating">
-									<label class="control-label">Tanggal Yudisium</label>
-									<input name="datetimepicker" value="<?php echo $user->tanggal_yudisium ?>" />
-									<span class="input-group-addon">
-										<svg class="olymp-month-calendar-icon icon"><use xlink:href="<?php echo base_url('icons')?>/icons.svg#olymp-month-calendar-icon"></use></svg>
-									</span>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-								<div class="form-group label-floating">
-									<label class="control-label">IPK</label>
-									<input class="form-control" placeholder="" name="ipk" type="text" value="<?php echo $user->ipk ?>">
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-								<div class="form-group label-floating is-select">
-									<label class="control-label">Tahun Lulus</label>
-									<select class="selectpicker form-control" name="tahun_lulus" size="auto">
-										<option value="" disabled>Pilih Tahun Lulus</option>
-										<?php for ($i=1950; $i <= date('Y') ; $i++) { ?>
-											<option value="<?php echo $i ?>"<?php echo ($user->tahun_lulus == $i) ? 'selected="selected"' : '' ?>><?php echo $i ?></option>
-										<?php } ?>
-									</select>
-								</div>
-							</div>
+							 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								 <div class="form-group label-floating">
+									 <label class="control-label">Alamat</label>
+									 <input class="form-control" placeholder="" name="alamat" type="text" value="<?php echo set_value('alamat') ?>">
+								 </div>
+							 </div>
+							 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								 <div class="form-group label-floating">
+									 <label class="control-label">Pendapatan Per Bulan</label>
+									 <input class="form-control" placeholder="" name="pendapatan_per_bulan" type="text" value="<?php echo set_value('pendapatan_per_bulan') ?>">
+								 </div>
+							 </div>
+ 						 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							 <div class="form-group label-floating is-select">
+								 <label class="control-label">Golongan PNS ( Khusus PNS )</label>
+								 <select class="selectpicker form-control" name="golongan_pns" size="auto" value="<?php echo set_value('golongan_pns') ?>">
+									 <option value=""selected disabled>Pilih Golongan</option>
+									 <option value="Golongan I A">Golongan I A</option>
+									 <option value="Golongan I B">Golongan I B</option>
+									 <option value="Golongan I C">Golongan I C</option>
+									 <option value="Golongan I D">Golongan I D</option>
+									 <option value="Golongan II A">Golongan II A</option>
+									 <option value="Golongan II B">Golongan II B</option>
+									 <option value="Golongan II C">Golongan II C</option>
+									 <option value="Golongan II D">Golongan II D</option>
+									 <option value="Golongan III A">Golongan III A</option>
+									 <option value="Golongan III B">Golongan III B</option>
+									 <option value="Golongan III C">Golongan III C</option>
+									 <option value="Golongan III D">Golongan III D</option>
+									 <option value="Golongan IV A">Golongan IV A</option>
+									 <option value="Golongan IV B">Golongan IV B</option>
+									 <option value="Golongan IV C">Golongan IV C</option>
+									 <option value="Golongan IV D">Golongan IV D</option>
+								 </select>
+							 </div>
+						 </div>
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-								<button type="submit" name="submit" value="simpan" class="btn btn-primary btn-lg full-width">Update Informasi Lulusan</button>
+								<button type="submit" name="submit" value="simpan" class="btn btn-primary btn-lg full-width">Tambah Riwayat Pekerjaan</button>
 							</div>
 						</div>
 					</form>
@@ -146,6 +145,16 @@
 <script src="<?php echo base_url('resource')?>/js/mediaelement-and-player.min.js"></script>
 <script src="<?php echo base_url('resource')?>/js/mediaelement-playlist-plugin.min.js"></script>
 <script type="text/javascript">
+
+$(function() {
+  $('input[name="datetimepicker2"]').daterangepicker({
+		singleDatePicker: true,
+    showDropdowns: true,
+    minYear: 1901,
+    maxYear: parseInt(moment().format('YYYY'),10)
+  });
+});
+
 $(document).ready(function(){
 
 	$('#jurusan').change(function(){

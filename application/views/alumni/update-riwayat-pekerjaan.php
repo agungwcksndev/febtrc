@@ -54,7 +54,10 @@
 							 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 								 <div class="form-group date-time-picker label-floating">
 									 <label class="control-label">Mulai Kerja</label>
-									 <input name="datetimepicker" value="<?php echo $data_riwayat->mulai_kerja ?>" />
+									 <?php
+									 $tgl_mulai = date_create($data_riwayat->mulai_kerja) ;
+									 ?>
+									 <input name="datetimepicker" value="<?php echo date_format($tgl_mulai, 'd/m/Y'); ?>" />
 									 <span class="input-group-addon">
 										 <svg class="olymp-month-calendar-icon icon"><use xlink:href="<?php echo base_url('icons')?>/icons.svg#olymp-month-calendar-icon"></use></svg>
 									 </span>
@@ -63,13 +66,16 @@
 							 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 								 <div class="form-group date-time-picker label-floating">
 									 <label class="control-label">Berhenti Kerja</label>
-									 <input name="datetimepicker2"
-									 <?php if($data_riwayat->sekarang != '1'){
-										 echo "value='$data_riwayat->tempat_kerja'";
-									 }else{
-										 echo "value=''";
-									 }
-									 ?>  />
+									 <?php
+									 $tgl_berhenti = date_create($data_riwayat->berhenti_kerja) ;
+									 $tgl_berhenti_proc = date_format($tgl_berhenti, 'd/m/Y');
+									 $tgl_now = date("Y-m-d");
+									 ?>
+									 <?php if($data_riwayat->sekarang == '1'){
+										 echo "<input name='datetimepicker2' value='$data_riwayat->berhenti_kerja'>";
+									 } else{
+										 echo "<input name='datetimepicker2' value='$data_riwayat->berhenti_kerja'>";
+									 }?>
 									 <span class="input-group-addon">
 										 <svg class="olymp-month-calendar-icon icon"><use xlink:href="<?php echo base_url('icons')?>/icons.svg#olymp-month-calendar-icon"></use></svg>
 									 </span>
@@ -103,7 +109,7 @@
 									 <input class="form-control" placeholder="" name="pendapatan_per_bulan" type="text" value="<?php echo $data_riwayat->pendapatan_per_bulan ?>">
 								 </div>
 							 </div>
-							 <input type="hidden" name="" value="<?php echo $data_riwayat->id_riwayat_pekerjaan ?>">
+							 <input type="hidden" name="id_riwayat_pekerjaan" value="<?php echo $data_riwayat->id_riwayat_pekerjaan ?>">
  						 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							 <div class="form-group label-floating is-select">
 								 <label class="control-label">Golongan PNS ( Khusus PNS )</label>
@@ -161,9 +167,10 @@
 
 $(function() {
   $('input[name="datetimepicker2"]').daterangepicker({
-		locale: {
-				format: 'YYYY/MM/DD'
-		}
+		singleDatePicker: true,
+    showDropdowns: true,
+    minYear: 1901,
+    maxYear: parseInt(moment().format('YYYY'),10)
   });
 });
 
