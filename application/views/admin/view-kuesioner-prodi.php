@@ -29,7 +29,7 @@
                <tr>
                  <th class="text-center">No.</th>
                  <th>Jenjang</th>
-                 <th>Angkatan</th>
+                 <th>Tahun Lulus</th>
                  <th>Nama Paket</th>
                  <th>Program Studi</th>
                  <th class="text-center">Aksi</th>
@@ -42,7 +42,7 @@
                <tr>
                  <td class="text-center"><?php echo $no ?></td>
                  <td><?php echo $paket_soal->jenjang_soal ?></td>
-                 <td><?php echo $paket_soal->angkatan ?></td>
+                 <td><?php echo $paket_soal->tahun_lulus ?></td>
                  <td><?php echo $paket_soal->nama_paket ?></td>
                  <td><?php echo $paket_soal->nama_tingkat ?></td>
                  <td class="text-center">
@@ -58,7 +58,7 @@
                <tr>
                  <th class="text-center">No.</th>
                  <th>Jenjang</th>
-                 <th>Angkatan</th>
+                 <th>Tahun Lulus</th>
                  <th>Nama Paket</th>
                  <th>Program Studi</th>
                  <th class="text-center">Aksi</th>
@@ -309,10 +309,10 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Angkatan</label>
+                  <label class="col-sm-3 control-label" for="">Tahun Lulus</label>
                   <div class="col-sm-9">
-                    <select name="angkatan" id="angkatan" class="form-control">
-                      <option selected disabled>Pilih Angkatan</option>
+                    <select name="tahun_lulus" id="tahun_lulus" class="form-control">
+                      <option selected disabled>Pilih Tahun Lulus</option>
                     </select>
                   </div>
                 </div>
@@ -376,10 +376,10 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-3 control-label" for="">Angkatan</label>
+                  <label class="col-sm-3 control-label" for="">Tahun Lulus</label>
                   <div class="col-sm-9">
-                    <select name="angkatan_up" id="angkatan_up" class="form-control">
-                      <option selected disabled>Pilih Angkatan</option>
+                    <select name="tahun_lulus_up" id="tahun_lulus_up" class="form-control">
+                      <option selected disabled>Pilih Tahun Lulus</option>
                     </select>
                   </div>
                 </div>
@@ -447,8 +447,8 @@
   var max  = new Date().getFullYear();
   var min  = 1961;
   var min2 = 1950;
-  select = document.getElementById('angkatan');
-  select2 = document.getElementById('angkatan_up');
+  select = document.getElementById('tahun_lulus');
+  select2 = document.getElementById('tahun_lulus_up');
 
   for (var i = min; i<=max; i++){
   var opt = document.createElement('option');
@@ -474,7 +474,7 @@
          {
              $('[name="id_paket_up"]').val(data.id_paket);
              $('[name="jenjang_soal_up"]').val(data.jenjang_soal);
-             $('[name="angkatan_up"]').val(data.angkatan);
+             $('[name="tahun_lulus_up"]').val(data.tahun_lulus);
              $('[name="nama_paket_up"]').val(data.nama_paket);
              $('[name="nama_tingkat_up"]').val(data.nama_tingkat);
              $('#modal-update-paket').modal('show'); // show bootstrap modal when complete loaded

@@ -31,10 +31,10 @@ class Kuesioner_Fakultas extends CI_Controller{
     );
 
     $valid->set_rules(
-        'angkatan',
+        'tahun_lulus',
         'Angkatan',
         'required',
-        array(  'required'  =>  'Anda belum mengisikan angkatan.')
+        array(  'required'  =>  'Anda belum mengisikan tahun_lulus.')
     );
 
     $valid->set_rules(
@@ -68,7 +68,7 @@ class Kuesioner_Fakultas extends CI_Controller{
       {
           $data = array(
                 'jenjang_soal'      =>  $i->post('jenjang_soal'),
-                'angkatan'          =>  $i->post('angkatan'),
+                'tahun_lulus'          =>  $i->post('tahun_lulus'),
                 'nama_paket'        =>  $i->post('nama_paket'),
                 'tingkat_kuesioner' =>  $i->post('tingkat_kuesioner'),
                 'nama_tingkat'      =>  $i->post('nama_tingkat')
@@ -118,7 +118,7 @@ class Kuesioner_Fakultas extends CI_Controller{
             $data = array(
                   'jenjang_soal'    => $i->post('jenjang_soal_up'),
                   'nama_paket'      => $i->post('nama_paket_up'),
-                  'angkatan'        => $i->post('angkatan_up'),
+                  'tahun_lulus'        => $i->post('tahun_lulus_up'),
                   'id_paket'        => $i->post('id_paket_up')
                 );
             $this->Kuesioner_Model->update_paket_soal($data);
