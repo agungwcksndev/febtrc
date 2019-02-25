@@ -93,7 +93,10 @@
 							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 								<div class="form-group date-time-picker label-floating">
 									<label class="control-label">Tanggal Yudisium</label>
-									<input name="datetimepicker" value="<?php echo $user->tanggal_yudisium ?>" />
+									<?php
+									$tgl_yudisium = date_create($user->tanggal_yudisium) ;
+									?>
+									<input name="datetimepicker" value="<?php echo date_format($tgl_yudisium, 'd/m/Y');  ?>" />
 									<span class="input-group-addon">
 										<svg class="olymp-month-calendar-icon icon"><use xlink:href="<?php echo base_url('icons')?>/icons.svg#olymp-month-calendar-icon"></use></svg>
 									</span>

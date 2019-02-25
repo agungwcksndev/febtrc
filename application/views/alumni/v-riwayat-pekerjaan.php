@@ -30,7 +30,7 @@
 
 					<div class="control-block-button post-control-button">
 
-						<a href="#" class="btn btn-control">
+						<a href="<?php echo site_url('alumni/settings/update_riwayat_pekerjaan/'.$pekerjaan->id_riwayat_pekerjaan) ?>" class="btn btn-control">
 							<svg class="olymp-comments-post-icon"><use xlink:href="<?php echo base_url('icons/') ?>icons.svg#olymp-three-dots-icon"></use></svg>
 						</a>
 

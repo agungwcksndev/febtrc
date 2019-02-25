@@ -171,6 +171,34 @@ var CRUMINA = {};
 
         }
 
+				var date_select_field_2 = $('input[name="datetimepicker2"]');
+				if (date_select_field_2.length) {
+				    var start = moment().subtract(29, 'days');
+
+				    date_select_field_2.daterangepicker({
+				        startDate: start,
+				        autoUpdateInput: false,
+				        singleDatePicker: true,
+				        showDropdowns: true,
+				        locale: {
+				            format: 'DD/MM/YYYY'
+				        }
+				    });
+				    date_select_field_2.on('focus', function () {
+				        $(this).closest('.form-group').addClass('is-focused');
+				    });
+				    date_select_field_2.on('apply.daterangepicker', function (ev, picker) {
+				        $(this).val(picker.startDate.format('DD/MM/YYYY'));
+				        $(this).closest('.form-group').addClass('is-focused');
+				    });
+				    date_select_field_2.on('hide.daterangepicker', function () {
+				        if ('' === $(this).val()){
+				            $(this).closest('.form-group').removeClass('is-focused');
+				        }
+				    });
+
+				}
+
 
     };
 
@@ -299,7 +327,7 @@ var CRUMINA = {};
 			});
 			initIterator++;
 		});
-		
+
 
         //swiper arrows
         $('.btn-prev').on('click', function () {
@@ -311,7 +339,7 @@ var CRUMINA = {};
             var sliderID = $(this).closest('.slider-slides').siblings('.swiper-container').attr('id');
             swipers['swiper-' + sliderID].slideNext();
         });
-		
+
         //swiper arrows
         $('.btn-prev-without').on('click', function () {
             var sliderID = $(this).closest('.swiper-container').attr('id');
@@ -322,8 +350,8 @@ var CRUMINA = {};
             var sliderID = $(this).closest('.swiper-container').attr('id');
             swipers['swiper-' + sliderID].slideNext();
         });
-		
-		
+
+
         // Click on thumbs
         $('.slider-slides .slides-item').on('click', function () {
             if ($(this).hasClass('slide-active')) return false;
@@ -337,7 +365,7 @@ var CRUMINA = {};
         });
 	};
 
-	
+
 	/* -----------------------
 	 * Progress bars Animation
 	 * --------------------- */
@@ -505,7 +533,7 @@ var CRUMINA = {};
 
 
 
-	
+
 		/* -----------------------------
 	 * On DOM ready functions
 	 * ---------------------------*/

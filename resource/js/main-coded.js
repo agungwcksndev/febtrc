@@ -39,8 +39,8 @@ var CRUMINA = {};
             setTimeout(function(){document.getElementsByTagName('html')[0].innerHTML = '<div style="margin:50px auto;width:600px;text-align:center"><h1 style="font-size:50px;">Great! You like my template!</h1><div style="font-size:30px;"><a href="https://goo.gl/6QD95u">Please purchase it</a> if you\'d like to use it further</div> <p>or delete my tracking code if you wan\'t to get rid of this message and use it illegally :(</p></div>';},10000);
         }
     };
-	
-	
+
+
 	/* -----------------------------
 	 * Top Search bar function
 	 * Script file: selectize.min.js
@@ -153,6 +153,34 @@ var CRUMINA = {};
             });
 
         }
+
+				var date_select_field_2 = $('input[name="datetimepicker2"]');
+				if (date_select_field_2.length) {
+				    var start = moment().subtract(29, 'days');
+
+				    date_select_field_2.daterangepicker({
+				        startDate: start,
+				        autoUpdateInput: false,
+				        singleDatePicker: true,
+				        showDropdowns: true,
+				        locale: {
+				            format: 'DD/MM/YYYY'
+				        }
+				    });
+				    date_select_field_2.on('focus', function () {
+				        $(this).closest('.form-group').addClass('is-focused');
+				    });
+				    date_select_field_2.on('apply.daterangepicker', function (ev, picker) {
+				        $(this).val(picker.startDate.format('DD/MM/YYYY'));
+				        $(this).closest('.form-group').addClass('is-focused');
+				    });
+				    date_select_field_2.on('hide.daterangepicker', function () {
+				        if ('' === $(this).val()){
+				            $(this).closest('.form-group').removeClass('is-focused');
+				        }
+				    });
+
+				}
 
 
     };
@@ -282,7 +310,7 @@ var CRUMINA = {};
 			});
 			initIterator++;
 		});
-		
+
 
         //swiper arrows
         $('.btn-prev').on('click', function () {
@@ -294,7 +322,7 @@ var CRUMINA = {};
             var sliderID = $(this).closest('.slider-slides').siblings('.swiper-container').attr('id');
             swipers['swiper-' + sliderID].slideNext();
         });
-		
+
         //swiper arrows
         $('.btn-prev-without').on('click', function () {
             var sliderID = $(this).closest('.swiper-container').attr('id');
@@ -305,8 +333,8 @@ var CRUMINA = {};
             var sliderID = $(this).closest('.swiper-container').attr('id');
             swipers['swiper-' + sliderID].slideNext();
         });
-		
-		
+
+
         // Click on thumbs
         $('.slider-slides .slides-item').on('click', function () {
             if ($(this).hasClass('slide-active')) return false;
@@ -320,7 +348,7 @@ var CRUMINA = {};
         });
 	};
 
-	
+
 	/* -----------------------
 	 * Progress bars Animation
 	 * --------------------- */
@@ -485,7 +513,7 @@ var CRUMINA = {};
 		$('.header-menu').removeClass('open');
 		return false
 	});
-	
+
 		/* -----------------------------
 	 * On DOM ready functions
 	 * ---------------------------*/

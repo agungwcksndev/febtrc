@@ -99,7 +99,8 @@ class Settings extends CI_Controller{
           $this->load->view("layouts/user-settings-wrapper", $data, false);
         } else {
             $i  = $this->input;
-            $tgl_lahir_proc = date("Y-m-d",strtotime($_POST['datetimepicker']));
+            $tgl_lahir = str_replace('/', '-', $_POST['datetimepicker']);
+            $tgl_lahir_proc = date('Y-m-d', strtotime($tgl_lahir));
             $data = array(
                   'nama'               =>  $i->post('nama'),
                   'nim'                =>  $i->post('nim'),
@@ -124,6 +125,9 @@ class Settings extends CI_Controller{
                   'twitter'            =>  $i->post('twitter'),
                   'instagram'          =>  $i->post('instagram')
                 );
+                // echo "<pre>";
+                // print_r($_POST['datetimepicker']);
+                // exit();
             $this->Alumni_Model->update_alumni($data);
             $this->session->set_flashdata('success', 'Identitas diri berhasil diperbarui.');
             redirect('alumni/settings/');
@@ -306,16 +310,16 @@ class Settings extends CI_Controller{
             );
 
             $valid->set_rules(
-                'mulai_kerja',
-                'mulai_kerja',
+                'datetimepicker',
+                'datetimepicker',
                 'required',
                 array(
               'required'  =>  'Anda belum mengisikan Mulai Kerja.')
             );
 
             $valid->set_rules(
-                'berhenti_kerja',
-                'berhenti_kerja',
+                'datetimepicker2',
+                'datetimepicker2',
                 'required',
                 array(
               'required'  =>  'Anda belum mengisikan Berhenti Kerja.')
@@ -330,16 +334,37 @@ class Settings extends CI_Controller{
                               );
                 $this->load->view("layouts/user-settings-wrapper", $data, false);
             } else {
-                $tanggal_mulai = date("Y-m-d",strtotime($_POST['mulai_kerja_add']));
-                $tanggal_berhenti = date("Y-m-d",strtotime($_POST['berhenti_kerja_add']));
+              if(!isset($_POST['sekarang'])){
+                $username = $this->session->userdata('username');
+                $tanggal_mulai = date("Y-m-d",strtotime($_POST['datetimepicker']));
+                $tanggal_berhenti = date("Y-m-d",strtotime($_POST['datetimepicker2']));
                 $data = array(
-                  'username'               =>  $i->post('username'),
+                  'username'               =>  $username,
                   'tempat_kerja'           =>  $i->post('tempat_kerja'),
                   'posisi'                 =>  $i->post('posisi'),
                   'mulai_kerja'            =>  $tanggal_mulai,
-                  'berhenti_kerja'         =>  $tanggal_enti,
+                  'berhenti_kerja'         =>  $tanggal_berhenti,
                   'posisi'                 =>  $i->post('posisi'),
-                  'alamat_kerja'           =>  $i->post('alamat_kerja'),
+                  'alamat_kerja'           =>  $i->post('alamat'),
+                  'pendapatan_per_bulan'   =>  $i->post('pendapatan_per_bulan'),
+                  'golongan_pns'           =>  $i->post('golongan_pns')
+                  );
+                $this->Riwayat_Pekerjaan_Model->add_riwayat_pekerjaan($data);
+                $this->session->set_flashdata('success', 'Berhasil menambah Riwayat Pekerjaan');
+                redirect('alumni/settings/riwayat_pekerjaan');
+              }else{
+                $username = $this->session->userdata('username');
+                $tanggal_mulai = date("Y-m-d",strtotime($_POST['datetimepicker']));
+                $tanggal_berhenti = date("Y-m-d",strtotime($_POST['datetimepicker2']));
+                $data = array(
+                  'username'               =>  $username,
+                  'tempat_kerja'           =>  $i->post('tempat_kerja'),
+                  'posisi'                 =>  $i->post('posisi'),
+                  'mulai_kerja'            =>  $tanggal_mulai,
+                  'berhenti_kerja'         =>  $tanggal_berhenti,
+                  'sekarang'               =>  '1',
+                  'posisi'                 =>  $i->post('posisi'),
+                  'alamat_kerja'           =>  $i->post('alamat'),
                   'pendapatan_per_bulan'   =>  $i->post('pendapatan_per_bulan'),
                   'golongan_pns'           =>  $i->post('golongan_pns')
                   );
@@ -347,6 +372,85 @@ class Settings extends CI_Controller{
                 $this->session->set_flashdata('success', 'Berhasil menambah Riwayat Pekerjaan');
                 redirect('alumni/settings/riwayat_pekerjaan');
               }
+              }
+          }
 
+          public function update_riwayat_pekerjaan($id_riwayat_pekerjaan){
+            $data_riwayat = $this->Riwayat_Pekerjaan_Model->get_riwayat_by_id($id_riwayat_pekerjaan);
+            $valid = $this->form_validation;
+
+            $valid->set_rules(
+                'tempat_kerja',
+                'tempat_kerja',
+                'required',
+                array(
+              'required'  =>  'Anda belum mengisikan Tempat Kerja.')
+            );
+
+            $valid->set_rules(
+                'datetimepicker',
+                'datetimepicker',
+                'required',
+                array(
+              'required'  =>  'Anda belum mengisikan Mulai Kerja.')
+            );
+
+            $valid->set_rules(
+                'datetimepicker2',
+                'datetimepicker2',
+                'required',
+                array(
+              'required'  =>  'Anda belum mengisikan Berhenti Kerja.')
+            );
+
+            $i  = $this->input;
+            if ($valid->run()===false) {
+                $username = $this->session->userdata('username');
+                $user = $this->Alumni_Model->detail_alumni($username);
+                $data = array('isi'     => 'alumni/update-riwayat-pekerjaan',
+                              'user' => $user,
+                              'data_riwayat' => $data_riwayat
+                              );
+                $this->load->view("layouts/user-settings-wrapper", $data, false);
+            } else {
+              if(!isset($_POST['sekarang'])){
+                $username = $this->session->userdata('username');
+                $tanggal_mulai = date("Y-m-d",strtotime($_POST['datetimepicker']));
+                $tanggal_berhenti = date("Y-m-d",strtotime($_POST['datetimepicker2']));
+                $data = array(
+                  'username'               =>  $username,
+                  'tempat_kerja'           =>  $i->post('tempat_kerja'),
+                  'posisi'                 =>  $i->post('posisi'),
+                  'mulai_kerja'            =>  $tanggal_mulai,
+                  'berhenti_kerja'         =>  $tanggal_berhenti,
+                  'posisi'                 =>  $i->post('posisi'),
+                  'alamat_kerja'           =>  $i->post('alamat'),
+                  'pendapatan_per_bulan'   =>  $i->post('pendapatan_per_bulan'),
+                  'golongan_pns'           =>  $i->post('golongan_pns')
+                  );
+                $this->Riwayat_Pekerjaan_Model->update_riwayat_pekerjaan($data);
+                $this->session->set_flashdata('success', 'Berhasil memperbarui Riwayat Pekerjaan');
+                redirect('alumni/settings/riwayat_pekerjaan');
+              }else{
+                $username = $this->session->userdata('username');
+                $tanggal_mulai = date("Y-m-d",strtotime($_POST['datetimepicker']));
+                $tanggal_berhenti = date("Y-m-d",strtotime($_POST['datetimepicker2']));
+                $data = array(
+                  'username'               =>  $username,
+                  'tempat_kerja'           =>  $i->post('tempat_kerja'),
+                  'posisi'                 =>  $i->post('posisi'),
+                  'mulai_kerja'            =>  $tanggal_mulai,
+                  'berhenti_kerja'         =>  $tanggal_berhenti,
+                  'sekarang'               =>  '1',
+                  'posisi'                 =>  $i->post('posisi'),
+                  'alamat_kerja'           =>  $i->post('alamat'),
+                  'pendapatan_per_bulan'   =>  $i->post('pendapatan_per_bulan'),
+                  'golongan_pns'           =>  $i->post('golongan_pns')
+                  );
+                $this->Riwayat_Pekerjaan_Model->update_riwayat_pekerjaan($data);
+                $this->session->set_flashdata('success', 'Berhasil memperbarui Riwayat Pekerjaan');
+                redirect('alumni/settings/riwayat_pekerjaan');
+              }
+              }
           }
         }
