@@ -4,7 +4,7 @@
 		<div class="col-xl-9 order-xl-2 col-lg-9 order-lg-2 col-md-12 order-md-1 col-sm-12 col-xs-12">
 			<div class="ui-block">
 				<div class="ui-block-title">
-					<h6 class="title">Tambah Riwayat Pekerjaan</h6>
+					<h6 class="title">Update Riwayat Pekerjaan</h6>
 				</div>
 				<div class="ui-block-content">
 		     <form class="form-horizontal" method="post" action="">
@@ -68,8 +68,16 @@
 									 <label class="control-label">Berhenti Kerja</label>
 									 <?php
 									 $tgl_berhenti = date_create($data_riwayat->berhenti_kerja) ;
+									 $tgl_berhenti_proc = date_format($tgl_berhenti, 'd/m/Y');
+									 $tgl_now = date('d/m/Y');
 									 ?>
-									 <input id="datetimepicker2" name="datetimepicker2" value="<?php echo date_format($tgl_berhenti, 'd/m/Y') ?>" />
+									 <?php
+									 if($data_riwayat->sekarang != '1'){
+										 echo "<input id='datetimepicker2' name='datetimepicker2' value='$tgl_berhenti_proc' />";
+									 }else{
+										 echo "<input id='datetimepicker2' name='datetimepicker2' value='$tgl_now' />";
+									 }
+									  ?>
 									 <span class="input-group-addon">
 										 <svg class="olymp-month-calendar-icon icon"><use xlink:href="<?php echo base_url('icons')?>/icons.svg#olymp-month-calendar-icon"></use></svg>
 									 </span>
@@ -129,7 +137,7 @@
 							 </div>
 						 </div>
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-								<button type="submit" name="submit" value="simpan" class="btn btn-primary btn-lg full-width">Tambah Riwayat Pekerjaan</button>
+								<button type="submit" name="submit" value="simpan" class="btn btn-primary btn-lg full-width">Update Riwayat Pekerjaan</button>
 							</div>
 						</div>
 					</form>
@@ -160,12 +168,34 @@
 <script type="text/javascript">
 
 $(function() {
-  $('input[name="datetimepicker2"]').daterangepicker({
-		singleDatePicker: true,
-    showDropdowns: true,
-    minYear: 1901,
-    maxYear: parseInt(moment().format('YYYY'),10)
-  });
+
+					var date_select_field_2 = $('input[name="datetimepicker2"]');
+					if (date_select_field_2.length) {
+					    var start = moment().subtract(29, 'days');
+
+					    date_select_field_2.daterangepicker({
+					        startDate: start,
+					        autoUpdateInput: false,
+					        singleDatePicker: true,
+					        showDropdowns: true,
+					        locale: {
+					            format: 'DD/MM/YYYY'
+					        }
+					    });
+					    date_select_field_2.on('focus', function () {
+					        $(this).closest('.form-group').addClass('is-focused');
+					    });
+					    date_select_field_2.on('apply.daterangepicker', function (ev, picker) {
+					        $(this).val(picker.startDate.format('DD/MM/YYYY'));
+					        $(this).closest('.form-group').addClass('is-focused');
+					    });
+					    date_select_field_2.on('hide.daterangepicker', function () {
+					        if ('' === $(this).val()){
+					            $(this).closest('.form-group').removeClass('is-focused');
+					        }
+					    });
+
+					}
 });
 
 $(document).ready(function(){

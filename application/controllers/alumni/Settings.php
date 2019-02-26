@@ -457,7 +457,6 @@ class Settings extends CI_Controller{
                   'pendapatan_per_bulan'   =>  $i->post('pendapatan_per_bulan'),
                   'golongan_pns'           =>  $i->post('golongan_pns')
                   );
-                
                 $this->Riwayat_Pekerjaan_Model->update_riwayat_pekerjaan($data);
                 $this->session->set_flashdata('success', 'Berhasil memperbarui Riwayat Pekerjaan');
                 redirect('alumni/settings/riwayat_pekerjaan');
