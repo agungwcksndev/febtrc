@@ -68,14 +68,8 @@
 									 <label class="control-label">Berhenti Kerja</label>
 									 <?php
 									 $tgl_berhenti = date_create($data_riwayat->berhenti_kerja) ;
-									 $tgl_berhenti_proc = date_format($tgl_berhenti, 'd/m/Y');
-									 $tgl_now = date("Y-m-d");
 									 ?>
-									 <?php if($data_riwayat->sekarang == '1'){
-										 echo "<input name='datetimepicker2' value='$data_riwayat->berhenti_kerja'>";
-									 } else{
-										 echo "<input name='datetimepicker2' value='$data_riwayat->berhenti_kerja'>";
-									 }?>
+									 <input id="datetimepicker2" name="datetimepicker2" value="<?php echo date_format($tgl_berhenti, 'd/m/Y') ?>" />
 									 <span class="input-group-addon">
 										 <svg class="olymp-month-calendar-icon icon"><use xlink:href="<?php echo base_url('icons')?>/icons.svg#olymp-month-calendar-icon"></use></svg>
 									 </span>
